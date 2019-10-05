@@ -6,21 +6,21 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class VolleySingleton {
+public class ClaseVolley {
 
-    private static VolleySingleton intanciaVolley;
+    private static ClaseVolley intanciaVolley;
     private RequestQueue request;
     private static Context contexto;
 
-    private VolleySingleton(Context context) {
+    private ClaseVolley(Context context) {
         contexto = context;
         request = getRequestQueue();
     }
 
 
-    public static synchronized VolleySingleton getIntanciaVolley(Context context) {
+    public static synchronized ClaseVolley getIntanciaVolley(Context context) {
         if (intanciaVolley == null) {
-            intanciaVolley = new VolleySingleton(context);
+            intanciaVolley = new ClaseVolley(context);
         }
 
         return intanciaVolley;

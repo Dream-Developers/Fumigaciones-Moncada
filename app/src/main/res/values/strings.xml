@@ -10,8 +10,7 @@
     <string name="menu_principal">Principal</string>
     <string name="menu_servicio">Adquirir Servicio</string>
     <string name="menu_acerca">Acerca De</string>
-
-
+    <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
 
 </resources>

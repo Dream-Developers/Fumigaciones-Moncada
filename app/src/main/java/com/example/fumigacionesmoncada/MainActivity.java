@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void resgistro(View view) {
-        Intent i = new Intent(getApplication(),MenuActivity.class);
+        Intent i = new Intent(getApplication(),RegistarUsuarioNuevo.class);
         startActivity(i);
     }
 }

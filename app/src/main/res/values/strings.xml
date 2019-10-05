@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FumigacioneSMoncada</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_titulo">Fumigaciones Moncada</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Lo que sea</string>
+
+    <string name="menu_principal">Principal</string>
+    <string name="menu_servicio">Adquirir Servicio</string>
+    <string name="menu_acerca">Acerca De</string>
+
+    <string name="ip">http://192.168.0.3</string>
+
+
 </resources>

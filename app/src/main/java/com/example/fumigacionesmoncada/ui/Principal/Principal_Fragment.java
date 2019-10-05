@@ -8,13 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseAdapterImagen;
 import com.example.fumigacionesmoncada.ClaseImagen;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.VolleySingleton;
+import com.example.fumigacionesmoncada.ClaseVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,12 +111,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         dialog.setMessage("Consultando Imagenes");
         dialog.show();
 
-        String ip=getString(R.string.ip);
 
-        String url=ip+"/ejemploBDRemota/wsJSONConsultarListaImagenesUrl.php";
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        // request.add(jsonObjectRequest);
-        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
     @Override

@@ -56,24 +56,7 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
 
     private void cargarImagenWebService(String rutaImagen, final UsuariosHolder holder) {
 
-        String ip=context.getString(R.string.ip);
 
-        String urlImagen=ip+"/ejemploBDRemota/"+rutaImagen;
-        urlImagen=urlImagen.replace(" ","%20");
-
-        ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                holder.imagen.setImageBitmap(response);
-            }
-        }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context,"Error al cargar la imagen",Toast.LENGTH_SHORT).show();
-            }
-        });
-        //request.add(imageRequest);
-        VolleySingleton.getIntanciaVolley(context).addToRequestQueue(imageRequest);
     }
 
     @Override

@@ -23,7 +23,7 @@
         >
 
         <ImageView
-            android:layout_width="126dp"
+            android:layout_width="120dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:background="@drawable/logo" />
@@ -34,7 +34,7 @@
             android:text="MONCADA'S FUMIGACIONES"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textStyle="normal|bold" />
 
     </LinearLayout>
@@ -104,12 +104,12 @@
 
                 <Button
                     android:id="@+id/idLoginLogin"
-                    android:layout_width="170dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/oval"
-                    android:onClick="registrar"
+                    android:onClick="logear"
                     android:text="Ingresar"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
@@ -139,7 +139,7 @@
                     android:text="Regístrate"
                     android:onClick="registro"
                     android:background="@drawable/oval"
-                    android:color="@color/Transparent"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textAllCaps="false"
                      />
 
@@ -149,6 +149,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/loanding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    />
 
             </LinearLayout>
         </LinearLayout>

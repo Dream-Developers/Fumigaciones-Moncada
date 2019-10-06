@@ -110,12 +110,19 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         dialog.setMessage("Consultando Imagenes");
         dialog.show();
 
+        String ip=getString(R.string.ip);
+
+        String url=ip;
+        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+        // request.add(jsonObjectRequest);
+        ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
 
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se puede conectar "+error.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Feliciades tu proyecto no sirve"+error.toString(), Toast.LENGTH_LONG).show();
         System.out.println();
         dialog.hide();
         Log.d("ERROR: ", error.toString());
@@ -136,8 +143,8 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
 
-                usuario.setDescripcion(jsonObject.optString("documento"));
-                usuario.setRutaImagen(jsonObject.optString("ruta_imagen"));
+                usuario.setDescripcion(jsonObject.optString("descripcion"));
+                usuario.setRutaImagen(jsonObject.optString("imagen"));
                 listaUsuarios.add(usuario);
             }
             dialog.hide();

@@ -18,6 +18,7 @@
     <string name="title_activity_navegacion_admin">Administrador</string>
 
 
+    <string name="ip">http://192.168.2.23/api/recuperar</string>
 
 
 

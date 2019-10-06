@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.fumigacionesmoncada.ChatFragment;
 import com.example.fumigacionesmoncada.CitaFragment;
+import com.example.fumigacionesmoncada.ContenidoFragment;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RegistroFragment;
 
@@ -20,7 +21,7 @@ import com.example.fumigacionesmoncada.RegistroFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3,R.string.tab_text_4};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -41,6 +42,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return  registroFragment;
 
             case 2:
+                ContenidoFragment contenidoFragment = new ContenidoFragment();
+                return  contenidoFragment;
+
+            case 3:
                 CitaFragment citaFragment = new CitaFragment();
                 return  citaFragment;
 
@@ -57,6 +62,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
 
-        return 3;
+        return 4;
     }
 }

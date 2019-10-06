@@ -11,6 +11,14 @@
     <string name="menu_servicio">Adquirir Servicio</string>
     <string name="menu_acerca">Acerca De</string>
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
+    <string name="title_activity_navegacion_admin">NavegacionAdminActivity</string>
+    <string name="tab_text_1">Chat</string>
+    <string name="tab_text_2">Registro</string>
+    <string name="tab_text_3">Citas</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

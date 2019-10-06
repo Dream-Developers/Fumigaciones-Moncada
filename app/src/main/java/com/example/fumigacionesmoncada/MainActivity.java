@@ -127,4 +127,10 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplication(),RegistarUsuarioNuevo.class);
         startActivity(i);
     }
+
+
+    public void logear(View view) {
+        Intent i = new Intent(getApplication(), MenuActivity.class);
+        startActivity(i);
+    }
 }

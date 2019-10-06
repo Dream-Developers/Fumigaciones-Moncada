@@ -95,7 +95,6 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         principalViewModel = ViewModelProviders.of(this).get(Principal_ViewModel.class);
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         listaUsuarios=new ArrayList<>();
-
         recyclerUsuarios =  vista.findViewById(R.id.idRecyclerImagen);
         recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerUsuarios.setHasFixedSize(true);

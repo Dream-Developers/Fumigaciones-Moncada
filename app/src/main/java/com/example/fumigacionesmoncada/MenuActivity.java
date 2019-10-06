@@ -1,10 +1,12 @@
 package com.example.fumigacionesmoncada;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -58,5 +60,10 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void red_admin(MenuItem item) {
+        Intent i = new Intent(MenuActivity.this, NavegacionAdminActivity.class);
+        startActivity(i);
     }
 }

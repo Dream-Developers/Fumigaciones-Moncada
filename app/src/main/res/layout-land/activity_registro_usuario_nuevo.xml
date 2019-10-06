@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/logo2"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="160dp"
+            android:src="@drawable/logo"
+            android:id="@+id/imageView"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MONCADA'S FUMIGACIONES"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
+
+
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        >
+
+
+        <EditText
+            android:id="@+id/registro_nombres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
+            android:hint="  Nombres"
+            android:lines="1"
+            android:maxLength="30"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+
+
+            />
+
+        <EditText
+            android:id="@+id/registro_apellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
+            android:hint="  Apellidos"
+            android:lines="1"
+            android:maxLength="30"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+
+
+            />
+
+        <EditText
+            android:id="@+id/registro_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_phone_in_talk_white_18dp"
+            android:hint="  Telefono"
+            android:lines="1"
+            android:maxLength="30"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+
+
+            />
+
+
+        <EditText
+            android:id="@+id/registro_correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_email_white_18dp"
+            android:hint="  Correo"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/registro_contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
+            android:hint=" Contraseña"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/comprobacion_contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_check_circle_outline_white_18dp"
+            android:hint=" Contraseña"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+
+        <Button
+            android:id="@+id/registrar"
+            android:layout_marginTop="20dp"
+            android:layout_width="180dp"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
+            android:text="Registrar"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:onClick="registrar"
+            android:background="@drawable/oval"
+
+            />
+
+    </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

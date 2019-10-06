@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -26,6 +27,13 @@ public class NavegacionAdminActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
     }
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mi = new MenuInflater(this);
+        mi.inflate(R.menu.menu_admin, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+   */
+
 }

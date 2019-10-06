@@ -14,12 +14,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        registro = findViewById(R.id.resgistro);
+        registro = findViewById(R.id.idLoginLogin);
     }
 
 
 
-    public void resgistro(View view) {
+    public void registro(View view) {
         Intent i = new Intent(getApplication(),RegistarUsuarioNuevo.class);
         startActivity(i);
     }

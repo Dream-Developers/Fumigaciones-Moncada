@@ -13,9 +13,11 @@
     <string name="tab_text_1">CHAT</string>
     <string name="tab_text_2">REGISTRO</string>
     <string name="tab_text_3">CITAS</string>
+    <string name="tab_text_4">CONTENIDO</string>
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
     <string name="title_activity_navegacion_admin">Administrador</string>
+
 
 
 

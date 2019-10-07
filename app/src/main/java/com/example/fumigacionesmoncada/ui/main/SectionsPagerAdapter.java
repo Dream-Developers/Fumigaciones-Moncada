@@ -42,12 +42,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return  registroFragment;
 
             case 2:
-                ContenidoFragment contenidoFragment = new ContenidoFragment();
-                return  contenidoFragment;
-
-            case 3:
                 CitaFragment citaFragment = new CitaFragment();
                 return  citaFragment;
+
+
+            case 3:
+                ContenidoFragment contenidoFragment = new ContenidoFragment();
+                return  contenidoFragment;
 
         }
         return null;

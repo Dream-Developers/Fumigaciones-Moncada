@@ -110,9 +110,9 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         dialog.setMessage("Consultando Imagenes");
         dialog.show();
 
-        String ip=getString(R.string.ip);
+       // String ip=getString(R.string.ip);
 
-        String url=ip;
+        String url="http://192.168.0.5/api/recuperar";
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         // request.add(jsonObjectRequest);
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);

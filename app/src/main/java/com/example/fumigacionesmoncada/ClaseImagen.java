@@ -9,7 +9,16 @@ public class ClaseImagen {
 
     private String descripcion;
     private Bitmap imagen;
+    private String nombre;
     private String rutaImagen;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public String getDescripcion() {
         return descripcion;
@@ -22,7 +31,7 @@ public class ClaseImagen {
 
         try {
             byte[] byteCode= Base64.decode(descripcion,Base64.DEFAULT);
-            //this.imagen= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
+
 
             int alto=100;//alto en pixeles
             int ancho=150;//ancho en pixeles

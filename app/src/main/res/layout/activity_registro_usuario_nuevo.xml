@@ -18,7 +18,7 @@
 
         <ImageView
             android:layout_width="150dp"
-            android:layout_height="160dp"
+            android:layout_height="110dp"
             android:src="@drawable/logo"
             android:id="@+id/imageView"
             android:layout_gravity="center"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="MONCADA'S FUMIGACIONES"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textAlignment="center"
             android:textStyle="normal|bold" />
 

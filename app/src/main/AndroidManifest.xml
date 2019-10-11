@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".NavegacionAdminActivity"
-            android:label="@string/title_activity_navegacion_admin"
+            android:name=".NavegacionAdministradorActivity"
+            android:label="@string/title_activity_navegacion_administrador"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MenuActivity"

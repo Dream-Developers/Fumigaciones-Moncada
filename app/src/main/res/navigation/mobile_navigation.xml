@@ -3,24 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_principal">
+    app:startDestination="@+id/nav_chat">
 
     <fragment
-        android:id="@+id/nav_principal"
-        android:name="com.example.fumigacionesmoncada.ui.Principal.Principal_Fragment"
-        android:label="@string/menu_principal"
-        tools:layout="@layout/fragment_principal" />
+        android:id="@+id/nav_chat"
+        android:name="com.example.fumigacionesmoncada.ui.chat.ChatFragment"
+        android:label="@string/menu_chat"
+        tools:layout="@layout/fragment_chat" />
 
     <fragment
-        android:id="@+id/nav_servicio"
-        android:name="com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment"
-        android:label="@string/menu_servicio"
-        tools:layout="@layout/fragment_ad_servicio" />
-
+        android:id="@+id/nav_clientes"
+        android:name="com.example.fumigacionesmoncada.ui.clientes.ClientesFragment"
+        android:label="@string/menu_clientes"
+        tools:layout="@layout/fragment_clientes" />
 
     <fragment
-        android:id="@+id/nav_acerca"
-        android:name="com.example.fumigacionesmoncada.ui.AcercaDe.Acerca_De_Fragment"
-        android:label="@string/menu_acerca"
-        tools:layout="@layout/fragment_acerca_de" />
+        android:id="@+id/nav_imagen"
+        android:name="com.example.fumigacionesmoncada.ui.imagen.ImagenFragment"
+        android:label="@string/menu_imagen"
+        tools:layout="@layout/fragment_imagen" />
+
+    <fragment
+        android:id="@+id/nav_citas"
+        android:name="com.example.fumigacionesmoncada.ui.citas.CitasFragment"
+        android:label="@string/menu_citas"
+        tools:layout="@layout/fragment_citas" />
+
+    <fragment
+        android:id="@+id/nav_solicitarCita"
+        android:name="com.example.fumigacionesmoncada.ui.solicitarCita.SolicitarCitaFragment"
+        android:label="@string/menu_solicitarCita"
+        tools:layout="@layout/fragment_solicitar_cita" />
+
+    <fragment
+        android:id="@+id/nav_acercad"
+        android:name="com.example.fumigacionesmoncada.ui.Acerca.AcercaFragment"
+        android:label="@string/menu_acercad"
+        tools:layout="@layout/fragment_acerca" />
 </navigation>

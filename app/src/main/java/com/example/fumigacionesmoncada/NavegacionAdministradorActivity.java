@@ -1,12 +1,10 @@
 package com.example.fumigacionesmoncada;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -23,24 +21,24 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
-public class MenuActivity extends AppCompatActivity {
+public class NavegacionAdministradorActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_navegacion_administrador);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_principal,
-                R.id.nav_servicio,
-                R.id.nav_acerca)
+                R.id.nav_chat, R.id.nav_clientes, R.id.nav_imagen,
+                R.id.nav_citas, R.id.nav_solicitarCita, R.id.nav_acercad)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -51,7 +49,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.navegacion_administrador, menu);
         return true;
     }
 
@@ -60,10 +58,5 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    public void red_admin(MenuItem item) {
-        Intent i = new Intent(MenuActivity.this, NavegacionAdministradorActivity.class);
-        startActivity(i);
     }
 }

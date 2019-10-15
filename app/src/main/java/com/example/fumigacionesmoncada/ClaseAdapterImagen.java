@@ -2,6 +2,7 @@ package com.example.fumigacionesmoncada;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.UsuariosHolder> {
 
 
-    List<ClaseImagen> listaimegen;
+    List<ClaseImagen>  listaUsuarios;
     Context context;
 
     public ClaseAdapterImagen(List<ClaseImagen> listaimegen, Context context) {
-        this.listaimegen = listaimegen;
+        this. listaUsuarios = listaimegen;
         this.context = context;
     }
 
@@ -43,14 +44,14 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
 
     @Override
     public void onBindViewHolder(UsuariosHolder holder, int position) {
-        holder.txtDocumento.setText(listaimegen.get(position).getDescripcion());
+        holder.txtDocumento.setText( listaUsuarios.get(position).getDescripcion());
 
+        if ( listaUsuarios.get(position).getRutaImagen()!=null){
+            cargarImagenWebService( listaUsuarios.get(position).getRutaImagen(),holder);
 
-        if (listaimegen.get(position).getRutaImagen()!=null){
-            //
-            cargarImagenWebService(listaimegen.get(position).getRutaImagen(),holder);
         }else{
-            holder.imagen.setImageResource(R.drawable.img_base);
+            holder.imagen.setImageResource(R.drawable.logo);
+
         }
     }
 
@@ -58,7 +59,7 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
 
         //String ip=context.getString(R.string.ip);
 
-        String urlImagen="http://192.168.0.5/api/recuperar"+rutaImagen;
+        String urlImagen="http://10.24.10.113/imagen/"+rutaImagen;
         urlImagen=urlImagen.replace(" ","%20");
 
         ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
@@ -70,17 +71,21 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context,"Error al cargar la imagen",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,error.getMessage(),Toast.LENGTH_LONG).show();
+
+
             }
         });
         //request.add(imageRequest);
         ClaseVolley.getIntanciaVolley(context).addToRequestQueue(imageRequest);
 
 
+
     }
 
     @Override
     public int getItemCount() {
-        return listaimegen.size();
+        return  listaUsuarios.size();
     }
 
     public class UsuariosHolder extends RecyclerView.ViewHolder {

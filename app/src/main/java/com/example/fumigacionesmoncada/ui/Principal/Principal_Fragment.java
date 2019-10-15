@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class Principal_Fragment extends Fragment  implements Response.Listener<JSONObject>,Response.ErrorListener  {
 
-    private Principal_ViewModel principalViewModel;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,7 +92,6 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
 
-        principalViewModel = ViewModelProviders.of(this).get(Principal_ViewModel.class);
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.idRecyclerImagen);
@@ -100,8 +99,6 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         recyclerUsuarios.setHasFixedSize(true);
         cargarWebService();
         return  vista;
-
-
 
     }
 
@@ -112,7 +109,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
        // String ip=getString(R.string.ip);
 
-        String url="http://192.168.0.5/api/recuperar";
+        String url="http://10.24.10.113/api/recuperar";
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         // request.add(jsonObjectRequest);
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
@@ -120,32 +117,25 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
     }
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "Feliciades tu proyecto no sirve"+error.toString(), Toast.LENGTH_LONG).show();
-        System.out.println();
-        dialog.hide();
-        Log.d("ERROR: ", error.toString());
 
-    }
 
     @Override
     public void onResponse(JSONObject response) {
 
-        ClaseImagen usuario=null;
+        ClaseImagen servicio=null;
 
-        JSONArray json=response.optJSONArray("usuario");
+        JSONArray json=response.optJSONArray("servicio");
 
         try {
 
             for (int i=0;i<json.length();i++){
-                usuario=new ClaseImagen();
+                servicio=new ClaseImagen();
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
 
-                usuario.setDescripcion(jsonObject.optString("descripcion"));
-                usuario.setRutaImagen(jsonObject.optString("imagen"));
-                listaUsuarios.add(usuario);
+                servicio.setDescripcion(jsonObject.optString("descripcion"));
+                servicio.setRutaImagen(jsonObject.optString("imagen"));
+                listaUsuarios.add(servicio);
             }
             dialog.hide();
             ClaseAdapterImagen adapter=new ClaseAdapterImagen(listaUsuarios, getContext());
@@ -157,6 +147,15 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
                     " "+response, Toast.LENGTH_LONG).show();
             dialog.hide();
         }
+
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Toast.makeText(getContext(), "No se puede conectar"+error.toString(), Toast.LENGTH_LONG).show();
+        System.out.println();
+        dialog.hide();
+        Log.d("ERROR: ", error.toString());
 
     }
     public void onButtonPressed(Uri uri) {

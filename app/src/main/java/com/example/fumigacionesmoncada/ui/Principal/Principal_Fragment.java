@@ -109,7 +109,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
        // String ip=getString(R.string.ip);
 
-        String url="http://10.24.10.113/api/recuperar";
+        String url="http://192.168.0.7/api/recuperar";
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         // request.add(jsonObjectRequest);
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);

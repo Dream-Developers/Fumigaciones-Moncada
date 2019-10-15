@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/idLayoutSubir" >
+    android:id="@+id/idLayoutRegistrar" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,15 +36,13 @@
                 android:id="@+id/btnFoto"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
+                android:text="Foto"
                 android:layout_gravity="center"
                 android:background="@color/colorAccent"
-                android:onClick="abricamara"
-                android:text="Foto"
-                android:textColor="@android:color/white"
-                android:visibility="visible" />
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
-gen
+
         <EditText
             android:id="@+id/campoNombre"
             android:layout_width="match_parent"
@@ -80,4 +78,3 @@ gen
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
-

@@ -1,5 +1,6 @@
 package com.example.fumigacionesmoncada.ui.imagen;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,11 +30,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import  static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -51,6 +53,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 //import org.apache.http.HttpVersion;
@@ -70,6 +74,8 @@ public class ImagenFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private File pictureFile;
+    private  String pictureFilePath;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -84,6 +90,7 @@ public class ImagenFragment extends Fragment {
     private String path;//almacena la ruta de la imagen
     File fileImagen;
     Bitmap bitmap;
+    private static final int TOMARFOTO = 1;
 
 
     private final int MIS_PERMISOS = 100;
@@ -96,6 +103,8 @@ public class ImagenFragment extends Fragment {
     ProgressDialog progreso;
 
     RelativeLayout layoutSubir;//permisos
+    private File imgFile;
+    private int orientation;
 
     // RequestQueue request;
     //JsonObjectRequest jsonObjectRequest;
@@ -152,11 +161,6 @@ public class ImagenFragment extends Fragment {
         // request= Volley.newRequestQueue(getContext());
 
         //Permisos
-        if(solicitaPermisosVersionesSuperiores()){
-            btnFoto.setEnabled(true);
-        }else{
-            btnFoto.setEnabled(false);
-        }
 
 
         botonSubir.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +189,7 @@ public class ImagenFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(opciones[i].equals("Tomar Foto")){
-                    abriCamara();
+                    abrirCamara();
                 }else{
                     if (opciones[i].equals("Elegir de Galeria")){
                         Intent intent=new Intent(Intent.ACTION_PICK,
@@ -201,43 +205,62 @@ public class ImagenFragment extends Fragment {
         builder.show();
     }
 
-    private void abriCamara() {
 
-        File miFile=new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
-        boolean isCreada=miFile.exists();
+    private void abrirCamara() {
+        //Capturar la imagen del empleado desde la camara
 
-        if(isCreada==false){
-            isCreada=miFile.mkdirs();
-        }
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
 
-        if(isCreada==true){
-            Long consecutivo= System.currentTimeMillis()/1000;
-            String nombre=consecutivo.toString()+".jpg";
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    100);
 
-            path=Environment.getExternalStorageDirectory()+File.separator+DIRECTORIO_IMAGEN
-                    +File.separator+nombre;//indicamos la ruta de almacenamiento
+        }else {
 
-            fileImagen=new File(path);
 
-            Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(fileImagen));
 
-            ////
-            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N)
-            {
-                String authorities=getContext().getPackageName()+".provider";
-                Uri imageUri= FileProvider.getUriForFile(getContext(),authorities,fileImagen);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            }else
-            {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
+
+            Intent inten = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+            try {
+
+                //Se crea un achivo de la foto en blanco
+                pictureFile =getPictureFile();
+
+            }catch (Exception e){
+
             }
-            startActivityForResult(intent,COD_FOTO);
 
-            ////
+
+            //se agrega la imagen capturada al archivo en blanco
+            Uri photoUri = FileProvider.getUriForFile(getContext(),"com.permisosunahtec.android.fileprovider",pictureFile);
+            inten.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+
+            startActivityForResult(inten, TOMARFOTO);
+
+
+
+
+
+
 
         }
+    }
+    private File getPictureFile()throws IOException{
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String pictureFile ="Docente"+timeStamp;
+        File storeImagen =getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(pictureFile,".jpg",storeImagen);
+        pictureFilePath = imagen.getAbsolutePath();
 
+
+
+        return  imagen;
     }
 
 
@@ -245,7 +268,7 @@ public class ImagenFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
+             switch (requestCode){
             case COD_SELECCIONA:
                 Uri miPath=data.getData();
                 imgFoto.setImageURI(miPath);
@@ -258,23 +281,71 @@ public class ImagenFragment extends Fragment {
                 }
 
                 break;
-            case COD_FOTO:
-                MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
-                        new MediaScannerConnection.OnScanCompletedListener() {
-                            @Override
-                            public void onScanCompleted(String path, Uri uri) {
-                                Log.i("Path",""+path);
-                            }
-                        });
+            case TOMARFOTO:
+                imgFile = new File(pictureFilePath);
+                if (resultCode == -1) {
 
-                bitmap= BitmapFactory.decodeFile(path);
-                imgFoto.setImageBitmap(bitmap);
+                    bitmap = BitmapFactory.decodeFile(String.valueOf(imgFile));
+
+
+                    try {
+
+
+
+
+                        ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
+
+                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                        switch (orientation) {
+
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                bitmap = rotateImage(getContext(),bitmap, 270);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                bitmap = rotateImage(getContext() ,bitmap, 180);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                bitmap = rotateImage(getContext(),bitmap, 90);
+                                break;
+
+                        }
+
+
+
+                        imgFoto.setImageBitmap(bitmap);
+
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                }else{
+                    //en caso de que no haya foto capturada el archivo en blanco se elimina
+                    imgFile.delete();
+                }
 
                 break;
         }
-        bitmap=redimensionarImagen(bitmap,600,800);
-    }
+     }
+    public static Bitmap rotateImage(Context context ,Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        try {
 
+            matrix.postRotate(angle);
+
+
+            source = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true);
+        }catch (Exception e){
+
+            Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+        }
+        return  source;
+    }
     private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
 
         int ancho=bitmap.getWidth();
@@ -383,7 +454,7 @@ public class ImagenFragment extends Fragment {
         progreso.show();
 
         String ip=getString(R.string.ip);
-        String url=ip+"/api/servicio";
+        String url=ip+"/imagen";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
@@ -480,4 +551,5 @@ public class ImagenFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
+
    }

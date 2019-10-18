@@ -3,13 +3,10 @@ package com.example.fumigacionesmoncada;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
 
+    //Shared Preferences
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!mEmail.isEmpty() || !mPassword.isEmpty() || !isEmailValid(mEmail)) {
                     login(mEmail, mPassword);
-                    Bienvenido();
+                    //Bienvenido();
                     Intent i = new Intent(getApplication(),MenuActivity.class);
                     startActivity(i);
 
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public void Bienvenido(){
+    /*public void Bienvenido(){
         LayoutInflater inflater= (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View customToast=inflater.inflate(R.layout.toas_personalizado,null);
         TextView txt= (TextView)customToast.findViewById(R.id.txtToast);
@@ -163,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
 
         //Agregar arriba Bienvenido();
-    }
-
+    }*/
     /*public void guardarLogeo(View view){
         String correo = txtCorreo.getText().toString();
         String pass = txtContrasena.getText().toString();

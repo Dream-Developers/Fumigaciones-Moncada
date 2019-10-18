@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!mEmail.isEmpty() || !mPassword.isEmpty() || !isEmailValid(mEmail)) {
                     login(mEmail, mPassword);
+                    Bienvenido();
                     Intent i = new Intent(getApplication(),MenuActivity.class);
                     startActivity(i);
 

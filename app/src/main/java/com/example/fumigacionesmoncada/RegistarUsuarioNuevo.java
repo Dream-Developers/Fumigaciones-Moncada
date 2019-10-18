@@ -10,8 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,6 +18,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class RegistarUsuarioNuevo extends AppCompatActivity implements
@@ -65,7 +65,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
                 progreso.setMessage("Cargando...");
                 progreso.show();
 
-                String url = "http://192.168.0.8/api/auth/signup?name=" + nombre.getText().toString()
+                String url = "http://192.168.1.109/api/auth/signup?name=" + nombre.getText().toString()
                         + "&lasname=" + apellidos.getText().toString()+  "&telefono="
                         + telefono.getText().toString()+ "&email=" + correo.getText().toString()+"&password=" + contraseña.getText().toString()+ "&password_confirmation=" + confcontra.getText().toString();
                 url = url.replace(" ", "%20");

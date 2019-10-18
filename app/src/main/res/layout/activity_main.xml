@@ -109,7 +109,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/oval"
-                    android:onClick="logear"
+                    android:onClick="guardarLogeo"
                     android:text="Ingresar"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"

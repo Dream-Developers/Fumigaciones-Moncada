@@ -38,7 +38,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:background="@color/colorAccent"
-                android:onClick="abricamara"
+                android:onClick="abrircamara"
                 android:text="Foto"
                 android:textColor="@android:color/white"
                 android:visibility="visible" />

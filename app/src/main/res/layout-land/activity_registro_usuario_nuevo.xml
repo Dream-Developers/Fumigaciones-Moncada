@@ -44,7 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
         >
 
 
@@ -127,7 +126,7 @@
 
         <Button
             android:id="@+id/registrar"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_width="180dp"
             android:layout_gravity="center"
             android:layout_height="40dp"
@@ -136,7 +135,6 @@
             android:textColor="@color/colorPrimary"
             android:onClick="registrar"
             android:background="@drawable/oval"
-
             />
 
     </LinearLayout>

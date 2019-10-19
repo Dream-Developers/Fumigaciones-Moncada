@@ -1,12 +1,18 @@
 package com.example.fumigacionesmoncada;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,32 +34,55 @@ import java.util.Map;
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
+    private TextView recuperarContra;
     private Button btn_registro, btn_login;
-    private static String URL_LOGIN = "http://192.168.1.109/api/auth/login";
+    private RadioButton RBsesion;
+    private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
 
+
     //Shared Preferences
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
+    private boolean isActivateRadioButton;
+    private static final String STRING_PREFERENCES = "example.preferencias";
+    private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (obtenerEstadoButton()){
+            intem();
+            finish();
+        }
+
         txtCorreo = findViewById(R.id.idCorreoLogin);
         txtContrasena = findViewById(R.id.idContraseñaLogin);
+        recuperarContra = findViewById(R.id.recuperarPass);
+        RBsesion = findViewById(R.id.noSalir);
         btn_login = findViewById(R.id.idLoginLogin);
         btn_registro = findViewById(R.id.idRegistroLogin);
 
+        isActivateRadioButton = RBsesion.isChecked();
 
-      // sharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-       // editor = sharedPreferences.edit();
+        RBsesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isActivateRadioButton){
+                    RBsesion.setChecked(false);
+                }
+                isActivateRadioButton = RBsesion.isChecked();
+            }
+        });
 
 
+        cargarPreferencias();
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!mEmail.isEmpty() || !mPassword.isEmpty() || !isEmailValid(mEmail)) {
                     login(mEmail, mPassword);
                     //Bienvenido();
-                    Intent i = new Intent(getApplication(),MenuActivity.class);
-                    startActivity(i);
+
 
                 }
                 else {
@@ -82,15 +110,40 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void guardarEstadoButton(){
+
+        SharedPreferences preferencias = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
+        preferencias.edit().putBoolean(PREFERENCE_ESTADO_BUTTON, RBsesion.isChecked()).apply();
+    }
+
+    public boolean obtenerEstadoButton(){
+
+        SharedPreferences preferencias = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
+        return preferencias.getBoolean(PREFERENCE_ESTADO_BUTTON, false);
+    }
+
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+
+        String email = preferences.getString("email", "jacob07@gmail.com");
+        String contra = preferences.getString("contra", "secret");
+
+        txtCorreo.setText(email);
+        txtContrasena.setText(contra);
+
+    }
+
 
     private void login(final String txtCorreo, final String txtContrasena){
 
-         btn_login.setVisibility(View.GONE);
+//         btn_login.setVisibility(View.GONE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        guardarEstadoButton();
                         Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -113,15 +166,21 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
+                        //
+                        Bienvenido();
+                        savePreferences();
+                        intem();
+                        finish();
+
                     }
+
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                          btn_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(MainActivity.this, "NO responde", Toast.LENGTH_SHORT).show();
-
-                        Toast.makeText(MainActivity.this, "Error al iniciar sesión 3 "+error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Error al iniciar sesión, verifique que su " +
+                                "contraseña esté correcta "+error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -149,28 +208,39 @@ public class MainActivity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    /*public void Bienvenido(){
+    public void intem(){
+
+        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(i);
+
+    }
+
+    public void Bienvenido(){
         LayoutInflater inflater= (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View customToast=inflater.inflate(R.layout.toas_personalizado,null);
         TextView txt= (TextView)customToast.findViewById(R.id.txtToast);
-        txt.setText("Bienvenido, Gracias por preferirnos ");
+        txt.setText("Bienvenido, Gracias por preferirnos. " +
+                " Sea feliz, que Dios lo bendiga ");
         Toast toast =new Toast(this);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(customToast);
         toast.show();
 
         //Agregar arriba Bienvenido();
-    }*/
-    /*public void guardarLogeo(View view){
-        String correo = txtCorreo.getText().toString();
-        String pass = txtContrasena.getText().toString();
+    }
 
+
+    private void savePreferences(){
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+        String correo = txtCorreo.getText().toString();
+        String contra = txtContrasena.getText().toString();
+
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", correo);
-        editor.putString("password", pass);
+        editor.putString("password", contra);
         editor.commit();
 
-        Intent i = new Intent(getApplication(), MenuActivity.class);
-        startActivity(i);
-    }*/
+    }
 }

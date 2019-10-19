@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:backgroundTint="#fff"
                     android:layout_marginRight="15dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
@@ -86,12 +87,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:backgroundTint="#fff"
                     android:layout_marginRight="15dp"
                     android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
                     android:hint="Contraseña"
                     android:inputType="textPassword"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/noSalir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="No cerrar sesion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff">
+                </RadioButton>
+
+                <TextView
+                    android:id="@+id/recuperarPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="¿Olvidaste tu Contraseña?"
+                    android:textColor="#ffffff"
+                    android:layout_weight="3">
+
+                </TextView>
 
 
             </LinearLayout>

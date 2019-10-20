@@ -64,8 +64,8 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
                 progreso = new ProgressDialog(this);
                 progreso.setMessage("Cargando...");
                 progreso.show();
-
-                String url = "http://192.168.0.101/api/auth/signup?name=" + nombre.getText().toString()
+                String ip=getString(R.string.ip);
+                String url = ip +"/api/auth/signup?name=" + nombre.getText().toString()
                         + "&lasname=" + apellidos.getText().toString()+  "&telefono="
                         + telefono.getText().toString()+ "&email=" + correo.getText().toString()+"&password=" + contraseña.getText().toString()+ "&password_confirmation=" + confcontra.getText().toString();
                 url = url.replace(" ", "%20");

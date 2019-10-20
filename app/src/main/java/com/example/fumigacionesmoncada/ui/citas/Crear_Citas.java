@@ -166,8 +166,8 @@ public class Crear_Citas extends AppCompatActivity implements Response.Listener<
                 progreso = new ProgressDialog(this);
                 progreso.setMessage("Cargando...");
                 progreso.show();
-
-                String url = "http://192.168.0.111/api/cita?Nombre=" + nombre.getText().toString()
+                String ip=getString(R.string.ip);
+                String url = ip+"/api/cita?Nombre=" + nombre.getText().toString()
                         + "&Direccion=" + direccion.getText().toString()+ "&Precio="+ precio.getText()+ "&FechaFumigacion="
                         + fecha.getText()+"&FechaProxima=" +fecha.getText()+ "&Hora=" + etHora.getText();
                 url = url.replace(" ", "%20");

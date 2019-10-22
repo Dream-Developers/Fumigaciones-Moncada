@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.111/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
 
-        String email = preferences.getString("email", "jacob07@gmail.com");
-        String contra = preferences.getString("contra", "secret");
+        String email = preferences.getString("email", "");
+        String contra = preferences.getString("contra", "");
 
         txtCorreo.setText(email);
         txtContrasena.setText(contra);
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 " Sea feliz, que Dios lo bendiga ");
         Toast toast =new Toast(this);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(customToast);
         toast.show();
 

@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,6 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class ClientesFragment extends Fragment {
 
@@ -42,7 +42,7 @@ public class ClientesFragment extends Fragment {
 
     private void cargarClientes() {
 
-        String ip = "http://192.168.137.1/api/clientes";
+        String ip = "http://192.168.0.101/api/clientes";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

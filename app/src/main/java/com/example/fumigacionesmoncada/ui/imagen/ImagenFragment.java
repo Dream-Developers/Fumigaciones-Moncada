@@ -262,7 +262,14 @@ public class ImagenFragment extends Fragment {
 
         return  imagen;
     }
+    private String convertirImagenEnString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20,byteArrayOutputStream);
+        byte[] imageByte = byteArrayOutputStream.toByteArray();
+        String imagenString = Base64.encodeToString(imageByte, Base64.DEFAULT);
+        return imagenString;
 
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

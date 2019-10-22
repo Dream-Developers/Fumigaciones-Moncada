@@ -97,7 +97,7 @@ public class ImagenFragment extends Fragment {
     private static final int COD_SELECCIONA = 10;
     private static final int COD_FOTO = 20;
 
-    EditText campoNombre,campoDocumento,campoDescripcion;
+    EditText campoNombre,campoDescripcion;
     Button botonSubir,btnFoto;
     ImageView imgFoto;
     ProgressDialog progreso;
@@ -147,7 +147,6 @@ public class ImagenFragment extends Fragment {
                               Bundle savedInstanceState) {
 
         View vista=inflater.inflate(R.layout.fragment_imagen, container, false);
-        campoDocumento=  vista.findViewById(R.id.campoDoc);
         campoNombre=  vista.findViewById(R.id.campoNombre);
         campoDescripcion= vista.findViewById(R.id.campoDescrpcion);
         botonSubir= vista.findViewById(R.id.btnSubir);
@@ -253,7 +252,7 @@ public class ImagenFragment extends Fragment {
     }
     private File getPictureFile()throws IOException{
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String pictureFile ="Docente"+timeStamp;
+        String pictureFile ="Servicio"+timeStamp;
         File storeImagen =getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File imagen = File.createTempFile(pictureFile,".jpg",storeImagen);
         pictureFilePath = imagen.getAbsolutePath();
@@ -262,7 +261,14 @@ public class ImagenFragment extends Fragment {
 
         return  imagen;
     }
+    private String convertirImagenEnString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20,byteArrayOutputStream);
+        byte[] imageByte = byteArrayOutputStream.toByteArray();
+        String imagenString = Base64.encodeToString(imageByte, Base64.DEFAULT);
+        return imagenString;
 
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -464,7 +470,6 @@ public class ImagenFragment extends Fragment {
 
                 if (response.trim().equalsIgnoreCase("registra")) {
                     campoNombre.setText("");
-                    campoDocumento.setText("");
                     campoDescripcion.setText("");
                     Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
                 } else {
@@ -482,14 +487,12 @@ public class ImagenFragment extends Fragment {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                String documento = campoDocumento.getText().toString();
                 String nombre = campoNombre.getText().toString();
                 String descripcion = campoDescripcion.getText().toString();
 
                 String imagen = convertirImgString(bitmap);
 
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("documento", documento);
                 parametros.put("nombre", nombre);
                 parametros.put("descripcion", descripcion);
                 parametros.put("imagen", imagen);

@@ -14,8 +14,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:orientation="vertical">
+            android:layout_marginTop="100dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
 
             <EditText
@@ -26,7 +28,8 @@
                 android:drawableLeft="@drawable/baseline_supervised_user_circle_white_18dp"
                 android:hint="  Nombre Cliente "
                 android:lines="1"
-                android:maxLength="30"
+                android:maxLength="50"
+                android:inputType="textPersonName"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
 

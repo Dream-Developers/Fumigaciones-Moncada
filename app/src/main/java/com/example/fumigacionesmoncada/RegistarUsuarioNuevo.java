@@ -83,13 +83,21 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
         @Override
         public void onErrorResponse (VolleyError error){
             progreso.hide();
-            Toast.makeText(getApplicationContext(),"No se pudo registrar , Hubo un error al conectar por favor verifica la conexión a internet o intente nuevamente o su correo ya esta registrado , Error : "+ error.toString(), Toast.LENGTH_LONG).show();
+            if (error.toString().equals("com.android.volley.ServerError")) {
+                Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
-            Log.i("ERROR", error.toString());
+            } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+            } else {
+            }
+          //  Toast.makeText(getApplicationContext(),"No se pudo registrar , Hubo un error al conectar por favor verifica la conexión a internet o intente nuevamente o su correo ya esta registrado , Error : "+ error.toString(), Toast.LENGTH_LONG).show();
 
-
-
+           // Log.i("ERROR", error.toString());
         }
+
+
+
+
 
         @Override
         public void onResponse (JSONObject response){

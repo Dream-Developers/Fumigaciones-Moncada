@@ -32,7 +32,7 @@
     <string name="menu_citas">Citas</string>
     <string name="menu_solicitarCita">Solicitud de citas</string>
     <string name="menu_acercad">Acerca de</string>
-    <string name="ip">http://192.168.0.101</string>
+    <string name="ip">http://192.168.0.111</string>
 
 
 </resources>

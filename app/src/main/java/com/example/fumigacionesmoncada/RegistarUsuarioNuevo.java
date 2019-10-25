@@ -80,7 +80,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
                                 progreso.show();
                                 String ip = getString(R.string.ip);
                                 String url = ip + "/api/auth/signup?name=" + nombre.getText().toString()
-                                        + "&lasname=" + apellidos.getText().toString() + "&telefono="
+                                        + "&recidencia=" + apellidos.getText().toString() + "&telefono="
                                         + telefono.getText().toString() + "&email=" + correo.getText().toString() + "&password=" + contraseña.getText().toString() + "&password_confirmation=" + confcontra.getText().toString();
                                 url = url.replace(" ", "%20");
                                 jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);

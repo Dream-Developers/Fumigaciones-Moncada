@@ -57,9 +57,9 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
 
     private void cargarImagenWebService(String rutaImagen, final UsuariosHolder holder) {
 
-        //String ip=context.getString(R.string.ip);
+        String ip=context.getString(R.string.ip);
 
-        String urlImagen="http://192.168.0.7/imagen/"+rutaImagen;
+        String urlImagen=ip+"/imagen/"+rutaImagen;
         urlImagen=urlImagen.replace(" ","%20");
 
         ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {

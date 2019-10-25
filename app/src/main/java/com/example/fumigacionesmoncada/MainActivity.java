@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.111/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.137.211/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
-
+    String success;
 
     //Shared Preferences
     //private SharedPreferences sharedPreferences;
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
 
-        String email = preferences.getString("email", "jacob07@gmail.com");
-        String contra = preferences.getString("contra", "secret");
+        String email = preferences.getString("email", "");
+        String contra = preferences.getString("contra", "");
 
         txtCorreo.setText(email);
         txtContrasena.setText(contra);
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("access_token");
+                             success = jsonObject.getString("access_token");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
                                 for(int i = 0; i < jsonArray.length(); i++){
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //
                         Bienvenido();
-                        savePreferences();
+                        savePreferences(success);
                         intem();
                         finish();
 
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 " Sea feliz, que Dios lo bendiga ");
         Toast toast =new Toast(this);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(customToast);
         toast.show();
 
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(){
+    private void savePreferences(String token){
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();
@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", correo);
+        editor.putString("token", token);
         editor.putString("password", contra);
         editor.commit();
 

@@ -25,17 +25,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/campoDoc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:hint="Documento"/>
 
             <Button
                 android:id="@+id/btnFoto"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:background="@color/colorAccent"
                 android:onClick="abrircamara"
@@ -44,7 +38,7 @@
                 android:visibility="visible" />
 
         </LinearLayout>
-gen
+
         <EditText
             android:id="@+id/campoNombre"
             android:layout_width="match_parent"
@@ -61,7 +55,7 @@ gen
         <ImageView
             android:id="@+id/imgFoto"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"/>
         <!-- android:src="@drawable/img_base" -->

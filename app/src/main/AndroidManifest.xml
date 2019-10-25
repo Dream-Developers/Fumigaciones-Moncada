@@ -18,8 +18,7 @@
         <activity android:name=".ui.citas.Crear_Citas"></activity>
         <activity
             android:name=".NavegacionAdministradorActivity"
-            android:label="@string/title_activity_navegacion_administrador"
-            android:theme="@style/AppTheme.NoActionBar" />
+             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"

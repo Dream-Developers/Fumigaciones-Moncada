@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.regex.Pattern;
 
 
 public class RegistarUsuarioNuevo extends AppCompatActivity implements
@@ -58,21 +61,37 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
 
         try {
             if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
-            || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
+                    || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
                 Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
             }else {
-                progreso = new ProgressDialog(this);
-                progreso.setMessage("Cargando...");
-                progreso.show();
-                String ip=getString(R.string.ip);
-                String url = ip +"/api/auth/signup?name=" + nombre.getText().toString()
-                        + "&lasname=" + apellidos.getText().toString()+  "&telefono="
-                        + telefono.getText().toString()+ "&email=" + correo.getText().toString()+"&password=" + contraseña.getText().toString()+ "&password_confirmation=" + confcontra.getText().toString();
-                url = url.replace(" ", "%20");
-                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
-                request.add(jsonObjectRequest);
-            }
+                if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
+                    Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
+                } else {
+                    if (telefono.getText().toString().length() < 8 ) {
+                        Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
+                            if (!validarEmail(correo.getText().toString())) {
+                                Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
+                            } else {
 
+                                progreso = new ProgressDialog(this);
+                                progreso.setMessage("Cargando...");
+                                progreso.show();
+                                String ip = getString(R.string.ip);
+                                String url = ip + "/api/auth/signup?name=" + nombre.getText().toString()
+                                        + "&recidencia=" + apellidos.getText().toString() + "&telefono="
+                                        + telefono.getText().toString() + "&email=" + correo.getText().toString() + "&password=" + contraseña.getText().toString() + "&password_confirmation=" + confcontra.getText().toString();
+                                url = url.replace(" ", "%20");
+                                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
+                                request.add(jsonObjectRequest);
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
         }catch (Exception exe){
             Toast.makeText(this,exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -114,6 +133,10 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
 
     public void registrar(View view) {
         cargarwebservice();
+    }
+    private boolean validarEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 }
 

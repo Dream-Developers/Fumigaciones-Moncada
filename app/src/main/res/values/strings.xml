@@ -15,7 +15,9 @@
     <string name="tab_text_4">CONTENIDO</string>
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
+
     <string name="Iplogin">192.168.1.114</string>
+===
 
 
     <string name="title_activity_navegacion_admin">Administrador</string>
@@ -36,6 +38,7 @@
 
     <string name="ip">http://192.168.1.114</string>
 
+=======
 
 
 </resources>

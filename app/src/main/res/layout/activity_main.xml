@@ -140,12 +140,13 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/oval"
-                    android:onClick="guardarLogeo"
+                    android:onClick="registro"
                     android:text="Ingresar"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22dp"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    />
 
             </LinearLayout>
 

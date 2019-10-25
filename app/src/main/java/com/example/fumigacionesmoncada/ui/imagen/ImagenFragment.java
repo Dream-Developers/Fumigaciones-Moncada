@@ -11,9 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,24 +32,21 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.Principal.Principal_Fragment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,13 +70,12 @@ public class ImagenFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private File pictureFile;
-    private  String pictureFilePath;
+    private String pictureFilePath;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
 
 
     private static final String CARPETA_PRINCIPAL = "misImagenesApp/";//directorio principal
@@ -97,8 +91,8 @@ public class ImagenFragment extends Fragment {
     private static final int COD_SELECCIONA = 10;
     private static final int COD_FOTO = 20;
 
-    EditText campoNombre,campoDescripcion;
-    Button botonSubir,btnFoto;
+    EditText campoNombre, campoDescripcion;
+    Button botonSubir, btnFoto;
     ImageView imgFoto;
     ProgressDialog progreso;
 
@@ -125,7 +119,7 @@ public class ImagenFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ImagenFragment newInstance(String param1, String param2) {
-       ImagenFragment fragment= new ImagenFragment();
+        ImagenFragment fragment = new ImagenFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -143,19 +137,19 @@ public class ImagenFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        View vista=inflater.inflate(R.layout.fragment_imagen, container, false);
-        campoNombre=  vista.findViewById(R.id.campoNombre);
-        campoDescripcion= vista.findViewById(R.id.campoDescrpcion);
-        botonSubir= vista.findViewById(R.id.btnSubir);
-        btnFoto=vista.findViewById(R.id.btnFoto);
+        View vista = inflater.inflate(R.layout.fragment_imagen, container, false);
+        campoNombre = vista.findViewById(R.id.campoNombre);
+        campoDescripcion = vista.findViewById(R.id.campoDescrpcion);
+        botonSubir = vista.findViewById(R.id.btnSubir);
+        btnFoto = vista.findViewById(R.id.btnFoto);
 
-        imgFoto= vista.findViewById(R.id.imgFoto);
+        imgFoto = vista.findViewById(R.id.imgFoto);
 
 
-        layoutSubir= vista.findViewById(R.id.idLayoutSubir);
+        layoutSubir = vista.findViewById(R.id.idLayoutSubir);
 
         // request= Volley.newRequestQueue(getContext());
 
@@ -165,14 +159,29 @@ public class ImagenFragment extends Fragment {
         botonSubir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cargarWebService();
+                if (campoNombre.getText().toString().length() > 0 && campoDescripcion.getText().toString().length() > 0) {
+
+                    cargarWebService();
+
+                }else {
+                    if (campoNombre.getText().toString().length() == 0) {
+                        campoNombre.setError("Ingrese el nombre");
+                        Toast.makeText(getContext(), "Ingrese el nombre", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    if (campoDescripcion.getText().toString().length() == 0) {
+                        campoDescripcion.setError("Ingrese la descripcion");
+                        Toast.makeText(getContext(), "Ingrese la descripcion", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
         btnFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mostrarDialogOpciones();
+                mostrarDialogOpciones();
 
             }
         });
@@ -181,21 +190,21 @@ public class ImagenFragment extends Fragment {
     }
 
     private void mostrarDialogOpciones() {
-        final CharSequence[] opciones={"Tomar Foto","Elegir de Galeria","Cancelar"};
-        final AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(opciones[i].equals("Tomar Foto")){
+                if (opciones[i].equals("Tomar Foto")) {
                     abrirCamara();
-                }else{
-                    if (opciones[i].equals("Elegir de Galeria")){
-                        Intent intent=new Intent(Intent.ACTION_PICK,
+                } else {
+                    if (opciones[i].equals("Elegir de Galeria")) {
+                        Intent intent = new Intent(Intent.ACTION_PICK,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         intent.setType("image/");
-                        startActivityForResult(intent.createChooser(intent,"Seleccione"),COD_SELECCIONA);
-                    }else{
+                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+                    } else {
                         dialogInterface.dismiss();
                     }
                 }
@@ -215,12 +224,10 @@ public class ImagenFragment extends Fragment {
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     100);
 
-        }else {
-
-
+        } else {
 
 
             Intent inten = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -229,58 +236,46 @@ public class ImagenFragment extends Fragment {
             try {
 
                 //Se crea un achivo de la foto en blanco
-                pictureFile =getPictureFile();
+                pictureFile = getPictureFile();
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
 
 
             //se agrega la imagen capturada al archivo en blanco
-            Uri photoUri = FileProvider.getUriForFile(getContext(),"com.permisosunahtec.android.fileprovider",pictureFile);
+            Uri photoUri = FileProvider.getUriForFile(getContext(), "com.permisosunahtec.android.fileprovider", pictureFile);
             inten.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
             startActivityForResult(inten, TOMARFOTO);
 
 
-
-
-
-
-
         }
     }
-    private File getPictureFile()throws IOException{
+
+    private File getPictureFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String pictureFile ="Servicio"+timeStamp;
-        File storeImagen =getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File imagen = File.createTempFile(pictureFile,".jpg",storeImagen);
+        String pictureFile = "Servicio" + timeStamp;
+        File storeImagen = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(pictureFile, ".jpg", storeImagen);
         pictureFilePath = imagen.getAbsolutePath();
 
 
-
-        return  imagen;
+        return imagen;
     }
-    private String convertirImagenEnString(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20,byteArrayOutputStream);
-        byte[] imageByte = byteArrayOutputStream.toByteArray();
-        String imagenString = Base64.encodeToString(imageByte, Base64.DEFAULT);
-        return imagenString;
 
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-             switch (requestCode){
+        switch (requestCode) {
             case COD_SELECCIONA:
-                Uri miPath=data.getData();
+                Uri miPath = data.getData();
                 imgFoto.setImageURI(miPath);
 
                 try {
-                    bitmap=MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),miPath);
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
                     imgFoto.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -297,8 +292,6 @@ public class ImagenFragment extends Fragment {
                     try {
 
 
-
-
                         ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
 
                         orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -306,19 +299,18 @@ public class ImagenFragment extends Fragment {
                         switch (orientation) {
 
                             case ExifInterface.ORIENTATION_ROTATE_270:
-                                bitmap = rotateImage(getContext(),bitmap, 270);
+                                bitmap = rotateImage(getContext(), bitmap, 270);
                                 break;
 
                             case ExifInterface.ORIENTATION_ROTATE_180:
-                                bitmap = rotateImage(getContext() ,bitmap, 180);
+                                bitmap = rotateImage(getContext(), bitmap, 180);
                                 break;
 
                             case ExifInterface.ORIENTATION_ROTATE_90:
-                                bitmap = rotateImage(getContext(),bitmap, 90);
+                                bitmap = rotateImage(getContext(), bitmap, 90);
                                 break;
 
                         }
-
 
 
                         imgFoto.setImageBitmap(bitmap);
@@ -329,15 +321,16 @@ public class ImagenFragment extends Fragment {
                     }
 
 
-                }else{
+                } else {
                     //en caso de que no haya foto capturada el archivo en blanco se elimina
                     imgFile.delete();
                 }
 
                 break;
         }
-     }
-    public static Bitmap rotateImage(Context context ,Bitmap source, float angle) {
+    }
+
+    public static Bitmap rotateImage(Context context, Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         try {
 
@@ -346,27 +339,28 @@ public class ImagenFragment extends Fragment {
 
             source = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
                     matrix, true);
-        }catch (Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
         }
-        return  source;
+        return source;
     }
+
     private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
 
-        int ancho=bitmap.getWidth();
-        int alto=bitmap.getHeight();
+        int ancho = bitmap.getWidth();
+        int alto = bitmap.getHeight();
 
-        if(ancho>anchoNuevo || alto>altoNuevo){
-            float escalaAncho=anchoNuevo/ancho;
-            float escalaAlto= altoNuevo/alto;
+        if (ancho > anchoNuevo || alto > altoNuevo) {
+            float escalaAncho = anchoNuevo / ancho;
+            float escalaAlto = altoNuevo / alto;
 
-            Matrix matrix=new Matrix();
-            matrix.postScale(escalaAncho,escalaAlto);
+            Matrix matrix = new Matrix();
+            matrix.postScale(escalaAncho, escalaAlto);
 
-            return Bitmap.createBitmap(bitmap,0,0,ancho,alto,matrix,false);
+            return Bitmap.createBitmap(bitmap, 0, 0, ancho, alto, matrix, false);
 
-        }else{
+        } else {
             return bitmap;
         }
 
@@ -378,19 +372,19 @@ public class ImagenFragment extends Fragment {
     ////////////////
 
     private boolean solicitaPermisosVersionesSuperiores() {
-        if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){//validamos si estamos en android menor a 6 para no buscar los permisos
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {//validamos si estamos en android menor a 6 para no buscar los permisos
             return true;
         }
 
         //validamos si los permisos ya fueron aceptados
-        if((getContext().checkSelfPermission(WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)&&getContext().checkSelfPermission(CAMERA)==PackageManager.PERMISSION_GRANTED){
+        if ((getContext().checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) && getContext().checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
 
 
-        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)||(shouldShowRequestPermissionRationale(CAMERA)))){
+        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE) || (shouldShowRequestPermissionRationale(CAMERA)))) {
             cargarDialogoRecomendacion();
-        }else{
+        } else {
             requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MIS_PERMISOS);
         }
 
@@ -398,34 +392,34 @@ public class ImagenFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,  int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==MIS_PERMISOS){
-            if(grantResults.length==2 && grantResults[0]==PackageManager.PERMISSION_GRANTED && grantResults[1]==PackageManager.PERMISSION_GRANTED){//el dos representa los 2 permisos
-                Toast.makeText(getContext(),"Permisos aceptados",Toast.LENGTH_SHORT);
+        if (requestCode == MIS_PERMISOS) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
+                Toast.makeText(getContext(), "Permisos aceptados", Toast.LENGTH_SHORT);
                 btnFoto.setEnabled(true);
             }
-        }else{
+        } else {
             solicitarPermisosManual();
         }
     }
 
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones={"si","no"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(getContext());//estamos en fragment
+        final CharSequence[] opciones = {"si", "no"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(getContext());//estamos en fragment
         alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("si")){
-                    Intent intent=new Intent();
+                if (opciones[i].equals("si")) {
+                    Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    Uri uri=Uri.fromParts("package",getContext().getPackageName(),null);
+                    Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
-                }else{
-                    Toast.makeText(getContext(),"Los permisos no fueron aceptados",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }
@@ -435,14 +429,14 @@ public class ImagenFragment extends Fragment {
 
 
     private void cargarDialogoRecomendacion() {
-        AlertDialog.Builder dialogo=new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
         dialogo.setTitle("Permisos Desactivados");
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
 
         dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, 100);
             }
         });
         dialogo.show();
@@ -451,37 +445,28 @@ public class ImagenFragment extends Fragment {
     ///////////////
 
 
-
-
     private void cargarWebService() {
 
-        progreso=new ProgressDialog(getContext());
+        progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String ip=getString(R.string.ip);
-        String url=ip+"/imagen";
+        String ip = getString(R.string.ip);
+        String url = ip + "/api/servicio";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 progreso.hide();
-
-                if (response.trim().equalsIgnoreCase("registra")) {
-                    campoNombre.setText("");
-                    campoDescripcion.setText("");
-                    Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "No se ha registrado ", Toast.LENGTH_SHORT).show();
-                    Log.i("RESPUESTA: ", "" + response);
-                }
-
+                Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                Log.i("mensaje",response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_SHORT).show();
+                error.getStackTrace();
                 progreso.hide();
             }
         }) {
@@ -495,7 +480,7 @@ public class ImagenFragment extends Fragment {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("nombre", nombre);
                 parametros.put("descripcion", descripcion);
-                parametros.put("imagen", imagen);
+                parametros.put("foto", imagen);
 
                 return parametros;
             }
@@ -507,10 +492,10 @@ public class ImagenFragment extends Fragment {
 
     private String convertirImgString(Bitmap bitmap) {
 
-        ByteArrayOutputStream array=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,array);
-        byte[] imagenByte=array.toByteArray();
-        String imagenString= Base64.encodeToString(imagenByte,Base64.DEFAULT);
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
 
         return imagenString;
     }
@@ -538,7 +523,6 @@ public class ImagenFragment extends Fragment {
     }
 
 
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -555,4 +539,5 @@ public class ImagenFragment extends Fragment {
 
     }
 
-   }
+
+}

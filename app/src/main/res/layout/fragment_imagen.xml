@@ -38,7 +38,7 @@
                 android:visibility="visible" />
 
         </LinearLayout>
-gen
+
         <EditText
             android:id="@+id/campoNombre"
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@ gen
         <ImageView
             android:id="@+id/imgFoto"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"/>
         <!-- android:src="@drawable/img_base" -->

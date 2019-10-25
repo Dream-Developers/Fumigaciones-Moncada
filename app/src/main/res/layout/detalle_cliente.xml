@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.clientes.Detalle_Cliente">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingTop="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:paddingLeft="130dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/person" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:paddingTop="300dp">
+
+
+        <TextView
+            android:id="@+id/nombreCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Nombre:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nombre_detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_toRightOf="@+id/nombreCliente"
+            android:text="Maria Izamar Molina" />
+
+        <TextView
+            android:id="@+id/residencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nombreCliente"
+            android:layout_margin="10dp"
+            android:text="Residencia:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/residencia_detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nombreCliente"
+            android:layout_margin="15dp"
+            android:layout_toRightOf="@+id/residencia"
+            android:text="Danli" />
+
+        <TextView
+            android:id="@+id/telefonoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/residencia"
+            android:layout_margin="10dp"
+            android:text="Telefono:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/telefono_detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/residencia_detalle"
+            android:layout_margin="15dp"
+            android:layout_toRightOf="@+id/telefonoCliente"
+            android:text="89765643" />
+
+        <TextView
+            android:id="@+id/CorreoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefonoCliente"
+            android:layout_margin="30dp"
+            android:text="Correo:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/correo_detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/telefono_detalle"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/CorreoCliente"
+            android:text="Izamar_molina@yahoo.com" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

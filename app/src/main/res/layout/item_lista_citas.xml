@@ -26,7 +26,7 @@
         android:layout_toRightOf="@+id/relativeLayout1">
 
         <TextView
-            android:id="@+id/nombre_cliente"
+            android:id="@+id/nombre_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -39,11 +39,11 @@
             android:layout_marginLeft="60dp"/>
 
         <TextView
-            android:id="@+id/telefono_cliente"
+            android:id="@+id/fecha_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nombre_cliente"
-            android:text="98786578"
+            android:layout_below="@+id/nombre_cita"
+            android:text="10/01/2020"
             android:textSize="15sp"
             android:visibility="visible"
             android:layout_marginLeft="60dp"/>

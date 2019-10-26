@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.26/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
-    String success;
+
 
     //Shared Preferences
     //private SharedPreferences sharedPreferences;
@@ -84,6 +84,27 @@ public class MainActivity extends AppCompatActivity {
 
         cargarPreferencias();
 
+
+
+ /*
+
+        Cursor cursor = getContentResolver().query(ContractParaListaUsers.CONTENT_URI, null,
+                ContractParaListaUsers.Columnas.ROL+"=? or "+
+                        ContractParaListaUsers.Columnas.ROL+"=?",
+                new String[]{"1","2"},null,null);
+
+        cursor.moveToNext();
+        Log.i("USUARIO",""+cursor.getCount());
+
+        try{
+            if (cursor.getCount()==1) {
+
+                Intent intent = new Intent(MainActivity.this, ChatFragment.class);
+                startActivity(intent);
+                finish();
+
+            } else {*/
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,12 +123,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_registro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RegistarUsuarioNuevo.class));
-            }
-        });
+
+        //ojo
+           /*  }
+
+
+
+
+        }catch (Exception exc){
+            Log.i("Login_Activity",""+exc);
+        }*/
+
     }
 
     public void guardarEstadoButton(){
@@ -147,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                             success = jsonObject.getString("access_token");
+                            String success = jsonObject.getString("access_token");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
                                 for(int i = 0; i < jsonArray.length(); i++){
@@ -168,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //
                         Bienvenido();
-                        savePreferences(success);
+                        savePreferences();
                         intem();
                         finish();
 
@@ -199,10 +225,6 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 }
 
-    public void registro(View view) {
-        Intent i = new Intent(getApplication(),RegistarUsuarioNuevo.class);
-        startActivity(i);
-    }
 
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -231,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(String token){
+    private void savePreferences(){
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();
@@ -239,9 +261,14 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", correo);
-        editor.putString("token", token);
         editor.putString("password", contra);
         editor.commit();
+
+    }
+
+    public void botonregistrar(View view) {
+        Intent i = new Intent(getApplicationContext(), RegistarUsuarioNuevo.class);
+        startActivity(i);
 
     }
 }

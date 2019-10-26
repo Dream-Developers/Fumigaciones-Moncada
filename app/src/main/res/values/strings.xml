@@ -15,9 +15,7 @@
     <string name="tab_text_4">CONTENIDO</string>
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
-
-    <string name="Iplogin">192.168.0.26</string>
-===
+    <string name="Iplogin">192.168.0.101</string>
 
 
     <string name="title_activity_navegacion_admin">Administrador</string>
@@ -34,11 +32,7 @@
     <string name="menu_citas">Citas</string>
     <string name="menu_solicitarCita">Solicitud de citas</string>
     <string name="menu_acercad">Acerca de</string>
-
-
-    <string name="ip">http://192.168.0.26</string>
-
-=======
+    <string name="ip">http://192.168.0.101</string>
 
 
 </resources>

@@ -40,7 +40,17 @@ public class ClientesFragment extends Fragment {
         addCliente = view.findViewById(R.id.add_clientes);
 
         cargarClientes();
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClientesVO clientesVO = (ClientesVO) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getContext(), Detalle_Cliente.class);
+                intent.putExtra("id_cliente",clientesVO.getId());
+                startActivity(intent);
 
+
+            }
+        });
         addCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +67,7 @@ public class ClientesFragment extends Fragment {
 
     private void cargarClientes() {
 
-        String ip = "http://192.168.43.134/api/clientes";
+        String ip = "http://192.168.137.1/api/clientes";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -72,6 +82,7 @@ public class ClientesFragment extends Fragment {
                         object = array.getJSONObject(i);
                         clientesVO.setNombre(object.getString("name"));
                         clientesVO.setTelefono(object.getString("telefono"));
+                        clientesVO.setId(String.valueOf(object.getInt("id")));
 
                         cliente.add(clientesVO);
                         clientesAdapter = new ClientesAdapter(getContext(), cliente);

@@ -35,7 +35,7 @@ public class Detalle_Cliente extends Activity {
         telefono= findViewById(R.id.telefono_detalle);
         correo= findViewById(R.id.correo_detalle);
 
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id_cliente");
 
         cargarClienteWeb(id);
 
@@ -43,7 +43,7 @@ public class Detalle_Cliente extends Activity {
 
     private void cargarClienteWeb(final String id) {
 
-        String ip = "http://192.168.43.134/api/cliente/"+id+"/mostrar";
+        String ip = "http://192.168.137.1/api/cliente/"+id+"/mostrar";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
                 new Response.Listener<JSONObject>() {
@@ -51,10 +51,11 @@ public class Detalle_Cliente extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject object = response.getJSONObject("cliente");
-                                nombre.setText(object.getString("name")+object.getString("lasname"));
+                                nombre.setText(object.getString("name"));
+                            residencia.setText(object.getString("recidencia"));
                                 telefono.setText(object.getString("telefono"));
                                 correo.setText(object.getString("email"));
-                                residencia.setText(object.getString("recidencia"));
+
 
 
                         } catch (JSONException e) {

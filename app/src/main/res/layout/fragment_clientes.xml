@@ -6,8 +6,6 @@
 
 
 
-
-
     <ListView
         android:id="@+id/lista_clientes"
         android:layout_width="match_parent"

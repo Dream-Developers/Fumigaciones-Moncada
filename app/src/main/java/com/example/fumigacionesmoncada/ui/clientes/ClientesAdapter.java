@@ -15,9 +15,10 @@ import com.example.fumigacionesmoncada.R;
 import java.util.ArrayList;
 
 public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
-
+    private ArrayList<ClientesVO> usuarios;
     public ClientesAdapter( Context context,  ArrayList<ClientesVO>lista) {
         super(context, R.layout.item_lista_clientes ,lista);
+        this.usuarios = lista;
     }
 
 
@@ -36,5 +37,28 @@ public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
 
 
         return  convertView;
+    }
+    @Override
+    public int getCount() {
+        return usuarios.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Nullable
+    @Override
+    public ClientesVO getItem(int position) {
+        return usuarios.get(position);
+    }
+
+    public void filtrar(ArrayList<ClientesVO> permisosgetYset) {
+        this.usuarios = new ArrayList<>();
+        this.usuarios.addAll(permisosgetYset);
+        notifyDataSetChanged();
+
+
     }
 }

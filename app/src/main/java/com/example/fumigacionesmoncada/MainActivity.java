@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
+    String success;
 
 
     //Shared Preferences
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("access_token");
+                             success = jsonObject.getString("access_token");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
                                 for(int i = 0; i < jsonArray.length(); i++){
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //
                         Bienvenido();
-                        savePreferences();
+                        savePreferences(success);
                         intem();
                         finish();
 
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(){
+    private void savePreferences(String token){
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();
@@ -261,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", correo);
+        editor.putString("token", token);
         editor.putString("password", contra);
         editor.commit();
 

@@ -44,6 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,25 +55,49 @@
             >
 
 
-            <EditText
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Nombre :"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:allowUndo="true"
+        android:layout_gravity="center"
+       />
+    <EditText
                 android:id="@+id/nombres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
                 android:hint="  Nombre Completo"
                 android:lines="1"
                 android:maxLength="30"
+        android:layout_marginLeft="15dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
 
 
                 />
-
+</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Residencia :"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_gravity="center" />
             <EditText
                 android:id="@+id/direccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
                 android:hint=" Residencia "
                 android:lines="1"
                 android:textColor="#ffffff"
@@ -79,49 +105,86 @@
 
 
                 />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Telefono :"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_gravity="center" />
 
             <EditText
                 android:id="@+id/telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_phone_in_talk_white_18dp"
-                android:hint="  Telefono"
+                android:hint="  90000000"
                 android:lines="1"
                 android:maxLength="8"
                 android:inputType="number"
                 android:textColor="#ffffff"
+                android:layout_marginLeft="30dp"
                 android:textColorHint="#ffffff"
 
 
                 />
+        </LinearLayout>
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fecha :"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+            />
             <EditText
                 android:id="@+id/fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_email_white_18dp"
-                android:hint="  Fecha"
-                android:inputType="textEmailAddress"
+                android:hint="  2019/12/12"
+                android:inputType="date"
                 android:lines="1"
                 android:textColor="#ffffff"
+                android:layout_marginLeft="30dp"
                 android:textColorHint="#ffffff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Hora :"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:layout_gravity="center" />
 
             <EditText
                 android:id="@+id/hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
-                android:hint=" Hora"
+                android:hint=" 12:00"
+                android:layout_marginLeft="40dp"
                 android:lines="1"
+                android:inputType="time"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff" />
 
 
 
-
+</LinearLayout>
             <Button
-                android:id="@+id/registrar"
+                android:id="@+id/pedir"
                 android:layout_marginTop="20dp"
                 android:layout_width="180dp"
                 android:layout_gravity="center"
@@ -129,7 +192,7 @@
                 android:text="Pedir Cita"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
-                android:onClick="PedirCita"
+                android:onClick="pedir"
                 android:background="@drawable/oval"
 
                 />

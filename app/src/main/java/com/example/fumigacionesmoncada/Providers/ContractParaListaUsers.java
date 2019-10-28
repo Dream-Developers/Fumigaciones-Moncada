@@ -67,7 +67,5 @@ public class ContractParaListaUsers {
         public static final String EMAIL = "email";
         public static final String PASSWORD = "password";
         public static final String ROL = "rol";
-        public static final String ID_REMOTA = "idRemota";
-        public static final String ESTADO = "estado";
     }
 }

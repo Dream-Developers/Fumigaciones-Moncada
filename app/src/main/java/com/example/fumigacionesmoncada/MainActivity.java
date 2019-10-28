@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
+    private static String URL_LOGIN = "http://10.24.8.176/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
@@ -114,17 +114,26 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mEmail = txtCorreo.getText().toString().trim();
-                String mPassword = txtContrasena.getText().toString().trim();
 
-                if (!mEmail.isEmpty() || !mPassword.isEmpty() || !isEmailValid(mEmail)) {
-                    login(mEmail, mPassword);
-                    //Bienvenido();
-
-
+                if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
+                    if(!isEmailValid(txtCorreo.getText())){
+                        txtCorreo.setError("No es un correo valido");
+                    }else {
+                        String email = txtCorreo.getText().toString().trim();
+                        String contraseniaPass = txtContrasena.getText().toString().trim();
+                        login(email, contraseniaPass);
+                    }
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Al menos un campo está vacío", Toast.LENGTH_SHORT).show();
+                    if (txtCorreo.getText().toString().length() == 0 ||
+                            txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
+                        txtCorreo.setError("Ingresa el correo");
+
+                    }
+                    if (txtContrasena.getText().toString().trim().length() == 0 ||
+                            txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
+                        txtContrasena.setError("Ingresa la contraseña");
+                    }
                 }
             }
         });
@@ -132,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
         //ojo
              }
-
-
 
 
         }catch (Exception exc){
@@ -251,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                 " Sea feliz, que Dios lo bendiga ");
         Toast toast =new Toast(this);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(customToast);
         toast.show();
 

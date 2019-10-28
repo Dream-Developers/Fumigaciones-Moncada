@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.fumigacionesmoncada.Providers.ContractParaListaUsers;
+import com.example.fumigacionesmoncada.ui.chat.ChatFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +36,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
- /*
-
         Cursor cursor = getContentResolver().query(ContractParaListaUsers.CONTENT_URI, null,
                 ContractParaListaUsers.Columnas.ROL+"=? or "+
                         ContractParaListaUsers.Columnas.ROL+"=?",
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            } else {*/
+            } else {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,14 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //ojo
-           /*  }
+             }
 
 
 
 
         }catch (Exception exc){
             Log.i("Login_Activity",""+exc);
-        }*/
+        }
 
     }
 

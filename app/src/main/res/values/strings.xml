@@ -38,6 +38,11 @@
 
     <string name="ip">http://192.168.0.27</string>
 
+
+
+
+    <string name="account_type">com.example.fumigacionesmoncada.account</string>
+
 =======
 
 

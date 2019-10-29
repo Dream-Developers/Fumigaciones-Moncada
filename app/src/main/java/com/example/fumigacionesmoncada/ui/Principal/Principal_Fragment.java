@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,7 +95,8 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.idRecyclerImagen);
-        recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
         cargarWebService();
         return  vista;
@@ -150,10 +152,10 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se puede conectar"+error.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "No hay acceso a internet", Toast.LENGTH_LONG).show();
         System.out.println();
         dialog.hide();
-        Log.d("ERROR: ", error.toString());
+       // Log.d("ERROR: ", error.toString());
 
     }
     public void onButtonPressed(Uri uri) {

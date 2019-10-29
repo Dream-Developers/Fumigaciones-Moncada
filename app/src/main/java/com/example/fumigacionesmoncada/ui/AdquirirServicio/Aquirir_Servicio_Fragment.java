@@ -92,6 +92,13 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
             }
         });
         cargarClienteWeb();
+        mostrarNombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"El Nombre no se puede modificar",Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
         pedir.setOnClickListener(new View.OnClickListener() {
@@ -105,9 +112,9 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
         dialogo1.setTitle("Importante");
         dialogo1.setMessage("¿ Estos Datos Son los correctos ?" +"\n"+
-                "Nombre  "  +"  :"   +mostrarNombre.getText().toString()   +   "\n"     +
-                "Direccion De Fumigacion "  +"  :" +mostrarDireccion.getText().toString()  +  "\n"      +
-                "Telefono  "  +"  :"  +mostraraTelefono.getText().toString()  +  "\n"
+                "Nombre  "  +":  "   +mostrarNombre.getText().toString()   +   "\n"     +
+                "Direccion De Fumigacion "  +":  " +mostrarDireccion.getText().toString()  +  "\n"      +
+                "Telefono  "  +":  "  +mostraraTelefono.getText().toString()  +  "\n"
 
         );
         dialogo1.setCancelable(false);
@@ -188,6 +195,11 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
 
         Toast.makeText(getContext(),"Peticion Realizada correctamente", Toast.LENGTH_SHORT).show();
         progreso.hide();
+        fecha.setText("");
+        Hora.setText("");
+        mostrarNombre.setText("");
+        mostrarDireccion.setText("");
+        mostraraTelefono.setText("");
     }
 
 
@@ -206,7 +218,7 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONObject object = response.getJSONObject("cliente");
+                            JSONObject object = response;
                             mostrarNombre.setText(object.getString("name"));
                             mostraraTelefono.setText(object.getString("telefono"));
                             mostrarDireccion.setText(object.getString("recidencia"));

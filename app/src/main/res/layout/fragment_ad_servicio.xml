@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:text="  Nombre :"
         android:textSize="20dp"
+
         android:textColor="#fff"
         android:allowUndo="true"
         android:layout_gravity="center"
@@ -75,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:maxLength="30"
+        android:focusable="false"
         android:layout_marginLeft="15dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"

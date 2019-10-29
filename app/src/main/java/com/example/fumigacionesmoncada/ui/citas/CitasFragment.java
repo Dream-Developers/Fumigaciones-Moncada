@@ -1,30 +1,19 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
-import com.example.fumigacionesmoncada.MainActivity;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesAdapter;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -32,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class CitasFragment extends Fragment {
 private FloatingActionButton addcita;
@@ -63,7 +54,7 @@ private FloatingActionButton addcita;
     }
 
     private void cargarCitas() {
-        String ip = "http://192.168.0.26/api/citas";
+        String ip = "http://192.168.0.101/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {

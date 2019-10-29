@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,12 +13,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.Nullable;
 
 public class Detalle_Cliente extends Activity {
     private TextView nombre, residencia, telefono,correo;
@@ -43,7 +42,7 @@ public class Detalle_Cliente extends Activity {
 
     private void cargarClienteWeb(final String id) {
 
-        String ip = "http://192.168.137.1/api/cliente/"+id+"/mostrar";
+        String ip = "http://192.168.0.101/api/cliente/"+id+"/mostrar";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
                 new Response.Listener<JSONObject>() {

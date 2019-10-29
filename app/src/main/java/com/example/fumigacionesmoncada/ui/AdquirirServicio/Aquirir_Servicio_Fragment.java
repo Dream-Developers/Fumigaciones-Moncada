@@ -1,7 +1,11 @@
 package com.example.fumigacionesmoncada.ui.AdquirirServicio;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,14 +41,24 @@ import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Aquirir_Servicio_Fragment extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
-
+    private int dia, mes, anio;
+    private EditText fecha;
+    private static final String CERO = "0";
+    private static final String DOS_PUNTOS = ":";
+    public final Calendar c = Calendar.getInstance();
+    final int hora = c.get(Calendar.HOUR_OF_DAY);
+    final int minuto = c.get(Calendar.MINUTE);
     private Aquirir_Servicio_ViewModel servicioViewModel;
     private EditText mostrarNombre,mostrarDireccion,mostraraTelefono;
-    private EditText fecha, Hora;
+    private EditText Hora;
     String tokenUsuario;
     private Button pedir;
     ProgressDialog progreso;
@@ -63,24 +79,64 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
         fecha = (EditText)view.findViewById(R.id.fecha);
         pedir= view.findViewById(R.id.pedir);
         request = Volley.newRequestQueue(getActivity());
+        Hora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerHora();
+            }
+        });
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerFecha();
+            }
+        });
         cargarClienteWeb();
 
 
         pedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              SubirWeb();
+                if(mostrarNombre.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")|| fecha.getText().toString().equals("") || Hora.getText().toString().equals("")){
+                    Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
+                }else {
+
+
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿ Estos Datos Son los correctos ?" +"\n"+
+                "Nombre  "  +"  :"   +mostrarNombre.getText().toString()   +   "\n"     +
+                "Direccion De Fumigacion "  +"  :" +mostrarDireccion.getText().toString()  +  "\n"      +
+                "Telefono  "  +"  :"  +mostraraTelefono.getText().toString()  +  "\n"
+
+        );
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptar();
             }
         });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelar();
+            }
+        });
+        dialogo1.show();
+            }}
+        });
         return view;
+    }
 
+    public void aceptar() {
+        SubirWeb();
+    }
+
+    public void cancelar() {
     }
 
     private void SubirWeb() {
         try {
-            if(mostrarNombre.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")|| fecha.getText().toString().equals("") || Hora.getText().toString().equals("")){
-                Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-            }else {
+
                     if (mostraraTelefono.getText().toString().length() < 8 ) {
                         Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
                     } else {
@@ -96,7 +152,7 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
                                 jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
                                 request.add(jsonObjectRequest);
                             }
-                        }
+
 
 
 
@@ -141,10 +197,11 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
 
     }
     private void cargarClienteWeb() {
+        String ip = getString(R.string.ip);
 
-        String ip = "http://192.168.0.111/api/auth/user";
+        String url = ip+"/api/auth/user";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -157,7 +214,7 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
 
 
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), "sinoda.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "sinoda."+e, Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -169,23 +226,79 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-                } else if (error.toString().equals("com.android.volley.AuthFailureError")) {
-                    Toast.makeText(getContext(), "Correo o password invalido.", Toast.LENGTH_LONG).show();
-                } else {
+                }  else {
                     Toast.makeText(getContext(), " "+error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
-                return parametros;
-            }
-        };
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }};
 
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+    private void obtenerHora() {
+        TimePickerDialog recogerHora = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String horaFormateada =  (hourOfDay < 10)? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                String minutoFormateado = (minute < 10)? String.valueOf(CERO + minute):String.valueOf(minute);
+                String AM_PM;
+                if(hourOfDay < 12) {
+                    AM_PM = "a.m.";
+                } else {
+                    AM_PM = "p.m.";
+                }
+                Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado +DOS_PUNTOS +"00" );
+            }
+        }, hora, minuto, false);
+
+        recogerHora.show();
+
+    }
+
+
+    private void obtenerFecha() {
+        Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        anio = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                fecha.setText(   year  + "-" + (month + 1  ) + "-"+ dayOfMonth);
+
+            }
+        }, anio, mes, dia);
+        datePickerDialog.show();
+
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+            Date fechai = dateParser.parse(fecha.getText().toString().trim());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechai);
+            c.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+30);
+            Date newDate = c.getTime();
+            String fechaf = dateParser.format(newDate);
+
+            fecha.setText(fechaf);
+
+
+
+
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
 
 
     }

@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.fumigacionesmoncada.Providers.ContractParaListaUsers;
+import com.example.fumigacionesmoncada.ui.chat.ChatFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,17 +36,19 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.137.1/api/auth/login";
+    private static String URL_LOGIN = "http://10.24.10.117/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
+    String success;
 
 
     //Shared Preferences
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
- /*
-
         Cursor cursor = getContentResolver().query(ContractParaListaUsers.CONTENT_URI, null,
                 ContractParaListaUsers.Columnas.ROL+"=? or "+
                         ContractParaListaUsers.Columnas.ROL+"=?",
@@ -103,36 +109,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            } else {*/
+            } else {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mEmail = txtCorreo.getText().toString().trim();
-                String mPassword = txtContrasena.getText().toString().trim();
 
-                if (!mEmail.isEmpty() || !mPassword.isEmpty() || !isEmailValid(mEmail)) {
-                    login(mEmail, mPassword);
-                    //Bienvenido();
-
-
+                if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
+                    if(!isEmailValid(txtCorreo.getText())){
+                        txtCorreo.setError("No es un correo valido");
+                    }else {
+                        String email = txtCorreo.getText().toString().trim();
+                        String contraseniaPass = txtContrasena.getText().toString().trim();
+                        login(email, contraseniaPass);
+                    }
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Al menos un campo está vacío", Toast.LENGTH_SHORT).show();
+                    if (txtCorreo.getText().toString().length() == 0 ||
+                            txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
+                        txtCorreo.setError("Ingresa el correo");
+
+                    }
+                    if (txtContrasena.getText().toString().trim().length() == 0 ||
+                            txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
+                        txtContrasena.setError("Ingresa la contraseña");
+                    }
                 }
             }
         });
 
 
         //ojo
-           /*  }
-
-
+             }
 
 
         }catch (Exception exc){
             Log.i("Login_Activity",""+exc);
-        }*/
+        }
 
     }
 
@@ -170,10 +183,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         guardarEstadoButton();
-                        Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("access_token");
+                             success = jsonObject.getString("access_token");
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
                                 for(int i = 0; i < jsonArray.length(); i++){
@@ -193,8 +206,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         //
-                        Bienvenido();
-                        savePreferences();
+                        //Bienvenido();
+                        savePreferences(success);
                         intem();
                         finish();
 
@@ -245,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                 " Sea feliz, que Dios lo bendiga ");
         Toast toast =new Toast(this);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(customToast);
         toast.show();
 
@@ -253,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(){
+    private void savePreferences(String token){
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();
@@ -261,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", correo);
+        editor.putString("token", token);
         editor.putString("password", contra);
         editor.commit();
 

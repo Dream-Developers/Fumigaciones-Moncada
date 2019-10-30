@@ -63,7 +63,7 @@ private FloatingActionButton addcita;
     }
 
     private void cargarCitas() {
-        String ip = "http://10.24.10.118/api/citas";
+        String ip = "http://192.168.137.1/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
@@ -79,7 +79,11 @@ private FloatingActionButton addcita;
                             citas = new Citas();
                             object = array.getJSONObject(i);
                             citas.setNombre(object.getString("Nombre"));
+                            citas.setDireccion(object.getString("Direccion"));
+                            citas.setPrecio(object.getString("Precio"));
                             citas.setFecha(object.getString("FechaFumigacion"));
+                            citas.setHora(object.getString("Hora"));
+
 
                             cita.add(citas);
                             citasAdapter = new Citas_Adapter(getContext(), cita);

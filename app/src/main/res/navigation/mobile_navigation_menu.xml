@@ -17,6 +17,11 @@
         android:label="@string/menu_servicio"
         tools:layout="@layout/fragment_ad_servicio" />
 
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="Perfil.PerfilFragment"
+        android:label="@string/perfil"
+        tools:layout="@layout/fragment_perfil" />
 
     <fragment
         android:id="@+id/nav_acerca"

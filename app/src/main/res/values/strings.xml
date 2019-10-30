@@ -16,8 +16,7 @@
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
 
-    <string name="Iplogin">192.168.0.6</string>
-
+    <string name="Iplogin">10.24.10.118</string>
 
 
     <string name="title_activity_navegacion_admin">Administrador</string>
@@ -36,14 +35,16 @@
     <string name="menu_acercad">Acerca de</string>
 
 
-    <string name="ip">http://192.168.0.6</string>
-
-
+    <string name="ip">http://10.24.10.118</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
+    <string name="perfil">Perfil</string>
 
-=======
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    =======
 
 
 </resources>

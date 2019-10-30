@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:orientation="vertical"
+    >
+
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="#60000000"
+            card_view:cardPreventCornerOverlap="true"
+            card_view:cardUseCompatPadding="false">
+
+            <RelativeLayout
+                android:layout_width="426dp"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+                    android:layout_alignParentStart="true"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="108dp"
+                    android:layout_marginLeft="108dp"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/logo" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginEnd="117dp"
+                    android:layout_marginRight="117dp"
+                    android:baselineAligned="false"
+                    android:text="MONCADA'S FUMIGACIONES"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="174dp"
+                    android:allowUndo="true"
+                    android:text="Nombre :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/nombres"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="178dp"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginBottom="226dp"
+                    android:text="Lugar De Fumigacion :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/direccion"
+                    android:layout_width="225dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginRight="75dp"
+                    android:layout_marginBottom="231dp"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:lines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="-6dp"
+                    android:layout_marginBottom="197dp"
+                    android:text="Telefono :"
+
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/telefono"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginBottom="201dp"
+                    android:background="@drawable/rectangulo_blanco"
+
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:maxLength="8"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="-7dp"
+                    android:layout_marginBottom="166dp"
+                    android:text="Fecha :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/fecha"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginBottom="170dp"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:focusable="false"
+
+                    android:inputType="date"
+                    android:lines="1"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginBottom="135dp"
+                    android:text="Hora :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/hora"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginBottom="137dp"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:inputType="time"
+                    android:lines="1"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <Button
+                    android:id="@+id/pedir"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="98dp"
+                    android:layout_marginLeft="98dp"
+
+                    android:layout_marginBottom="42dp"
+                    android:background="@drawable/oval"
+                    android:onClick="pedir"
+                    android:text="Guardar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+   </ScrollView>

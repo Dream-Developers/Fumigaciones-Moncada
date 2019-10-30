@@ -15,14 +15,14 @@
         <androidx.cardview.widget.CardView
 
             android:id="@+id/card_view"
-            android:layout_width="500dp"
+            android:layout_width="800dp"
             android:layout_height="600dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -31,22 +31,9 @@
             card_view:cardUseCompatPadding="false">
 
             <RelativeLayout
-                android:layout_width="376dp"
+                android:layout_width="800dp"
 
-                android:layout_height="600dp">
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="150dp"
-                    android:layout_height="110dp"
-                    android:layout_alignParentStart="true"
-
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="133dp"
-                    android:layout_marginLeft="133dp"
-                    android:layout_marginTop="0dp"
-                    android:src="@drawable/logo" />
+                android:layout_height="380dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -73,60 +60,62 @@
 
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="174dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="18dp"
                     android:allowUndo="true"
                     android:text="Nombre :"
                     android:textColor="#fff"
-                    android:textSize="25dp" />
+                    android:textSize="30dp" />
 
                 <EditText
                     android:id="@+id/nombres"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="178dp"
+                    android:layout_marginLeft="230dp"
+                    android:layout_marginTop="13dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
                     android:lines="1"
                     android:maxLength="30"
                     android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
+                    android:textColorHint="#ffffff"
+                    android:textSize="30dp" />
 
                 <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="193dp"
+                    android:layout_height="76dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="331dp"
+                    android:layout_marginBottom="247dp"
                     android:text="Lugar De Fumigacion :"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="30dp" />
 
                 <EditText
                     android:id="@+id/direccion"
-                    android:layout_width="225dp"
-                    android:layout_height="42dp"
+                    android:layout_width="240dp"
+                    android:layout_height="63dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="200dp"
 
-                    android:layout_marginEnd="23dp"
-                    android:layout_marginRight="23dp"
-                    android:layout_marginBottom="330dp"
+                    android:layout_marginEnd="328dp"
+                    android:layout_marginRight="328dp"
+                    android:layout_marginBottom="253dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:gravity="center"
                     android:lines="1"
                     android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
+                    android:textColorHint="#ffffff"
+                    android:textSize="30dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,23 +124,23 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginBottom="277dp"
+                    android:layout_marginBottom="204dp"
                     android:text="Telefono :"
 
                     android:textColor="#fff"
-                    android:textSize="25dp" />
+                    android:textSize="30dp" />
 
                 <EditText
                     android:id="@+id/telefono"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginBottom="277dp"
+                    android:layout_marginLeft="230dp"
+                    android:layout_marginBottom="203dp"
                     android:background="@drawable/rectangulo_blanco"
-
+                    android:textSize="30dp"
                     android:gravity="center"
                     android:inputType="number"
                     android:lines="1"
@@ -166,28 +155,28 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginBottom="231dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="162dp"
                     android:text="Fecha :"
                     android:textColor="#fff"
-                    android:textSize="25dp" />
+                    android:textSize="30dp" />
 
                 <EditText
                     android:id="@+id/fecha"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginBottom="231dp"
+                    android:layout_marginLeft="230dp"
+                    android:layout_marginBottom="158dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
-
                     android:gravity="center"
                     android:inputType="date"
                     android:lines="1"
                     android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
+                    android:textColorHint="#ffffff"
+                    android:textSize="30dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,23 +185,24 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginBottom="178dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="116dp"
                     android:text="Hora :"
                     android:textColor="#fff"
-                    android:textSize="25dp" />
+                    android:textSize="30dp" />
 
                 <EditText
                     android:id="@+id/hora"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginBottom="181dp"
+                    android:layout_marginLeft="230dp"
+                    android:layout_marginBottom="113dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
+                    android:textSize="30dp"
                     android:inputType="time"
                     android:lines="1"
                     android:textColor="#ffffff"
@@ -220,19 +210,32 @@
 
                 <Button
                     android:id="@+id/pedir"
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
+                    android:layout_width="194dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="87dp"
-                    android:layout_marginRight="87dp"
-                    android:layout_marginBottom="61dp"
+                    android:layout_marginEnd="476dp"
+                    android:layout_marginRight="476dp"
+                    android:layout_marginBottom="32dp"
                     android:background="@drawable/oval"
                     android:onClick="pedir"
                     android:text="Pedir Cita"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="110dp"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="99dp"
+                    android:layout_marginRight="99dp"
+                    android:layout_marginBottom="127dp"
+                    android:src="@drawable/logo" />
 
             </RelativeLayout>
 

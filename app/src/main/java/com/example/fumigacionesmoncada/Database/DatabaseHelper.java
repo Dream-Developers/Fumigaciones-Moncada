@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void createTableUsuarios(SQLiteDatabase db) {
         String cmd = "CREATE TABLE " + ContractParaListaUsers.USERS + " (" +
                 ContractParaListaUsers.Columnas._ID + " INTEGER PRIMARY KEY, " +
+                ContractParaListaUsers.Columnas.NAME + " TEXT, " +
                 ContractParaListaUsers.Columnas.EMAIL + " TEXT UNIQUE, " +
                 ContractParaListaUsers.Columnas.PASSWORD + " TEXT, " +
                 ContractParaListaUsers.Columnas.ROL+ " TEXT); ";

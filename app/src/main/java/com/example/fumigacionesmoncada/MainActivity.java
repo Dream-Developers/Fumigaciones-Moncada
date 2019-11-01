@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://10.24.8.67/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.0.16/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
     JsonObjectRequest solicitar_objeto_json;
     String success;
+    String rol_id;
+
 
 
     //Shared Preferences
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (obtenerEstadoButton()){
+            cargarPreferencias();
             intem();
             finish();
         }
@@ -167,9 +170,10 @@ public class MainActivity extends AppCompatActivity {
 
         String email = preferences.getString("email", "");
         String contra = preferences.getString("contra", "");
+        rol_id = preferences.getString("rol", "");
 
-        txtCorreo.setText(email);
-        txtContrasena.setText(contra);
+//        txtCorreo.setText(email);
+  //      txtContrasena.setText(contra);
 
     }
 
@@ -183,10 +187,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         guardarEstadoButton();
-                        Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                              success = jsonObject.getString("access_token");
+                             rol_id = jsonObject.getString("rol_id");
+
+                            //Toast.makeText(MainActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
+
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
                                 for(int i = 0; i < jsonArray.length(); i++){
@@ -206,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         //
-                        Bienvenido();
+                        //Bienvenido();
                         savePreferences(success);
                         intem();
                         finish();
@@ -245,8 +253,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void intem(){
 
-        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-        startActivity(i);
+        if (rol_id.equals("1")){
+
+            Intent intent = new Intent(getApplicationContext(), NavegacionAdministradorActivity.class);
+            startActivity(intent);
+        }else {
+            Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+            startActivity(i);
+        }
+
 
     }
 
@@ -276,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("email", correo);
         editor.putString("token", token);
         editor.putString("password", contra);
+        editor.putString("rol", rol_id);
         editor.commit();
 
     }

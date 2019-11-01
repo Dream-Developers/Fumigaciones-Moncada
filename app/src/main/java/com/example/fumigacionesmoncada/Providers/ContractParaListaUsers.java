@@ -5,18 +5,14 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- *  Esta clase provee las constantes y URIs necesarias para trabajar con el StudentsProvider
+ *  Esta clase provee las constantes y URIs necesarias
  */
 
 public class ContractParaListaUsers {
     public final static String AUTHORITY = "com.example.fumigacionesmoncada.provider";
     public static final String USERS = "users";
-    /**
-     * URI de contenido principal
-     */
     public final static Uri CONTENT_URI =
             Uri.parse("content://" + AUTHORITY + "/" + USERS);
-
 
         /**
             MIME Types
@@ -46,7 +42,7 @@ public class ContractParaListaUsers {
     public static final int SINGLE_ROW = 2;
 
 
-    // Asignación de URIs
+    // Asignación de URI
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(AUTHORITY, USERS, ALLROWS);
@@ -64,6 +60,7 @@ public class ContractParaListaUsers {
         }
 
         public static  final String _ID = BaseColumns._ID;
+        public static final String NAME = "name";
         public static final String EMAIL = "email";
         public static final String PASSWORD = "password";
         public static final String ROL = "rol";

@@ -16,7 +16,7 @@
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
 
-    <string name="Iplogin">192.168.0.6</string>
+    <string name="Iplogin">192.168.137.1</string>
 
 
 
@@ -36,7 +36,7 @@
     <string name="menu_acercad">Acerca de</string>
 
 
-    <string name="ip">http://192.168.0.6</string>
+    <string name="ip">http://192.168.137.1</string>
 
 
 

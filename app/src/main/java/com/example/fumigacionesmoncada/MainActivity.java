@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://10.24.10.117/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.43.66/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         guardarEstadoButton();
-                        //Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                              success = jsonObject.getString("access_token");
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         //
-                        //Bienvenido();
+                        Bienvenido();
                         savePreferences(success);
                         intem();
                         finish();

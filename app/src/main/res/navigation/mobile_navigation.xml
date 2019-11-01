@@ -42,4 +42,6 @@
         android:name="com.example.fumigacionesmoncada.ui.Acerca.AcercaFragment"
         android:label="@string/menu_acercad"
         tools:layout="@layout/fragment_acerca" />
+
+
 </navigation>

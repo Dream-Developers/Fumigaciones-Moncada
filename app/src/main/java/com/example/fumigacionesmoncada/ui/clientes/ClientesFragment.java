@@ -82,7 +82,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
 
     private void cargarClientes() {
 
-        String ip = "http://192.168.0.6/api/clientes";
+        String ip = "http://192.168.43.66/api/clientes";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

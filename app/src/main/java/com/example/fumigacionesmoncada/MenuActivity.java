@@ -40,7 +40,8 @@ public class MenuActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_principal,
                 R.id.nav_servicio,
-                R.id.nav_acerca)
+                R.id.nav_acerca,
+                R.id.nav_perfil)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

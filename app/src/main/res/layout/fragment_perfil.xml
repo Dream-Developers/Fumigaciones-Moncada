@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    >
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="#60000000"
+            card_view:cardPreventCornerOverlap="true"
+            card_view:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+               >
+
+                <Button
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"
+                    android:background="@drawable/person" />
+                <TextView
+                    android:id="@+id/txtnombres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Juan Oseguera"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/nombresP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/direccionP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono :"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/telefonoP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:maxLength="30"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo Eléctronico:"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/correoP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+                <Button
+                    android:id="@+id/pedir"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                   android:layout_gravity="center"
+                    android:background="@drawable/oval"
+                    android:onClick="cambiarPerfil"
+                    android:text="Guardar"
+                    android:layout_marginTop="10dp"
+
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+   </ScrollView>

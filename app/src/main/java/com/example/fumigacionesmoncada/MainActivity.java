@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.43.66/api/auth/login";
+    private static String URL_LOGIN = "http://10.24.8.67/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;

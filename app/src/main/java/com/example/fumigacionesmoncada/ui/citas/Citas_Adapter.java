@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 public class Citas_Adapter extends ArrayAdapter<Citas> {
 
-
+    private ArrayList<Citas> usuarios;
     public Citas_Adapter(@NonNull Context context, ArrayList<Citas>lista_citas) {
         super(context, R.layout.item_lista_citas,lista_citas);
+        this.usuarios = lista_citas;
 
     }
 
@@ -46,4 +47,28 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
         return  convertView;
 
     }
+    @Override
+    public int getCount() {
+        return usuarios.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Nullable
+    @Override
+    public Citas getItem(int position) {
+        return usuarios.get(position);
+    }
+
+    public void filtrar(ArrayList<Citas> permisosgetYset) {
+        this.usuarios = new ArrayList<>();
+        this.usuarios.addAll(permisosgetYset);
+        notifyDataSetChanged();
+
+
+    }
+
 }

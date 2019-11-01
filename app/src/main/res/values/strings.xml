@@ -16,7 +16,7 @@
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
 
-    <string name="Iplogin">192.168.0.6</string>
+    <string name="Iplogin">10.24.8.67</string>
 
 
 
@@ -37,7 +37,7 @@
     <string name="perfil">Perfil</string>
 
 
-    <string name="ip">http://192.168.0.6</string>
+    <string name="ip">http://10.24.8.67</string>
 
 
 

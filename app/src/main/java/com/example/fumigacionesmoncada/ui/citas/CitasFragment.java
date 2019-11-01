@@ -1,30 +1,31 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.SearchView;
+
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
-import com.example.fumigacionesmoncada.MainActivity;
+
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesAdapter;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -32,12 +33,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-public class CitasFragment extends Fragment {
+public class CitasFragment extends Fragment implements SearchView.OnQueryTextListener {
 private FloatingActionButton addcita;
     ListView lista_citas;
     Citas_Adapter citasAdapter;
+    ArrayList<Citas> citas;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +62,18 @@ private FloatingActionButton addcita;
 
 
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menuprueba, menu);
+        MenuItem item = menu.findItem(R.id.buscar);
+
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+    }
 
     private void cargarCitas() {
-        String ip = "http://192.168.137.1/api/citas";
+        String ip = "http://10.24.8.67/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
@@ -111,6 +121,49 @@ private FloatingActionButton addcita;
         //ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
 
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
+    }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if (!(citasAdapter == null)) {
+            ArrayList<Citas> listacitas = null;
+            try {
+                listacitas = filtrarDatosDeptos(citas, s.trim());
+                citasAdapter.filtrar(listacitas);
+                citasAdapter.notifyDataSetChanged();
+
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "" + listacitas, Toast.LENGTH_SHORT).show();
+
+            }
+            return true;
+
+
+        }
+        return false;
+    }
+    private ArrayList<Citas> filtrarDatosDeptos(ArrayList<Citas> listaTarea, String dato) {
+        ArrayList<Citas> listaFiltradaPermiso = new ArrayList<>();
+        try{
+            dato = dato.toLowerCase();
+            for(Citas permisos: listaTarea){
+                String nombre = permisos.getNombre().toLowerCase().trim();
+                if(nombre.toLowerCase().contains(dato)){
+                    listaFiltradaPermiso.add(permisos);
+                }
+            }
+            citasAdapter.filtrar(listaFiltradaPermiso);
+        }catch (Exception e){
+            Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
+        }
+
+        return listaFiltradaPermiso;
 
     }
 

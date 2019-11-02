@@ -38,7 +38,7 @@ public class CitasFragment extends Fragment implements SearchView.OnQueryTextLis
 private FloatingActionButton addcita;
     ListView lista_citas;
     Citas_Adapter citasAdapter;
-    ArrayList<Citas> citas;
+    ArrayList<Citas> cita;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ private FloatingActionButton addcita;
         View view = inflater.inflate(R.layout.fragment_citas, container, false);
         addcita = view.findViewById(R.id.add_citas);
         lista_citas= view.findViewById(R.id.lista_citas);
+
 
 
 
@@ -58,6 +59,7 @@ private FloatingActionButton addcita;
         });
 
         cargarCitas();
+        setHasOptionsMenu(true);
         return view;
 
 
@@ -73,18 +75,18 @@ private FloatingActionButton addcita;
     }
 
     private void cargarCitas() {
-        String ip = "http://192.168.0.101/api/citas";
+        String ip = "http://192.168.0.8/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                    ArrayList<Citas> cita = new ArrayList<>();
+                    cita = new ArrayList<>();
                     Citas citas = null;
                     try {
                         JSONArray array = response.getJSONArray("citas");
-                        JSONObject object = null;
+                        JSONObject object;
                         for (int i = 0; i < array.length(); i++) {
                             citas = new Citas();
                             object = array.getJSONObject(i);
@@ -133,7 +135,7 @@ private FloatingActionButton addcita;
         if (!(citasAdapter == null)) {
             ArrayList<Citas> listacitas = null;
             try {
-                listacitas = filtrarDatosDeptos(citas, s.trim());
+                listacitas = filtrarDatosDeptos(cita, s.trim());
                 citasAdapter.filtrar(listacitas);
                 citasAdapter.notifyDataSetChanged();
 
@@ -153,7 +155,12 @@ private FloatingActionButton addcita;
             dato = dato.toLowerCase();
             for(Citas permisos: listaTarea){
                 String nombre = permisos.getNombre().toLowerCase().trim();
+                String precio = permisos.getPrecio().toLowerCase().trim();
+
                 if(nombre.toLowerCase().contains(dato)){
+                    listaFiltradaPermiso.add(permisos);
+                }
+                if(precio.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
                 }
             }

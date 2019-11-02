@@ -82,7 +82,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
 
     private void cargarClientes() {
 
-        String ip = "http://192.168.0.101/api/clientes";
+        String ip = "http://192.168.0.8/api/clientes";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -91,7 +91,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
                 ClientesVO clientesVO = null;
                 try {
                     JSONArray array = response.getJSONArray("clientes");
-                    JSONObject object = null;
+                    JSONObject object;
                     for(int i=0; i<array.length();i++){
                         clientesVO = new ClientesVO();
                         object = array.getJSONObject(i);
@@ -152,9 +152,13 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
             dato = dato.toLowerCase();
             for(ClientesVO permisos: listaTarea){
                 String nombre = permisos.getNombre().toLowerCase().trim();
+                String telefono = permisos.getTelefono().toLowerCase().trim();
 
 
                 if(nombre.toLowerCase().contains(dato)){
+                    listaFiltradaPermiso.add(permisos);
+                }
+                if(telefono.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
                 }
             }

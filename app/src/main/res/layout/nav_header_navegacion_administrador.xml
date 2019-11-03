@@ -25,6 +25,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_titulo"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

@@ -26,6 +26,9 @@
         android:layout_height="45dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_titulo"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

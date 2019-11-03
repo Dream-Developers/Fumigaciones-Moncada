@@ -16,8 +16,6 @@
     <string name="title_activity_registro">Registro Nuevo Usuario</string>
 
 
-
-
     <string name="title_activity_navegacion_admin">Administrador</string>
     <string name="title_activity_navegacion_administrador">NavegacionAdministradorActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -40,6 +38,7 @@
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
     <string name="action_usuario">Cerrar Sesión</string>
+    <string name="title_activity_contactos">Contactos</string>
 
 
 </resources>

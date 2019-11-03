@@ -27,7 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.Providers.ContractParaListaUsers;
-import com.example.fumigacionesmoncada.ui.chat.ChatFragment;
+import com.example.fumigacionesmoncada.ui.Mensajes.MensajesFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             if (cursor.getCount()==1) {
 
-                Intent intent = new Intent(MainActivity.this, ChatFragment.class);
+                Intent intent = new Intent(MainActivity.this, MensajesFragment.class);
                 startActivity(intent);
                 finish();
 

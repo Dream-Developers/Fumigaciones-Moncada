@@ -40,7 +40,7 @@
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
-
+    <string name="action_usuario">Cerrar Sesión</string>
 
 
 </resources>

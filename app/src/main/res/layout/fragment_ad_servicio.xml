@@ -86,7 +86,7 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="110dp"
                     android:layout_marginTop="178dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
@@ -145,10 +145,10 @@
 
                 <EditText
                     android:id="@+id/telefono"
-                    android:layout_width="250dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="120dp"
                     android:layout_marginBottom="277dp"
                     android:background="@drawable/rectangulo_blanco"
 

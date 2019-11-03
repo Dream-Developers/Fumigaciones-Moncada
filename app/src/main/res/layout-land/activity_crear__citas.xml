@@ -10,30 +10,27 @@
     <androidx.cardview.widget.CardView
 
         android:id="@+id/card_view"
-        android:layout_width="386dp"
-        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
         app:cardBackgroundColor="#60000000">
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="527dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -41,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre Cliente"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
 
                 <EditText
@@ -64,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text="Direccion "
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/registro_direccion"
@@ -84,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="Precio"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/registro_Precio"
@@ -106,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fecha"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/registro_Fecha"
@@ -126,12 +123,12 @@
                     android:layout_height="wrap_content"
                     android:text="Hora"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/registro_Hora"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/baseline_alarm_white_18dp"
                     android:focusable="false"

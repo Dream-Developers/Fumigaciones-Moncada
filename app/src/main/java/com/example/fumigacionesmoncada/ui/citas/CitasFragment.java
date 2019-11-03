@@ -163,6 +163,8 @@ private FloatingActionButton addcita;
                 if(precio.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
                 }
+
+
             }
             citasAdapter.filtrar(listaFiltradaPermiso);
         }catch (Exception e){

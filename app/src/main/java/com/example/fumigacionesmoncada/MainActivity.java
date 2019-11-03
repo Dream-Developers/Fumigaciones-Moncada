@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.8/api/auth/login";
+    private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
     private boolean isActivateRadioButton;
+
     private static final String STRING_PREFERENCES = "example.preferencias";
     private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -81,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         btn_registro = findViewById(R.id.idRegistroLogin);
 
         isActivateRadioButton = RBsesion.isChecked();
+
+        RBsesion.setVisibility(View.GONE);
+
 
         RBsesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,4 +306,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
 }

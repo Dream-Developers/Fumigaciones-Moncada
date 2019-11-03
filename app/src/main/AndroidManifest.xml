@@ -11,21 +11,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-
+        <activity
+            android:name=".PasswordReset"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.citas.Crear_Citas" />
         <activity
             android:name=".NavegacionAdministradorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
@@ -36,9 +38,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".ui.clientes.Detalle_Cliente" />
 
         <provider
@@ -70,10 +70,10 @@
                 android:resource="@xml/authenticator" />
         </service>
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

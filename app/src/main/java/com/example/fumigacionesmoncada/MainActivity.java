@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                         //
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                          btn_login.setVisibility(View.VISIBLE);
                         Toast.makeText(MainActivity.this, "Error al iniciar sesión, verifique que su " +
-                                "contraseña esté correcta "+error.toString(), Toast.LENGTH_SHORT).show();
+                                "contraseña esté correcta ", Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -307,4 +307,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void resetPassword(View view) {
+        Intent intent = new Intent(getApplicationContext(), PasswordReset.class);
+        startActivity(intent);
+    }
 }

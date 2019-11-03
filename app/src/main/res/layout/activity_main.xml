@@ -185,15 +185,16 @@
                     <TextView
                         android:id="@+id/recuperarPass"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:textStyle="normal|bold"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_weight="3"
+                        android:onClick="resetPassword"
                         android:text="¿Olvidaste tu contraseña?"
-                        android:textColor="#ffffff">
-                    </TextView>
+                        android:textColor="#ffffff"
+                        android:textSize="15dp"
+                        android:textStyle="normal|bold"></TextView>
 
                 </LinearLayout>
 

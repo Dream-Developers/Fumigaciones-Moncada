@@ -36,7 +36,7 @@
     <string name="perfil">Perfil</string>
 
 
-    <string name="ip">http://192.168.0.8</string>
+    <string name="ip">http://192.168.0.101</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>

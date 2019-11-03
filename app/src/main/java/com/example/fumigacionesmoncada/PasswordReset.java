@@ -71,9 +71,12 @@ public class PasswordReset extends AppCompatActivity {
                 false,
                 false);
 
-        String REGISTER_URL = Utils.URL + "api/password/create";
+        //String REGISTER_URL = Utils.URL + "api/password/create";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+        String ip = getString(R.string.ip);
+        String url = ip + "/api/password/create";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
 
                 new Response.Listener<String>() {
 

@@ -55,7 +55,7 @@ public class Crear_Citas extends AppCompatActivity implements Response.Listener<
         nombre = findViewById(R.id.registro_nombres);
         direccion = findViewById(R.id.registro_direccion);
         precio = findViewById(R.id.registro_Precio);
-        registrar=findViewById(R.id.registrar);
+        registrar=findViewById(R.id.registrar1);
         request = Volley.newRequestQueue(this);
         // llenarSpinner();
         etHora.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +183,7 @@ public class Crear_Citas extends AppCompatActivity implements Response.Listener<
 
 
     }
-    public void registrar(View view) {
+    public void registrar1(View view) {
         cargarwebservice();
     }
 

@@ -99,7 +99,7 @@
                 <Button
                     android:id="@+id/idLoginLogin"
                     android:layout_width="140dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/oval"
@@ -109,11 +109,66 @@
                     android:textSize="18dp"
                     android:textStyle="normal|bold" />
 
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="¿Eres nuevo?  "
+                        android:textColor="#ffffff"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/idRegistroLogin"
+                        android:layout_width="82dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/rectangulo_blanco"
+                        android:onClick="botonregistrar"
+                        android:text="Regístrate"
+                        android:textAllCaps="false"
+                        android:textColor="#ffff"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.504"
+                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
 
                     <RadioButton
                         android:id="@+id/noSalir"
@@ -122,57 +177,27 @@
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:checked="true"
+                        android:visibility="gone"
                         android:text="No cerrar sesión"
                         android:textColor="#ffffff"></RadioButton>
 
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"></View>
 
                     <TextView
                         android:id="@+id/recuperarPass"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:textStyle="normal|bold"
                         android:layout_weight="3"
-                        android:text="Recuperar contraseña"
-                        android:textColor="#ffffff">
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="¿Eres nuevo?"
+                        android:onClick="resetPassword"
+                        android:text="¿Olvidaste tu contraseña?"
                         android:textColor="#ffffff"
-                        android:layout_marginLeft="25dp"
-                        android:textSize="18dp" />
-
-
-                    <Button
-                        android:id="@+id/idRegistroLogin"
-                        android:layout_width="80dp"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="30dp"
-                        android:background="@drawable/rectangulo_blanco"
-                        android:text="Regístrate"
-                        android:onClick="botonregistrar"
-                        android:textAllCaps="false"
-                        android:textColor="#ffff"
-                        android:textSize="17dp" />
+                        android:textSize="15dp"
+                        android:textStyle="normal|bold"></TextView>
 
                 </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

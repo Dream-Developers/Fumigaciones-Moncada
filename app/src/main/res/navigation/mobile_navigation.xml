@@ -9,9 +9,9 @@
 
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.example.fumigacionesmoncada.ui.chat.ChatFragment"
+        android:name="com.example.fumigacionesmoncada.ui.Mensajes.MensajesFragment"
         android:label="@string/menu_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_mensajes" />
 
     <fragment
         android:id="@+id/nav_clientes"

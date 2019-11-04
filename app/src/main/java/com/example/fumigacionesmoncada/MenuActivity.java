@@ -57,4 +57,22 @@ public class MenuActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_usuarios, menu);
+        return true;
+    }
+
+
+    public void red_user(MenuItem item) {
+        logout();
+    }
+
+    private void logout() {
+        SharedPrefManager.getInstance(MenuActivity.this).clear();
+        Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 }

@@ -27,7 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.Providers.ContractParaListaUsers;
-import com.example.fumigacionesmoncada.ui.chat.ChatFragment;
+import com.example.fumigacionesmoncada.ui.Mensajes.MensajesFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
     private RadioButton RBsesion;
-    private static String URL_LOGIN = "http://192.168.0.8/api/auth/login";
+    // private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
     RequestQueue solicitar_cola;
     ProgressBar cargando;
@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
     private boolean isActivateRadioButton;
+
     private static final String STRING_PREFERENCES = "example.preferencias";
     private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -81,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         btn_registro = findViewById(R.id.idRegistroLogin);
 
         isActivateRadioButton = RBsesion.isChecked();
+
+        RBsesion.setVisibility(View.GONE);
+
 
         RBsesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             if (cursor.getCount()==1) {
 
-                Intent intent = new Intent(MainActivity.this, ChatFragment.class);
+                Intent intent = new Intent(MainActivity.this, MensajesFragment.class);
                 startActivity(intent);
                 finish();
 
@@ -180,9 +185,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(final String txtCorreo, final String txtContrasena){
 
-//         btn_login.setVisibility(View.GONE);
+        String ip = getString(R.string.ip);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
+        String url = ip + "/api/auth/login";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -210,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                         //
@@ -227,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                          btn_login.setVisibility(View.VISIBLE);
                         Toast.makeText(MainActivity.this, "Error al iniciar sesión, verifique que su " +
-                                "contraseña esté correcta "+error.toString(), Toast.LENGTH_SHORT).show();
+                                "contraseña esté correcta ", Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -300,5 +307,10 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), RegistarUsuarioNuevo.class);
         startActivity(i);
 
+    }
+
+    public void resetPassword(View view) {
+        Intent intent = new Intent(getApplicationContext(), PasswordReset.class);
+        startActivity(intent);
     }
 }

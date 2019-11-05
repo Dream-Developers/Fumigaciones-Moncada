@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.fumigacionesmoncada"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,4 +37,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:29.0.0'
     implementation 'com.android.support:design:29.1.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+
 }

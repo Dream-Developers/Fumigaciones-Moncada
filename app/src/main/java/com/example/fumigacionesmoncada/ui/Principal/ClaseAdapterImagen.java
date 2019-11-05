@@ -1,8 +1,8 @@
-package com.example.fumigacionesmoncada;
+package com.example.fumigacionesmoncada.ui.Principal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +13,22 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.example.fumigacionesmoncada.ClaseVolley;
+import com.example.fumigacionesmoncada.R;
 
 import java.util.List;
 
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.UsuariosHolder> {
+public class ClaseAdapterImagen extends
+        RecyclerView.Adapter<ClaseAdapterImagen.UsuariosHolder>
+{
 
 
     List<ClaseImagen>  listaUsuarios;
     Context context;
+
 
     public ClaseAdapterImagen(List<ClaseImagen> listaimegen, Context context) {
         this. listaUsuarios = listaimegen;
@@ -37,7 +42,7 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
         RecyclerView.LayoutParams layoutParams=new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         vista.setLayoutParams(layoutParams);
-        return new UsuariosHolder(vista);
+                return new UsuariosHolder(vista);
     }
 
 
@@ -53,6 +58,14 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
             holder.imagen.setImageResource(R.drawable.logo);
 
         }
+
+        holder.imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetalleImagenActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void cargarImagenWebService(String rutaImagen, final UsuariosHolder holder) {
@@ -87,6 +100,10 @@ public class ClaseAdapterImagen extends RecyclerView.Adapter<ClaseAdapterImagen.
     public int getItemCount() {
         return  listaUsuarios.size();
     }
+
+
+
+
 
     public class UsuariosHolder extends RecyclerView.ViewHolder {
 

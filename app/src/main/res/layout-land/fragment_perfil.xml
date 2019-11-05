@@ -37,7 +37,6 @@
                     android:id="@+id/txtnombres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="Juan Oseguera"
                     android:layout_gravity="center"
                     android:textColor="@android:color/background_light"
@@ -55,6 +54,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:lines="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
@@ -71,6 +72,8 @@
                     android:background="@drawable/rectangulo_blanco"
                     android:lines="1"
                     android:maxLength="30"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
                 <TextView
@@ -85,6 +88,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:maxLength="30"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
@@ -102,6 +107,8 @@
                     android:lines="1"
                     android:maxLength="30"
                     android:textColor="#ffffff"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textColorHint="#ffffff" />
                 <Button
                     android:id="@+id/pedir"
@@ -109,10 +116,8 @@
                     android:layout_height="40dp"
                    android:layout_gravity="center"
                     android:background="@drawable/oval"
-                    android:onClick="cambiarPerfil"
                     android:text="Guardar"
                     android:layout_marginTop="10dp"
-
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
 

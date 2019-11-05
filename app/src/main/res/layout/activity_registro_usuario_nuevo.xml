@@ -25,15 +25,11 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-
+            android:layout_height="800dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="21dp"
-            android:layout_marginRight="21dp"
-            android:layout_marginBottom="86dp">
+            android:layout_centerHorizontal="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,24 +38,34 @@
                 android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="150dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:text="MONCADA'S FUMIGACIONES"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="20dp"
-                    android:textStyle="normal|bold" />
+                    android:gravity="center">
 
+                    <Button
+                        android:id="@+id/btn_selected_photo"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/boton_redondo"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/photo"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_photo"
+                        android:layout_width="150dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@android:color/holo_blue_dark"
+                        android:layout_height="150dp"
+
+                        />
+
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/registro_nombres"
@@ -99,8 +105,6 @@
                     android:maxLength="8"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
-
-
                     />
 
 

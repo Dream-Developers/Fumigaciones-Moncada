@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Principal.DetalleImagenActivity"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:ignore="MissingDefaultResource">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        >
+        <ImageView
+            android:id="@+id/idImagenD"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/tituloImagenD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titulo"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descripcionImagenD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripcion"
+        android:textSize="25dp"
+        android:textColor="#DD1B1919"
+        />
+</LinearLayout>

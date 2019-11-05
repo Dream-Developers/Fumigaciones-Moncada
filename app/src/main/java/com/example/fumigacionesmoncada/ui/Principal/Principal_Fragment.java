@@ -2,22 +2,23 @@ package com.example.fumigacionesmoncada.ui.Principal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.fumigacionesmoncada.ClaseAdapterImagen;
-import com.example.fumigacionesmoncada.ClaseImagen;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
+import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Principal_Fragment extends Fragment  implements Response.Listener<JSONObject>,Response.ErrorListener  {
@@ -101,7 +101,13 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         cargarWebService();
         return  vista;
 
+
+
     }
+
+
+
+
 
     private void cargarWebService() {
         dialog=new ProgressDialog(getContext());
@@ -168,8 +174,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-
-        }catch (Exception e){
+             }catch (Exception e){
 
             if (context instanceof OnFragmentInteractionListener) {
                 mListener = (OnFragmentInteractionListener) context;

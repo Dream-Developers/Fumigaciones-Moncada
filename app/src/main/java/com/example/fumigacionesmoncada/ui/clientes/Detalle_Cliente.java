@@ -42,7 +42,7 @@ public class Detalle_Cliente extends Activity {
 
     private void cargarClienteWeb(final String id) {
 
-        String ip = "http://192.168.0.101/api/cliente/"+id+"/mostrar";
+        String ip = "http://192.168.137.1/api/cliente/"+id+"/mostrar";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
                 new Response.Listener<JSONObject>() {

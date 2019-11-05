@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+
+        <TextView
+            android:id="@+id/Nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="118dp"
+            android:text="Nombre:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detalle_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="125dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/Nombre"
+            android:text="Eloisa Flores" />
+
+        <TextView
+            android:id="@+id/residencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Nombre"
+            android:layout_margin="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="Residencia:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detalle_residencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Nombre"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/residencia"
+            android:text="Danli" />
+
+        <TextView
+            android:id="@+id/telefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/residencia"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Telefono:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detalle_telefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detalle_residencia"
+            android:layout_margin="15dp"
+            android:layout_toRightOf="@+id/telefono"
+            android:text="504 9999 0000" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detalle_telefono"
+            android:layout_margin="20dp"
+            android:text="Fecha:"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/detalle_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detalle_telefono"
+            android:layout_margin="15dp"
+            android:layout_toRightOf="@+id/telefono"
+            android:inputType="date" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnAceptar"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/oval"
+        android:onClick="botonAceptar"
+        android:text="ACEPTAR"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/btnRechazar"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/oval"
+        android:lineSpacingExtra="45dp"
+        android:onClick="botonRechazar"
+        android:text="RECHAZAR"
+        android:textColor="@color/colorPrimaryDark" />
+
+
+</RelativeLayout>

@@ -33,12 +33,13 @@
     <string name="perfil">Perfil</string>
 
 
-    <string name="ip">http://192.168.0.6</string>
+    <string name="ip">http://192.168.0.100</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
     <string name="action_usuario">Cerrar Sesión</string>
     <string name="title_activity_contactos">Contactos</string>
+    <string name="photo">Foto</string>
 
 
 </resources>

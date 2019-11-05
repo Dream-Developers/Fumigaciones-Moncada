@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "218069660386",
+    "firebase_url": "https://chatnuevo-0703.firebaseio.com",
+    "project_id": "chatnuevo-0703",
+    "storage_bucket": "chatnuevo-0703.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218069660386:android:0807f32c05294e5dd864bb",
+        "android_client_info": {
+          "package_name": "com.example.fumigacionesmoncada"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218069660386-o8nvht7bafmc825pjh4oun22vfbhko2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fumigacionesmoncada",
+            "certificate_hash": "91ec356e58a7edf4f629f32cf3d30b040c1077af"
+          }
+        },
+        {
+          "client_id": "218069660386-l5l845an1p3855f9d48k2e2ras0c3muq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAawagCmUWoaj0MiniYYWOgSNmdgL4ahYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218069660386-l5l845an1p3855f9d48k2e2ras0c3muq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

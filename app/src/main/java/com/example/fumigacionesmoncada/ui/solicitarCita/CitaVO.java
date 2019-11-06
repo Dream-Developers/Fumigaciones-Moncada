@@ -9,11 +9,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public abstract class CitaVO {
-    private String id, nombre,residencia,telefono,fecha;
+public class CitaVO {
+    private String id, nombre, direccion, telefono, fecha, hora;
 
-    public CitaVO(Context context, int item_lista_citas, ArrayList<CitaVO> lista) {
-    }
 
     public CitaVO() {
 
@@ -35,12 +33,12 @@ public abstract class CitaVO {
         this.nombre = nombre;
     }
 
-    public String getResidencia() {
-        return residencia;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setResidencia(String residencia) {
-        this.residencia = residencia;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
@@ -55,19 +53,9 @@ public abstract class CitaVO {
         return fecha;
     }
 
-    public void setFecha(String correo) {
-        this.fecha = correo;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    @NonNull
-    public abstract View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent);
 
-    public abstract int getCount();
-
-    public abstract long getItemId(int position);
-
-    @Nullable
-    public abstract CitaVO getItem(int position);
 }
-
-

@@ -39,7 +39,7 @@
             android:text="Eloisa Flores" />
 
         <TextView
-            android:id="@+id/residencia"
+            android:id="@+id/direccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
@@ -51,20 +51,20 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/detalle_residencia"
+            android:id="@+id/detalle_direccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
             android:layout_margin="15dp"
             android:gravity="center"
-            android:layout_toRightOf="@+id/residencia"
+            android:layout_toRightOf="@+id/direccion"
             android:text="Danli" />
 
         <TextView
             android:id="@+id/telefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/residencia"
+            android:layout_below="@id/direccion"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="Telefono:"
@@ -75,7 +75,7 @@
             android:id="@+id/detalle_telefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/detalle_residencia"
+            android:layout_below="@id/detalle_direccion"
             android:layout_margin="15dp"
             android:layout_toRightOf="@+id/telefono"
             android:text="504 9999 0000" />

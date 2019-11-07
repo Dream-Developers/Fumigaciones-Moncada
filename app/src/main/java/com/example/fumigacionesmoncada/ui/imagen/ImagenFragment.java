@@ -204,7 +204,7 @@ public class ImagenFragment extends Fragment {
 
 
     private void abrirCamara() {
-        //Capturar la imagen del empleado desde la camara
+        //Capturar la imagen desde la camara
 
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -450,6 +450,9 @@ public class ImagenFragment extends Fragment {
                 progreso.hide();
                 Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
                 Log.i("mensaje",response);
+                campoNombre.setText("");
+                campoDescripcion.setText("");
+
             }
         }, new Response.ErrorListener() {
             @Override

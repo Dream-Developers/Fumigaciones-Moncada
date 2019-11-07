@@ -28,6 +28,7 @@ import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
 import com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment;
+import com.example.fumigacionesmoncada.ui.citas.Citas;
 import com.example.fumigacionesmoncada.ui.citas.Citas_Adapter;
 import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
@@ -40,8 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SolicitarCitaFragment extends Fragment implements SearchView.OnQueryTextListener{
-    private FloatingActionButton addCita;
-    ListView lista;
+        ListView lista;
     CitasAdapter citasAdapter ;
     ArrayList<CitaVO> cita;
     private Object CitasAdapter;
@@ -52,7 +52,7 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
 
         View view = inflater.inflate(R.layout.fragment_solicitar_cita, container, false);
         lista = view.findViewById(R.id.lista_citas);
-        addCita = view.findViewById(R.id.add_citas);
+
 
         cargarCitas();
         setHasOptionsMenu(true);
@@ -60,22 +60,13 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CitaVO citaVO = (com.example.fumigacionesmoncada.ui.solicitarCita.CitaVO) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getContext(), Detalle_Cliente.class);
+                Intent intent = new Intent(getContext(), Detalle_Cita.class);
                 intent.putExtra("id_cita",citaVO.getId());
                 startActivity(intent);
 
 
             }
         });
-        addCita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Aquirir_Servicio_Fragment.class);
-                startActivity(intent);
-            }
-        });
-
-
 
 
         return view;
@@ -94,55 +85,40 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
 
     private void cargarCitas() {
 
-        String ip = "http://192.168.0.101/api/citas";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
+        String ip = getString(R.string.ip);
+        String url = ip + "/api/peticioncita";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 cita = new ArrayList<>();
-                CitaVO citaVO = null;
+                Citas citas = null;
                 try {
-                    JSONArray array = response.getJSONArray("cita");
+                    JSONArray array = response.getJSONArray("citas");
                     JSONObject object;
-                    for(int i=0; i<array.length();i++){
-                        CitaVO = new CitaVO() {
-                            @NonNull
-                            @Override
-                            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                                return null;
-                            }
-
-                            @Override
-                            public int getCount() {
-                                return 0;
-                            }
-
-                            @Override
-                            public long getItemId(int position) {
-                                return 0;
-                            }
-
-                            @Nullable
-                            @Override
-                            public com.example.fumigacionesmoncada.ui.solicitarCita.CitaVO getItem(int position) {
-                                return null;
-                            }
-                        };
+                    for (int i = 0; i < array.length(); i++) {
+                        citas = new Citas();
                         object = array.getJSONObject(i);
-                        citaVO.setNombre(object.getString("name"));
-                        citaVO.setTelefono(object.getString("telefono"));
-                        citaVO.setId(String.valueOf(object.getInt("id")));
+                        citas.setNombre(object.getString("Nombre"));
+                        citas.setDireccion(object.getString("Direccion"));
+                        citas.setFecha(object.getString("FechaFumigacion"));
+                        citas.setHora(object.getString("Hora"));
 
-                        cita.add(citaVO);
-                        CitasAdapter = new CitasAdapter(getContext(), cita);
-                        lista.setAdapter((ListAdapter) citasAdapter);
+
+                       // cita.add(  citas);
+                        CitasAdapter = new Citas_Adapter(getContext(), citas);
+                        lista.setAdapter(citasAdapter);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+
             }
+
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -153,7 +129,10 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
         });
 
 
+        //ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
 
     }
     @Override
@@ -168,7 +147,7 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
             try {
                 listaCita = filtrarDatosDeptos(cita, s.trim());
                 citasAdapter.filtrar(listaCita);
-                // citasAdapter.notifyDataSetChanged();
+                citasAdapter.notifyDataSetChanged();
 
             } catch (Exception e) {
                 Toast.makeText(getContext(), "" + listaCita, Toast.LENGTH_SHORT).show();

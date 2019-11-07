@@ -76,7 +76,7 @@ private FloatingActionButton addcita;
     }
 
     private void cargarCitas() {
-        String ip = "http://192.168.0.6/api/citas";
+        String ip = "http://10.24.10.90/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {

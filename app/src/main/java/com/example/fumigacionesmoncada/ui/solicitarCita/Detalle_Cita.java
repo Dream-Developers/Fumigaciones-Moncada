@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Detalle_Cita  extends Activity {
-    private TextView nombre, residencia, telefono,fecha;
+    private TextView nombre, direccion, telefono,fecha;
     private CitaVO citaVO;
     private Button btnAceptar, btnRechazar;
     String id;
@@ -39,7 +39,7 @@ public class Detalle_Cita  extends Activity {
         super.onCreate(savedInstanceState);
         setContentVIew(R.layout.detalle_cita);
         nombre= findViewById(R.id.detalle_nombre);
-        residencia= findViewById(R.id.detalle_residencia);
+        direccion= findViewById(R.id.detalle_direccion);
         telefono= findViewById(R.id.detalle_telefono);
         fecha= findViewById(R.id.detalle_fecha);
         btnAceptar = findViewById(R.id.btnAceptar);
@@ -70,7 +70,8 @@ public class Detalle_Cita  extends Activity {
 
     private void cargarCitaWeb(final String id) {
 
-        String ip = "http://192.168.0.15/api/cita/"+id+"/mostrarCita";
+        String ip = getString(R.string.ip);
+        String url = ip + "/api/peticioncita"+id+"/mostrarCita";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
                 new Response.Listener<JSONObject>() {
@@ -79,7 +80,7 @@ public class Detalle_Cita  extends Activity {
                         try {
                             JSONObject object = response.getJSONObject("cita");
                             nombre.setText(object.getString("name"));
-                            residencia.setText(object.getString("residencia"));
+                            direccion.setText(object.getString("direccion"));
                             telefono.setText(object.getString("telefono"));
                             fecha.setText(object.getString("date"));
 

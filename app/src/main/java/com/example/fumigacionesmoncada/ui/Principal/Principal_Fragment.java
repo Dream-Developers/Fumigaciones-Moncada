@@ -139,7 +139,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
 
-                servicio.setDescripcion(jsonObject.optString("descripcion"));
+                servicio.setDescripcion(jsonObject.optString("nombre"));
                 servicio.setRutaImagen(jsonObject.optString("foto"));
                 listaUsuarios.add(servicio);
             }

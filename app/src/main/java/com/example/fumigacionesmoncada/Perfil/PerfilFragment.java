@@ -69,7 +69,7 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
     }
 
 
-   /* public void cargarwebservice(final String id){
+/*    public void cargarwebservice(final String id){
 
         try {
             if(mostrarNombre.getText().toString().equals("")||mostrarCorreo.getText().toString().equals("")

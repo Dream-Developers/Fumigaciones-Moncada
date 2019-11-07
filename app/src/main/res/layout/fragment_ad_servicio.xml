@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -15,23 +15,23 @@
         <androidx.cardview.widget.CardView
 
             android:id="@+id/card_view"
-            android:layout_width="500dp"
-            android:layout_height="600dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="0dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="60dp"
             app:cardBackgroundColor="#60000000"
             card_view:cardPreventCornerOverlap="true"
             card_view:cardUseCompatPadding="false">
 
             <RelativeLayout
-                android:layout_width="376dp"
+                android:layout_width="wrap_content"
 
                 android:layout_height="600dp">
                 <ImageView
@@ -51,13 +51,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/imageView"
 
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="110dp"
-                    android:layout_marginEnd="42dp"
-                    android:layout_marginRight="42dp"
+                    android:layout_marginTop="112dp"
+                    android:layout_marginEnd="54dp"
+                    android:layout_marginRight="54dp"
                     android:baselineAligned="false"
                     android:text="MONCADA'S FUMIGACIONES"
                     android:textAlignment="center"
@@ -83,10 +83,11 @@
 
                 <EditText
                     android:id="@+id/nombres"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="178dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
@@ -97,6 +98,7 @@
                     android:textColorHint="#ffffff" />
 
                 <TextView
+                    android:id="@+id/fu"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -112,16 +114,14 @@
 
                 <EditText
                     android:id="@+id/direccion"
-                    android:layout_width="225dp"
-                    android:layout_height="27dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="200dp"
-
-                    android:layout_marginEnd="23dp"
-                    android:layout_marginRight="23dp"
-                    android:layout_marginBottom="330dp"
+                    android:layout_marginTop="224dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_toEndOf="@+id/fu"
+                    android:layout_toRightOf="@+id/fu"
                     android:background="@drawable/rectangulo_blanco"
                     android:gravity="center"
                     android:lines="1"
@@ -138,14 +138,14 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="277dp"
-                    android:text="Telefono :"
+                    android:text="Telefono:"
 
                     android:textColor="#fff"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/telefono"
-                    android:layout_width="230dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="120dp"
@@ -154,6 +154,7 @@
 
                     android:gravity="center"
                     android:inputType="number"
+                    android:layout_marginRight="15dp"
                     android:lines="1"
                     android:maxLength="8"
                     android:textColor="#ffffff"
@@ -175,14 +176,14 @@
 
                 <EditText
                     android:id="@+id/fecha"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginBottom="231dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="234dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
-
+                    android:layout_marginRight="15dp"
                     android:gravity="center"
                     android:inputType="date"
                     android:lines="1"
@@ -205,16 +206,17 @@
 
                 <EditText
                     android:id="@+id/hora"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="120dp"
                     android:layout_marginBottom="181dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
                     android:inputType="time"
                     android:lines="1"
+                    android:layout_marginRight="15dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
@@ -225,9 +227,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="87dp"
-                    android:layout_marginRight="87dp"
-                    android:layout_marginBottom="61dp"
+                    android:layout_marginEnd="128dp"
+                    android:layout_marginRight="128dp"
+                    android:layout_marginBottom="96dp"
                     android:background="@drawable/oval"
                     android:onClick="pedir"
                     android:text="Pedir Cita"
@@ -240,4 +242,4 @@
         </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout></RelativeLayout>
+    </RelativeLayout></ScrollView>

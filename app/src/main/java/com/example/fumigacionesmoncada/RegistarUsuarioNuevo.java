@@ -1,12 +1,24 @@
 package com.example.fumigacionesmoncada;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -14,14 +26,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,14 +55,25 @@ import androidx.annotation.NonNull;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class RegistarUsuarioNuevo extends AppCompatActivity implements
-        Response.Listener<JSONObject>, Response.ErrorListener{
+
+public class RegistarUsuarioNuevo extends AppCompatActivity{
     EditText nombre,contraseña,correo,confcontra, telefono , apellidos;
     TextView col;
     Button registrar;
@@ -55,11 +81,22 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     ProgressBar pro;
-
+    private File imgFile;
+    RadioButton femenino;
+    RadioButton masculino;
+    private int orientation;
+    Bitmap bitmap;
+    private File pictureFile;
+    private String pictureFilePath;
+    private static final int TOMARFOTO = 1;
+    private final int MIS_PERMISOS = 100;
+    private static final int COD_SELECCIONA = 10;
+    private static final int COD_FOTO = 20;
+    String sexo;
     //Firebase
     private Button mBtnSelectedPhoto;
-    private ImageView mImgPhoto;
-    private Uri mSelectedUri;
+    private ImageView imgFoto;
+    private Uri miPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +109,19 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
         apellidos = findViewById(R.id.registro_apellidos);
         contraseña = findViewById(R.id.registro_contraseña);
         registrar =  findViewById(R.id.registrar);
+        masculino = findViewById(R.id.maculino);
+        femenino = findViewById(R.id.femenino);
         request = Volley.newRequestQueue(this);
 
 
-        mBtnSelectedPhoto = findViewById(R.id.btn_selected_photo);
-        mImgPhoto = findViewById(R.id.img_photo);
 
-        mBtnSelectedPhoto.setOnClickListener(new View.OnClickListener() {
+        imgFoto = findViewById(R.id.foto);
+
+        imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                selectPhoto();
+            public void onClick(View view) {
+                mostrarDialogOpciones();
+
             }
         });
 
@@ -89,7 +129,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarwebservice();
+                    validacion();
                 createUser();
             }
         });
@@ -105,76 +145,353 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
         telefono.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
 
     }
-    public void cargarwebservice(){
-
-        try {
-            if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
-                    || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
-                Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-            }else {
-                if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
-                    Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
+    private void mostrarDialogOpciones() {
+        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Elige una Opción");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Tomar Foto")) {
+                    abrirCamara();
                 } else {
-                    if (telefono.getText().toString().length() < 8 ) {
-                        Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                    if (opciones[i].equals("Elegir de Galeria")) {
+                        Intent intent = new Intent(Intent.ACTION_PICK,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/");
+                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
                     } else {
-                        if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
-                            if (!validarEmail(correo.getText().toString())) {
-                                Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
-                            } else {
-
-                                progreso = new ProgressDialog(this);
-                                progreso.setMessage("Cargando...");
-                                progreso.show();
-                                String ip = getString(R.string.ip);
-                                String url = ip + "/api/auth/signup?name=" + nombre.getText().toString()
-                                        + "&recidencia=" + apellidos.getText().toString() + "&telefono="
-                                        + telefono.getText().toString() + "&email=" + correo.getText().toString() + "&password=" + contraseña.getText().toString() + "&password_confirmation=" + confcontra.getText().toString();
-                                url = url.replace(" ", "%20");
-                                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
-                                request.add(jsonObjectRequest);
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
-                        }
+                        dialogInterface.dismiss();
                     }
                 }
             }
-        }catch (Exception exe){
-            Toast.makeText(this,exe.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+        builder.show();
+    }
+    private void abrirCamara() {
+        //Capturar la imagen desde la camara
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    100);
+
+        } else {
+
+
+            Intent inten = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+            try {
+
+                //Se crea un achivo de la foto en blanco
+                pictureFile = getPictureFile();
+
+            } catch (Exception e) {
+
+            }
+
+
+            //se agrega la imagen capturada al archivo en blanco
+            Uri photoUri = FileProvider.getUriForFile(getApplicationContext(), "com.permisosunahtec.android.fileprovider", pictureFile);
+            inten.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+
+            startActivityForResult(inten, TOMARFOTO);
+
+
+        }
+    }
+    private File getPictureFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String pictureFile = "Servicio" + timeStamp;
+        File storeImagen = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(pictureFile, ".jpg", storeImagen);
+        pictureFilePath = imagen.getAbsolutePath();
+
+
+        return imagen;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case COD_SELECCIONA:
+                miPath = data.getData();
+                imgFoto.setImageURI(miPath);
+
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
+                    imgFoto.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case TOMARFOTO:
+                imgFile = new File(pictureFilePath);
+                if (resultCode == -1) {
+
+                    bitmap = BitmapFactory.decodeFile(String.valueOf(imgFile));
+
+
+                    try {
+
+
+                        ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
+
+                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                        switch (orientation) {
+
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                bitmap = rotateImage(this, bitmap, 270);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                bitmap = rotateImage(this, bitmap, 180);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                bitmap = rotateImage(this, bitmap, 90);
+                                break;
+
+                        }
+
+
+                        imgFoto.setImageBitmap(bitmap);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                } else {
+                    //en caso de que no haya foto capturada el archivo en blanco se elimina
+                    imgFile.delete();
+                }
+
+                break;
+        }
+    }
+
+    public static Bitmap rotateImage(Context context, Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        try {
+
+            matrix.postRotate(angle);
+
+
+            source = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true);
+        } catch (Exception e) {
+
+            Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+        }
+        return source;
+    } @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MIS_PERMISOS) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
+                Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_SHORT);
+                imgFoto.setEnabled(true);
+            }
+        } else {
+            solicitarPermisosManual();
+        }
+    }
+
+    private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
+
+        int ancho = bitmap.getWidth();
+        int alto = bitmap.getHeight();
+
+        if (ancho > anchoNuevo || alto > altoNuevo) {
+            float escalaAncho = anchoNuevo / ancho;
+            float escalaAlto = altoNuevo / alto;
+
+            Matrix matrix = new Matrix();
+            matrix.postScale(escalaAncho, escalaAlto);
+
+            return Bitmap.createBitmap(bitmap, 0, 0, ancho, alto, matrix, false);
+
+        } else {
+            return bitmap;
         }
 
 
     }
 
-        @Override
-        public void onErrorResponse (VolleyError error){
-            progreso.hide();
-            if (error.toString().equals("com.android.volley.ServerError")) {
-                Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
-            } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-            } else {
+    //permisos
+    ////////////////
+
+    private boolean solicitaPermisosVersionesSuperiores() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {//validamos si estamos en android menor a 6 para no buscar los permisos
+            return true;
+        }
+
+        //validamos si los permisos ya fueron aceptados
+        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) && checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+
+
+        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE) || (shouldShowRequestPermissionRationale(CAMERA)))) {
+            cargarDialogoRecomendacion();
+        } else {
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MIS_PERMISOS);
+        }
+
+        return false;//implementamos el que procesa el evento dependiendo de lo que se defina aqui
+    }
+
+
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones = {"si", "no"};
+        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(this);//estamos en fragment
+        alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("si")) {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package",getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext() , "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
             }
-          //  Toast.makeText(getApplicationContext(),"No se pudo registrar , Hubo un error al conectar por favor verifica la conexión a internet o intente nuevamente o su correo ya esta registrado , Error : "+ error.toString(), Toast.LENGTH_LONG).show();
+        });
+        alertOpciones.show();
+    }
 
-           // Log.i("ERROR", error.toString());
+
+    private void cargarDialogoRecomendacion() {
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle("Permisos Desactivados");
+        dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
+
+        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, 100);
+                }
+            }
+        });
+        dialogo.show();
+    }
+    private String convertirImgString(Bitmap bitmap) {
+
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+        return imagenString;
+    }
+    private void cargarWebService() {
+
+        progreso=new ProgressDialog(this);
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+        String ip=getString(R.string.ip);
+
+        String url=ip+"/api/auth/signup?";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.hide();
+
+                        finish();
+
+                        Toast.makeText(getApplicationContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.hide();
+                if (error.toString().equals("com.android.volley.ServerError")) {
+                    Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (masculino.isChecked()) {
+                    sexo = "M";
+                }
+                if (femenino.isChecked()) {
+                    sexo = "F";
+                }
+                String imagen = convertirImgString(bitmap);
+
+
+                Map<String,String> parametros=new HashMap<>();
+                parametros.put("name",nombre.getText().toString());
+                parametros.put("recidencia",apellidos.getText().toString());
+                parametros.put("telefono",telefono.getText().toString());
+                parametros.put("email",correo.getText().toString());
+                parametros.put("password",contraseña.getText().toString());
+                parametros.put("password_confirmation",confcontra.getText().toString());
+                parametros.put("sexo",sexo);
+                parametros.put("foto",imagen);
+
+                return parametros;
+            }
+        };
+        //request.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);}
+    private void validacion() {
+        if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
+                || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
+            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
+        }else {
+            if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
+                Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
+            } else {
+                if (telefono.getText().toString().length() < 8 ) {
+                    Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                } else {
+                    if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
+                        if (!validarEmail(correo.getText().toString())) {
+                            Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
+                        } else {
+
+                            cargarWebService();
+                        }
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
         }
 
-        @Override
-        public void onResponse (JSONObject response){
 
-            Toast.makeText(this,"Se registrado correctamente", Toast.LENGTH_SHORT).show();
-            progreso.hide();
-            nombre.setText("");
-            correo.setText("");
-            confcontra.setText("");
-            contraseña.setText("");
-            telefono.setText("");
-            apellidos.setText("");
-        }
-
+    }
 
     private boolean validarEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
@@ -196,7 +513,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
         startActivityForResult(intent, 0);
     }
 
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -207,13 +524,13 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
-                mImgPhoto.setImageDrawable(new BitmapDrawable(bitmap));
+                imgFoto.setImageDrawable(new BitmapDrawable(bitmap));
                 mBtnSelectedPhoto.setAlpha(0);
             } catch (IOException e) {
             }
         }
 
-    }
+    }*/
 
     private void createUser() {
         String name = nombre.getText().toString();
@@ -248,7 +565,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity implements
     private void saveUserInFirebase() {
         String filename = UUID.randomUUID().toString();
         final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
-        ref.putFile(mSelectedUri)
+        ref.putFile(miPath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

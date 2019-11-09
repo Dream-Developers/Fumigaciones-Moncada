@@ -15,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         >
-        <ImageView
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/idImagenD"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             />
 
     </androidx.cardview.widget.CardView>

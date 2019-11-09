@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
-public class ClaseImagen {
+public class ServiciosVO {
 
     private String id;
     private String titulo;

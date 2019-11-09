@@ -26,11 +26,11 @@ public class ClaseAdapterImagen extends
 {
 
 
-    List<ClaseImagen>  listaUsuarios;
+    List<ServiciosVO>  listaUsuarios;
     Context context;
 
 
-    public ClaseAdapterImagen(List<ClaseImagen> listaimegen, Context context) {
+    public ClaseAdapterImagen(List<ServiciosVO> listaimegen, Context context) {
         this. listaUsuarios = listaimegen;
         this.context = context;
     }
@@ -59,13 +59,6 @@ public class ClaseAdapterImagen extends
 
         }
 
-        holder.imagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetalleImagenActivity.class);
-                context.startActivity(intent);
-            }
-        });
     }
 
     private void cargarImagenWebService(String rutaImagen, final UsuariosHolder holder) {

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,8 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
-import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
+import com.example.fumigacionesmoncada.RecyclerTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +44,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
 
     RecyclerView recyclerUsuarios;
-    ArrayList<ClaseImagen> listaUsuarios;
+    ArrayList<ServiciosVO> listaUsuarios;
 
     ProgressDialog dialog;
 
@@ -94,11 +92,26 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         listaUsuarios=new ArrayList<>();
-        recyclerUsuarios =  vista.findViewById(R.id.idRecyclerImagen);
+        recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
         //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
+
         cargarWebService();
+        recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                ServiciosVO serviciosVO = listaUsuarios.get(position);
+                Intent intent = new Intent(getContext(),DetalleImagenActivity.class);
+                intent.putExtra("id",serviciosVO.getId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
         return  vista;
 
 
@@ -128,17 +141,18 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
     @Override
     public void onResponse(JSONObject response) {
 
-        ClaseImagen servicio=null;
+        ServiciosVO servicio=null;
 
         JSONArray json=response.optJSONArray("servicio");
 
         try {
 
             for (int i=0;i<json.length();i++){
-                servicio=new ClaseImagen();
+                servicio=new ServiciosVO();
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
 
+                servicio.setId(String.valueOf(jsonObject.getInt("id")));
                 servicio.setDescripcion(jsonObject.optString("nombre"));
                 servicio.setRutaImagen(jsonObject.optString("foto"));
                 listaUsuarios.add(servicio);

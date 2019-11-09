@@ -41,10 +41,11 @@ public class Detalle_Cliente extends Activity {
     }
 
     private void cargarClienteWeb(final String id) {
+        String ip=getString(R.string.ip);
 
-        String ip = "http://192.168.2.11/api/cliente/"+id+"/mostrar";
+        String url = ip+"/api/cliente/"+id+"/mostrar";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -15,10 +15,12 @@
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/imagen_cliente"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="291dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="9dp"
             android:foregroundGravity="center"
+            android:scaleType="centerCrop"
             android:src="@drawable/person" />
 
     </RelativeLayout>
@@ -111,6 +113,13 @@
             android:layout_toEndOf="@+id/CorreoCliente"
             android:layout_toRightOf="@+id/CorreoCliente"
             android:text="Izamar_molina@yahoo.com" />
+
+
+
+
+
+
+
 
 
     </RelativeLayout>

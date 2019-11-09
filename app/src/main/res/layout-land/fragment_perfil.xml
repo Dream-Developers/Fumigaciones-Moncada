@@ -26,7 +26,7 @@
                 android:orientation="vertical"
                >
 
-                <Button
+                <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Juan Oseguera"
+                    android:layout_margin="5dp"
                     android:layout_gravity="center"
                     android:textColor="@android:color/background_light"
                     android:textSize="20dp"
@@ -46,16 +47,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre :"
+                    android:layout_margin="5dp"
                     android:textColor="#fff"
                     android:textSize="20dp" />
                 <EditText
                     android:id="@+id/nombresP"
+                    android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:lines="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_margin="5dp"
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
@@ -63,17 +65,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dirección :"
+                    android:layout_margin="5dp"
                     android:textColor="#fff"
                     android:textSize="20dp" />
                 <EditText
                     android:id="@+id/direccionP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:background="@drawable/rectangulo_blanco"
                     android:lines="1"
                     android:maxLength="30"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_margin="5dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
                 <TextView
@@ -81,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="Teléfono :"
                     android:textColor="#fff"
+                    android:layout_margin="5dp"
                     android:textSize="20dp" />
                 <EditText
                     android:id="@+id/telefonoP"
@@ -88,28 +92,11 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:maxLength="30"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_margin="5dp"
                     android:textColor="#ffffff"
+                    android:textAlignment="center"
                     android:textColorHint="#ffffff" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo Eléctronico:"
-                    android:textColor="#fff"
-                    android:textSize="20dp" />
-                <EditText
-                    android:id="@+id/correoP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:lines="1"
-                    android:maxLength="30"
-                    android:textColor="#ffffff"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:textColorHint="#ffffff" />
                 <Button
                     android:id="@+id/pedir"
                     android:layout_width="180dp"
@@ -117,7 +104,7 @@
                    android:layout_gravity="center"
                     android:background="@drawable/oval"
                     android:text="Guardar"
-                    android:layout_marginTop="10dp"
+                    android:layout_margin="5dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
 

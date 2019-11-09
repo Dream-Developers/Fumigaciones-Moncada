@@ -26,18 +26,18 @@
                 android:orientation="vertical"
                >
 
-                <Button
+                <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_margin="5dp"
                     android:layout_gravity="center"
                     android:background="@drawable/person" />
                 <TextView
                     android:id="@+id/txtnombres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_margin="5dp"
                     android:text="Juan Oseguera"
                     android:layout_gravity="center"
                     android:textColor="@android:color/background_light"
@@ -47,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre :"
+                    android:layout_margin="5dp"
                     android:textColor="#fff"
                     android:textSize="20dp" />
                 <EditText
@@ -54,9 +55,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
-                    android:lines="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:inputType="text"
+                    android:layout_margin="5dp"
+                    android:textAlignment="center"
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
@@ -65,52 +66,42 @@
                     android:layout_height="wrap_content"
                     android:text="Dirección :"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:layout_margin="5dp"/>
+
                 <EditText
                     android:id="@+id/direccionP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:lines="1"
+                    android:layout_margin="5dp"
                     android:maxLength="30"
+                    android:textAlignment="center"
                     android:textColor="#ffffff"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:inputType="text"
                     android:textColorHint="#ffffff" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Teléfono :"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:layout_margin="5dp"/>
+
                 <EditText
                     android:id="@+id/telefonoP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:maxLength="30"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:inputType="number"
+                    android:layout_margin="5dp"
+                    android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo Eléctronico:"
-                    android:textColor="#fff"
-                    android:textSize="20dp" />
-                <EditText
-                    android:id="@+id/correoP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:lines="1"
-                    android:maxLength="30"
-                    android:textColor="#ffffff"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:textColorHint="#ffffff" />
+
                 <Button
                     android:id="@+id/pedir"
                     android:layout_width="180dp"
@@ -120,6 +111,7 @@
                     android:text="Guardar"
                     android:layout_marginTop="10dp"
                     android:textAllCaps="false"
+                    android:textAlignment="center"
                     android:textColor="@color/colorPrimary" />
 
 

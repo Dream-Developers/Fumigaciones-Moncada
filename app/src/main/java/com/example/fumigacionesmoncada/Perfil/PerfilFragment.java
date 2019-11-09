@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,15 +41,16 @@ import androidx.fragment.app.Fragment;
 
 
 
-public class PerfilFragment extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
+public class PerfilFragment extends Fragment  {
     private String tokenUsuario;
-    private EditText mostrarNombre,mostrarDireccion,mostraraTelefono,mostrarCorreo;
+    private EditText mostrarNombre,mostrarDireccion,mostraraTelefono;
     private TextView mostrarnombre1;
     private Button guradarDatos;
     ProgressBar pro;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
     ProgressDialog progreso;
+    String id_usuario;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,22 +60,28 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
         mostrarNombre = view.findViewById(R.id.nombresP);
         mostrarDireccion = view.findViewById(R.id.direccionP);
         mostraraTelefono = view.findViewById(R.id.telefonoP);
-        mostrarCorreo = view.findViewById(R.id.correoP);
+        //mostrarCorreo = view.findViewById(R.id.correoP);
         guradarDatos= view.findViewById(R.id.pedir);
        request = Volley.newRequestQueue(getContext());
 
         cargarPreferencias();
         cargarClienteWeb();
-        //cargarwebservice(id);
+
+        guradarDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actualizar_datos(id_usuario);
+            }
+        });
         return view;
 
     }
 
 
-/*    public void cargarwebservice(final String id){
+   public void actualizar_datos(final String id){
 
         try {
-            if(mostrarNombre.getText().toString().equals("")||mostrarCorreo.getText().toString().equals("")
+            if(mostrarNombre.getText().toString().equals("")
                     || mostraraTelefono.getText().toString().equals("") || mostrarDireccion.getText().toString().equals("")){
                 Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
             }else {
@@ -80,22 +89,54 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
                     if (mostraraTelefono.getText().toString().length() < 8 ) {
                         Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
                     } else  {
-                            if (!validarEmail(mostrarCorreo.getText().toString())) {
-                                Toast.makeText(getContext(), "Correo no valido", Toast.LENGTH_LONG).show();
-                            } else {
+                              {
+
+                            }  {
+
 
                                 progreso = new ProgressDialog(getContext());
                                 progreso.setMessage("Cargando...");
                                 progreso.show();
                                 String ip = getString(R.string.ip);
-                               String url  = ip+ "/api/clientes/"+id+"/update?name=" + mostrarNombre.getText().toString()
-                                        + "&recidencia="  + mostrarDireccion.getText().toString() +
-                                        "&telefono=" + mostraraTelefono.getText().toString() +
-                                        "&email=" + mostrarCorreo.getText().toString()  +
+                                String url  = ip+ "/api/clientes/"+id+"/update" ;
 
-                                url = url.replace(" ", "%20");
-                                jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null, this, this);
-                                request.add(jsonObjectRequest);
+
+                                JSONObject parametros = new JSONObject();
+                                parametros.put("name", mostrarNombre.getText().toString());
+                                parametros.put("recidencia", mostrarDireccion.getText().toString());
+                                parametros.put("telefono", mostraraTelefono.getText().toString());
+
+
+
+                                jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        progreso.dismiss();
+                                        try {
+                                            Toast.makeText(getContext(), ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        cargarClienteWeb();
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        progreso.dismiss();
+                                        Toast.makeText(getContext(), ""+error.toString(), Toast.LENGTH_SHORT).show();
+                                        Log.d("volley", "onErrorResponse: "+error.networkResponse);
+                                    }
+                                }){
+
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String,String> parametros = new HashMap<>();
+                                        parametros.put("Content-Type","application/json");
+                                        parametros.put("X-Requested-With","XMLHttpRequest");
+
+                                        return parametros;
+                                    }
+                                };
+                                ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
                             }
                         }
                     } catch (Exception exe){
@@ -103,20 +144,7 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
         }
 
 
-    }*/
-
-    @Override
-    public void onErrorResponse (VolleyError error){
-        progreso.hide();
-        if (error.toString().equals("com.android.volley.ServerError")) {
-            Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-
-        } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-            Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-        } else {
-        }
     }
-
     public void registrar(View view)
     {
 
@@ -151,11 +179,13 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject object = response;
+                            id_usuario = object.getString("id");
+
                             mostrarnombre1.setText(object.getString("name"));
                             mostrarNombre.setText(object.getString("name"));
                             mostraraTelefono.setText(object.getString("telefono"));
                             mostrarDireccion.setText(object.getString("recidencia"));
-                            mostrarCorreo.setText(object.getString("email"));
+                            //mostrarCorreo.setText(object.getString("email"));
 
 
 
@@ -192,9 +222,4 @@ public class PerfilFragment extends Fragment implements Response.ErrorListener, 
 
     }
 
-
-    @Override
-    public void onResponse(JSONObject response) {
-
-    }
 }

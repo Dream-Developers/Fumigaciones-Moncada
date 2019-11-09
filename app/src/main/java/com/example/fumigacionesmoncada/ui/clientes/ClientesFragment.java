@@ -99,6 +99,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
                         clientesVO.setNombre(object.getString("name"));
                         clientesVO.setTelefono(object.getString("telefono"));
                         clientesVO.setId(String.valueOf(object.getInt("id")));
+                        clientesVO.setImagen(object.getString("foto"));
 
                         cliente.add(clientesVO);
                         clientesAdapter = new ClientesAdapter(getContext(), cliente);

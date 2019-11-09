@@ -1,7 +1,7 @@
 package com.example.fumigacionesmoncada.ui.clientes;
 
 public class ClientesVO {
-    private String id, nombre,apellido,telefono,correo;
+    private String id, nombre,apellido,telefono,correo,imagen;
 
     public ClientesVO() {
     }
@@ -45,5 +45,13 @@ public class ClientesVO {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

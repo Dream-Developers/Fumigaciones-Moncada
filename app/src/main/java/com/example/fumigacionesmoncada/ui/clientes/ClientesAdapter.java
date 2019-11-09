@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 
 import java.util.ArrayList;
@@ -30,9 +33,22 @@ public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
 
         TextView nombre = convertView.findViewById(R.id.nombre_cliente);
         TextView telefono = convertView.findViewById(R.id.telefono_cliente);
+
+        NetworkImageView imagen = convertView.findViewById(R.id.foto_cliente);
+
         ClientesVO clientesVO = getItem(position);
         nombre.setText(clientesVO.getNombre());
         telefono.setText(clientesVO.getTelefono());
+
+        String ip = getContext().getResources().getString(R.string.ip);
+        String url = ip+"/foto/"+clientesVO.getImagen();
+        ImageLoader imageLoader = ClaseVolley.getIntanciaVolley(getContext()).getImageLoader();
+        imagen.setImageUrl(url,imageLoader);
+
+
+
+
+
 
 
         return  convertView;

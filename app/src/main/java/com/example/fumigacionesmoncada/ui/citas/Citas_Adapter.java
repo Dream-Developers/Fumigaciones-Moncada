@@ -1,11 +1,17 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +19,15 @@ import androidx.annotation.Nullable;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Citas_Adapter extends ArrayAdapter<Citas> {
+
+    private ListView lista_citas;
 
     private ArrayList<Citas> usuarios;
     public Citas_Adapter(@NonNull Context context, ArrayList<Citas>lista_citas) {
@@ -27,15 +39,18 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView==null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_citas,null,false);
+        if (convertView == null)
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_citas, null, false);
 
         TextView nombre = convertView.findViewById(R.id.nombre_cita);
         TextView direccion = convertView.findViewById(R.id.direccion_cita);
         TextView precio = convertView.findViewById(R.id.precio_cita);
         TextView fecha = convertView.findViewById(R.id.fecha_cita);
         TextView hora = convertView.findViewById(R.id.hora_cita);
+        ImageView imagen = convertView.findViewById(R.id.icon_citas);
+
         Citas citas = getItem(position);
+
 
         nombre.setText(citas.getNombre());
         direccion.setText(citas.getDireccion());
@@ -44,7 +59,7 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
         hora.setText(citas.getHora());
 
 
-        return  convertView;
+        return convertView;
 
     }
     @Override

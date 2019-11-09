@@ -1,7 +1,21 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
 public class Citas {
-    private String nombre,direccion,precio,fecha,hora;
+    private String nombre;
+    private String direccion;
+    private String precio;
+    private String fecha;
+    private String hora;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
 
     public String getNombre() {
         return nombre;

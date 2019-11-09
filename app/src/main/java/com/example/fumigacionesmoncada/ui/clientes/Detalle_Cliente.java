@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class Detalle_Cliente extends Activity {
+public class Detalle_Cliente extends AppCompatActivity {
     private TextView nombre, residencia, telefono,correo;
     private ClientesVO clientesVO;
     NetworkImageView imagen;
@@ -32,6 +33,7 @@ public class Detalle_Cliente extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_cliente);
+        getSupportActionBar();
         nombre= findViewById(R.id.nombre_detalle);
         residencia= findViewById(R.id.residencia_detalle);
         telefono= findViewById(R.id.telefono_detalle);

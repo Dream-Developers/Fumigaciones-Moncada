@@ -1,7 +1,10 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -19,21 +23,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 
 import com.example.fumigacionesmoncada.R;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CitasFragment extends Fragment implements SearchView.OnQueryTextListener {
 private FloatingActionButton addcita;
@@ -47,6 +56,16 @@ private FloatingActionButton addcita;
         View view = inflater.inflate(R.layout.fragment_citas, container, false);
         addcita = view.findViewById(R.id.add_citas);
         lista_citas= view.findViewById(R.id.lista_citas);
+
+        lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Citas citas = (Citas) parent.getItemAtPosition(position);
+                eliminarCitas(citas,position);
+
+                return true;
+            }
+        });
 
 
 
@@ -63,8 +82,72 @@ private FloatingActionButton addcita;
         setHasOptionsMenu(true);
         return view;
 
+    }
+
+    private void eliminarCitas(final Citas cit, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirmacion");
+        builder.setMessage("Esta seguro que desea eliminar de tu lista");
+        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                eliminarCitaWebService(cit.getId(),position);
+
+            }
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    dialog.dismiss();
+
+                    cargarCitas();
+
+                }
+            });
+        }
+        builder.setNegativeButton("No", null);
+        builder.show();
+    }
+
+    private void eliminarCitaWebService(String id, final int position) {
+        String ip=getString(R.string.ip);
+        String url = ip+"/api/citas/"+id+"/borrar";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject object = new JSONObject(response);
+                    Toast.makeText(getContext(), ""+object.getString("message"), Toast.LENGTH_LONG).show();
+                    cita = new ArrayList<>();
+                    citasAdapter = new Citas_Adapter(getContext(),cita);
+                    lista_citas.setAdapter(citasAdapter);
+                    cargarCitas();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Error al borrar", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                return  parametros;
+            }
+        };
+        ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);
 
     }
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -97,6 +180,7 @@ private FloatingActionButton addcita;
                             citas.setPrecio(object.getString("Precio"));
                             citas.setFecha(object.getString("FechaFumigacion"));
                             citas.setHora(object.getString("Hora"));
+                            citas.setId(object.getString("id"));
 
 
                             cita.add(citas);

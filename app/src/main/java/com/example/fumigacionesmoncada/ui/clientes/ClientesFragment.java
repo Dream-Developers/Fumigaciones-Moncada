@@ -65,8 +65,6 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
         });
 
 
-
-
         return view;
     }
 

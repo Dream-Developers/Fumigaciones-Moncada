@@ -76,7 +76,7 @@ private FloatingActionButton addcita;
     }
 
     private void cargarCitas() {
-        String ip = "http://10.24.10.90/api/citas";
+        String ip = "http://192.168.2.11/api/citas";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null, new Response.Listener<JSONObject>() {
@@ -160,8 +160,8 @@ private FloatingActionButton addcita;
 
                 if(nombre.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
-                }
-                if(precio.toLowerCase().contains(dato)){
+                }else
+                if (precio.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
                 }
 

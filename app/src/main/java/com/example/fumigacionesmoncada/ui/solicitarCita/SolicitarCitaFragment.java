@@ -107,7 +107,7 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
 
 
                        // cita.add(  citas);
-                        CitasAdapter = new Citas_Adapter(getContext(), citas);
+                       // CitasAdapter = new Citas_Adapter(,citas);
                         lista.setAdapter(citasAdapter);
                     }
 
@@ -170,8 +170,7 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
 
                 if(nombre.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
-                }
-                if(telefono.toLowerCase().contains(dato)){
+                }else if(telefono.toLowerCase().contains(dato)){
                     listaFiltradaPermiso.add(permisos);
                 }
             }

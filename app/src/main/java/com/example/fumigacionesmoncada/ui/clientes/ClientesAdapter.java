@@ -31,7 +31,6 @@ public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
         TextView nombre = convertView.findViewById(R.id.nombre_cliente);
         TextView telefono = convertView.findViewById(R.id.telefono_cliente);
         ClientesVO clientesVO = getItem(position);
-
         nombre.setText(clientesVO.getNombre());
         telefono.setText(clientesVO.getTelefono());
 
@@ -58,7 +57,5 @@ public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
         this.usuarios = new ArrayList<>();
         this.usuarios.addAll(permisosgetYset);
         notifyDataSetChanged();
-
-
     }
 }

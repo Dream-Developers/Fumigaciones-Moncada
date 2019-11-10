@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Principal.DetalleImagenActivity"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:ignore="MissingDefaultResource">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        >
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/idImagenDA"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:layout_marginTop="15dp"
+        android:id="@+id/tituloImagenDA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titulo"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/descripcionImagenDA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripcion"
+        android:textSize="25dp"
+        android:textColor="#DD1B1919"
+        />
+</LinearLayout>

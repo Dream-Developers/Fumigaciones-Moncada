@@ -26,14 +26,14 @@
                 android:orientation="vertical"
                >
 
-                <ImageView
+                <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="45dp"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
-                    android:background="@drawable/person" />
+                    />
                 <TextView
                     android:id="@+id/txtnombres"
                     android:layout_width="wrap_content"
@@ -101,6 +101,25 @@
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo :"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/correoP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:maxLength="30"
+                    android:layout_margin="5dp"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:textColorHint="#ffffff"
+                    android:focusable="false"/>
+
 
 
                 <Button
@@ -113,7 +132,8 @@
                     android:layout_marginTop="10dp"
                     android:textAllCaps="false"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                   />
 
 
             </LinearLayout>

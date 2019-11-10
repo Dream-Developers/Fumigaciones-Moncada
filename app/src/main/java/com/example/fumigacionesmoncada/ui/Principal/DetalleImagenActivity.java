@@ -32,7 +32,6 @@ public class DetalleImagenActivity extends AppCompatActivity {
 
     private TextView titulo, descripcion;
     NetworkImageView imagen;
-    ClaseAdapterImagen claseAdapterImagen ;
     String id;
 
     @Override

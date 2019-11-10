@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
@@ -31,7 +32,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -43,14 +44,16 @@ import androidx.fragment.app.Fragment;
 
 public class PerfilFragment extends Fragment  {
     private String tokenUsuario;
-    private EditText mostrarNombre,mostrarDireccion,mostraraTelefono;
+    private EditText mostrarNombre,mostrarDireccion,mostraraTelefono,mostrarCorreo;
     private TextView mostrarnombre1;
+    NetworkImageView imagen;
     private Button guradarDatos;
     ProgressBar pro;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
     ProgressDialog progreso;
     String id_usuario;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -60,12 +63,22 @@ public class PerfilFragment extends Fragment  {
         mostrarNombre = view.findViewById(R.id.nombresP);
         mostrarDireccion = view.findViewById(R.id.direccionP);
         mostraraTelefono = view.findViewById(R.id.telefonoP);
-        //mostrarCorreo = view.findViewById(R.id.correoP);
+        imagen= view.findViewById(R.id.imageView);
+        mostrarCorreo = view.findViewById(R.id.correoP);
         guradarDatos= view.findViewById(R.id.pedir);
        request = Volley.newRequestQueue(getContext());
 
+        mostrarCorreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "El Correo no se puede modificar", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         cargarPreferencias();
         cargarClienteWeb();
+
 
         guradarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +99,9 @@ public class PerfilFragment extends Fragment  {
                 Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
             }else {
                 }
-                    if (mostraraTelefono.getText().toString().length() < 8 ) {
-                        Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                    if ((mostraraTelefono.getText().toString().length() < 8 )||(mostraraTelefono.getText().toString().length() > 8 )){
+                        Toast.makeText(getContext(), "No es un número teléfonico", Toast.LENGTH_LONG).show();
+
                     } else  {
                               {
 
@@ -105,6 +119,7 @@ public class PerfilFragment extends Fragment  {
                                 parametros.put("name", mostrarNombre.getText().toString());
                                 parametros.put("recidencia", mostrarDireccion.getText().toString());
                                 parametros.put("telefono", mostraraTelefono.getText().toString());
+                               // parametros.put("email",mostrarCorreo.getText().toString());
 
 
 
@@ -145,22 +160,6 @@ public class PerfilFragment extends Fragment  {
 
 
     }
-    public void registrar(View view)
-    {
-
-    }
-
-
-
-
-    private boolean validarEmail(String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-    }
-
-
-
-
 
 
     private void cargarPreferencias() {
@@ -185,7 +184,9 @@ public class PerfilFragment extends Fragment  {
                             mostrarNombre.setText(object.getString("name"));
                             mostraraTelefono.setText(object.getString("telefono"));
                             mostrarDireccion.setText(object.getString("recidencia"));
-                            //mostrarCorreo.setText(object.getString("email"));
+                            mostrarCorreo.setText(object.getString("email"));
+                            cargarImagen(object.getString("foto"));
+
 
 
 
@@ -221,5 +222,16 @@ public class PerfilFragment extends Fragment  {
 
 
     }
+
+    private void cargarImagen(String foto) {
+        String ip = getResources().getString(R.string.ip);
+        String url = ip+"/foto/"+foto;
+        ImageLoader imageLoader = ClaseVolley.getIntanciaVolley(getContext()).getImageLoader();
+
+        imagen.setImageUrl(url,imageLoader);
+
+    }
+
+
 
 }

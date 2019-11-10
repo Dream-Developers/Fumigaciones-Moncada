@@ -58,7 +58,13 @@ public class Detalle_Cita  extends Activity {
                     }
                 });
 
-        //btnRechazar.setOnClickListener();
+        btnRechazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(Detalle_Cita.this, SolicitarCitaFragment.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -71,9 +77,9 @@ public class Detalle_Cita  extends Activity {
     private void cargarCitaWeb(final String id) {
 
         String ip = getString(R.string.ip);
-        String url = ip + "/api/peticioncita"+id+"/mostrarCita";
+        String url = ip + "/api/peticionCita"+id+"/mostrarCita";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ip, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -82,7 +88,7 @@ public class Detalle_Cita  extends Activity {
                             nombre.setText(object.getString("name"));
                             direccion.setText(object.getString("direccion"));
                             telefono.setText(object.getString("telefono"));
-                            fecha.setText(object.getString("date"));
+                            fecha.setText(object.getString("fecha"));
 
 
 
@@ -91,8 +97,8 @@ public class Detalle_Cita  extends Activity {
                         }
 
                     }
-                }, new Response.ErrorListener() {
-            @Override
+                    }, new Response.ErrorListener() {
+           @Override
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(Detalle_Cita.this, "Error", Toast.LENGTH_SHORT).show();

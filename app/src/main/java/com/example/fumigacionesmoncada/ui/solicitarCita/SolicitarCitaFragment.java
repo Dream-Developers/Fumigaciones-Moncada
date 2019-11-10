@@ -1,5 +1,6 @@
 package com.example.fumigacionesmoncada.ui.solicitarCita;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,65 +41,48 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SolicitarCitaFragment extends Fragment implements SearchView.OnQueryTextListener{
+public class SolicitarCitaFragment extends Fragment {
         ListView lista;
     CitasAdapter citasAdapter ;
     ArrayList<CitaVO> cita;
-    private Object CitasAdapter;
-    private Object CitaVO;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_solicitar_cita, container, false);
-        lista = view.findViewById(R.id.lista_citas);
+        lista = view.findViewById(R.id.lista_citas_solicitud);
+        cita = new ArrayList<>();
+        lista.setAdapter(new CitasAdapter(getContext(),cita));
+        lista.setVisibility(View.VISIBLE);
+
 
 
         cargarCitas();
         setHasOptionsMenu(true);
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CitaVO citaVO = (com.example.fumigacionesmoncada.ui.solicitarCita.CitaVO) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getContext(), Detalle_Cita.class);
-                intent.putExtra("id_cita",citaVO.getId());
-                startActivity(intent);
 
 
-            }
-        });
 
-
-        return view;
+         return view;
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menuprueba, menu);
-        MenuItem item = menu.findItem(R.id.buscar);
-
-        SearchView searchView = (SearchView) item.getActionView();
-        searchView.setOnQueryTextListener(this);
-    }
 
     private void cargarCitas() {
 
         String ip = getString(R.string.ip);
-        String url = ip + "/api/peticioncita";
+        String url = ip + "/api/peticionesCitas";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 cita = new ArrayList<>();
-                Citas citas = null;
+                CitaVO citas = null;
                 try {
                     JSONArray array = response.getJSONArray("citas");
                     JSONObject object;
                     for (int i = 0; i < array.length(); i++) {
-                        citas = new Citas();
+                        citas = new CitaVO();
                         object = array.getJSONObject(i);
                         citas.setNombre(object.getString("Nombre"));
                         citas.setDireccion(object.getString("Direccion"));
@@ -106,8 +90,9 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
                         citas.setHora(object.getString("Hora"));
 
 
-                       // cita.add(  citas);
-                       // CitasAdapter = new Citas_Adapter(,citas);
+                       cita.add(citas);
+
+                        citasAdapter = new CitasAdapter(getContext(),cita);
                         lista.setAdapter(citasAdapter);
                     }
 
@@ -135,54 +120,9 @@ public class SolicitarCitaFragment extends Fragment implements SearchView.OnQuer
 
 
     }
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-        if (!(citasAdapter == null)) {
-            ArrayList<CitaVO> listaCita = null;
-            try {
-                listaCita = filtrarDatosDeptos(cita, s.trim());
-                citasAdapter.filtrar(listaCita);
-                citasAdapter.notifyDataSetChanged();
-
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "" + listaCita, Toast.LENGTH_SHORT).show();
-
-            }
-            return true;
 
 
-        }
-        return false;
-    }
-    private ArrayList<CitaVO> filtrarDatosDeptos(ArrayList<CitaVO> listaTarea, String dato) {
-        ArrayList<CitaVO> listaFiltradaPermiso = new ArrayList<>();
-        try{
-            dato = dato.toLowerCase();
-            for(CitaVO permisos: listaTarea){
-                String nombre = permisos.getNombre().toLowerCase().trim();
-                String telefono = permisos.getTelefono().toLowerCase().trim();
 
-
-                if(nombre.toLowerCase().contains(dato)){
-                    listaFiltradaPermiso.add(permisos);
-                }else if(telefono.toLowerCase().contains(dato)){
-                    listaFiltradaPermiso.add(permisos);
-                }
-            }
-            citasAdapter.filtrar(listaFiltradaPermiso);
-        }catch (Exception e){
-            Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
-            e.getStackTrace();
-        }
-
-        return listaFiltradaPermiso;
-
-    }
 
 
 

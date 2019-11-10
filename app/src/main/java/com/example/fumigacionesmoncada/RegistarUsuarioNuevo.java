@@ -538,7 +538,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         String contra = contraseña.getText().toString();
 
         if (name == null || name.isEmpty() || email == null || email.isEmpty() || contra == null || contra.isEmpty()) {
-            Toast.makeText(this, "Nombre y contrasena requeridos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Al menos un campo vacio", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -575,7 +575,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
                                 Log.i("Teste", uri.toString());
 
                                 String uid = FirebaseAuth.getInstance().getUid();
-                                String username = correo.getText().toString();
+                                String username = nombre.getText().toString();
                                 String profileUrl = uri.toString();
 
                                 User user = new User(uid, username, profileUrl);

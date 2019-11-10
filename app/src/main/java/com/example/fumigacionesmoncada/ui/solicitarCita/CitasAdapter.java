@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class CitasAdapter extends ArrayAdapter<CitaVO> {
         private ArrayList<CitaVO> cita;
+
     public CitasAdapter(Context context, ArrayList<CitaVO>lista) {
         super(context, R.layout.item_lista_cita_peticion ,lista);
         this.cita = lista;
@@ -26,16 +27,16 @@ public class CitasAdapter extends ArrayAdapter<CitaVO> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView==null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_cita_peticion,null,false);
-        }
+        if(convertView==null)
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_cita_peticion,parent,false);
 
-        TextView nombre = convertView.findViewById(R.id.Nombre);
-        TextView telefono = convertView.findViewById(R.id.telefono);
+
+        TextView nombre = convertView.findViewById(R.id.nombre_cita);
+        TextView telefono = convertView.findViewById(R.id.direccion_cita);
         CitaVO citaVO = getItem(position);
 
         nombre.setText(citaVO.getNombre());
-        telefono.setText(citaVO.getTelefono());
+        telefono.setText(citaVO.getDireccion());
 
 
         return  convertView;

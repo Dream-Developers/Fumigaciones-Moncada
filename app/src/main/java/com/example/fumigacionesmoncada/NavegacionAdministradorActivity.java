@@ -42,6 +42,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                 R.id.nav_chat,
                 R.id.nav_clientes,
                 R.id.nav_imagen,
+                R.id.nav_serviciosadministrador,
                 R.id.nav_citas,
                 R.id.nav_solicitarCita,
                 R.id.nav_acercad)

@@ -30,12 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="49dp"
             android:layout_marginTop="125dp"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
-            android:gravity="center"
             android:layout_toRightOf="@+id/Nombre"
+            android:gravity="center"
             android:text="Eloisa Flores" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
-            android:layout_margin="15dp"
+            android:layout_margin="21dp"
             android:gravity="center"
             android:layout_toRightOf="@+id/direccion"
             android:text="Danli" />
@@ -85,16 +85,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detalle_telefono"
-            android:layout_margin="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
             android:text="Fecha:"
             android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/detalle_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/detalle_telefono"
-            android:layout_margin="15dp"
+            android:layout_margin="25dp"
             android:layout_toRightOf="@+id/telefono"
             android:inputType="date" />
 

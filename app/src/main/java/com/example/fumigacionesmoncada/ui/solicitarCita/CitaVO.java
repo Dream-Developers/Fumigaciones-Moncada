@@ -17,6 +17,14 @@ public class CitaVO {
 
     }
 
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
     public String getId() {
         return id;
     }

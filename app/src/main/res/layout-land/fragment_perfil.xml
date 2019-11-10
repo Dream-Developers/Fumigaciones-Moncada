@@ -87,6 +87,7 @@
                         android:background="@drawable/rectangulo_blanco"
                         android:maxLength="30"
                         android:layout_margin="5dp"
+                        android:inputType="number"
                         android:textColor="#ffffff"
                         android:textAlignment="center"
                         android:textColorHint="#ffffff" />

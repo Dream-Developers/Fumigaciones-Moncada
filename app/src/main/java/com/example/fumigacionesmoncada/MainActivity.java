@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //
                         //Bienvenido();
-                        savePreferences(success);
+                        savePreferences(success,usuario_id);
                         intem();
                         finish();
 
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(String token){
+    private void savePreferences(String token,String usuario_id){
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();

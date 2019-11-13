@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -13,16 +14,26 @@
             android:icon="@drawable/ic_servicio"
             android:title="@string/menu_servicio" />
         <item
+            android:id="@+id/nav_registro_citas"
+            android:icon="@drawable/ic_chat_black_24dp"
+            android:title="@string/menu_registro_cita" />
+
+    </group>
+
+        <item android:title="Informacion">
+
+       <menu>
+        <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/perfil" />
+
         <item
             android:id="@+id/nav_acerca"
             android:icon="@drawable/ic_acerca"
             android:title="@string/menu_acerca" />
+       </menu>
 
-
-
-    </group>
+</item>
 
 </menu>

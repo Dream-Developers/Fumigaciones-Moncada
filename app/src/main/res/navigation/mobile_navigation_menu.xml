@@ -28,4 +28,9 @@
         android:name="com.example.fumigacionesmoncada.ui.AcercaDe.Acerca_De_Fragment"
         android:label="@string/menu_acerca"
         tools:layout="@layout/fragment_acerca_de" />
+    <fragment
+        android:id="@+id/nav_registro_citas"
+        android:name="com.example.fumigacionesmoncada.Registro_De_Citas"
+        android:label="@string/menu_registro_cita"
+        tools:layout="@layout/fragment_registro__de__citas" />
 </navigation>

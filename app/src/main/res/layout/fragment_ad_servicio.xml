@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -8,17 +8,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <androidx.cardview.widget.CardView
 
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+
             android:layout_gravity="center_vertical"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="10dp"
@@ -29,55 +26,35 @@
             app:cardBackgroundColor="#60000000"
             card_view:cardPreventCornerOverlap="true"
             card_view:cardUseCompatPadding="false">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-
-                android:layout_height="600dp">
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="150dp"
                     android:layout_height="110dp"
-                    android:layout_alignParentStart="true"
-
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="133dp"
-                    android:layout_marginLeft="133dp"
+              android:layout_gravity="center"
                     android:layout_marginTop="0dp"
                     android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView"
-
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="112dp"
-                    android:layout_marginEnd="54dp"
-                    android:layout_marginRight="54dp"
-                    android:baselineAligned="false"
                     android:text="MONCADA'S FUMIGACIONES"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_light"
                     android:textSize="20dp"
+                    android:layout_gravity="center"
                     android:textStyle="normal|bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="174dp"
                     android:allowUndo="true"
                     android:text="Nombre :"
+                    android:layout_marginLeft="15dp"
                     android:textColor="#fff"
                     android:textSize="25dp" />
 
@@ -85,43 +62,33 @@
                     android:id="@+id/nombres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="178dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:lines="1"
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
                 <TextView
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/fu"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="331dp"
                     android:text="Lugar De Fumigacion :"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="25dp" />
 
                 <EditText
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:id="@+id/direccion"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="224dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toEndOf="@+id/fu"
-                    android:layout_toRightOf="@+id/fu"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:gravity="center"
                     android:lines="1"
@@ -131,13 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginBottom="277dp"
+                    android:layout_marginLeft="15dp"
                     android:text="Telefono:"
 
                     android:textColor="#fff"
@@ -147,14 +108,11 @@
                     android:id="@+id/telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginBottom="277dp"
                     android:background="@drawable/rectangulo_blanco"
-
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:gravity="center"
                     android:inputType="number"
-                    android:layout_marginRight="15dp"
                     android:lines="1"
                     android:maxLength="8"
                     android:textColor="#ffffff"
@@ -163,14 +121,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginBottom="231dp"
                     android:text="Fecha :"
+                    android:layout_marginLeft="15dp"
                     android:textColor="#fff"
                     android:textSize="25dp" />
 
@@ -178,13 +130,12 @@
                     android:id="@+id/fecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginBottom="234dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
-                    android:layout_marginRight="15dp"
+                    android:textSize="20dp"
                     android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:inputType="date"
                     android:lines="1"
                     android:textColor="#ffffff"
@@ -193,14 +144,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginBottom="178dp"
                     android:text="Hora :"
+                    android:layout_marginLeft="15dp"
                     android:textColor="#fff"
                     android:textSize="25dp" />
 
@@ -208,15 +153,14 @@
                     android:id="@+id/hora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginBottom="181dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:inputType="time"
                     android:lines="1"
-                    android:layout_marginRight="15dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
@@ -224,22 +168,18 @@
                     android:id="@+id/pedir"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="128dp"
-                    android:layout_marginRight="128dp"
-                    android:layout_marginBottom="96dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:background="@drawable/oval"
                     android:onClick="pedir"
                     android:text="Pedir Cita"
-                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
+            </LinearLayout>
 
-            </RelativeLayout>
 
 
         </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout></ScrollView>
+    </LinearLayout>

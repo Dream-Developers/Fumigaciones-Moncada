@@ -538,7 +538,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         String contra = contraseña.getText().toString();
 
         if (name == null || name.isEmpty() || email == null || email.isEmpty() || contra == null || contra.isEmpty()) {
-            Toast.makeText(this, "Al menos un campo vacio", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Al menos un campo vacio", Toast.LENGTH_SHORT).show();
             return;
         }
 

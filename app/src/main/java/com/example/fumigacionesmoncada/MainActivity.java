@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     JsonObjectRequest solicitar_objeto_json;
     String success;
     String rol_id;
+    String usuario_id;
 
 
 
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                              success = jsonObject.getString("access_token");
                              rol_id = jsonObject.getString("rol_id");
+                            usuario_id = jsonObject.getString("id");
 
                             //Toast.makeText(MainActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
 
@@ -299,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("token", token);
         editor.putString("password", contra);
         editor.putString("rol", rol_id);
+        editor.putString("id", usuario_id);
         editor.commit();
 
     }

@@ -96,6 +96,8 @@
                     android:drawablePadding="10dp"
                     android:inputType="textPassword"
                     android:textColor="#FFFF"
+                    app:passwordToggleEnabled = "true"
+                    app:passwordToggleTint="#FFF"
                     android:textColorHint="#FFFF" />
 
                 <Button

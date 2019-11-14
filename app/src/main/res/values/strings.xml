@@ -34,7 +34,7 @@
     <string name="publicidad">Publicidad</string>
 
 
-    <string name="ip">http://192.168.0.8</string>
+    <string name="ip">http://192.168.0.105</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -45,6 +45,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_registro_cita">Registro de citas</string>
+    <string name="btn_chat">Enviar</string>
+    <string name="message">Escribe tu mensaje</string>
 
 
 </resources>

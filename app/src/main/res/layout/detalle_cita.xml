@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
+        android:layout_width="386dp"
+        android:layout_height="670dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:background="#60000000">
 
 
         <TextView
@@ -22,6 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="118dp"
             android:text="Nombre:"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -36,17 +39,23 @@
             android:layout_marginRight="15dp"
             android:layout_toRightOf="@+id/Nombre"
             android:gravity="center"
-            android:text="Eloisa Flores" />
+            android:text="Eloisa Flores"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/direccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
-            android:layout_margin="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
             android:text="Residencia:"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -56,18 +65,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
             android:layout_margin="21dp"
-            android:gravity="center"
             android:layout_toRightOf="@+id/direccion"
-            android:text="Danli" />
+            android:gravity="center"
+            android:text="Danli"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/telefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/direccion"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="Telefono:"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -78,7 +93,8 @@
             android:layout_below="@id/detalle_direccion"
             android:layout_margin="15dp"
             android:layout_toRightOf="@+id/telefono"
-            android:text="504 9999 0000" />
+            android:text="504 9999 0000"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/fecha"
@@ -87,11 +103,12 @@
             android:layout_below="@+id/detalle_telefono"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:text="Fecha:"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -100,9 +117,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/detalle_telefono"
-            android:layout_margin="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
             android:layout_toRightOf="@+id/telefono"
-            android:inputType="date" />
+            android:text="23/09/2015"
+            android:textColor="#ffffff" />
 
 
     </RelativeLayout>
@@ -115,13 +138,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginBottom="180dp"
         android:background="@drawable/oval"
         android:onClick="botonAceptar"
         android:text="ACEPTAR"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/btnRechazar"
@@ -130,14 +153,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="180dp"
         android:background="@drawable/oval"
         android:lineSpacingExtra="45dp"
         android:onClick="botonRechazar"
         android:text="RECHAZAR"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>

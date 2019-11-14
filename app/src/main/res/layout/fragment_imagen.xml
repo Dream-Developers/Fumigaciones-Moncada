@@ -4,74 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/idLayoutSubir" >
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="383dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/fondo3"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Enviar Imagenes"
-            android:gravity="center"
-            android:textSize="20sp"
             android:layout_marginBottom="20dp"
-            android:textStyle="bold"/>
+            android:gravity="center"
+            android:text="Enviar Imagenes"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-
-            <Button
-                android:id="@+id/btnFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@color/colorAccent"
-                android:onClick="abrircamara"
-                android:text="Foto"
-                android:textColor="@android:color/white"
-                android:visibility="visible" />
-
-        </LinearLayout>
 
         <EditText
             android:id="@+id/campoNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"/>
+            android:hint="Nombre"
+            android:textColor="#ffffff" />
 
         <EditText
-            android:id="@+id/campoDescrpcion"
+            android:id="@+id/campoDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descripcion"/>
+            android:hint="Descripcion"
+            android:textColor="#ffffff" />
 
 
-        <ImageView
+        <!-- android:src="@drawable/img_base" -->
+        <ImageButton
             android:id="@+id/imgFoto"
             android:layout_width="250dp"
             android:layout_height="300dp"
+            android:layout_margin="55dp"
             android:layout_gravity="center"
-            android:layout_centerHorizontal="true"/>
-        <!-- android:src="@drawable/img_base" -->
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_menu_camera"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            />
+
+
+
+        <Button
+            android:id="@+id/btnSubir"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="132dp"
+            android:layout_marginLeft="132dp"
+            android:layout_marginRight="132dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/oval"
+            android:text="Subir"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSubir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subir"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorAccent"
-        android:textColor="@android:color/white" />
 
 </RelativeLayout>
-

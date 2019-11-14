@@ -81,8 +81,8 @@ public class ImagenFragment extends Fragment {
     private static final int COD_FOTO = 20;
 
     EditText campoNombre, campoDescripcion;
-    Button botonSubir, btnFoto;
-    ImageView imgFoto;
+    Button botonSubir;
+    private ImageView imgFoto;
     ProgressDialog progreso;
 
     RelativeLayout layoutSubir;//permisos
@@ -133,7 +133,6 @@ public class ImagenFragment extends Fragment {
         campoNombre = vista.findViewById(R.id.campoNombre);
         campoDescripcion = vista.findViewById(R.id.campoDescrpcion);
         botonSubir = vista.findViewById(R.id.btnSubir);
-        btnFoto = vista.findViewById(R.id.btnFoto);
 
         imgFoto = vista.findViewById(R.id.imgFoto);
 
@@ -167,7 +166,7 @@ public class ImagenFragment extends Fragment {
             }
         });
 
-        btnFoto.setOnClickListener(new View.OnClickListener() {
+        imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarDialogOpciones();
@@ -386,7 +385,7 @@ public class ImagenFragment extends Fragment {
         if (requestCode == MIS_PERMISOS) {
             if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
                 Toast.makeText(getContext(), "Permisos aceptados", Toast.LENGTH_SHORT);
-                btnFoto.setEnabled(true);
+                imgFoto.setEnabled(true);
             }
         } else {
             solicitarPermisosManual();

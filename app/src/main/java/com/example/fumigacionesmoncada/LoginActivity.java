@@ -38,7 +38,7 @@ import java.util.Map;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
     private TextView recuperarContra;
     private Button btn_registro, btn_login;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         if (obtenerEstadoButton()){
             cargarPreferencias();
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             if (cursor.getCount()==1) {
 
-                Intent intent = new Intent(MainActivity.this, MensajesFragment.class);
+                Intent intent = new Intent(LoginActivity.this, MensajesFragment.class);
                 startActivity(intent);
                 finish();
 
@@ -195,14 +195,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         guardarEstadoButton();
-                        //Toast.makeText(MainActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                              success = jsonObject.getString("access_token");
                              rol_id = jsonObject.getString("rol_id");
                             usuario_id = jsonObject.getString("id");
 
-                            //Toast.makeText(MainActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
 
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
                             if (success.equals("1")){
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     String name = object.getString("name").trim();
                                     String email = object.getString("email").trim();
-                                    Toast.makeText(MainActivity.this, "Se ha logeado. " +
+                                    Toast.makeText(LoginActivity.this, "Se ha logeado. " +
                                             " \nTu nombre : " +name+"" +
                                             "\nTu correo :" +email, Toast.LENGTH_SHORT).show();
                                     cargando.setVisibility(View.GONE);
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-//                            Toast.makeText(MainActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                         //
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                          btn_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(MainActivity.this, "Error al iniciar sesión, verifique que su " +
+                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión, verifique que su " +
                                 "contraseña esté correcta ", Toast.LENGTH_SHORT).show();
 
                     }

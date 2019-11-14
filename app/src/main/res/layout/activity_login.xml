@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
     android:alpha="1"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
 
 
@@ -79,6 +79,7 @@
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
                     android:hint=" Correo"
+                    android:drawablePadding="10dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff" />
 
@@ -92,6 +93,7 @@
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
                     android:hint=" Contraseña"
+                    android:drawablePadding="10dp"
                     android:inputType="textPassword"
                     android:textColor="#FFFF"
                     android:textColorHint="#FFFF" />
@@ -102,10 +104,10 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/oval"
+                    android:background="@drawable/rectangulo_blanco"
                     android:text="Ingresar"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="#fff"
                     android:textSize="18dp"
                     android:textStyle="normal|bold" />
 

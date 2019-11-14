@@ -3,11 +3,7 @@ package com.example.fumigacionesmoncada;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -76,7 +72,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
 
     private void logout() {
         SharedPrefManager.getInstance(NavegacionAdministradorActivity.this).clear();
-        Intent intent = new Intent(NavegacionAdministradorActivity.this, MainActivity.class);
+        Intent intent = new Intent(NavegacionAdministradorActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

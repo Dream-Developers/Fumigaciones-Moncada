@@ -50,8 +50,9 @@
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/perfil"
-                        android:background="#60000000"
+                        android:background="@drawable/boton_redondo"
                         />
 
 
@@ -75,7 +76,7 @@
                     android:id="@+id/registro_apellidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
+                    android:drawableLeft="@drawable/baseline_home_white_18dp"
                     android:hint=" Residencia "
                     android:lines="1"
                     android:textColor="#ffffff"

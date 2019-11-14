@@ -123,7 +123,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
-                    android:hint="   Correo"
+                    android:hint=" Correo"
                     android:drawablePadding="10dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff" />
@@ -137,7 +137,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
-                    android:hint="   Contraseña"
+                    android:hint=" Contraseña"
                     android:drawablePadding="10dp"
                     android:inputType="textPassword"
                     android:textColor="#FFFF"

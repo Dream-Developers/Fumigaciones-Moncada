@@ -28,6 +28,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.Providers.ContractParaListaUsers;
 import com.example.fumigacionesmoncada.ui.Mensajes.MensajesFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +41,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
@@ -124,27 +130,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
-                    if(!isEmailValid(txtCorreo.getText())){
-                        txtCorreo.setError("No es un correo valido");
-                    }else {
-                        String email = txtCorreo.getText().toString().trim();
-                        String contraseniaPass = txtContrasena.getText().toString().trim();
-                        login(email, contraseniaPass);
-                    }
-                }
-                else {
-                    if (txtCorreo.getText().toString().length() == 0 ||
-                            txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
-                        txtCorreo.setError("Ingresa el correo");
+                logeoLaravel();
+                logeoFirebase();
 
-                    }
-                    if (txtContrasena.getText().toString().trim().length() == 0 ||
-                            txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
-                        txtContrasena.setError("Ingresa la contraseña");
-                    }
-                }
             }
+
+
         });
 
 
@@ -157,6 +148,61 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public void logeoLaravel(){
+        if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
+            if(!isEmailValid(txtCorreo.getText())){
+                txtCorreo.setError("No es un correo valido");
+            }else {
+                String email = txtCorreo.getText().toString().trim();
+                String contraseniaPass = txtContrasena.getText().toString().trim();
+                login(email, contraseniaPass);
+            }
+        }
+        else {
+            if (txtCorreo.getText().toString().length() == 0 ||
+                    txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
+                txtCorreo.setError("Ingresa el correo");
+
+            }
+            if (txtContrasena.getText().toString().trim().length() == 0 ||
+                    txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
+                txtContrasena.setError("Ingresa la contraseña");
+            }
+        }
+
+    }
+
+
+
+    private void logeoFirebase() {
+        String email = txtCorreo.getText().toString();
+        String password = txtContrasena.getText().toString();
+
+        Log.i("Teste", email);
+        Log.i("Teste", password);
+
+        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+            return;
+        }
+
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.i("Teste", task.getResult().getUser().getUid());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("Teste", e.getMessage());
+
+                    }
+                });
+    }
+
 
     public void guardarEstadoButton(){
 

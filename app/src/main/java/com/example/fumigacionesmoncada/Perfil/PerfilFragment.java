@@ -109,7 +109,7 @@ public class PerfilFragment extends Fragment  {
 
 
                                 progreso = new ProgressDialog(getContext());
-                                progreso.setMessage("Cargando...");
+                                progreso.setMessage("Cargando datos...");
                                 progreso.show();
                                 String ip = getString(R.string.ip);
                                 String url  = ip+ "/api/clientes/"+id+"/update" ;

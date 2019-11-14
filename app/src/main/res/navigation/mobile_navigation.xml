@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/nav_serviciosadministrador"
-        android:name="ServiciosAdministrador.ServiciosAdministradorFragment"
+        android:name="serviciosAdministrador.ServiciosAdministradorFragment"
         android:label="@string/publicidad"
         tools:layout="@layout/fragment_servicios_administrador" />
 

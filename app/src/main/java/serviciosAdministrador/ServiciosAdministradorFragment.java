@@ -1,4 +1,4 @@
-package ServiciosAdministrador;
+package serviciosAdministrador;
 
 
 import android.os.Bundle;
@@ -28,7 +28,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.RecyclerTouchListener;
 import com.example.fumigacionesmoncada.ui.Principal.ClaseAdapterImagen;
-import com.example.fumigacionesmoncada.ui.Principal.DetalleImagenActivity;
 import com.example.fumigacionesmoncada.ui.Principal.ServiciosVO;
 
 import org.json.JSONArray;
@@ -40,7 +39,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -108,7 +106,6 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     dialog.dismiss();
-                    cargarWebService();
                 }
             });
         }

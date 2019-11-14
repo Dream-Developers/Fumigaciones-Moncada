@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.Principal.DetalleImagenActivity"
     android:orientation="vertical"
-    android:padding="25dp"
+    android:padding="5dp"
     tools:ignore="MissingDefaultResource">
 
 
@@ -19,7 +19,7 @@
             android:id="@+id/idImagenDA"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             />
 
     </androidx.cardview.widget.CardView>
@@ -43,4 +43,14 @@
         android:textSize="25dp"
         android:textColor="#DD1B1919"
         />
+    <Button
+        android:id="@+id/guardarcambios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:background="@drawable/oval"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center">
+    </Button>
 </LinearLayout>

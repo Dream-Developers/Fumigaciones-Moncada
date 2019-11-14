@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="ServiciosAdministrador.DetalleServicioAdministradorActivity"></activity>
+        <activity android:name="serviciosAdministrador.DetalleServicioAdministradorActivity"></activity>
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
         <activity
             android:name=".ContactsActivity"

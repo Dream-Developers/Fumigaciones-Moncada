@@ -9,7 +9,6 @@
     <string name="menu_principal">Principal</string>
     <string name="menu_servicio">Adquirir Servicio</string>
     <string name="menu_acerca">Acerca De</string>
-    <string name="menu_registro_cita">Registro de Citas</string>
     <string name="tab_text_1">CHAT</string>
     <string name="tab_text_2">REGISTRO</string>
     <string name="tab_text_3">CITAS</string>
@@ -32,10 +31,10 @@
     <string name="menu_solicitarCita">Solicitud de citas</string>
     <string name="menu_acercad">Acerca de</string>
     <string name="perfil">Perfil</string>
-    <string name="publicidad">Públicidad</string>
+    <string name="publicidad">Publicidad</string>
 
 
-    <string name="ip">http://10.24.10.80</string>
+    <string name="ip">http://192.168.0.6</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -45,6 +44,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_registro_cita">Registro de citas</string>
 
 
 </resources>

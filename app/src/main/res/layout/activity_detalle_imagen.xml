@@ -1,46 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".ui.Principal.DetalleImagenActivity"
-android:orientation="vertical"
-android:padding="25dp"
-tools:ignore="MissingDefaultResource">
-
-
-
-<androidx.cardview.widget.CardView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="match_parent"
     >
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/idImagenD"
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="fitCenter"
-        />
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@color/colorAccent"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="false">
 
-</androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="25dp">
 
-<TextView
-    android:layout_marginTop="15dp"
-    android:id="@+id/tituloImagenD"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Titulo"
-    android:textAlignment="center"
-    android:textColor="#000"
-    android:textSize="30sp"
-    android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-<TextView
-    android:id="@+id/descripcionImagenD"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Descripcion"
-    android:textSize="25dp"
-    android:textColor="#DD1B1919"
-    />
-</LinearLayout>
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/idImagenD"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tituloImagenD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulo"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descripcionImagenD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripcion"
+                android:textSize="25dp"
+                android:textColor="#DD1B1919"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>

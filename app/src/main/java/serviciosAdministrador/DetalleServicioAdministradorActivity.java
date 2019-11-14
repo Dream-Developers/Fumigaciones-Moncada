@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,7 +73,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                 {
 
                 }  {
-                    progreso = new ProgressDialog(getApplicationContext());
+                    progreso = new ProgressDialog(this);
                     progreso.setMessage("Cargando datos...");
                     progreso.show();
 
@@ -114,19 +115,17 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                             return parametros;
                         }
                     };
-                    ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                    ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
                 }
             }
         } catch (Exception exe){
             Toast.makeText(getApplicationContext(),exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
 
     private void cargarPreferencias() {
-        SharedPreferences preferences = getApplication().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
 
     }
@@ -161,12 +160,13 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String>parametros = new HashMap<>();
-                parametros.put("id",id);
-                return parametros;
-            }
-        };
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }};
 
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
 

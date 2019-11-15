@@ -36,13 +36,14 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
         TextView fecha = convertView.findViewById(R.id.mostrarfecha);
         TextView hora = convertView.findViewById(R.id.mostrarcita);
         TextView estado = convertView.findViewById(R.id.mosstarestado);
+        TextView direccion = convertView.findViewById(R.id.mosstardireccion);
         RelativeLayout relativeLayout1=convertView.findViewById(R.id.relativeLayout1);
 
 
         Citas_Peticiones citas = getItem(position);
 
 
-
+        direccion.setText(citas.getDireccion());
         fecha.setText(citas.getFecha());
         hora.setText(citas.getHora());
 

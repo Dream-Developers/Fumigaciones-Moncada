@@ -203,7 +203,7 @@ public class Registro_De_Citas extends Fragment {
         Toast.makeText(getContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
     }}else {
             progreso.dismiss();
-            Toast.makeText(getContext(), "Solo Puede cancelar Las citas Pendinetes", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Solo Puede cancelar Las citas Pendientes", Toast.LENGTH_LONG).show();
 
         }
 
@@ -233,8 +233,6 @@ public class Registro_De_Citas extends Fragment {
                     for (int i = 0; i < array.length(); i++) {
                         citas = new Citas_Peticiones();
                         object = array.getJSONObject(i);
-                        citas.setNombre(object.getString("Nombre"));
-                        citas.setNombre(object.getString("Nombre"));
                         citas.setDireccion(object.getString("Direccion"));
                         citas.setFecha(object.getString("FechaFumigacion"));
                         citas.setHora(object.getString("Hora"));

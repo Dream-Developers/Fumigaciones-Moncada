@@ -51,6 +51,8 @@ public class Crear_Citas extends AppCompatActivity {
     TextView col;
     Button registrar;
     String tokenUsuario;
+    private static final int maximo = 20;
+    private static final int minimo = 07;
     ProgressDialog progreso;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -83,7 +85,9 @@ cargarPreferencias();
 
 
 
-    private void obtenerHora() { Calendar c = Calendar.getInstance();
+    private void obtenerHora() {
+
+        Calendar c = Calendar.getInstance();
         final int hour = c.get(Calendar.HOUR_OF_DAY);
         final int minutes = c.get(Calendar.MINUTE);
 
@@ -95,23 +99,44 @@ cargarPreferencias();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        String fecha_usuario = anio + "-" + mes + "-" + dia;
-        String fecha_actual = anio_hoy + "-" + mes_hoy + "-" + dia_hoy;
+        String fecha_usuario = fecha.getText().toString();
+        String fecha_actual = anio_hoy + "-" + (mes_hoy +1) + "-" + dia_hoy;
         try {
             final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
             final Date fecha_actualDate = formatter.parse(fecha_actual);
 
-
             final TimePickerDialog recogerHora = new TimePickerDialog(Crear_Citas.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     //Se validan la fecha actual con la tomada por el usuario para asi
                     //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
                     //la hora actual debe ser menor a la hora tomada.
-
                     if(fecha_usuarioDate.equals(fecha_actualDate)){
+
                         if(hour<hourOfDay){
+                            if (hourOfDay<maximo&&hourOfDay>minimo) {
+                                String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                                String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
+                                String AM_PM;
+                                if (hourOfDay < 12) {
+                                    AM_PM = "a.m.";
+                                } else {
+                                    AM_PM = "p.m.";
+                                }
+                                etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
+                            }else {
+                                Toast.makeText(Crear_Citas.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                                etHora.setText("");
+                            }
+
+                        }else{
+                            Toast.makeText(Crear_Citas.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }else {
+                        if (hourOfDay<maximo&&hourOfDay>minimo) {
                             String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
                             String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
                             String AM_PM;
@@ -122,24 +147,12 @@ cargarPreferencias();
                             }
                             etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
 
-                        }else{
-                            Toast.makeText(Crear_Citas.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
-                        }
 
-
-                    }else {
-                        String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
-                        String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
-                        String AM_PM;
-                        if (hourOfDay < 12) {
-                            AM_PM = "a.m.";
                         } else {
-                            AM_PM = "p.m.";
+                            etHora.setText("");
+                            Toast.makeText(Crear_Citas.this, "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
                         }
-                        etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
-
                     }
-
                 }
             }, hora, minuto, false);
 
@@ -148,8 +161,9 @@ cargarPreferencias();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
+
+
     private void cargarPreferencias() {
         SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");

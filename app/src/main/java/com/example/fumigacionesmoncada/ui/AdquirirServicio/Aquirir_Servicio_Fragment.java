@@ -6,24 +6,19 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.AuthFailureError;
@@ -35,22 +30,18 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
-import com.example.fumigacionesmoncada.LoginActivity;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
-import com.example.fumigacionesmoncada.ui.citas.Crear_Citas;
-import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class Aquirir_Servicio_Fragment extends Fragment  {
     private int dia, mes, anio;
@@ -58,7 +49,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
     private static final String CERO = "0";
     private static final String DOS_PUNTOS = ":";
     private static final int maximo = 20;
-    private static final int minimo = 7;
+    private static final int minimo = 07;
     public final Calendar c = Calendar.getInstance();
     final int hora = c.get(Calendar.HOUR_OF_DAY);
 
@@ -294,74 +285,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
     }
 
-    private void obtenerHora() {
 
-        Calendar c = Calendar.getInstance();
-        final int hour = c.get(Calendar.HOUR_OF_DAY);
-        final int minutes = c.get(Calendar.MINUTE);
-
-
-        final int dia_hoy = c.get(Calendar.DAY_OF_MONTH);
-        final int mes_hoy = c.get(Calendar.MONTH);
-        final int anio_hoy = c.get(Calendar.YEAR);
-
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        String fecha_usuario = anio + "-" + mes + "-" + dia;
-        String fecha_actual = anio_hoy + "-" + mes_hoy + "-" + dia_hoy;
-        try {
-            final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
-            final Date fecha_actualDate = formatter.parse(fecha_actual);
-
-
-            final TimePickerDialog recogerHora = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                    //Se validan la fecha actual con la tomada por el usuario para asi
-                    //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
-                    //la hora actual debe ser menor a la hora tomada.
-
-                    if(fecha_usuarioDate.equals(fecha_actualDate)){
-                        if(hour<hourOfDay){
-                            String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
-                            String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
-                            String AM_PM;
-                            if (hourOfDay < 12) {
-                                AM_PM = "a.m.";
-                            } else {
-                                AM_PM = "p.m.";
-                            }
-                            Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
-
-                        }else{
-                            Toast.makeText(getContext(), "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }else {
-                        String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
-                        String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
-                        String AM_PM;
-                        if (hourOfDay < 12) {
-                            AM_PM = "a.m.";
-                        } else {
-                            AM_PM = "p.m.";
-                        }
-                        Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
-
-                    }
-
-                }
-            }, hora, minuto, false);
-
-            recogerHora.show();
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     private void obtenerFecha() {
@@ -400,6 +324,83 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
         }
 
 
+    }
+    private void obtenerHora() {
+
+        Calendar c = Calendar.getInstance();
+        final int hour = c.get(Calendar.HOUR_OF_DAY);
+        final int minutes = c.get(Calendar.MINUTE);
+
+
+        final int dia_hoy = c.get(Calendar.DAY_OF_MONTH);
+        final int mes_hoy = c.get(Calendar.MONTH);
+        final int anio_hoy = c.get(Calendar.YEAR);
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String fecha_usuario = fecha.getText().toString();
+        String fecha_actual = anio_hoy + "-" + (mes_hoy +1) + "-" + dia_hoy;
+        try {
+            final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
+            final Date fecha_actualDate = formatter.parse(fecha_actual);
+
+            final TimePickerDialog recogerHora = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                @Override
+
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    //Se validan la fecha actual con la tomada por el usuario para asi
+                    //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
+                    //la hora actual debe ser menor a la hora tomada.
+                    if(fecha_usuarioDate.equals(fecha_actualDate)){
+
+                        if(hour<hourOfDay){
+                            if (hourOfDay<maximo&&hourOfDay>minimo) {
+                                String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                                String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
+                                String AM_PM;
+                                if (hourOfDay < 12) {
+                                    AM_PM = "a.m.";
+                                } else {
+                                    AM_PM = "p.m.";
+                                }
+                                Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
+                            }else {
+                                Toast.makeText(getContext(), "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
+                                Hora.setText("");
+                            }
+
+                        }else{
+                            Toast.makeText(getContext(), "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }else {
+                        if (hourOfDay<maximo&&hourOfDay>minimo) {
+                            String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                            String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
+                            String AM_PM;
+                            if (hourOfDay < 12) {
+                                AM_PM = "a.m.";
+                            } else {
+                                AM_PM = "p.m.";
+                            }
+                            Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
+
+
+                        } else {
+                            Hora.setText("");
+                            Toast.makeText(getContext(), "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }, hora, minuto, false);
+
+            recogerHora.show();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }

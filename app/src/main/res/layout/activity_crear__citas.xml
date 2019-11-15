@@ -14,13 +14,12 @@
 
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
@@ -48,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre Cliente"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="20dp"/>
 
 
                 <EditText
@@ -57,7 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/baseline_supervised_user_circle_white_18dp"
+                    android:background="@drawable/rectangulo_blanco"
                     android:inputType="textPersonName"
+                    android:textSize="20dp"
                     android:lines="1"
                     android:maxLength="50"
                     android:textColor="#ffffff"
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:text="Direccion "
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/registro_direccion"
@@ -80,6 +81,8 @@
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/baseline_my_location_white_18dp"
                     android:lines="1"
+                    android:textSize="20dp"
+                    android:background="@drawable/rectangulo_blanco"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
 
@@ -91,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="Precio"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/registro_Precio"
@@ -101,6 +104,8 @@
                     android:drawableLeft="@drawable/baseline_attach_money_white_18dp"
                     android:inputType="number"
                     android:lines="1"
+                    android:textSize="20dp"
+                    android:background="@drawable/rectangulo_blanco"
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
@@ -113,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fecha"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/registro_Fecha"
@@ -124,7 +129,9 @@
                     android:focusable="false"
                     android:inputType="date"
                     android:lines="1"
+                    android:textSize="20dp"
                     android:onClick="fechass"
+                    android:background="@drawable/rectangulo_blanco"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
@@ -133,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:text="Hora"
                     android:textColor="#ffffff"
-                    android:textSize="15dp"/>
+                    android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/registro_Hora"
@@ -144,7 +151,9 @@
                     android:focusable="false"
                     android:inputType="time"
                     android:lines="1"
+                    android:textSize="20dp"
                     android:onClick="onClick1"
+                    android:background="@drawable/rectangulo_blanco"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 

@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -47,18 +47,18 @@
                     android:text="MONCADA'S FUMIGACIONES"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_light"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="normal|bold" />
             </LinearLayout>
                 <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="15">
+                    android:layout_weight="25">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="6">
+        android:layout_weight="2">
 
 
                 <TextView
@@ -68,7 +68,7 @@
                     android:textColor="#fff"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="17dp"/>
+                    android:textSize="25dp"/>
 
                 <EditText
 
@@ -83,7 +83,7 @@
                     android:maxLength="30"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
-                    android:textSize="17dp"/>
+                    android:textSize="25dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Lugar De Fumigacion :"
                     android:textColor="#fff"
-                    android:textSize="17dp" />
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/direccion"
@@ -106,7 +106,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColorHint="#ffffff"
-                    android:textSize="17dp" />
+                    android:textSize="25dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                     android:text="Telefono :"
                     android:layout_marginTop="15dp"
                     android:textColor="#fff"
-                    android:textSize="17dp"
+                    android:textSize="25dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"/>
 
@@ -123,8 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
-                    android:textSize="17dp"
-                    android:gravity="center"
+                    android:textSize="25dp"                    android:gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:inputType="number"
@@ -141,7 +140,7 @@
                     android:textColor="#fff"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="17dp" />
+                    android:textSize="25dp"/>
 
 
 
@@ -158,7 +157,7 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
-                    android:textSize="17dp" />
+                    android:textSize="25dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -166,7 +165,7 @@
                     android:text="Hora :"
                     android:layout_marginTop="15dp"
                     android:textColor="#fff"
-                    android:textSize="17dp"
+                    android:textSize="25dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"/>
 
@@ -179,7 +178,7 @@
                     android:background="@drawable/rectangulo_blanco"
                     android:focusable="false"
                     android:gravity="center"
-                    android:textSize="17dp"
+                    android:textSize="25dp"
                     android:inputType="time"
                     android:lines="1"
                     android:textColor="#ffffff"

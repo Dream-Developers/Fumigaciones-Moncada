@@ -6,29 +6,40 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
+import com.example.fumigacionesmoncada.LoginActivity;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
+import com.example.fumigacionesmoncada.ui.citas.Crear_Citas;
+import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,23 +50,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-public class Aquirir_Servicio_Fragment extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
+public class Aquirir_Servicio_Fragment extends Fragment  {
     private int dia, mes, anio;
     private EditText fecha;
     private static final String CERO = "0";
     private static final String DOS_PUNTOS = ":";
+    private static final int maximo = 20;
+    private static final int minimo = 7;
     public final Calendar c = Calendar.getInstance();
     final int hora = c.get(Calendar.HOUR_OF_DAY);
+
     final int minuto = c.get(Calendar.MINUTE);
     private Aquirir_Servicio_ViewModel servicioViewModel;
     private EditText mostrarNombre, mostrarDireccion, mostraraTelefono;
     private EditText Hora;
     String tokenUsuario;
     private Button pedir;
+
     ProgressDialog progreso;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
+    private String Usuario_id;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -131,72 +148,99 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
     }
 
     public void aceptar() {
-        SubirWeb();
+        validacion();
     }
 
     public void cancelar() {
     }
 
-    private void SubirWeb() {
-        try {
 
-            if (mostraraTelefono.getText().toString().length() < 8) {
-                Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
-            } else {
+    private void cargarWebService() {
 
-                progreso = new ProgressDialog(getContext());
-                progreso.setMessage("Cargando...");
-                progreso.show();
-                String ip = getString(R.string.ip);
-                String url = ip + "/api/peticioncita?Nombre=" + mostrarNombre.getText().toString()
-                        + "&Direccion=" + mostrarDireccion.getText().toString() + "&Telefono=" + mostraraTelefono.getText().toString()
-                        + "&FechaFumigacion=" + fecha.getText().toString() + "&Hora=" + Hora.getText().toString();
-                url = url.replace(" ", "%20");
-                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, this, this);
-                request.add(jsonObjectRequest);
+        progreso=new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+        String ip=getString(R.string.ip);
+
+        String url=ip+"/api/auth/peticioncita";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.hide();
+                        Hora.setText("");
+                        fecha.setText("");
+
+                        Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.hide();
+                if (error.toString().equals("com.android.volley.ServerError")) {
+                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+
+                }
             }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String,String> parametros=new HashMap<>();
+                parametros.put("Nombre",mostrarNombre.getText().toString());
+                parametros.put("Direccion",mostrarDireccion.getText().toString());
+                parametros.put("Telefono",mostraraTelefono.getText().toString());
+                parametros.put("FechaFumigacion",fecha.getText().toString());
+                parametros.put("Hora",Hora.getText().toString());
+                parametros.put("User_id",Usuario_id);
+
+                return parametros;
+            }@Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
 
 
-        } catch (Exception exe) {
-            Toast.makeText(getContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
+                return params;
+            }
+        };
+        //request.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);}
+    private void validacion() {
+        if(mostrarNombre.getText().toString().equals("")||mostrarDireccion.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")
+                || fecha.getText().toString().equals("") || Hora.getText().toString().equals("")){
+            Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
+        }else {
+                if (mostraraTelefono.getText().toString().length() < 8 ) {
+                    Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                } else {
+
+
+                            cargarWebService();
+
+
+
+                }
+            }
         }
 
 
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        progreso.hide();
-        if (error.toString().equals("com.android.volley.ServerError")) {
-            Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-
-        } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-            Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
-        }
-        //  Toast.makeText(getApplicationContext(),"No se pudo registrar , Hubo un error al conectar por favor verifica la conexión a internet o intente nuevamente o su correo ya esta registrado , Error : "+ error.toString(), Toast.LENGTH_LONG).show();
-
-        // Log.i("ERROR", error.toString());
-    }
-
-
-    @Override
-    public void onResponse(JSONObject response) {
-
-        Toast.makeText(getContext(), "Peticion Realizada correctamente", Toast.LENGTH_SHORT).show();
-        progreso.hide();
-        fecha.setText("");
-        Hora.setText("");
-        mostrarNombre.setText("");
-        mostrarDireccion.setText("");
-        mostraraTelefono.setText("");
-    }
 
 
     private void cargarPreferencias() {
         SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
+        Usuario_id = preferences.getString("id", "");
 
     }
 
@@ -317,7 +361,6 @@ public class Aquirir_Servicio_Fragment extends Fragment implements Response.Erro
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
 

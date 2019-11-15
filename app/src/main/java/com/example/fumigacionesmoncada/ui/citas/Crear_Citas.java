@@ -83,8 +83,7 @@ cargarPreferencias();
 
 
 
-    private void obtenerHora() {
-        Calendar c = Calendar.getInstance();
+    private void obtenerHora() { Calendar c = Calendar.getInstance();
         final int hour = c.get(Calendar.HOUR_OF_DAY);
         final int minutes = c.get(Calendar.MINUTE);
 
@@ -103,7 +102,7 @@ cargarPreferencias();
             final Date fecha_actualDate = formatter.parse(fecha_actual);
 
 
-            final TimePickerDialog recogerHora = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            final TimePickerDialog recogerHora = new TimePickerDialog(Crear_Citas.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -124,7 +123,7 @@ cargarPreferencias();
                             etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
 
                         }else{
-                            Toast.makeText(getApplicationContext(), "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Citas.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -205,24 +204,13 @@ cargarPreferencias();
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/cita";
+        String url=ip+"/api/auth/cita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progreso.hide();
-                        try {
-                            JSONObject parametros = new JSONObject();
-                            parametros.put("Nombre",nombre.getText().toString());
-                            parametros.put("Direccion",direccion.getText().toString());
-                            parametros.put("Precio",precio.getText().toString());
-                            parametros.put("FechaFumigacion",fecha.getText().toString());
-                            parametros.put("Hora",etHora.getText().toString());
-                            parametros.put("FechaProxima",fecha.getText().toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
                         finish();
 
@@ -244,14 +232,29 @@ cargarPreferencias();
 
                 }
             }
-        }){ public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String,String> parametros = new HashMap<>();
-            parametros.put("Content-Type","application/json");
-            parametros.put("X-Requested-With","XMLHttpRequest");
-            parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
 
-            return parametros;
+
+                Map<String,String> parametros=new HashMap<>();
+                parametros.put("Nombre",nombre.getText().toString());
+                parametros.put("Direccion",direccion.getText().toString());
+                parametros.put("Precio",precio.getText().toString());
+                parametros.put("FechaFumigacion",fecha.getText().toString());
+                parametros.put("Hora",etHora.getText().toString());
+                parametros.put("FechaProxima",fecha.getText().toString());
+                return parametros;
+
         }
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }
         };
         //request.add(stringRequest);
         RequestQueue requestQueue = Volley.newRequestQueue(this);

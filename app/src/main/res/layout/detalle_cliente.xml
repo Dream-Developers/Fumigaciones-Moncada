@@ -8,10 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.clientes.Detalle_Cliente">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/imagen_cliente"
@@ -123,5 +124,7 @@
 
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>

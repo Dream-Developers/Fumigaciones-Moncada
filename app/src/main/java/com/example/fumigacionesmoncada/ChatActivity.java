@@ -217,16 +217,17 @@ public class ChatActivity extends AppCompatActivity {
             txtMsg.setText(mensaje.getText());
 
             Picasso.get()
-                    .load(user.getProfileUrl())
+                    .load(mensaje.getFromID().equals(FirebaseAuth.getInstance().getUid())
+                            ? yo.getProfileUrl()
+                            : user.getProfileUrl())
                     .into(imgMensaje);
-
         }
 
         @Override
         public int getLayout() {
             return mensaje.getFromID().equals(FirebaseAuth.getInstance().getUid())
-                    ? R.layout.item_from_mensaje
-                    : R.layout.item_to_mensajes;
+                    ? R.layout.item_to_mensajes
+                    : R.layout.item_from_mensaje;
         }
     }
 }

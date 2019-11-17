@@ -218,7 +218,7 @@ cargarPreferencias();
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/auth/cita";
+        String url=ip+"/api/cita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

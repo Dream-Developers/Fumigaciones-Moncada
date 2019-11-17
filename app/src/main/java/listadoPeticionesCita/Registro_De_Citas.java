@@ -1,10 +1,9 @@
-package com.example.fumigacionesmoncada;
+package listadoPeticionesCita;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
@@ -25,12 +24,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.example.fumigacionesmoncada.ui.citas.Citas;
-import com.example.fumigacionesmoncada.ui.citas.Citas_Adapter;
-import com.example.fumigacionesmoncada.ui.citas.Crear_Citas;
-import com.example.fumigacionesmoncada.ui.solicitarCita.CitaVO;
-import com.example.fumigacionesmoncada.ui.solicitarCita.CitasAdapter;
+import com.example.fumigacionesmoncada.ClaseVolley;
+import com.example.fumigacionesmoncada.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

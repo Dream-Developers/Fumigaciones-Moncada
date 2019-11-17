@@ -1,4 +1,4 @@
-package com.example.fumigacionesmoncada;
+package listadoPeticionesCita;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+
+import com.example.fumigacionesmoncada.R;
 
 import java.util.ArrayList;
 
@@ -51,18 +52,18 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
         estado.setText(citas.getEstado());
         if(estado.getText() == "1"){
             estado.setText("Pendiente");
-            relativeLayout1.setBackgroundColor(Color.parseColor("#46A7AA"));
+            relativeLayout1.setBackgroundColor(Color.parseColor("#81D4FA"));
         }else{
         if(estado.getText() == "2"){
             estado.setText("Aceptado");
-            relativeLayout1.setBackgroundColor(Color.parseColor("#D3BB5B"));
+            relativeLayout1.setBackgroundColor(Color.parseColor("#C5E1A5"));
         } else{if(estado.getText() == "3"){
             estado.setText("Cancelado");
-            relativeLayout1.setBackgroundColor(Color.parseColor("#D3AB7B"));
+            relativeLayout1.setBackgroundColor(Color.parseColor("#FFCC80"));
         }else{
         if(estado.getText() == "4"){
             estado.setText("Rechazado");
-            relativeLayout1.setBackgroundColor(Color.parseColor("#993839"));
+            relativeLayout1.setBackgroundColor(Color.parseColor("#FFAB91"));
         }}}}
 
         return convertView;

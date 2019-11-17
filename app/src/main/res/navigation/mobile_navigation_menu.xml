@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_acerca_de" />
     <fragment
         android:id="@+id/nav_registro_citas"
-        android:name="com.example.fumigacionesmoncada.Registro_De_Citas"
+        android:name="listadoPeticionesCita.Registro_De_Citas"
         android:label="@string/menu_registro_cita"
         tools:layout="@layout/fragment_registro__de__citas" />
 </navigation>

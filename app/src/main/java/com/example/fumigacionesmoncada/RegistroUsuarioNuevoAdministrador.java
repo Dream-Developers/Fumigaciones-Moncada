@@ -1,5 +1,11 @@
 package com.example.fumigacionesmoncada;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -36,27 +42,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import androidx.annotation.NonNull;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -72,8 +60,8 @@ import java.util.regex.Pattern;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
-public class RegistarUsuarioNuevo extends AppCompatActivity{
     EditText nombre,contraseña,correo,confcontra, telefono , apellidos;
     TextView col;
     Button registrar;
@@ -94,6 +82,8 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     private static final int COD_FOTO = 20;
     String sexo;
     //Firebase
+    String imagen;
+    int a = 1;
     private Button mBtnSelectedPhoto;
     private ImageView imgFoto;
     private Uri miPath;
@@ -101,7 +91,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro_usuario_nuevo);
+        setContentView(R.layout.activity_registro_usuario_nuevo_administrador);
         confcontra =  findViewById(R.id.comprobacion_contraseña);
         nombre =  findViewById(R.id.registro_nombres);
         correo = findViewById(R.id.registro_correo);
@@ -112,9 +102,8 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         masculino = findViewById(R.id.maculino);
         femenino = findViewById(R.id.femenino);
         request = Volley.newRequestQueue(this);
-
-
         imgFoto = findViewById(R.id.foto);
+
 
         imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +117,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    validacion();
+                validacion();
 
             }
         });
@@ -142,6 +131,24 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         apellidos.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         telefono.setSingleLine(false);
         telefono.setInputType(InputType.TYPE_CLASS_PHONE | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
+
+        correo.setText("example"+a+"@gamil.com");
+        confcontra.setText("12345678");
+        contraseña.setText("12345678");
+        contraseña.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "La contraseña por defecto es del 1 al 8", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        confcontra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "La contraseña por defecto es del 1 al 8", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
     private void mostrarDialogOpciones() {
@@ -409,13 +416,21 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         if (femenino.isChecked()) {
             sexo = "F";
         }
-        String imagen = convertirImgString(bitmap);
+
+        if (bitmap == null){
+            imagen = null;
+        }else{
+         imagen = convertirImgString(bitmap);
+        }
+
+
         String ip=getString(R.string.ip);
 
         String url=ip+"/api/auth/signup?";
         try {
 
             JSONObject parametros = new JSONObject();
+
             parametros.put("name", nombre.getText().toString());
             parametros.put("recidencia", apellidos.getText().toString());
             parametros.put("telefono", telefono.getText().toString());
@@ -423,50 +438,53 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
             parametros.put("password", contraseña.getText().toString());
             parametros.put("password_confirmation", confcontra.getText().toString());
             parametros.put("sexo", sexo);
-            parametros.put("foto", imagen);
+            if (imagen == null){
+                parametros.put("foto", null);
+            }else{
+            parametros.put("foto", imagen);}
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                progreso.dismiss();
-                finish();
-                Toast.makeText(RegistarUsuarioNuevo.this, "Se regsiro correctamente ", Toast.LENGTH_SHORT).show();
-        }}, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progreso.hide();
-                if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-                } if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-                }
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    progreso.dismiss();
+                    finish();
+                    Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se regsiro correctamente ", Toast.LENGTH_SHORT).show();
+                }}, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progreso.hide();
+                    if (error.toString().equals("com.android.volley.ServerError")) {
+                        Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    } if (error.toString().equals("com.android.volley.TimeoutError")) {
+                        Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    }
                     if (error.toString().equals("com.android.volley.ClientError")) {
-                    Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "No se pudo registar ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No se pudo registar ", Toast.LENGTH_LONG).show();
 
+                    }
                 }
-            }
 
-        }){
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("Content-Type", "application/json");
-                parametros.put("X-Requested-With", "XMLHttpRequest");
+            }){
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<>();
+                    parametros.put("Content-Type", "application/json");
+                    parametros.put("X-Requested-With", "XMLHttpRequest");
 
-                return parametros;
-            }
+                    return parametros;
+                }
 
-        };
-        ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+            };
+            ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
-        //request.add(stringRequest);
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-    } catch(Exception exe){
-        Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
+            //request.add(stringRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+        } catch(Exception exe){
+            Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
-}
     private void validacion() {
         if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
                 || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
@@ -482,13 +500,10 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
                         if (!validarEmail(correo.getText().toString())) {
                             Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
                         } else {
-                            if(bitmap == null ){
-                                Toast.makeText(this, "Ingrese la fotografia", Toast.LENGTH_SHORT).show();
-                            }else{
 
-                            cargarWebService();
-                                createUser();
-                        }
+                                cargarWebService();
+                                a++;
+
                         }
 
 
@@ -508,118 +523,13 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     }
 
 
-    /**
-     * Metodos para la authentificacion de firebase
-     *
-     * **/
 
 
 
 
-    private void selectPhoto() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, 0);
-    }
 
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0) {
-            mSelectedUri = data.getData();
-
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
-                imgFoto.setImageDrawable(new BitmapDrawable(bitmap));
-                mBtnSelectedPhoto.setAlpha(0);
-            } catch (IOException e) {
-            }
-        }
-
-    }*/
-
-    private void createUser() {
-        String name = nombre.getText().toString();
-        String email = correo.getText().toString();
-        String contra = contraseña.getText().toString();
-
-        if (name == null || name.isEmpty() || email == null || email.isEmpty() || contra == null || contra.isEmpty()) {
-          //  Toast.makeText(this, "Al menos un campo vacio", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, contra)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("Teste", task.getResult().getUser().getUid());
-
-                            saveUserInFirebase();
-                        }
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i("Teste", e.getMessage());
-                    }
-                });
-    }
-
-    private void saveUserInFirebase() {
-        String filename = UUID.randomUUID().toString();
-        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
-        ref.putFile(miPath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Log.i("Teste", uri.toString());
-
-                                String uid = FirebaseAuth.getInstance().getUid();
-                                String username = nombre.getText().toString();
-                                String profileUrl = uri.toString();
-
-                                User user = new User(uid, username, profileUrl);
-
-                                FirebaseFirestore.getInstance().collection("users")
-                                        .document(uid)
-                                        .set(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Intent intent = new Intent(RegistarUsuarioNuevo.this, LoginActivity.class);
-
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                                startActivity(intent);
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.i("Teste", e.getMessage());
-                                            }
-                                        });
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Teste", e.getMessage(), e);
-                    }
-                });
-
-    }
 
 
 }
+
 

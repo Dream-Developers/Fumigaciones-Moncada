@@ -83,13 +83,13 @@
                     />
 
                 <EditText
+                    android:digits="0123456789."
+                    android:inputType="phone"
                     android:id="@+id/registro_telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/baseline_phone_in_talk_white_18dp"
                     android:hint="  Telefono"
-                    android:inputType="number"
-                    android:lines="1"
                     android:maxLength="8"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
@@ -168,7 +168,6 @@
                     />
 
             </LinearLayout>
-
         </ScrollView>
     </androidx.cardview.widget.CardView>
 

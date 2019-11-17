@@ -83,7 +83,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     String sexo;
     //Firebase
     String imagen;
-    int a = 1;
+    int a = 0;
     private Button mBtnSelectedPhoto;
     private ImageView imgFoto;
     private Uri miPath;
@@ -104,7 +104,6 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         request = Volley.newRequestQueue(this);
         imgFoto = findViewById(R.id.foto);
 
-
         imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,20 +118,24 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             public void onClick(View v) {
                 validacion();
 
+
             }
         });
+
 
 
         nombre.setSingleLine(false);
         nombre.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         correo.setSingleLine(false);
-        correo.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
+        correo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         apellidos.setSingleLine(false);
         apellidos.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         telefono.setSingleLine(false);
         telefono.setInputType(InputType.TYPE_CLASS_PHONE | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
 
-        correo.setText("example"+a+"@gamil.com");
+        correo.setText("example"+a+"@gmail.com");
+        a++;
+
         confcontra.setText("12345678");
         contraseña.setText("12345678");
         contraseña.setOnClickListener(new View.OnClickListener() {
@@ -502,7 +505,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                         } else {
 
                                 cargarWebService();
-                                a++;
+
 
                         }
 

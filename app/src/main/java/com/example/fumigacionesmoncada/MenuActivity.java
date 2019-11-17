@@ -1,10 +1,13 @@
 package com.example.fumigacionesmoncada;
 
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -63,7 +66,29 @@ public class MenuActivity extends AppCompatActivity {
 
 
     public void red_user(MenuItem item) {
-        logout();
+        alertaCerrarSesionUsuario();
+    }
+
+
+    public void alertaCerrarSesionUsuario() {
+        new AlertDialog.Builder(MenuActivity.this)
+                .setTitle("Confirmación")
+                .setMessage("¿Estás seguro que quieres cerrar sesión?")
+                .setIcon(R.drawable.baseline_error_black_24dp)
+                .setPositiveButton("SI",
+                        new DialogInterface.OnClickListener() {
+                            @TargetApi(11)
+                            public void onClick(DialogInterface dialog, int id) {
+                                logout();
+                                dialog.cancel();
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @TargetApi(11)
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).show();
     }
 
     private void logout() {

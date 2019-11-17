@@ -50,19 +50,19 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
 
 
         estado.setText(citas.getEstado());
-        if(estado.getText() == "1"){
-            estado.setText("Pendiente");
+        if(estado.getText() == "Pendiente"){
+
             relativeLayout1.setBackgroundColor(Color.parseColor("#81D4FA"));
         }else{
-        if(estado.getText() == "2"){
-            estado.setText("Aceptado");
+        if(estado.getText() == "Aceptado"){
+
             relativeLayout1.setBackgroundColor(Color.parseColor("#C5E1A5"));
-        } else{if(estado.getText() == "3"){
-            estado.setText("Cancelado");
+        } else{if(estado.getText() == "Cancelado"){
+
             relativeLayout1.setBackgroundColor(Color.parseColor("#FFCC80"));
         }else{
-        if(estado.getText() == "4"){
-            estado.setText("Rechazado");
+        if(estado.getText() == "Rechazado"){
+
             relativeLayout1.setBackgroundColor(Color.parseColor("#FFAB91"));
         }}}}
 

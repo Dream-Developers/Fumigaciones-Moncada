@@ -13,10 +13,14 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +49,7 @@ import java.util.Map;
  * Use the {@link Registro_De_Citas#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Registro_De_Citas extends Fragment {
+public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTextListener{
 
 
     ListView lista_citas;
@@ -147,6 +152,15 @@ public class Registro_De_Citas extends Fragment {
         builder.show();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menuprueba, menu);
+        MenuItem item = menu.findItem(R.id.buscar);
+
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+    }
     private void eliminarCitaWebService(String id,String Estado, final int position) {
         progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando datos...");
@@ -232,6 +246,16 @@ public class Registro_De_Citas extends Fragment {
                         citas.setFecha(object.getString("FechaFumigacion"));
                         citas.setHora(object.getString("Hora"));
                         citas.setEstado(object.getString("Estado_id"));
+                        if (citas.getEstado()=="1"){
+                            citas.setEstado("Pendiente");
+                        }
+                        if (citas.getEstado()=="2"){
+                            citas.setEstado("Aceptado");
+                        } if (citas.getEstado()=="3"){
+                            citas.setEstado("Cancelado");
+                        } if (citas.getEstado()=="4"){
+                            citas.setEstado("Rechazado");
+                        }
                         citas.setId(object.getString("id"));
 
                         cita.add(citas);
@@ -276,6 +300,52 @@ public class Registro_De_Citas extends Fragment {
         };
 
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
+
+    }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if (!(citasAdapter == null)) {
+            ArrayList<Citas_Peticiones> listaClientes = null;
+            try {
+                listaClientes = filtrarDatosDeptos(cita, s.trim());
+                citasAdapter.filtrar(listaClientes);
+                citasAdapter.notifyDataSetChanged();
+
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "" + listaClientes, Toast.LENGTH_SHORT).show();
+
+            }
+            return true;
+
+
+        }
+        return false;
+    }
+    private ArrayList<Citas_Peticiones> filtrarDatosDeptos(ArrayList<Citas_Peticiones> listaTarea, String dato) {
+        ArrayList<Citas_Peticiones> listaFiltradaPermiso = new ArrayList<>();
+        try{
+            dato = dato.toLowerCase();
+            for(Citas_Peticiones permisos: listaTarea){
+                String nombre = permisos.getEstado().toLowerCase().trim();
+
+
+
+                if(nombre.toLowerCase().contains(dato)) {
+                    listaFiltradaPermiso.add(permisos);
+                }
+            }
+            citasAdapter.filtrar(listaFiltradaPermiso);
+        }catch (Exception e){
+            Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
+        }
+
+        return listaFiltradaPermiso;
 
     }
 

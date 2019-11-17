@@ -30,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,7 +113,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Citas_Peticiones citas = (Citas_Peticiones) parent.getItemAtPosition(position);
-                eliminarCitas(citas, position);
+                CancelarCitas(citas, position);
                 return true;
             }
         });
@@ -125,14 +124,14 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         return view;
     }
 
-    private void eliminarCitas(final Citas_Peticiones cit, final int position) {
+    private void CancelarCitas(final Citas_Peticiones cit, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirmacion");
         builder.setMessage("Esta seguro que desea Cancelar la Peticion de cita");
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                eliminarCitaWebService(cit.getId(),cit.getEstado(), position);
+                CancelarCitaWebService(cit.getId(),cit.getEstado(), position);
 
             }
         });
@@ -161,12 +160,12 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
     }
-    private void eliminarCitaWebService(String id,String Estado, final int position) {
+    private void CancelarCitaWebService(String id, String Estado, final int position) {
         progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando datos...");
         progreso.show();
 
-        if (Estado == "1"){
+        if (Estado == "Pendiente"){
         try {
             String ip = getString(R.string.ip);
             String url = ip + "/api/peticionesCitas/" + id + "/update";

@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
+import com.example.fumigacionesmoncada.RegistroUsuarioNuevoAdministrador;
 import com.example.fumigacionesmoncada.ui.citas.Citas;
 import com.example.fumigacionesmoncada.ui.citas.Citas_Adapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -79,7 +80,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
         addCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RegistarUsuarioNuevo.class);
+                Intent intent = new Intent(getActivity(), RegistroUsuarioNuevoAdministrador.class);
                 startActivity(intent);
             }
         });

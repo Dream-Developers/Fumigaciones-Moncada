@@ -74,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
         new AlertDialog.Builder(MenuActivity.this)
                 .setTitle("Confirmación")
                 .setMessage("¿Estás seguro que quieres cerrar sesión?")
-                .setIcon(R.drawable.baseline_error_black_24dp)
+                .setIcon(R.drawable.logofm)
                 .setPositiveButton("SI",
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)

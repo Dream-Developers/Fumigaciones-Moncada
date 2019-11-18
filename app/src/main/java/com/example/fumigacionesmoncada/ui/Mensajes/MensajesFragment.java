@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,8 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fumigacionesmoncada.ChatActivity;
 import com.example.fumigacionesmoncada.Contactos;
 import com.example.fumigacionesmoncada.ContactsActivity;
+import com.example.fumigacionesmoncada.LoginActivity;
 import com.example.fumigacionesmoncada.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -48,6 +52,16 @@ public class MensajesFragment extends Fragment {
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull Item item, @NonNull View view) {
+
+                Toast.makeText(getContext(), "Gracias por darle click, aun no funciona", Toast.LENGTH_LONG).show();
+                //Intent intent = new Intent(getActivity(), ContactsActivity.class);
+                //startActivity(intent);
+            }
+        });
 
 
         add_chat = view.findViewById(R.id.add_chat);
@@ -71,7 +85,7 @@ public class MensajesFragment extends Fragment {
     private void searchLastMensaje() {
 
         String uid = FirebaseAuth.getInstance().getUid();
-        //if (uid == null) return;
+        if (uid == null) return;
 
 
         FirebaseFirestore.getInstance().collection("/last-messages")

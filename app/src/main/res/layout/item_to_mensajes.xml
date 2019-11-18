@@ -22,9 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/bg_edittext_rounded"
+        android:background="@drawable/bg_edittext_rounded_blue"
         android:maxWidth="240dp"
         android:padding="8dp"
+        android:textColor="#fff"
         android:text="Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice. Somos felices, Dios nos bendice. "
         app:layout_constraintEnd_toStartOf="@+id/img_message_user"
         app:layout_constraintTop_toTopOf="@+id/img_message_user" />

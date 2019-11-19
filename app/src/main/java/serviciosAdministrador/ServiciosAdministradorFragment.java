@@ -94,6 +94,7 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirmación");
         builder.setMessage("¿Está seguro que desea eliminar la imágen?");
+        builder.setIcon(R.drawable.logofm);
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

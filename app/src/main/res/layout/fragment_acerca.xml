@@ -33,23 +33,24 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="151dp"
-            android:layout_marginLeft="151dp"
+            android:layout_marginStart="189dp"
+            android:layout_marginLeft="189dp"
             android:layout_marginTop="245dp"
             android:text="Propietario"
             android:textColor="#ffff"
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="320dp"
-            android:layout_height="82dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="61dp"
-            android:layout_marginRight="61dp"
-            android:layout_marginBottom="365dp"
-            tools:srcCompat="@drawable/propietario" />
+            android:id="@+id/propietario"
+            android:layout_width="match_parent"
+            android:layout_height="163dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="260dp"
+            android:layout_marginEnd="25dp"
+            android:layout_weight="65"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/propietario" />
 
 
         <TextView

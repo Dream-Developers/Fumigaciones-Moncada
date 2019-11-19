@@ -144,7 +144,7 @@
         android:background="@drawable/oval"
         android:onClick="botonAceptar"
         android:text="ACEPTAR"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/btnRechazar"
@@ -160,7 +160,7 @@
         android:lineSpacingExtra="45dp"
         android:onClick="botonRechazar"
         android:text="RECHAZAR"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
 
 </RelativeLayout>

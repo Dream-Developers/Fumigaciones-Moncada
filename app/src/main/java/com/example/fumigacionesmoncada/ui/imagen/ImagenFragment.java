@@ -81,8 +81,8 @@ public class ImagenFragment extends Fragment {
     private static final int COD_FOTO = 20;
 
     EditText campoNombre, campoDescripcion;
-    Button botonSubir;
-    private ImageView imgFoto;
+    Button botonSubir, btnFoto;
+    ImageView imgFoto;
     ProgressDialog progreso;
 
     RelativeLayout layoutSubir;//permisos
@@ -131,8 +131,9 @@ public class ImagenFragment extends Fragment {
 
         View vista = inflater.inflate(R.layout.fragment_imagen, container, false);
         campoNombre = vista.findViewById(R.id.campoNombre);
-        campoDescripcion = vista.findViewById(R.id.campoDescrpcion);
+        campoDescripcion = vista.findViewById(R.id.campoDescripcion);
         botonSubir = vista.findViewById(R.id.btnSubir);
+        imgFoto = vista.findViewById(R.id.imgFoto);
 
         imgFoto = vista.findViewById(R.id.imgFoto);
 
@@ -203,7 +204,7 @@ public class ImagenFragment extends Fragment {
 
 
     private void abrirCamara() {
-        //Capturar la imagen desde la camara
+        //Capturar la imagen del empleado desde la camara
 
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -232,7 +233,7 @@ public class ImagenFragment extends Fragment {
 
 
             //se agrega la imagen capturada al archivo en blanco
-            Uri photoUri = FileProvider.getUriForFile(getContext(), "com.permisosunahtec.android.fileprovider", pictureFile);
+            Uri photoUri = FileProvider.getUriForFile(getContext(), "com.FumigacioneSMoncada.android.fileprovider", pictureFile);
             inten.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
             startActivityForResult(inten, TOMARFOTO);
@@ -451,7 +452,6 @@ public class ImagenFragment extends Fragment {
                 Log.i("mensaje",response);
                 campoNombre.setText("");
                 campoDescripcion.setText("");
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -514,6 +514,9 @@ public class ImagenFragment extends Fragment {
     }
 
 
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -529,6 +532,7 @@ public class ImagenFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
+
 
 
 }

@@ -47,6 +47,7 @@ public class SolicitarCitaFragment extends Fragment {
     ArrayList<CitaVO> cita;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -55,7 +56,27 @@ public class SolicitarCitaFragment extends Fragment {
         cita = new ArrayList<>();
         lista.setAdapter(new CitasAdapter(getContext(),cita));
         lista.setVisibility(View.VISIBLE);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CitaVO citaVO = (CitaVO) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getContext(), Detalle_Cita.class);
+                intent.putExtra("id",citaVO.getId());
+                startActivity(intent);
 
+                lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        CitaVO citaVO1 = (CitaVO) parent.getItemAtPosition(position);
+
+
+                        return true;
+                    }
+                });
+
+
+            }
+        });
 
 
         cargarCitas();
@@ -70,7 +91,7 @@ public class SolicitarCitaFragment extends Fragment {
     private void cargarCitas() {
 
         String ip = getString(R.string.ip);
-        String url = ip + "/api/peticionesCitas";
+        String url = ip + "/api/peticion/recuperar";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override

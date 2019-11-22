@@ -81,13 +81,14 @@ public class ImagenFragment extends Fragment {
     private static final int COD_FOTO = 20;
 
     EditText campoNombre, campoDescripcion;
-    Button botonSubir, btnFoto;
+    Button botonSubir;
     ImageView imgFoto;
     ProgressDialog progreso;
 
     RelativeLayout layoutSubir;//permisos
     private File imgFile;
     private int orientation;
+    private Uri uri;
 
     // RequestQueue request;
     //JsonObjectRequest jsonObjectRequest;
@@ -135,7 +136,6 @@ public class ImagenFragment extends Fragment {
         botonSubir = vista.findViewById(R.id.btnSubir);
         imgFoto = vista.findViewById(R.id.imgFoto);
 
-        imgFoto = vista.findViewById(R.id.imgFoto);
 
 
         layoutSubir = vista.findViewById(R.id.idLayoutSubir);
@@ -184,7 +184,7 @@ public class ImagenFragment extends Fragment {
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                public void onClick(DialogInterface dialogInterface, int i) {
                 if (opciones[i].equals("Tomar Foto")) {
                     abrirCamara();
                 } else {
@@ -233,7 +233,7 @@ public class ImagenFragment extends Fragment {
 
 
             //se agrega la imagen capturada al archivo en blanco
-            Uri photoUri = FileProvider.getUriForFile(getContext(), "com.FumigacioneSMoncada.android.fileprovider", pictureFile);
+            Uri photoUri = FileProvider.getUriForFile(getContext(), "com.permisosunahtec.android.fileprovider", pictureFile);
             inten.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
             startActivityForResult(inten, TOMARFOTO);

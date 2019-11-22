@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -443,7 +444,7 @@ public class ImagenFragment extends Fragment {
         String ip = getString(R.string.ip);
         String url = ip + "/api/servicio";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -452,6 +453,8 @@ public class ImagenFragment extends Fragment {
                 Log.i("mensaje",response);
                 campoNombre.setText("");
                 campoDescripcion.setText("");
+                Drawable drawable = null;
+                imgFoto.setImageDrawable(drawable);
             }
         }, new Response.ErrorListener() {
             @Override

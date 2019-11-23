@@ -62,15 +62,15 @@
                 />
             <Button
                 android:id="@+id/guardarcambios"
-                android:layout_width="140dp"
-                android:layout_height="35dp"
-                android:text="Guardar"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Adquir Servicios"
+                android:onClick="adquiiirServicio"
                 android:background="@drawable/oval"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
                 android:textStyle="normal|bold"
                 android:layout_marginTop="25dp"
-                android:textSize="20dp"
                 android:layout_gravity="center">
             </Button>
         </LinearLayout>

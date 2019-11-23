@@ -34,7 +34,7 @@
     <string name="publicidad">Publicidad</string>
 
 
-    <string name="ip">http://192.168.0.105</string>
+    <string name="ip">http://192.168.2.24</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>

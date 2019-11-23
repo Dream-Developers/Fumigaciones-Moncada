@@ -19,8 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.fumigacionesmoncada.AdquirirServicioActivity;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,7 @@ public class DetalleImagenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_imagen);
+        setTitle("Detalle Servicio");
          titulo = findViewById(R.id.tituloImagenD);
          descripcion= findViewById(R.id.descripcionImagenD);
          imagen= findViewById(R.id.idImagenD);
@@ -102,4 +105,8 @@ public class DetalleImagenActivity extends AppCompatActivity {
     }
 
 
+    public void adquiiirServicio(View view) {
+        Intent i = new Intent(getApplication(), AdquirirServicioActivity.class);
+        startActivity(i);
+    }
 }

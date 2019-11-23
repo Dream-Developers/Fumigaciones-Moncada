@@ -78,7 +78,6 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
                 Intent intent = new Intent(getContext(), DetalleServicioAdministradorActivity.class);
                 intent.putExtra("id",serviciosVO.getId());
                 startActivity(intent);
-
             }
 
             @Override

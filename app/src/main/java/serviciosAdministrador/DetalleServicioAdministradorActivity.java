@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,11 +22,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 
@@ -39,6 +43,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+
 import static android.Manifest.permission.CAMERA;
 
 import org.json.JSONException;
@@ -49,6 +54,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 
@@ -78,9 +86,9 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_servicio_administrador);
         titulo = findViewById(R.id.tituloImagenDA);
-        descripcion= findViewById(R.id.descripcionImagenDA);
-        imagen= findViewById(R.id.idImagenDA);
-        guardarCambios=findViewById(R.id.guardarcambios);
+        descripcion = findViewById(R.id.descripcionImagenDA);
+        imagen = findViewById(R.id.idImagenDA);
+        guardarCambios = findViewById(R.id.guardarcambios);
         id = getIntent().getStringExtra("id");
         cargarPreferencias();
         cargarImagenWeb(id);
@@ -101,32 +109,32 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
     }
 
 
-    public void actualizar_datos(final String id){
+    public void actualizar_datos(final String id) {
 
         try {
-            if(titulo.getText().toString().trim().equals("")
-                    || descripcion.getText().toString().trim().equals("")){
-                Toast.makeText(this,"Todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
+            if (titulo.getText().toString().trim().equals("")
+                    || descripcion.getText().toString().trim().equals("")) {
+                Toast.makeText(this, "Todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
 
 
-            } else  {
+            } else {
                 {
 
-                }  {
+                }
+                {
                     progreso = new ProgressDialog(this);
                     progreso.setMessage("Cargando datos...");
                     progreso.show();
 
                     String ip = getString(R.string.ip);
-                    String url  = ip+ "/api/servicios/"+id+"/update" ;
+                    String url = ip + "/api/servicios/" + id + "/update";
+                    String foto = convertirImgString(bitmap);
 
 
                     JSONObject parametros = new JSONObject();
                     parametros.put("nombre", titulo.getText().toString());
-                    parametros.put("descripcion",descripcion.getText().toString());
-
-
-
+                    parametros.put("descripcion", descripcion.getText().toString());
+                    parametros.put("foto", foto);
 
 
                     jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
@@ -134,7 +142,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             progreso.dismiss();
                             try {
-                                Toast.makeText(getApplicationContext(), ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -143,15 +151,15 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), ""+error.toString(), Toast.LENGTH_SHORT).show();
-                            Log.d("volley", "onErrorResponse: "+error.networkResponse);
+                            Toast.makeText(getApplicationContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
+                            Log.d("volley", "onErrorResponse: " + error.networkResponse);
                         }
-                    }){
+                    }) {
 
                         public Map<String, String> getHeaders() throws AuthFailureError {
-                            Map<String,String> parametros = new HashMap<>();
-                            parametros.put("Content-Type","application/json");
-                            parametros.put("X-Requested-With","XMLHttpRequest");
+                            Map<String, String> parametros = new HashMap<>();
+                            parametros.put("Content-Type", "application/json");
+                            parametros.put("X-Requested-With", "XMLHttpRequest");
 
                             return parametros;
                         }
@@ -159,11 +167,10 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                     ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
                 }
             }
-        } catch (Exception exe){
-            Toast.makeText(getApplicationContext(),exe.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception exe) {
+            Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     private void cargarPreferencias() {
@@ -173,9 +180,9 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
     }
 
     private void cargarImagenWeb(final String id) {
-        String ip=getString(R.string.ip);
+        String ip = getString(R.string.ip);
 
-        String url = ip+"/api/imagen/"+id+"/mostrar";
+        String url = ip + "/api/imagen/" + id + "/mostrar";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -200,7 +207,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                 Toast.makeText(DetalleServicioAdministradorActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
 
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -208,7 +215,8 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
 
                 return params;
-            }};
+            }
+        };
 
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
 
@@ -216,16 +224,15 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
     }
 
 
-
-
     private void cargarImagen(String foto) {
         String ip = getResources().getString(R.string.ip);
-        String url = ip+"/imagen/"+foto;
+        String url = ip + "/imagen/" + foto;
         ImageLoader imageLoader = ClaseVolley.getIntanciaVolley(this).getImageLoader();
 
-        imagen.setImageUrl(url,imageLoader);
+        imagen.setImageUrl(url, imageLoader);
 
     }
+
     private void mostrarDialogOpciones() {
         final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -237,9 +244,8 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                     abrirCamara();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
-                        Intent intent = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        intent.setType("image/");
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
                         startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
                     } else {
                         dialogInterface.dismiss();
@@ -249,11 +255,12 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
     private void abrirCamara() {
         //Capturar la imagen desde la camara
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(DetalleServicioAdministradorActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -287,6 +294,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
         }
     }
+
     private File getPictureFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String pictureFile = "Servicio" + timeStamp;
@@ -297,6 +305,34 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
         return imagen;
     }
+
+    public static String getRealPathFromDocumentUri(Context context, Uri uri) {
+        String filePath = "";
+
+        Pattern p = Pattern.compile("(\\d+)$");
+        Matcher m = p.matcher(uri.toString());
+        if (!m.find()) {
+            Log.e("Perfil", "ID for requested image not found: " + uri.toString());
+            return filePath;
+        }
+        String imgId = m.group();
+
+        String[] column = {MediaStore.Images.Media.DATA};
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, new String[]{imgId}, null);
+
+        int columnIndex = cursor.getColumnIndex(column[0]);
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+
+        return filePath;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -308,9 +344,29 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
+                    String rutaImagen = getRealPathFromDocumentUri(this, miPath);
+                    ExifInterface exif = new ExifInterface(rutaImagen);
+
+                    orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                    switch (orientation) {
+
+                        case ExifInterface.ORIENTATION_ROTATE_270:
+                            bitmap = rotateImage(this, bitmap, 270);
+                            break;
+
+                        case ExifInterface.ORIENTATION_ROTATE_180:
+                            bitmap = rotateImage(this, bitmap, 180);
+                            break;
+
+                        case ExifInterface.ORIENTATION_ROTATE_90:
+                            bitmap = rotateImage(this, bitmap, 90);
+                            break;
+                    }
+
                     imagen.setImageBitmap(bitmap);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.i("error", "" + e.getMessage());
                 }
 
                 break;
@@ -361,6 +417,16 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
         }
     }
 
+    private String convertirImgString(Bitmap bitmap) {
+
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return imagenString;
+    }
+
     public static Bitmap rotateImage(Context context, Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         try {
@@ -376,8 +442,6 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
         }
         return source;
     }
-
-
 
 
     @Override
@@ -449,11 +513,11 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                 if (opciones[i].equals("si")) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    Uri uri = Uri.fromParts("package",getPackageName(), null);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext() , "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }

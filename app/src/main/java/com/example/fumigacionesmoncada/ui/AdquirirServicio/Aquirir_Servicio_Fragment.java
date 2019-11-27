@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -57,6 +59,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
     private Aquirir_Servicio_ViewModel servicioViewModel;
     private EditText mostrarNombre, mostrarDireccion, mostraraTelefono;
     private EditText Hora;
+    private Spinner mostrarservicion;
     String tokenUsuario;
     private Button pedir;
 
@@ -74,6 +77,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
 
         mostrarNombre = (EditText) view.findViewById(R.id.nombres);
+        mostrarservicion = (Spinner) view.findViewById(R.id.servicio);
         mostrarDireccion = (EditText) view.findViewById(R.id.direccion);
         mostraraTelefono = (EditText) view.findViewById(R.id.telefono);
         Hora = (EditText) view.findViewById(R.id.hora);
@@ -94,6 +98,11 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
             }
         });
         cargarClienteWeb();
+
+
+        String [] opciones = {"Inceptos","Roedores"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item,opciones);
+        mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +163,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/auth/peticioncita";
+        String url=ip+"/api/peticioncita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -192,6 +201,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                 parametros.put("Telefono",mostraraTelefono.getText().toString());
                 parametros.put("FechaFumigacion",fecha.getText().toString());
                 parametros.put("Hora",Hora.getText().toString());
+                parametros.put("Servicio",mostrarservicion.getSelectedItem().toString());
                 parametros.put("User_id",Usuario_id);
 
                 return parametros;
@@ -252,7 +262,6 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
 
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), "sinoda." + e, Toast.LENGTH_LONG).show();
                         }
 
                     }

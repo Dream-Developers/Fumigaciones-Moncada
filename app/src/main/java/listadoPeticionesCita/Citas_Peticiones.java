@@ -7,6 +7,15 @@ public class Citas_Peticiones {
     private String fecha;
     private String hora;
     private String estado;
+    private String servicio;
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
+    }
 
     public String getEstado() {
         return estado;

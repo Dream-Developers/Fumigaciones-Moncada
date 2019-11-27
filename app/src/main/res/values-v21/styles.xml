@@ -4,5 +4,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
+    <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
+
+        <item name="android:textColor">@color/common_google_signin_btn_text_dark_pressed </item>
+        <item name="android:textSize">25dp </item>
+    </style>
+
 </resources>

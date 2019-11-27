@@ -116,6 +116,24 @@
                     android:maxLength="8"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="¿Que Plaga Desea Fumigar?"
+
+                    android:textColor="#fff"
+                    android:textSize="25dp" />
+
+                <Spinner
+
+                    android:id="@+id/servicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/rectangulo_blanco"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

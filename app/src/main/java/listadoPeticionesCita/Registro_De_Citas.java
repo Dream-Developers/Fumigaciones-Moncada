@@ -200,6 +200,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
                     Map<String, String> parametros = new HashMap<>();
                     parametros.put("Content-Type", "application/json");
                     parametros.put("X-Requested-With", "XMLHttpRequest");
+                    parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
 
                     return parametros;
                 }
@@ -244,6 +245,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
                         citas.setDireccion(object.getString("Direccion"));
                         citas.setFecha(object.getString("FechaFumigacion"));
                         citas.setHora(object.getString("Hora"));
+                        citas.setServicio(object.getString("Servicio"));
                         citas.setEstado(object.getString("Estado_id"));
                         if (citas.getEstado()=="1"){
                             citas.setEstado("Pendiente");

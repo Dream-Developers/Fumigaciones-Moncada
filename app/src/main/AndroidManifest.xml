@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fumigacionesmoncada">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdquirirServicioActivity"></activity>
+        <activity android:name="factura.crearFactura"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:label="@string/title_activity_menu"
+            ></activity>
+        <activity android:name=".AdquirirServicioActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name="serviciosAdministrador.DetalleServicioAdministradorActivity" />
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
@@ -29,7 +39,9 @@
         <activity
             android:name=".PasswordReset"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.citas.Crear_Citas" />
+        <activity android:name=".ui.citas.Crear_Citas"
+            android:label="@string/factura"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".NavegacionAdministradorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -79,11 +91,5 @@
                 android:resource="@xml/authenticator" />
         </service>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

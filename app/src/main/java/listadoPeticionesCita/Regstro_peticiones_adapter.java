@@ -2,20 +2,30 @@ package listadoPeticionesCita;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.fumigacionesmoncada.R;
 
 import java.util.ArrayList;
+
+import static com.example.fumigacionesmoncada.R.drawable.cancelado_peticion;
+import static com.example.fumigacionesmoncada.R.drawable.pendiente;
+import static com.example.fumigacionesmoncada.R.drawable.realizado_icon;
+import static com.example.fumigacionesmoncada.R.drawable.rechazdo;
+
 
 public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
     private ListView lista_citas;
@@ -27,6 +37,7 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -38,7 +49,9 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
         TextView hora = convertView.findViewById(R.id.mostrarcita);
         TextView estado = convertView.findViewById(R.id.mosstarestado);
         TextView direccion = convertView.findViewById(R.id.mosstardireccion);
-        RelativeLayout relativeLayout1=convertView.findViewById(R.id.relativeLayout1);
+        TextView servicio = convertView.findViewById(R.id.mosstarservicio);
+        ImageView logo = convertView.findViewById(R.id.icono);
+        LinearLayout relativeLayout1=convertView.findViewById(R.id.relativeLayout1);
 
 
         Citas_Peticiones citas = getItem(position);
@@ -47,23 +60,24 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
         direccion.setText(citas.getDireccion());
         fecha.setText(citas.getFecha());
         hora.setText(citas.getHora());
+        servicio.setText(citas.getServicio());
 
 
         estado.setText(citas.getEstado());
         if(estado.getText() == "Pendiente"){
+            logo.setImageResource(R.drawable.pendiente);
 
-            relativeLayout1.setBackgroundColor(Color.parseColor("#81D4FA"));
         }else{
         if(estado.getText() == "Aceptado"){
 
-            relativeLayout1.setBackgroundColor(Color.parseColor("#C5E1A5"));
+            logo.setImageResource(realizado_icon);
         } else{if(estado.getText() == "Cancelado"){
 
-            relativeLayout1.setBackgroundColor(Color.parseColor("#FFCC80"));
+            logo.setImageResource(rechazdo);
         }else{
         if(estado.getText() == "Rechazado"){
 
-            relativeLayout1.setBackgroundColor(Color.parseColor("#FFAB91"));
+            logo.setImageResource(cancelado_peticion);
         }}}}
 
         return convertView;

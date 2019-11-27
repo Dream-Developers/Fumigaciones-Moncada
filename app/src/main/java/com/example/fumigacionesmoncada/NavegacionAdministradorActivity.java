@@ -44,7 +44,8 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                 R.id.nav_serviciosadministrador,
                 R.id.nav_citas,
                 R.id.nav_solicitarCita,
-                R.id.nav_acercad)
+                R.id.nav_acercad,
+                R.id.nav_factura)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

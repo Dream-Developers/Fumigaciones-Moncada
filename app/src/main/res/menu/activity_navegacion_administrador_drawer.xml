@@ -44,6 +44,15 @@
                 android:title="@string/menu_solicitarCita" />
         </menu>
     </item>
+    <item android:title="Comprobante">
+        <menu>
+            <item
+                android:id="@+id/nav_factura"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="@string/factura" />
+        </menu>
+    </item>
+
 
     <item android:title="Información">
         <menu>

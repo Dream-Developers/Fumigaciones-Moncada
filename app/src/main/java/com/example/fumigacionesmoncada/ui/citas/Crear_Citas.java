@@ -8,7 +8,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,9 +25,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +46,7 @@ public class Crear_Citas extends AppCompatActivity {
     EditText nombre,direccion,precio;
     TextView col;
     Button registrar;
+    String id_usuario;
     String tokenUsuario;
     private static final int maximo = 20;
     private static final int minimo = 07;
@@ -60,7 +57,7 @@ public class Crear_Citas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear__citas); fecha = findViewById(R.id.registro_Fecha);
+        setContentView(R.layout.activity_crear_citas); fecha = findViewById(R.id.registro_Fecha);
         etHora = findViewById(R.id.registro_Hora);
         nombre = findViewById(R.id.registro_nombres);
         direccion = findViewById(R.id.registro_direccion);
@@ -167,6 +164,7 @@ cargarPreferencias();
     private void cargarPreferencias() {
         SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
+        id_usuario= preferences.getString("id","");
 
     }
 
@@ -258,6 +256,7 @@ cargarPreferencias();
                 parametros.put("FechaFumigacion",fecha.getText().toString());
                 parametros.put("Hora",etHora.getText().toString());
                 parametros.put("FechaProxima",fecha.getText().toString());
+                parametros.put("id_usuario",id_usuario);
                 return parametros;
 
         }

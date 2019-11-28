@@ -1,5 +1,7 @@
 package com.example.fumigacionesmoncada;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +35,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +88,16 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create channel to show notifications.
+            String channelId  = getString(R.string.default_notification_channel_id);
+            String channelName = getString(R.string.default_notification_channel_id);
+            NotificationManager notificationManager =
+                    getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+                    channelName, NotificationManager.IMPORTANCE_LOW));
+        }
+        FirebaseInstanceId.getInstance().getInstanceId();
         txtCorreo = findViewById(R.id.idCorreoLogin);
         txtContrasena = findViewById(R.id.idContraseñaLogin);
         recuperarContra = findViewById(R.id.recuperarPass);
@@ -348,8 +364,54 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", contra);
         editor.putString("rol", rol_id);
         editor.putString("id", usuario_id);
-        editor.commit();
 
+        String token_firebase = preferences.getString("token_firebase","") ;
+        guardarTokenFirebaseEnLaravel(usuario_id,token_firebase);
+        editor.apply();
+
+    }
+
+    private void guardarTokenFirebaseEnLaravel(String usuario_id, String token_firebase) {
+
+        String ip = getString(R.string.ip);
+        String url  = ip+ "/api/token_firebase" ;
+
+
+        JSONObject parametros = new JSONObject();
+
+        try {
+            parametros.put("id",usuario_id);
+            parametros.put("firebase_token",token_firebase);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                    Toast.makeText(LoginActivity.this, "Se actualizo el token firebase", Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LoginActivity.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("volley", "onErrorResponse: "+error.networkResponse);
+            }
+        }){
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                parametros.put("X-Requested-With","XMLHttpRequest");
+
+                return parametros;
+            }
+        };
+        ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void botonregistrar(View view) {

@@ -1,4 +1,4 @@
-package factura;
+package com.example.fumigacionesmoncada.factura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -126,7 +126,7 @@ public class crearFactura extends AppCompatActivity {
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/factura";
+        String url=ip+"/api/com.example.fumigacionesmoncada.factura";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

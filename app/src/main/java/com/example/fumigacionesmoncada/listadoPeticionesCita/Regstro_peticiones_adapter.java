@@ -1,4 +1,4 @@
-package listadoPeticionesCita;
+package com.example.fumigacionesmoncada.listadoPeticionesCita;
 
 import android.content.Context;
 import android.graphics.Color;

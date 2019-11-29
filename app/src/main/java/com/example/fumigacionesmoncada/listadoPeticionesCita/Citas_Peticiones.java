@@ -1,4 +1,4 @@
-package listadoPeticionesCita;
+package com.example.fumigacionesmoncada.listadoPeticionesCita;
 
 public class Citas_Peticiones {
     private String nombre;

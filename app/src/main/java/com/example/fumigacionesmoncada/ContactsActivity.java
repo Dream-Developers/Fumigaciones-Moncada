@@ -49,7 +49,9 @@ public class ContactsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
 
                 UserItem userItem = (UserItem) item;
-                intent.putExtra("user", userItem.user);
+                intent.putExtra("uuid", userItem.user.getUuid());
+                intent.putExtra("name", userItem.user.getUsername());
+                intent.putExtra("photo", userItem.user.getProfileUrl());
 
                 startActivity(intent);
             }
@@ -83,6 +85,8 @@ public class ContactsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 
 

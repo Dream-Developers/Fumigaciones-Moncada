@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Message;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +35,8 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
-    private User user;
+    private User user = new User();
+    //private ChatsRecent contactos;
     private EditText editChat;
     private User yo;
 
@@ -47,8 +46,11 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        user = getIntent().getExtras().getParcelable("user");
+        user = new User(getIntent().getStringExtra("uuid"),
+                getIntent().getStringExtra("name"),
+                getIntent().getStringExtra("photo"));
         getSupportActionBar().setTitle(user.getUsername());
+
 
         RecyclerView rv = findViewById(R.id.recycler_chat);
         editChat = findViewById(R.id.edit_chat);
@@ -136,7 +138,7 @@ public class ChatActivity extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d("Teste", documentReference.getId());
 
-                            Contactos contact = new Contactos();
+                            ChatsRecent contact = new ChatsRecent();
                             contact.setUuid(toId);
                             contact.setUsername(user.getUsername());
                             contact.setPhotoUrl(user.getProfileUrl());
@@ -171,7 +173,7 @@ public class ChatActivity extends AppCompatActivity {
                             Log.d("Teste", documentReference.getId());
 
 
-                            Contactos contact = new Contactos();
+                            ChatsRecent contact = new ChatsRecent();
                             contact.setUuid(toId);
                             contact.setUsername(user.getUsername());
                             contact.setPhotoUrl(user.getProfileUrl());

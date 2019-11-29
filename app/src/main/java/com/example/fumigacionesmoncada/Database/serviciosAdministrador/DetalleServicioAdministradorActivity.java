@@ -1,4 +1,4 @@
-package serviciosAdministrador;
+package com.example.fumigacionesmoncada.Database.serviciosAdministrador;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

@@ -2,13 +2,12 @@ package com.example.fumigacionesmoncada.ui.Mensajes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fumigacionesmoncada.ChatActivity;
-import com.example.fumigacionesmoncada.Contactos;
+import com.example.fumigacionesmoncada.ChatsRecent;
 import com.example.fumigacionesmoncada.ContactsActivity;
-import com.example.fumigacionesmoncada.LoginActivity;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -57,11 +56,19 @@ public class MensajesFragment extends Fragment {
             @Override
             public void onItemClick(@NonNull Item item, @NonNull View view) {
 
-                Toast.makeText(getContext(), "Gracias por darle click, aun no funciona", Toast.LENGTH_LONG).show();
-                //Intent intent = new Intent(getActivity(), ContactsActivity.class);
-                //startActivity(intent);
+               // Toast.makeText(getContext(), "Gracias por darle click, aun no funciona", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+
+                ContactoItem contactoItem = (ContactoItem) item;
+
+                intent.putExtra("uuid", contactoItem.contactos.getUuid());
+                intent.putExtra("name", contactoItem.contactos.getUsername());
+                intent.putExtra("photo", contactoItem.contactos.getPhotoUrl());
+
+                startActivity(intent);
             }
         });
+
 
 
         add_chat = view.findViewById(R.id.add_chat);
@@ -99,7 +106,7 @@ public class MensajesFragment extends Fragment {
                         if (documentChanges != null) {
                             for (DocumentChange doc: documentChanges) {
                                 if (doc.getType() == DocumentChange.Type.ADDED) {
-                                    Contactos contact = doc.getDocument().toObject(Contactos.class);
+                                    ChatsRecent contact = doc.getDocument().toObject(ChatsRecent.class);
 
                                     adapter.add(new ContactoItem(contact));
                                 }
@@ -113,9 +120,9 @@ public class MensajesFragment extends Fragment {
 
     public  class ContactoItem extends Item<ViewHolder>{
 
-        private final Contactos contactos;
+        private final ChatsRecent contactos;
 
-        public ContactoItem(Contactos contactos) {
+        public ContactoItem(ChatsRecent contactos) {
             this.contactos = contactos;
         }
 
@@ -138,4 +145,6 @@ public class MensajesFragment extends Fragment {
             return R.layout.item_contactos_mensajes;
         }
     }
+
+
 }

@@ -45,12 +45,12 @@
 
     <fragment
         android:id="@+id/nav_serviciosadministrador"
-        android:name="serviciosAdministrador.ServiciosAdministradorFragment"
+        android:name="com.example.fumigacionesmoncada.Database.serviciosAdministrador.ServiciosAdministradorFragment"
         android:label="@string/publicidad"
         tools:layout="@layout/fragment_servicios_administrador" />
     <fragment
         android:id="@+id/nav_factura"
-        android:name="factura.Factura_Fragment"
+        android:name="com.example.fumigacionesmoncada.factura.Factura_Fragment"
         android:label="@string/factura"
         tools:layout="@layout/fragment_factura" />
 

@@ -36,7 +36,6 @@ public class ChatActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
     private User user = new User();
-    //private ChatsRecent contactos;
     private EditText editChat;
     private User yo;
 
@@ -66,7 +65,6 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new GroupAdapter<>();
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
-
 
         FirebaseFirestore.getInstance().collection("/users")
                 .document(FirebaseAuth.getInstance().getUid())

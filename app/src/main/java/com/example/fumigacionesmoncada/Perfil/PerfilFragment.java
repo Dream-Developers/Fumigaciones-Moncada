@@ -87,6 +87,7 @@ public class PerfilFragment extends Fragment {
     private Uri uri;
     private final int MIS_PERMISOS = 100;
     private static final int COD_SELECCIONA = 10;
+    String foto;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -161,15 +162,23 @@ public class PerfilFragment extends Fragment {
                     progreso = new ProgressDialog(getContext());
                     progreso.setMessage("Cargando datos...");
                     progreso.show();
+
+                    if (bitmap == null) {
+                        foto = null;
+                    } else {
+                        foto = convertirImgString(bitmap);
+                    }
                     String ip = getString(R.string.ip);
                     String url = ip + "/api/clientes/" + id + "/update";
-                    String foto = convertirImgString(bitmap);
-
                     JSONObject parametros = new JSONObject();
                     parametros.put("name", mostrarNombre.getText().toString());
                     parametros.put("recidencia", mostrarDireccion.getText().toString());
                     parametros.put("telefono", mostraraTelefono.getText().toString());
-                    parametros.put("foto", foto);
+                    if (bitmap == null) {
+                        parametros.put("foto", null);
+                    } else {
+                        parametros.put("foto", foto);
+                    }
 
 
                     jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {

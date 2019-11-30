@@ -78,6 +78,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
     private final int MIS_PERMISOS = 100;
     private static final int COD_SELECCIONA = 10;
     private int orientation;
+    String foto;
     Bitmap bitmap;
 
 
@@ -97,6 +98,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 actualizar_datos(id);
+
             }
         });
 
@@ -125,16 +127,24 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                     progreso = new ProgressDialog(this);
                     progreso.setMessage("Cargando datos...");
                     progreso.show();
+                    if (bitmap == null) {
+                        foto = null;
+                    } else {
+                        foto = convertirImgString(bitmap);
+                    }
 
                     String ip = getString(R.string.ip);
                     String url = ip + "/api/servicios/" + id + "/update";
-                    String foto = convertirImgString(bitmap);
 
 
                     JSONObject parametros = new JSONObject();
                     parametros.put("nombre", titulo.getText().toString());
                     parametros.put("descripcion", descripcion.getText().toString());
-                    parametros.put("foto", foto);
+                    if (bitmap == null) {
+                        parametros.put("foto", null);
+                    } else {
+                        parametros.put("foto", foto);
+                    }
 
 
                     jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {

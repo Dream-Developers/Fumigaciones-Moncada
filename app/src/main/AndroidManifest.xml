@@ -33,15 +33,17 @@
 
         <activity android:name="com.example.fumigacionesmoncada.factura.crearFactura"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_menu"
             ></activity>
-        <activity android:name=".AdquirirServicioActivity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" />
-        <activity android:name=".ui.Principal.DetalleImagenActivity" />
+        <activity android:name=".AdquirirServicioActivity"  android:configChanges="orientation|screenSize"/>
+        <activity android:name=".ChatActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".ui.Principal.DetalleImagenActivity"  android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".ContactsActivity"
-            android:label="@string/title_activity_contactos" />
+            android:label="@string/title_activity_contactos"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -55,6 +57,7 @@
             android:name=".PasswordReset"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.citas.Crear_Citas"
+            android:configChanges="orientation|screenSize"
             android:label="@string/factura"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -66,6 +69,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegistarUsuarioNuevo"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_registro"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

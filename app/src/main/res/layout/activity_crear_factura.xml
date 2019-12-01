@@ -129,7 +129,6 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_alarm_white_18dp"
-                    android:onClick="onClick1"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
                     android:textSize="25dp" />

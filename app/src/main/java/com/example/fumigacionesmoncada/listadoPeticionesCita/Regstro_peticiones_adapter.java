@@ -1,7 +1,6 @@
 package com.example.fumigacionesmoncada.listadoPeticionesCita;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,7 +20,6 @@ import com.example.fumigacionesmoncada.R;
 import java.util.ArrayList;
 
 import static com.example.fumigacionesmoncada.R.drawable.cancelado_peticion;
-import static com.example.fumigacionesmoncada.R.drawable.pendiente;
 import static com.example.fumigacionesmoncada.R.drawable.realizado_icon;
 import static com.example.fumigacionesmoncada.R.drawable.rechazdo;
 

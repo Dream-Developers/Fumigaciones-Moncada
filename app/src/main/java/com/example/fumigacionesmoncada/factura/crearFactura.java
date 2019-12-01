@@ -97,7 +97,6 @@ public class crearFactura extends AppCompatActivity {
 
             }
         }, anio, mes, dia);
-        datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
         datePickerDialog.show();
 
         SimpleDateFormat dateParser = new SimpleDateFormat("yyyy/MM/dd");
@@ -126,7 +125,7 @@ public class crearFactura extends AppCompatActivity {
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/com.example.fumigacionesmoncada.factura";
+        String url=ip+"/api/factura";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

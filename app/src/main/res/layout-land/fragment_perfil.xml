@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/esteesmaschido"
+   android:background="@drawable/esteesmaschido"
     >
 
         <androidx.cardview.widget.CardView
@@ -16,7 +16,7 @@
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             android:layout_gravity="center_vertical"
-            card_view:cardBackgroundColor="#2D000000"
+            app:cardBackgroundColor="#60000000"
             android:layout_marginTop="25dp"
             card_view:cardPreventCornerOverlap="true"
             card_view:cardUseCompatPadding="false">
@@ -41,9 +41,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre :"
-                        android:layout_margin="5dp"
+                       android:layout_marginLeft="15dp"
                         android:textColor="#fff"
-                        android:textSize="20dp" />
+                        android:textSize="25dp" />
                     <EditText
                         android:id="@+id/nombresP"
                         android:textAlignment="center"
@@ -51,7 +51,9 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rectangulo_blanco"
                         android:lines="1"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textSize="25dp"
                         android:maxLength="30"
                         android:textColor="#ffffff"
                         android:textColorHint="#ffffff" />
@@ -59,9 +61,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dirección :"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="15dp"
                         android:textColor="#fff"
-                        android:textSize="20dp" />
+                        android:textSize="25dp" />
                     <EditText
                         android:id="@+id/direccionP"
                         android:layout_width="match_parent"
@@ -70,25 +72,29 @@
                         android:background="@drawable/rectangulo_blanco"
                         android:lines="1"
                         android:maxLength="30"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:textColor="#ffffff"
+                        android:textSize="25dp"
                         android:textColorHint="#ffffff" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Teléfono :"
                         android:textColor="#fff"
-                        android:layout_margin="5dp"
-                        android:textSize="20dp" />
+                        android:layout_marginLeft="15dp"
+                        android:textSize="25dp" />
                     <EditText
                         android:id="@+id/telefonoP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rectangulo_blanco"
                         android:maxLength="30"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:inputType="number"
                         android:textColor="#ffffff"
+                        android:textSize="25dp"
                         android:textAlignment="center"
                         android:textColorHint="#ffffff" />
 
@@ -97,18 +103,20 @@
                         android:layout_height="wrap_content"
                         android:text="Correo :"
                         android:textColor="#fff"
-                        android:layout_margin="5dp"
-                        android:textSize="20dp" />
+                        android:layout_marginLeft="15dp"
+                        android:textSize="25dp" />
                     <EditText
                         android:id="@+id/correoP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rectangulo_blanco"
                         android:maxLength="30"
-                        android:layout_margin="5dp"
                         android:textColor="#ffffff"
                         android:textAlignment="center"
                         android:textColorHint="#ffffff"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textSize="25dp"
                         android:focusable="false"/>
 
                     <Button
@@ -119,6 +127,7 @@
                         android:background="@drawable/oval"
                         android:text="Guardar"
                         android:layout_margin="5dp"
+                        android:textSize="25dp"
                         android:textAllCaps="false"
                         android:textColor="@color/colorPrimary" />
 

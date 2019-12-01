@@ -11,9 +11,11 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
     private EditText Hora;
     String tokenUsuario;
     private Button pedir;
-
+    private Spinner mostrarservicion;
     ProgressDialog progreso;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -76,6 +78,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         Hora = (EditText) findViewById(R.id.hora);
         fecha = (EditText) findViewById(R.id.fecha);
         pedir = findViewById(R.id.pedir);
+        mostrarservicion = findViewById(R.id.servicio);
         request = Volley.newRequestQueue(this);
         Hora.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +94,17 @@ public class AdquirirServicioActivity extends AppCompatActivity {
             }
         });
         cargarClienteWeb();
+
+        String [] opciones = {"Inceptos","Roedores"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item,opciones);
+        mostrarservicion.setAdapter(adapter);
+        mostrarNombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AdquirirServicioActivity.this, "El Nombre no se puede modificar", Toast.LENGTH_SHORT).show();
+
+            }
+        });
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +175,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                         Hora.setText("");
                         fecha.setText("");
 
-                        Toast.makeText(AdquirirServicioActivity.this, "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdquirirServicioActivity.this, "Se ha registrado con éxito", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -189,6 +203,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                 parametros.put("Telefono",mostraraTelefono.getText().toString());
                 parametros.put("FechaFumigacion",fecha.getText().toString());
                 parametros.put("Hora",Hora.getText().toString());
+                parametros.put("Servicio",mostrarservicion.getSelectedItem().toString());
                 parametros.put("User_id",Usuario_id);
 
                 return parametros;

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/esteesmaschido"
-    android:orientation="vertical"
     >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
     <androidx.cardview.widget.CardView
 
         android:id="@+id/card_view"
@@ -20,21 +14,40 @@
         android:layout_margin="10dp"
         card_view:cardBackgroundColor="#2D000000"
         card_view:cardPreventCornerOverlap="true"
-        card_view:cardUseCompatPadding="false">
+        card_view:cardUseCompatPadding="false"
+        android:layout_marginTop="25dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="25dp">
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/idImagenD"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
+                    android:layout_marginTop="30dp"
                     android:scaleType="fitCenter"
                     />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+
             <TextView
                 android:layout_marginTop="15dp"
                 android:id="@+id/tituloImagenD"
@@ -51,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descripcion"
+                android:textAlignment="center"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:textColor="#000"
@@ -66,13 +80,13 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:textStyle="normal|bold"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="100dp"
                 android:layout_gravity="center">
             </Button>
             </LinearLayout>
 
 
+        </LinearLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>

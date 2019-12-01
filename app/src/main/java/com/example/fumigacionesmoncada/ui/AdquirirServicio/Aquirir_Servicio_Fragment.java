@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -181,6 +182,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progreso.hide();
+                Log.i("errorVolley", String.valueOf(error.getStackTrace()));
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 

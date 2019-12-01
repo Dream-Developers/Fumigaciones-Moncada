@@ -50,6 +50,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
     private TextView recuperarContra;
@@ -65,15 +66,13 @@ public class LoginActivity extends AppCompatActivity {
     String usuario_id;
 
 
-
     //Shared Preferences
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
     private boolean isActivateRadioButton;
 
     private static final String STRING_PREFERENCES = "example.preferencias";
-    private static  final String PREFERENCE_ESTADO_BUTTON = "estado.button";
-
+    private static final String PREFERENCE_ESTADO_BUTTON = "estado.button";
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -82,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (obtenerEstadoButton()){
+        if (obtenerEstadoButton()) {
             cargarPreferencias();
             intem();
             finish();
@@ -90,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
-            String channelId  = getString(R.string.default_notification_channel_id);
+            String channelId = getString(R.string.default_notification_channel_id);
             String channelName = getString(R.string.default_notification_channel_id);
             NotificationManager notificationManager =
                     getSystemService(NotificationManager.class);
@@ -113,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         RBsesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isActivateRadioButton){
+                if (isActivateRadioButton) {
                     RBsesion.setChecked(false);
                 }
                 isActivateRadioButton = RBsesion.isChecked();
@@ -124,17 +123,16 @@ public class LoginActivity extends AppCompatActivity {
         cargarPreferencias();
 
 
-
         Cursor cursor = getContentResolver().query(ContractParaListaUsers.CONTENT_URI, null,
-                ContractParaListaUsers.Columnas.ROL+"=? or "+
-                        ContractParaListaUsers.Columnas.ROL+"=?",
-                new String[]{"1","2"},null,null);
+                ContractParaListaUsers.Columnas.ROL + "=? or " +
+                        ContractParaListaUsers.Columnas.ROL + "=?",
+                new String[]{"1", "2"}, null, null);
 
         cursor.moveToNext();
-        Log.i("USUARIO",""+cursor.getCount());
+        Log.i("USUARIO", "" + cursor.getCount());
 
-        try{
-            if (cursor.getCount()==1) {
+        try {
+            if (cursor.getCount() == 1) {
 
                 Intent intent = new Intent(LoginActivity.this, MensajesFragment.class);
                 startActivity(intent);
@@ -142,41 +140,40 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                btn_login.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                logeoLaravel();
-                logeoFirebase();
+                        logeoLaravel();
+                        logeoFirebase();
 
+                    }
+
+
+                });
+
+
+                //ojo
             }
 
 
-        });
-
-
-        //ojo
-             }
-
-
-        }catch (Exception exc){
-            Log.i("Login_Activity",""+exc);
+        } catch (Exception exc) {
+            Log.i("Login_Activity", "" + exc);
         }
 
     }
 
 
-    public void logeoLaravel(){
+    public void logeoLaravel() {
         if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
-            if(!isEmailValid(txtCorreo.getText())){
+            if (!isEmailValid(txtCorreo.getText())) {
                 txtCorreo.setError("No es un correo valido");
-            }else {
+            } else {
                 String email = txtCorreo.getText().toString().trim();
                 String contraseniaPass = txtContrasena.getText().toString().trim();
                 login(email, contraseniaPass);
             }
-        }
-        else {
+        } else {
             if (txtCorreo.getText().toString().length() == 0 ||
                     txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
                 txtCorreo.setError("Ingresa el correo");
@@ -189,7 +186,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     private void logeoFirebase() {
@@ -220,13 +216,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void guardarEstadoButton(){
+    public void guardarEstadoButton() {
 
         SharedPreferences preferencias = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
         preferencias.edit().putBoolean(PREFERENCE_ESTADO_BUTTON, RBsesion.isChecked()).apply();
     }
 
-    public boolean obtenerEstadoButton(){
+    public boolean obtenerEstadoButton() {
 
         SharedPreferences preferencias = getSharedPreferences(STRING_PREFERENCES, MODE_PRIVATE);
         return preferencias.getBoolean(PREFERENCE_ESTADO_BUTTON, false);
@@ -241,12 +237,12 @@ public class LoginActivity extends AppCompatActivity {
         rol_id = preferences.getString("rol", "");
 
 //        txtCorreo.setText(email);
-  //      txtContrasena.setText(contra);
+        //      txtContrasena.setText(contra);
 
     }
 
 
-    private void login(final String txtCorreo, final String txtContrasena){
+    private void login(final String txtCorreo, final String txtContrasena) {
 
         String ip = getString(R.string.ip);
 
@@ -260,22 +256,22 @@ public class LoginActivity extends AppCompatActivity {
                         //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                             success = jsonObject.getString("access_token");
-                             rol_id = jsonObject.getString("rol_id");
+                            success = jsonObject.getString("access_token");
+                            rol_id = jsonObject.getString("rol_id");
                             usuario_id = jsonObject.getString("id");
 
                             //Toast.makeText(LoginActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
 
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
-                            if (success.equals("1")){
-                                for(int i = 0; i < jsonArray.length(); i++){
+                            if (success.equals("1")) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     String name = object.getString("name").trim();
                                     String email = object.getString("email").trim();
                                     Toast.makeText(LoginActivity.this, "Se ha logeado. " +
-                                            " \nTu nombre : " +name+"" +
-                                            "\nTu correo :" +email, Toast.LENGTH_SHORT).show();
+                                            " \nTu nombre : " + name + "" +
+                                            "\nTu correo :" + email, Toast.LENGTH_SHORT).show();
                                     cargando.setVisibility(View.GONE);
                                 }
                             }
@@ -286,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //
                         //Bienvenido();
-                        savePreferences(success,usuario_id);
+                        savePreferences(success, usuario_id);
                         intem();
                         finish();
 
@@ -296,14 +292,12 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                         btn_login.setVisibility(View.VISIBLE);
+                        btn_login.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Error al iniciar sesión, verifique que su " +
                                 "contraseña esté correcta ", Toast.LENGTH_SHORT).show();
 
                     }
-                })
-
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<>();
@@ -315,20 +309,20 @@ public class LoginActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-}
+    }
 
 
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public void intem(){
+    public void intem() {
 
-        if (rol_id.equals("1")){
+        if (rol_id.equals("1")) {
 
             Intent intent = new Intent(getApplicationContext(), NavegacionAdministradorActivity.class);
             startActivity(intent);
-        }else {
+        } else {
             Intent i = new Intent(getApplicationContext(), MenuActivity.class);
             startActivity(i);
         }
@@ -336,14 +330,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void Bienvenido(){
-        LayoutInflater inflater= (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customToast=inflater.inflate(R.layout.toas_personalizado,null);
-        TextView txt= (TextView)customToast.findViewById(R.id.txtToast);
+    public void Bienvenido() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View customToast = inflater.inflate(R.layout.toas_personalizado, null);
+        TextView txt = (TextView) customToast.findViewById(R.id.txtToast);
         txt.setText("Bienvenido, Gracias por preferirnos. " +
                 " Sea feliz, que Dios lo bendiga ");
-        Toast toast =new Toast(this);
-        toast.setGravity(Gravity.CENTER,0,0);
+        Toast toast = new Toast(this);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(customToast);
         toast.show();
@@ -352,7 +346,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void savePreferences(String token,String usuario_id){
+    private void savePreferences(String token, String usuario_id) {
         SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
         String correo = txtCorreo.getText().toString();
@@ -365,8 +359,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("rol", rol_id);
         editor.putString("id", usuario_id);
 
-        String token_firebase = preferences.getString("token_firebase","") ;
-        guardarTokenFirebaseEnLaravel(usuario_id,token_firebase);
+        String token_firebase = preferences.getString("token_firebase", "");
+        guardarTokenFirebaseEnLaravel(usuario_id, token_firebase);
         editor.apply();
 
     }
@@ -374,14 +368,14 @@ public class LoginActivity extends AppCompatActivity {
     private void guardarTokenFirebaseEnLaravel(String usuario_id, String token_firebase) {
 
         String ip = getString(R.string.ip);
-        String url  = ip+ "/api/token_firebase" ;
+        String url = ip + "/api/token_firebase";
 
 
         JSONObject parametros = new JSONObject();
 
         try {
-            parametros.put("id",usuario_id);
-            parametros.put("firebase_token",token_firebase);
+            parametros.put("id", usuario_id);
+            parametros.put("firebase_token", token_firebase);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -391,22 +385,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                    Toast.makeText(LoginActivity.this, "Se actualizo el token firebase", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Se actualizo el token firebase", Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(LoginActivity.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("volley", "onErrorResponse: "+error.networkResponse);
+                Toast.makeText(LoginActivity.this, "" + error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("volley", "onErrorResponse: " + error.networkResponse);
             }
-        }){
+        }) {
 
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> parametros = new HashMap<>();
-                parametros.put("Content-Type","application/json");
-                parametros.put("X-Requested-With","XMLHttpRequest");
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Content-Type", "application/json");
+                parametros.put("X-Requested-With", "XMLHttpRequest");
 
                 return parametros;
             }

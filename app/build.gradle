@@ -41,11 +41,12 @@ dependencies {
     implementation 'com.xwray:groupie:2.3.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
-    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+    implementation 'com.google.firebase:firebase-firestore:21.3.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.1'
 
+    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.commit451:PhotoView:1.2.4'
 

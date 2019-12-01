@@ -6,25 +6,25 @@
     android:background="@drawable/esteesmaschido"
     android:orientation="vertical"
     >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
     <androidx.cardview.widget.CardView
 
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="10dp"
         card_view:cardBackgroundColor="#2D000000"
         card_view:cardPreventCornerOverlap="true"
         card_view:cardUseCompatPadding="false">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:padding="25dp">
@@ -35,6 +35,14 @@
                     android:layout_height="250dp"
                     android:scaleType="fitCenter"
                     />
+        </LinearLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
             <TextView
                 android:layout_marginTop="15dp"
                 android:id="@+id/tituloImagenD"
@@ -52,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="Descripcion"
                 android:textSize="25dp"
+                android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="#000"
                 />
@@ -67,12 +76,11 @@
                 android:textColor="@color/colorAccent"
                 android:textStyle="normal|bold"
                 android:layout_marginTop="25dp"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp">
             </Button>
             </LinearLayout>
-
-
+           </ScrollView>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-    </ScrollView>
-
 </LinearLayout>

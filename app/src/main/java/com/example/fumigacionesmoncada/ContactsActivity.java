@@ -6,14 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,12 +32,17 @@ import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity {
 
+    private EditText search_field;
+    private ImageButton search_btn;
+   
     private GroupAdapter adapter;
 
+    private DatabaseReference mUserDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,10 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
 
         RecyclerView rv = findViewById(R.id.recycler);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference("User");
+
+        search_field =  findViewById(R.id.search_field);
+        search_btn = findViewById(R.id.search_btn);
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
@@ -58,6 +74,18 @@ public class ContactsActivity extends AppCompatActivity {
         });
 
         SearchUsers();
+
+
+              search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String searchText = search_field.getText().toString();
+
+                firebaseUserSearch(searchText);
+
+            }
+        });
 
     }
 
@@ -85,6 +113,27 @@ public class ContactsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    /**
+     * METODO PARA buscar los datos
+     * */
+    private void firebaseUserSearch(String searchText) {
+
+        Toast.makeText(ContactsActivity.this, "Started Search", Toast.LENGTH_LONG).show();
+
+        Query firebaseSearchQuery = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+
+        //FirebaseRecyclerAdapter<User, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
+
+                //User.class,
+              //  R.layout.activity_contacts,
+              //  UsersViewHolder.class,
+               // firebaseSearchQuery,
+
+        };
+
+
 
 
 

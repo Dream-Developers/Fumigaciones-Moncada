@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/fondoverde"
     android:orientation="horizontal">
 
 
@@ -33,11 +33,11 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="189dp"
-            android:layout_marginLeft="189dp"
+            android:layout_marginStart="159dp"
+            android:layout_marginLeft="159dp"
             android:layout_marginTop="245dp"
             android:text="Propietario"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <ImageView
@@ -64,7 +64,7 @@
             android:layout_marginLeft="168dp"
             android:layout_marginTop="456dp"
             android:text="Desarrolladores"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="556dp"
             android:text="Alejandro Aguilar"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_marginLeft="267dp"
             android:layout_marginTop="555dp"
             android:text="Carlos Aleman"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="630dp"
             android:text="Eloisa Flores"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <TextView
@@ -124,7 +124,7 @@
             android:layout_marginLeft="314dp"
             android:layout_marginTop="629dp"
             android:text="Izamar Molina"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
         <TextView
@@ -139,7 +139,7 @@
             android:layout_marginLeft="150dp"
             android:layout_marginTop="629dp"
             android:text="Jennifer Chavarria"
-            android:textColor="#ffff"
+            android:textColor="#111"
             android:textStyle="bold" />
 
 

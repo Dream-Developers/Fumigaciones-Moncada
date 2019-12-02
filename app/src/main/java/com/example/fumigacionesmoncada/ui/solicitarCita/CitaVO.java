@@ -49,6 +49,7 @@ public class CitaVO {
         this.direccion = direccion;
     }
 
+
     public String getTelefono() {
         return telefono;
     }

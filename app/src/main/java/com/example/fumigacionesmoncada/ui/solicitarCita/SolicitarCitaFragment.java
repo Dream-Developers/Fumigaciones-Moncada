@@ -105,6 +105,7 @@ public class SolicitarCitaFragment extends Fragment {
                     for (int i = 0; i < array.length(); i++) {
                         citas = new CitaVO();
                         object = array.getJSONObject(i);
+                        citas.setId(object.getString("id"));
                         citas.setNombre(object.getString("Nombre"));
                         citas.setDireccion(object.getString("Direccion"));
                         citas.setFecha(object.getString("FechaFumigacion"));
@@ -141,12 +142,6 @@ public class SolicitarCitaFragment extends Fragment {
 
 
     }
-
-
-
-
-
-
 
 
 }

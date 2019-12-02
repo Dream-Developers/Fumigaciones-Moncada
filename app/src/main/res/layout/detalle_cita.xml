@@ -3,15 +3,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo">
+    android:background="@drawable/fondoverde">
 
     <RelativeLayout
-        android:layout_width="386dp"
-        android:layout_height="670dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
-        android:background="#60000000">
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp">
 
 
         <TextView
@@ -22,10 +25,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="118dp"
+            android:layout_marginTop="28dp"
             android:text="Nombre:"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textColor="#111"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
@@ -34,13 +37,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="49dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
             android:layout_toRightOf="@+id/Nombre"
             android:gravity="center"
-            android:text="Eloisa Flores"
-            android:textColor="#ffffff" />
+            android:text="Eloisa Flores "
+            android:textColor="#111"
+            android:textSize="25dp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/direccion"
@@ -49,14 +54,15 @@
             android:layout_below="@id/Nombre"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Residencia:"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textColor="#111"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
@@ -64,101 +70,158 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Nombre"
-            android:layout_margin="21dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="21dp"
             android:layout_toRightOf="@+id/direccion"
             android:gravity="center"
-            android:text="Danli"
-            android:textColor="#ffffff" />
+            android:text=" Danli "
+            android:textColor="#111"
+            android:textSize="25dp"
+            android:textStyle="normal" />
 
         <TextView
-            android:id="@+id/telefono"
+            android:id="@+id/txt_servicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/direccion"
+            android:layout_below="@+id/detalle_direccion"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="Telefono:"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Servicio:"
+            android:textColor="#111"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
+
         <TextView
-            android:id="@+id/detalle_telefono"
+            android:id="@+id/detalle_txt_servicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/detalle_direccion"
-            android:layout_margin="15dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="21dp"
+            android:layout_toRightOf="@+id/fecha"
+            android:text="Insectos"
+            android:textColor="#111"
+            android:textSize="25dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_servicio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Hora:"
+            android:textColor="#111"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detalle_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detalle_txt_servicio"
+            android:layout_marginStart="95dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="35dp"
             android:layout_toRightOf="@+id/telefono"
-            android:text="504 9999 0000"
-            android:textColor="#ffffff" />
+            android:inputType="date"
+            android:text="12:00:00"
+            android:textColor="#111"
+            android:textSize="25dp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/detalle_telefono"
+            android:layout_below="@+id/detalle_hora"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="36dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:text="Fecha:"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textColor="#111"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detalle_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/detalle_telefono"
+            android:layout_below="@id/detalle_hora"
             android:layout_marginStart="25dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="38dp"
+             android:layout_marginLeft="57dp"
+            android:layout_marginTop="33dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="25dp"
-            android:layout_toRightOf="@+id/telefono"
-            android:text="23/09/2015"
-            android:textColor="#ffffff" />
+            android:layout_toRightOf="@+id/hora"
+            android:text="23/6/19"
+            android:textColor="#111"
+            android:textSize="25dp"
+            android:textStyle="normal" />
 
 
     </RelativeLayout>
 
     <Button
         android:id="@+id/btnAceptar"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginBottom="180dp"
         android:background="@drawable/oval"
-        android:onClick="botonAceptar"
+        android:onClick="btnAceptado"
         android:text="ACEPTAR"
         android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/btnRechazar"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:layout_marginBottom="180dp"
         android:background="@drawable/oval"
-        android:lineSpacingExtra="45dp"
-        android:onClick="botonRechazar"
+        android:lineSpacingExtra="25dp"
+        android:onClick="btnRechazado"
         android:text="RECHAZAR"
         android:textColor="@android:color/black" />
 

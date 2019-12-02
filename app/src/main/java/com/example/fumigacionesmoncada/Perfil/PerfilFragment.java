@@ -224,7 +224,6 @@ public class PerfilFragment extends Fragment {
         SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
         id_usuario = preferences.getString("id", "");
-
     }
 
     private void cargarClienteWeb() {
@@ -272,6 +271,7 @@ public class PerfilFragment extends Fragment {
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
 
                 return params;
             }

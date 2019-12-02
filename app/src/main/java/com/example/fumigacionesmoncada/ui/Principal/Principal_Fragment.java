@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada.ui.Principal;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -47,6 +50,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
     ArrayList<ServiciosVO> listaUsuarios;
 
     ProgressDialog dialog;
+    String tokenUsuario;
 
     // RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -91,6 +95,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
 
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
+        cargarPreferencias();
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
         //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -178,6 +183,13 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
        // Log.d("ERROR: ", error.toString());
 
     }
+    public Map<String, String> getHeaders() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+        return params;
+    }
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -205,6 +217,12 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+
+
     }
 
     public interface OnFragmentInteractionListener {

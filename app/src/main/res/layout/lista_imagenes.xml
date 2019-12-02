@@ -25,7 +25,7 @@ tools:context=".LoginActivity">
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:padding="10dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="162dp"
         android:textColor="#000"
         android:background="#fff"
 

@@ -6,7 +6,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondochido"
+    android:background="@drawable/fondoverde"
     android:orientation="vertical">
 
 
@@ -24,6 +24,9 @@
             app:cardBackgroundColor="#60000000"
             card_view:cardPreventCornerOverlap="true"
             card_view:cardUseCompatPadding="false">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -193,6 +196,7 @@
                     android:text="Pedir Cita"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
+            </ScrollView>
 
 
 

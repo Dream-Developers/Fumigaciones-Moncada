@@ -45,25 +45,18 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".AdquirirServicioActivity"
-            android:configChanges="orientation|screenSize" />
+            />
         <activity
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity"
-            android:configChanges="orientation|screenSize" />
+             />
         <activity
             android:name=".ui.Principal.DetalleImagenActivity"
-            android:configChanges="orientation|screenSize" />
+            />
         <activity android:name=".ui.solicitarCita.Detalle_Cita" />
-        <activity
-            ></activity>
-        <activity android:name=".AdquirirServicioActivity"  android:configChanges="orientation|screenSize"/>
-        <activity android:name=".ChatActivity" android:configChanges="orientation|screenSize" />
-        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity"
-           />
-        <activity android:name=".ui.Principal.DetalleImagenActivity" />
-        <activity android:name=".ui.solicitarCita.Detalle_Cita"/>
+
                 <activity
             android:name=".ContactsActivity"
             android:label="@string/title_activity_contactos"

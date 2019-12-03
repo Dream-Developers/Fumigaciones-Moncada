@@ -38,12 +38,25 @@
             android:name="com.google.firebase.messaging.default_ringtone"
             android:value="RingtoneManager.TYPE_NOTIFICATION" />
 
-
-
-        <activity android:name="com.example.fumigacionesmoncada.factura.crearFactura"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        <activity
+            android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_menu"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".AdquirirServicioActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ChatActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.Principal.DetalleImagenActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".ui.solicitarCita.Detalle_Cita" />
+        <activity
             ></activity>
         <activity android:name=".AdquirirServicioActivity"  android:configChanges="orientation|screenSize"/>
         <activity android:name=".ChatActivity" android:configChanges="orientation|screenSize" />

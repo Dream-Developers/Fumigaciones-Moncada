@@ -33,6 +33,8 @@ import com.example.fumigacionesmoncada.ClaseVolley;
 
 import com.example.fumigacionesmoncada.R;
 
+import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
+import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
 
@@ -78,8 +80,20 @@ private FloatingActionButton addcita;
             }
         });
 
+
+
         cargarCitas();
         setHasOptionsMenu(true);
+
+        lista_citas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Citas citas = (Citas) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getContext(), Detalle_Cita.class);
+                intent.putExtra("id_citas", citas.getId());
+                startActivity(intent);
+            }
+        });
         return view;
 
     }

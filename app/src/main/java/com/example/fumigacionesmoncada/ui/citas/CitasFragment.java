@@ -161,6 +161,11 @@ private FloatingActionButton addcita;
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarCitas();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

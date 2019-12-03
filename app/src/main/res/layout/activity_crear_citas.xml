@@ -45,10 +45,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre Cliente"
+                    android:text="Seleccione el cliente"
                     android:textColor="#ffffff"
                     android:textSize="25dp" />
-
 
                 <EditText
                     android:id="@+id/registro_nombres"
@@ -60,6 +59,7 @@
                     android:inputType="textPersonName"
                     android:lines="1"
                     android:maxLength="50"
+                    android:focusable="false"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
                     android:textSize="25dp"

@@ -2,16 +2,20 @@ package com.example.fumigacionesmoncada.ui.citas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -24,10 +28,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.ui.clientes.ClientesAdapter;
+import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,7 +55,7 @@ public class Crear_Citas extends AppCompatActivity {
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
     EditText etHora;
-    EditText nombre,direccion,precio;
+    EditText nombre, direccion, precio;
     TextView col;
     Button registrar;
     String id_usuario;
@@ -51,20 +63,31 @@ public class Crear_Citas extends AppCompatActivity {
     private static final int maximo = 20;
     private static final int minimo = 07;
     ProgressDialog progreso;
+    ArrayList<ClientesVO> clientes;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
+    ClientesAdapter clientesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_citas); fecha = findViewById(R.id.registro_Fecha);
+        setContentView(R.layout.activity_crear_citas);
+        fecha = findViewById(R.id.registro_Fecha);
         etHora = findViewById(R.id.registro_Hora);
         nombre = findViewById(R.id.registro_nombres);
         direccion = findViewById(R.id.registro_direccion);
         precio = findViewById(R.id.registro_Precio);
-        registrar=findViewById(R.id.registrar1);
+        registrar = findViewById(R.id.registrar1);
         request = Volley.newRequestQueue(this);
         // llenarSpinner();
+
+        cargarClientes();
+        nombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionarCliente(v);
+            }
+        });
 
         etHora.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +97,95 @@ public class Crear_Citas extends AppCompatActivity {
         });
         etHora.setEnabled(false);
 
-cargarPreferencias();
 
 
     }
 
+    private void seleccionarCliente(View v) {
+        AlertDialog.Builder builde = new AlertDialog.Builder(this);
+        View dialogoLayout = getLayoutInflater().inflate(R.layout.lista_clientes_dialog, null);
+
+        ListView listaclientesDialogo = (ListView) dialogoLayout.findViewById(R.id.lista_clientes_dialog);
+        TextView sinClientes = dialogoLayout.findViewById(R.id.sinclientes);
+        if(clientes.size()>0){
+            sinClientes.setVisibility(View.GONE);
+            builde.setTitle("Seleccione el cliente");
+            ClientesAdapter adaptador_periodos_q = new ClientesAdapter(this, clientes);
+            listaclientesDialogo.setAdapter(adaptador_periodos_q);
+            builde.setAdapter(adaptador_periodos_q, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            final AlertDialog alertDialog = builde.create();
+
+            listaclientesDialogo = alertDialog.getListView();
+            listaclientesDialogo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    ClientesVO cliente = (ClientesVO) parent.getItemAtPosition(position);
+                    nombre.setText(cliente.getNombre());
+                    direccion.setText(cliente.getApellido());
+                    direccion.setFocusable(false);
+                    id_usuario =cliente.getId();
+                    alertDialog.dismiss();
+                }
+            });
+            alertDialog.show();
+
+        }else {
+            sinClientes.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "No hay clientes registrados aun", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void cargarClientes() {
+        String ip = getString(R.string.ip);
+
+        String url = ip + "/api/clientes";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                clientes = new ArrayList<>();
+                ClientesVO clientesVO = null;
+                try {
+                    JSONArray array = response.getJSONArray("clientes");
+                    JSONObject object;
+                    for (int i = 0; i < array.length(); i++) {
+                        clientesVO = new ClientesVO();
+                        object = array.getJSONObject(i);
+                        clientesVO.setNombre(object.getString("name"));
+                        clientesVO.setTelefono(object.getString("telefono"));
+                        clientesVO.setId(String.valueOf(object.getInt("id")));
+                        clientesVO.setImagen(object.getString("foto"));
+                        clientesVO.setApellido(object.getString("recidencia"));
+
+                        clientes.add(clientesVO);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                error.getStackTrace();
+                Toast.makeText(Crear_Citas.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
+        ClaseVolley.getIntanciaVolley(Crear_Citas.this).addToRequestQueue(jsonObjectRequest);
+
+    }
 
     private void obtenerHora() {
 
@@ -97,7 +202,7 @@ cargarPreferencias();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         String fecha_usuario = fecha.getText().toString();
-        String fecha_actual = anio_hoy + "-" + (mes_hoy +1) + "-" + dia_hoy;
+        String fecha_actual = anio_hoy + "-" + (mes_hoy + 1) + "-" + dia_hoy;
         try {
             final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
             final Date fecha_actualDate = formatter.parse(fecha_actual);
@@ -109,10 +214,10 @@ cargarPreferencias();
                     //Se validan la fecha actual con la tomada por el usuario para asi
                     //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
                     //la hora actual debe ser menor a la hora tomada.
-                    if(fecha_usuarioDate.equals(fecha_actualDate)){
+                    if (fecha_usuarioDate.equals(fecha_actualDate)) {
 
-                        if(hour<hourOfDay){
-                            if (hourOfDay<maximo&&hourOfDay>minimo) {
+                        if (hour < hourOfDay) {
+                            if (hourOfDay < maximo && hourOfDay > minimo) {
                                 String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
                                 String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
                                 String AM_PM;
@@ -122,18 +227,18 @@ cargarPreferencias();
                                     AM_PM = "p.m.";
                                 }
                                 etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
-                            }else {
+                            } else {
                                 Toast.makeText(Crear_Citas.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
                                 etHora.setText("");
                             }
 
-                        }else{
+                        } else {
                             Toast.makeText(Crear_Citas.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
                         }
 
 
-                    }else {
-                        if (hourOfDay<maximo&&hourOfDay>minimo) {
+                    } else {
+                        if (hourOfDay < maximo && hourOfDay > minimo) {
                             String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
                             String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
                             String AM_PM;
@@ -164,7 +269,7 @@ cargarPreferencias();
     private void cargarPreferencias() {
         SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
-        id_usuario= preferences.getString("id","");
+        id_usuario = preferences.getString("id", "");
 
     }
 
@@ -210,13 +315,13 @@ cargarPreferencias();
 
     private void cargarWebService() {
 
-        progreso=new ProgressDialog(this);
+        progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String ip=getString(R.string.ip);
+        String ip = getString(R.string.ip);
 
-        String url=ip+"/api/cita";
+        String url = ip + "/api/cita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -240,26 +345,27 @@ cargarPreferencias();
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
 
                 }
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Map<String,String> parametros=new HashMap<>();
-                parametros.put("Nombre",nombre.getText().toString());
-                parametros.put("Direccion",direccion.getText().toString());
-                parametros.put("Precio",precio.getText().toString());
-                parametros.put("FechaFumigacion",fecha.getText().toString());
-                parametros.put("Hora",etHora.getText().toString());
-                parametros.put("FechaProxima",fecha.getText().toString());
-                parametros.put("id_usuario",id_usuario);
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Nombre", nombre.getText().toString());
+                parametros.put("Direccion", direccion.getText().toString());
+                parametros.put("Precio", precio.getText().toString());
+                parametros.put("FechaFumigacion", fecha.getText().toString());
+                parametros.put("Hora", etHora.getText().toString());
+                parametros.put("FechaProxima", fecha.getText().toString());
+                parametros.put("id_usuario", id_usuario);
                 return parametros;
 
-        }
+            }
+
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -273,17 +379,19 @@ cargarPreferencias();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
     private void validacion() {
-        if(nombre.getText().toString().equals("")||direccion.getText().toString().equals("")||precio.getText().toString().equals("")||fecha.getText().toString().equals("")
-                || etHora.getText().toString().equals("")){
-            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
+        if (nombre.getText().toString().equals("") || direccion.getText().toString().equals("") || precio.getText().toString().equals("") || fecha.getText().toString().equals("")
+                || etHora.getText().toString().equals("")) {
+            Toast.makeText(this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+        } else {
 
             cargarWebService();
 
         }
 
     }
+
     public void registrar1(View view) {
         validacion();
     }

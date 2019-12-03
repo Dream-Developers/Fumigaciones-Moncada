@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fumigacionesmoncada.ChatActivity;
+import com.example.fumigacionesmoncada.ChatApplication;
 import com.example.fumigacionesmoncada.ChatsRecent;
 import com.example.fumigacionesmoncada.ContactsActivity;
 import com.example.fumigacionesmoncada.R;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
@@ -48,6 +50,15 @@ public class MensajesFragment extends Fragment {
 
         RecyclerView rv = view.findViewById(R.id.recycler_contact);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+
+        /*ChatApplication application =
+                (ChatApplication) getApplication();
+
+        getApplication().registerActivityLifecycleCallbacks(application);
+
+        <!--android:name=".ChatApplication"-->
+        */
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
@@ -82,11 +93,22 @@ public class MensajesFragment extends Fragment {
         });
 
 
-
+        updateToken();
         searchLastMensaje();
 
 
         return view;
+    }
+
+    private void updateToken() {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        if (uid != null) {
+            FirebaseFirestore.getInstance().collection("users")
+                    .document(uid)
+                    .update("token", token);
+        }
     }
 
     private void searchLastMensaje() {

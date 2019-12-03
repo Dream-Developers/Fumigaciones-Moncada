@@ -150,6 +150,21 @@ public class ChatActivity extends AppCompatActivity {
                                     .set(contact);
 
 
+                            if (!user.isOnline()) {
+                                Notification notification = new Notification();
+                                notification.setFromID(mensaje.getFromID());
+                                notification.setToID(mensaje.getToID());
+                                notification.setTimestap(mensaje.getTimestap());
+                                notification.setText(mensaje.getText());
+                                notification.setFromName(yo.getUsername());
+
+                                FirebaseFirestore.getInstance().collection("/notifications")
+                                        .document(user.getToken())
+                                        .set(notification);
+                            }
+
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

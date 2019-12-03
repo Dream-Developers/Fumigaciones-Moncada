@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -104,9 +105,16 @@ public class ContactsActivity extends AppCompatActivity {
                         }
 
                         List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+                            adapter.clear();
+
                         for (DocumentSnapshot doc: docs) {
                             User user = doc.toObject(User.class);
+                            String uid = FirebaseAuth.getInstance().getUid();
+                            if (user.getUuid().equals(uid))
+                                continue;
+
                             Log.d("Teste", user.getUsername());
+
 
                             adapter.add(new UserItem(user));
                         }

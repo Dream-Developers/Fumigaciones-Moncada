@@ -165,7 +165,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
 
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/auth/peticioncita";
+        String url=ip+"/api/peticioncita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

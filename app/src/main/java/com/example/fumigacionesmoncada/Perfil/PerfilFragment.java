@@ -303,9 +303,7 @@ public class PerfilFragment extends Fragment {
                     abrirCamara();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+                       abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
                     }
@@ -314,7 +312,39 @@ public class PerfilFragment extends Fragment {
         });
         builder.show();
     }
+    private void abrirGaleria() {
+        //Capturar la imagen del empleado desde la camara
 
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    100);
+
+        } else {
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            try {
+
+                //Se crea un achivo de la foto en blanco
+                pictureFile = getPictureFile();
+
+            } catch (Exception e) {
+
+            }
+
+
+            //se agrega la imagen capturada al archivo en blanco
+
+
+        }
+    }
 
     private void abrirCamara() {
         //Capturar la imagen del empleado desde la camara

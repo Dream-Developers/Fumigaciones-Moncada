@@ -10,11 +10,19 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class CitaVO {
-    private String id, nombre, direccion, telefono, fecha, hora;
+    private String id, nombre, direccion,txt_servicio, telefono, fecha, hora;
 
 
     public CitaVO() {
 
+    }
+
+    public String getTxt_servicio() {
+        return txt_servicio;
+    }
+
+    public void setTxt_servicio(String txt_servicio) {
+        this.txt_servicio = txt_servicio;
     }
 
     public String getHora() {

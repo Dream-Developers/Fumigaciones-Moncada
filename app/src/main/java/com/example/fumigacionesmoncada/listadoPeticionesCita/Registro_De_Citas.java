@@ -247,16 +247,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
                         citas.setHora(object.getString("Hora"));
                         citas.setServicio(object.getString("Servicio"));
                         citas.setEstado(object.getString("Estado_id"));
-                        if (citas.getEstado()=="1"){
-                            citas.setEstado("Pendiente");
-                        }
-                        if (citas.getEstado()=="2"){
-                            citas.setEstado("Aceptado");
-                        } if (citas.getEstado()=="3"){
-                            citas.setEstado("Cancelado");
-                        } if (citas.getEstado()=="4"){
-                            citas.setEstado("Rechazado");
-                        }
+
                         citas.setId(object.getString("id"));
 
                         cita.add(citas);
@@ -332,12 +323,16 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         try{
             dato = dato.toLowerCase();
             for(Citas_Peticiones permisos: listaTarea){
-                String nombre = permisos.getEstado().toLowerCase().trim();
+                String nombre = permisos.getServicio().toLowerCase().trim();
+                String nombre1 = permisos.getDireccion().toLowerCase().trim();
 
 
 
                 if(nombre.toLowerCase().contains(dato)) {
                     listaFiltradaPermiso.add(permisos);
+                }else{
+                    if(nombre1.toLowerCase().contains(dato))
+                        listaFiltradaPermiso.add(permisos);
                 }
             }
             citasAdapter.filtrar(listaFiltradaPermiso);

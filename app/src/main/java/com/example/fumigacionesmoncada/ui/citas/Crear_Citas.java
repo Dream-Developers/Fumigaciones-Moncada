@@ -96,7 +96,7 @@ public class Crear_Citas extends AppCompatActivity {
             }
         });
         etHora.setEnabled(false);
-
+        cargarPreferencias();
 
 
     }
@@ -322,11 +322,21 @@ public class Crear_Citas extends AppCompatActivity {
         String ip = getString(R.string.ip);
 
         String url = ip + "/api/cita";
+        try {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+            JSONObject parametros = new JSONObject();
+            parametros.put("Nombre", nombre.getText().toString());
+            parametros.put("Direccion", direccion.getText().toString());
+            parametros.put("Precio", precio.getText().toString());
+            parametros.put("FechaFumigacion", fecha.getText().toString());
+            parametros.put("Hora", etHora.getText().toString());
+            parametros.put("FechaProxima", fecha.getText().toString());
+            parametros.put("id_usuario", id_usuario);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url,parametros,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
                         progreso.hide();
 
                         finish();
@@ -351,24 +361,10 @@ public class Crear_Citas extends AppCompatActivity {
             }
         }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("Nombre", nombre.getText().toString());
-                parametros.put("Direccion", direccion.getText().toString());
-                parametros.put("Precio", precio.getText().toString());
-                parametros.put("FechaFumigacion", fecha.getText().toString());
-                parametros.put("Hora", etHora.getText().toString());
-                parametros.put("FechaProxima", fecha.getText().toString());
-                parametros.put("id_usuario", id_usuario);
-                return parametros;
-
-            }
-
-            @Override
-            public Map<String, String> getHeaders() {
+            public Map<String, String> getHeaders()throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("X-Requested-With", "XMLHttpRequest");
                 params.put("Authorization", "Bearer" + " " + tokenUsuario);
 
 
@@ -377,7 +373,10 @@ public class Crear_Citas extends AppCompatActivity {
         };
         //request.add(stringRequest);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonObjectRequest);
+        } catch(Exception exe){
+            Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void validacion() {

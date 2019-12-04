@@ -60,22 +60,22 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
         servicio.setText(citas.getServicio());
 
 
-        estado.setText(citas.getEstado());
-        if(estado.getText() == "Pendiente"){
+
+        if (citas.getEstado()=="1"){
             logo.setImageResource(R.drawable.pendiente);
-
-        }else{
-        if(estado.getText() == "Aceptado"){
-
+            citas.setEstado("Pendiente");
+            estado.setText("Pendiente");}
+        if (citas.getEstado()=="2"){
             logo.setImageResource(realizado_icon);
-        } else{if(estado.getText() == "Cancelado"){
-
+            estado.setText("Aceptado"); }
+        if (citas.getEstado()=="3"){
             logo.setImageResource(rechazdo);
-        }else{
-        if(estado.getText() == "Rechazado"){
-
+            estado.setText("Cancelado");
+        } if (citas.getEstado()=="4"){
             logo.setImageResource(cancelado_peticion);
-        }}}}
+            estado.setText("Rechazado");
+        }
+
 
         return convertView;
 

@@ -54,8 +54,12 @@ int i=0;
         Intent intent = null;
         String NOTIFICATION_CHANNEL_ID = getString(R.string.default_notification_channel_id);
 
+        if(obtener_rol_usuario()==1) {
+            intent = new Intent(this, NavegacionAdministradorActivity.class);
+        }else {
 
-        intent = new Intent(this, NavegacionAdministradorActivity.class);
+            intent = new Intent(this, MenuActivity.class);
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -67,7 +71,7 @@ int i=0;
         notificationBuilder
                 .setSmallIcon(R.drawable.logo)
                 .setColor(rgb(255,160,0))
-                .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{0, 1000, 500, 1000})
@@ -104,4 +108,10 @@ int i=0;
         editor.apply();
 
     }
+
+    public int obtener_rol_usuario(){
+        SharedPreferences sharedPreferences = getSharedPreferences("credenciales",Context.MODE_PRIVATE);
+        return Integer.parseInt(sharedPreferences.getString("rol",""));
+    }
+
 }

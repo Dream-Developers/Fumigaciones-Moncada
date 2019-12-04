@@ -97,6 +97,7 @@
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.clientes.Detalle_Cliente" />
+        <activity android:name=".ui.citas.Detalle_Cita" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

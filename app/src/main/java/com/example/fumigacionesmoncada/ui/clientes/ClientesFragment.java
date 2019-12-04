@@ -169,7 +169,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
             @Override
             public void onResponse(JSONObject response) {
 
-                 cliente = new ArrayList<>();
+                cliente = new ArrayList<>();
                 ClientesVO clientesVO = null;
                 try {
                     JSONArray array = response.getJSONArray("clientes");

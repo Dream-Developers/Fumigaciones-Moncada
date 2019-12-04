@@ -32,11 +32,18 @@ public class CitasAdapter extends ArrayAdapter<CitaVO> {
 
 
         TextView nombre = convertView.findViewById(R.id.nombre_cita);
-        TextView telefono = convertView.findViewById(R.id.direccion_cita);
+        TextView fecha = convertView.findViewById(R.id.fecha_cita);
+        TextView  direccion = convertView.findViewById(R.id.direccion_cita);
+        TextView txt_servicio = convertView.findViewById(R.id.txt_servicio);
+        TextView hora = convertView.findViewById(R.id.hora_cita);
         CitaVO citaVO = getItem(position);
 
         nombre.setText(citaVO.getNombre());
-        telefono.setText(citaVO.getDireccion());
+        fecha.setText(citaVO.getFecha());
+        direccion.setText(citaVO.getDireccion());
+        hora.setText(citaVO.getHora());
+        txt_servicio.setText(citaVO.getTxt_servicio());
+
 
 
         return  convertView;

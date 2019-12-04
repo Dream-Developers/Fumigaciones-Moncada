@@ -63,7 +63,6 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
 
         if (citas.getEstado()=="1"){
             logo.setImageResource(R.drawable.pendiente);
-            citas.setEstado("Pendiente");
             estado.setText("Pendiente");}
         if (citas.getEstado()=="2"){
             logo.setImageResource(realizado_icon);

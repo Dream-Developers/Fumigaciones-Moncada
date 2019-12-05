@@ -3,7 +3,9 @@ package com.example.fumigacionesmoncada.ui.Principal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +37,7 @@ public class DetalleImagenActivity extends AppCompatActivity {
     private TextView titulo, descripcion;
     NetworkImageView imagen;
     String id;
+    String tokenUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +52,15 @@ public class DetalleImagenActivity extends AppCompatActivity {
 
 
 
+cargarPreferencias();
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferences =this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+         tokenUsuario = preferences.getString("token", "");
+
 
     }
+
 
     private void cargarImagenWeb(final String id) {
         String ip=getString(R.string.ip);
@@ -86,6 +96,14 @@ public class DetalleImagenActivity extends AppCompatActivity {
                 Map<String,String>parametros = new HashMap<>();
                 parametros.put("id",id);
                 return parametros;
+            }
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
             }
         };
 

@@ -170,6 +170,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                             Map<String, String> parametros = new HashMap<>();
                             parametros.put("Content-Type", "application/json");
                             parametros.put("X-Requested-With", "XMLHttpRequest");
+                            parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
 
                             return parametros;
                         }

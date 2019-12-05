@@ -18,6 +18,7 @@ import androidx.annotation.RequiresApi;
 import com.example.fumigacionesmoncada.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.example.fumigacionesmoncada.R.drawable.cancelado_peticion;
 import static com.example.fumigacionesmoncada.R.drawable.realizado_icon;
@@ -61,16 +62,16 @@ public class Regstro_peticiones_adapter extends ArrayAdapter<Citas_Peticiones> {
 
 
 
-        if (citas.getEstado()=="1"){
+        if (Objects.equals(citas.getEstado(), "1")){
             logo.setImageResource(R.drawable.pendiente);
             estado.setText("Pendiente");}
-        if (citas.getEstado()=="2"){
+        if (Objects.equals(citas.getEstado(), "2")){
             logo.setImageResource(realizado_icon);
             estado.setText("Aceptado"); }
-        if (citas.getEstado()=="3"){
+        if (Objects.equals(citas.getEstado(), "3")){
             logo.setImageResource(rechazdo);
             estado.setText("Cancelado");
-        } if (citas.getEstado()=="4"){
+        } if (Objects.equals(citas.getEstado(), "4")){
             logo.setImageResource(cancelado_peticion);
             estado.setText("Rechazado");
         }

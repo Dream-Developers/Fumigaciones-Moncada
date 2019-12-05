@@ -165,7 +165,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         progreso.setMessage("Cargando datos...");
         progreso.show();
 
-        if (Estado == "1"){
+        if (Estado.equals("1")){
         try {
             String ip = getString(R.string.ip);
             String url = ip + "/api/peticionesCitas/" + id + "/update";

@@ -1,6 +1,7 @@
 package com.example.fumigacionesmoncada.Database.serviciosAdministrador;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -46,11 +47,12 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServiciosAdministradorFragment extends Fragment implements Response.Listener<JSONObject>,Response.ErrorListener  {
+public class ServiciosAdministradorFragment extends Fragment  {
     RecyclerView recyclerUsuarios;
     ArrayList<ServiciosVO> listaUsuarios;
     ProgressDialog dialog;
     JsonObjectRequest jsonObjectRequest;
+    String tokenUsuario;
 
     private OnFragmentInteractionListener mListener;
     ClaseAdapterImagen claseAdapterImagen;
@@ -70,7 +72,7 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
         cargarWebService();
-
+cargarPreferencias();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -144,6 +146,7 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> parametros= new HashMap<>();
                 parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return  parametros;
             }
         };
@@ -159,53 +162,64 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
         String ip=getString(R.string.ip);
 
         String url=ip+"/api/recuperar";
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        // request.add(jsonObjectRequest);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ServiciosVO servicio=null;
+
+                        JSONArray json=response.optJSONArray("servicio");
+
+                        try {
+
+                            for (int i=0;i<json.length();i++){
+                                servicio=new ServiciosVO();
+                                JSONObject jsonObject=null;
+                                jsonObject=json.getJSONObject(i);
+
+                                servicio.setId(String.valueOf(jsonObject.getInt("id")));
+                                servicio.setDescripcion(jsonObject.optString("nombre"));
+                                servicio.setRutaImagen(jsonObject.optString("foto"));
+                                listaUsuarios.add(servicio);
+                            }
+                            dialog.hide();
+                            ClaseAdapterImagen adapter=new ClaseAdapterImagen(listaUsuarios, getContext());
+                            recyclerUsuarios.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                                    " "+response, Toast.LENGTH_LONG).show();
+                            dialog.hide();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.toString().equals("com.android.volley.ServerError")) {
+                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }
+        };
+
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
 
-
-    }
-
-
-
-    @Override
-    public void onResponse(JSONObject response) {
-
-        ServiciosVO servicio=null;
-
-        JSONArray json=response.optJSONArray("servicio");
-
-        try {
-
-            for (int i=0;i<json.length();i++){
-                servicio=new ServiciosVO();
-                JSONObject jsonObject=null;
-                jsonObject=json.getJSONObject(i);
-
-                servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                servicio.setDescripcion(jsonObject.optString("nombre"));
-                servicio.setRutaImagen(jsonObject.optString("foto"));
-                listaUsuarios.add(servicio);
-            }
-            dialog.hide();
-            claseAdapterImagen=new ClaseAdapterImagen(listaUsuarios, getContext());
-            recyclerUsuarios.setAdapter(claseAdapterImagen);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
-                    " "+response, Toast.LENGTH_LONG).show();
-            dialog.hide();
-        }
-
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No hay acceso a internet", Toast.LENGTH_LONG).show();
-        System.out.println();
-        dialog.hide();
-        // Log.d("ERROR: ", error.toString());
 
     }
     public void onButtonPressed(Uri uri) {
@@ -228,6 +242,12 @@ public class ServiciosAdministradorFragment extends Fragment implements Response
             }
 
         }
+
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+
 
     }
 

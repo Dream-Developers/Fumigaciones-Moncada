@@ -31,7 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Principal_Fragment extends Fragment  implements Response.Listener<JSONObject>,Response.ErrorListener  {
+public class Principal_Fragment extends Fragment   {
 
 
 
@@ -134,8 +134,62 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
         String ip=getString(R.string.ip);
 
         String url=ip+"/api/recuperar";
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        // request.add(jsonObjectRequest);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ServiciosVO servicio=null;
+
+                        JSONArray json=response.optJSONArray("servicio");
+
+                        try {
+
+                            for (int i=0;i<json.length();i++){
+                                servicio=new ServiciosVO();
+                                JSONObject jsonObject=null;
+                                jsonObject=json.getJSONObject(i);
+
+                                servicio.setId(String.valueOf(jsonObject.getInt("id")));
+                                servicio.setDescripcion(jsonObject.optString("nombre"));
+                                servicio.setRutaImagen(jsonObject.optString("foto"));
+                                listaUsuarios.add(servicio);
+                            }
+                            dialog.hide();
+                            ClaseAdapterImagen adapter=new ClaseAdapterImagen(listaUsuarios, getContext());
+                            recyclerUsuarios.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                                    " "+response, Toast.LENGTH_LONG).show();
+                            dialog.hide();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.toString().equals("com.android.volley.ServerError")) {
+                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }
+        };
+
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
 
 
@@ -143,53 +197,7 @@ public class Principal_Fragment extends Fragment  implements Response.Listener<J
 
 
 
-    @Override
-    public void onResponse(JSONObject response) {
 
-        ServiciosVO servicio=null;
-
-        JSONArray json=response.optJSONArray("servicio");
-
-        try {
-
-            for (int i=0;i<json.length();i++){
-                servicio=new ServiciosVO();
-                JSONObject jsonObject=null;
-                jsonObject=json.getJSONObject(i);
-
-                servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                servicio.setDescripcion(jsonObject.optString("nombre"));
-                servicio.setRutaImagen(jsonObject.optString("foto"));
-                listaUsuarios.add(servicio);
-            }
-            dialog.hide();
-            ClaseAdapterImagen adapter=new ClaseAdapterImagen(listaUsuarios, getContext());
-            recyclerUsuarios.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
-                    " "+response, Toast.LENGTH_LONG).show();
-            dialog.hide();
-        }
-
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No hay acceso a internet", Toast.LENGTH_LONG).show();
-        System.out.println();
-        dialog.hide();
-       // Log.d("ERROR: ", error.toString());
-
-    }
-    public Map<String, String> getHeaders() {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("Authorization", "Bearer" + " " + tokenUsuario);
-
-
-        return params;
-    }
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

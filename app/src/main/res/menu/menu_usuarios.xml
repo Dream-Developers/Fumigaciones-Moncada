@@ -8,4 +8,16 @@
         android:title="@string/action_usuario"
         android:onClick="red_user"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/vision"
+        android:orderInCategory="100"
+        android:title="@string/mision_y_visi_n"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/confi"
+        android:orderInCategory="100"
+        android:title="Desarrolladores"
+        app:showAsAction="never" />
+
+
 </menu>

@@ -1,5 +1,7 @@
 package com.example.fumigacionesmoncada.ui.Mensajes;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,7 @@ import com.example.fumigacionesmoncada.ChatActivity;
 import com.example.fumigacionesmoncada.ChatApplication;
 import com.example.fumigacionesmoncada.ChatsRecent;
 import com.example.fumigacionesmoncada.ContactsActivity;
+import com.example.fumigacionesmoncada.NavegacionAdministradorActivity;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +41,7 @@ import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
 
-public class MensajesFragment extends Fragment {
+public class MensajesFragment extends Fragment   implements Application.ActivityLifecycleCallbacks {
 
     private FloatingActionButton add_chat;
     private GroupAdapter adapter;
@@ -52,13 +56,11 @@ public class MensajesFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
 
-        /*ChatApplication application =
-                (ChatApplication) getApplication();
+        getActivity().getApplication().registerActivityLifecycleCallbacks(this);
 
-        getApplication().registerActivityLifecycleCallbacks(application);
 
-        <!--android:name=".ChatApplication"-->
-        */
+        //<!--android:name=".ChatApplication"-->
+
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
@@ -138,6 +140,122 @@ public class MensajesFragment extends Fragment {
                 });
 
 
+    }
+
+    @Override
+    public void onActivityPreCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onActivityPostCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onActivityPreStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPostStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPreResumed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+        setOnline(true);
+    }
+
+    @Override
+    public void onActivityPostResumed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPrePaused(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+        setOnline(false);
+    }
+
+    @Override
+    public void onActivityPostPaused(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPreStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPostStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPreSaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
+
+    }
+
+    @Override
+    public void onActivityPostSaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityPreDestroyed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPostDestroyed(@NonNull Activity activity) {
+
+    }
+
+
+    private void setOnline(boolean enabled) {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid != null) {
+            FirebaseFirestore.getInstance().collection("users")
+                    .document(uid)
+                    .update("online", enabled);
+        }
+        Toast.makeText(getActivity(), "Si da", Toast.LENGTH_LONG).show();
     }
 
     public  class ContactoItem extends Item<ViewHolder>{

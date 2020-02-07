@@ -45,6 +45,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         user = new User(getIntent().getStringExtra("uuid"),
                 getIntent().getStringExtra("name"),
                 getIntent().getStringExtra("photo"));

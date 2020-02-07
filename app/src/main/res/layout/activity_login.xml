@@ -78,6 +78,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rectangulo_blanco"
                     android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
+                    android:inputType="textEmailAddress"
                     android:hint="Correo"
                     android:drawablePadding="10dp"
                     android:textColor="#fff"

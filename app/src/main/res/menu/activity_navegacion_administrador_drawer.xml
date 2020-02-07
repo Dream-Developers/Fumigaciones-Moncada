@@ -53,14 +53,4 @@
         </menu>
     </item>
 
-
-    <item android:title="Información">
-        <menu>
-            <item
-                android:id="@+id/nav_acercad"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="@string/menu_acercad" />
-        </menu>
-    </item>
-
 </menu>

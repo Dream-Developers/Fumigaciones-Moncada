@@ -128,12 +128,12 @@ public class LoginActivity extends AppCompatActivity {
                         ContractParaListaUsers.Columnas.ROL + "=?",
                 new String[]{"1", "2"}, null, null);
 
-        cursor.moveToNext();
-        Log.i("USUARIO", "" + cursor.getCount());
 
         try {
-            if (cursor.getCount() == 1) {
+            if (cursor!=null&& cursor.getCount() == 1) {
 
+                Log.i("USUARIO", "" + cursor.getCount());
+                cursor.moveToNext();
                 Intent intent = new Intent(LoginActivity.this, MensajesFragment.class);
                 startActivity(intent);
                 finish();

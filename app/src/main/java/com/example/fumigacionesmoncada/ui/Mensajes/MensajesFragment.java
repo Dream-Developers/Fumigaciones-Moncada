@@ -255,7 +255,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                     .document(uid)
                     .update("online", enabled);
         }
-        Toast.makeText(getActivity(), "Si da", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Si da", Toast.LENGTH_LONG).show();
     }
 
     public  class ContactoItem extends Item<ViewHolder>{

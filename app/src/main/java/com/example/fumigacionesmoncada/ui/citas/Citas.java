@@ -1,21 +1,49 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
 public class Citas {
-    private String nombre;
-    private String direccion;
-    private String precio;
-    private String fecha;
-    private String hora;
+    public int id;
+    public String idRemta;
+    public String nombre;
+    public String direccion;
+    public String precio;
+    public String fecha;
 
-    public String getId() {
+    public String getFecha_proxima() {
+        return fecha_proxima;
+    }
+
+    public void setFecha_proxima(String fecha_proxima) {
+        this.fecha_proxima = fecha_proxima;
+    }
+
+    public String fecha_proxima;
+    public String hora;
+    public String id_usuario;
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getIdRemta() {
+        return idRemta;
+    }
+
+    public void setIdRemta(String idRemta) {
+        this.idRemta = idRemta;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    private String id;
 
     public String getNombre() {
         return nombre;

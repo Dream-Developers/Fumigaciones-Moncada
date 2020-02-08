@@ -105,7 +105,7 @@ private FloatingActionButton addcita;
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                eliminarCitaWebService(cit.getId(),position);
+                eliminarCitaWebService(String.valueOf(cit.getId()),position);
 
             }
         });
@@ -199,7 +199,7 @@ private FloatingActionButton addcita;
                             citas.setPrecio(object.getString("Precio"));
                             citas.setFecha(object.getString("FechaFumigacion"));
                             citas.setHora(object.getString("Hora"));
-                            citas.setId(object.getString("id"));
+                            citas.setId(object.getInt("id"));
 
 
                             cita.add(citas);

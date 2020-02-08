@@ -96,7 +96,7 @@ int i=0;
             notificationManager.createNotificationChannel(notificationChannel);
         }
         i =(int) (Math.random()*1000 + 1);
-        notificationManager.notify(i++ /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(i /* ID of notification */, notificationBuilder.build());
     }
     private void guardarTokenFirebase(String token) {
         //Este token es para identificar el dispositivo a que se le mandara la notificacion

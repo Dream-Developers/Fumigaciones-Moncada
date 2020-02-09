@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/esteesmaschido"
+    android:background="@drawable/twelve"
     >
 
             <LinearLayout
@@ -28,24 +28,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-
+                        <TextView
+                            android:id="@+id/txtnombres"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Juan Oseguera"
+                            android:layout_gravity="center"
+                         android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="25dp"
+                            android:textStyle="bold" />
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/imageView"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginTop="45dp"
                     android:scaleType="centerCrop"
+                    android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
                     />
-                <TextView
-                    android:id="@+id/txtnombres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juan Oseguera"
-                    android:layout_gravity="center"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="25dp"
-                    android:textStyle="normal|bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,7 +61,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"
                     android:inputType="text"
-                    android:textAlignment="center"
                     android:maxLength="50"
                     android:gravity="center"
                     android:layout_marginLeft="15dp"
@@ -86,7 +87,6 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:maxLength="250"
-                    android:textAlignment="center"
                     android:gravity="center"
                     android:textColor="#ffffff"
                     android:inputType="text"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:text="Teléfono :"
                     android:textColor="#fff"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:layout_marginLeft="15dp"/>
 
                 <EditText
@@ -147,6 +147,7 @@
                     android:textAllCaps="false"
                     android:textAlignment="center"
                     android:textSize="25dp"
+                    android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                    />
                     </LinearLayout>

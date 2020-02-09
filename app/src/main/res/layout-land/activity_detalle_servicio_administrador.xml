@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/esteesmaschido"
+    android:background="@color/colorAccent"
     >
 
         <androidx.cardview.widget.CardView
@@ -38,7 +38,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Titulo"
-                    android:textAlignment="center"
                     android:textColor="#000"
                     android:textSize="30sp"
                     android:maxLength="500"
@@ -60,7 +59,7 @@
                     android:background="@drawable/oval"
                     android:textAllCaps="false"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="normal|bold"
+                    android:textStyle="bold"
                     android:layout_marginTop="25dp"
                     android:textSize="20dp"
                     android:layout_marginBottom="25dp"

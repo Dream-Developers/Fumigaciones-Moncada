@@ -6,7 +6,7 @@
     android:id="@+id/login_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/dos"
     android:alpha="1"
     tools:context=".LoginActivity">
 

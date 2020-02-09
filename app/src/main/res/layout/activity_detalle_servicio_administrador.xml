@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/esteesmaschido"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     >
 
@@ -11,7 +11,7 @@
 
             android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
             card_view:cardBackgroundColor="#2D000000"
@@ -36,6 +36,19 @@
                         />
 
             </LinearLayout>
+
+                <EditText
+                    android:id="@+id/tituloImagenDA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:maxLength="500"
+                    android:text="Titulo"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -44,17 +57,6 @@
                    android:layout_height="wrap_content"
                    android:orientation="vertical">
 
-                   <EditText
-                       android:layout_marginTop="15dp"
-                       android:id="@+id/tituloImagenDA"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="Titulo"
-                       android:textAlignment="center"
-                       android:textColor="#000"
-                       android:textSize="30sp"
-                       android:maxLength="500"
-                       android:textStyle="bold" />
                    <EditText
                        android:id="@+id/descripcionImagenDA"
                        android:layout_width="match_parent"
@@ -72,7 +74,7 @@
                        android:background="@drawable/oval"
                        android:textAllCaps="false"
                        android:textColor="@color/colorAccent"
-                       android:textStyle="normal|bold"
+                       android:textStyle="bold"
                        android:layout_marginTop="25dp"
                        android:textSize="20dp"
                        android:layout_marginBottom="25dp"

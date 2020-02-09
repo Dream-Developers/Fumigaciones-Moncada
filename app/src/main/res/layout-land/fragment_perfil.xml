@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@drawable/esteesmaschido"
+   android:background="@drawable/twelve"
     >
 
         <androidx.cardview.widget.CardView
@@ -34,7 +34,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1.5">
+                <TextView
+                    android:id="@+id/txtnombres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Juan Oseguera"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
 
 
                     <TextView
@@ -119,17 +129,6 @@
                         android:textSize="25dp"
                         android:focusable="false"/>
 
-                    <Button
-                        android:id="@+id/pedir"
-                        android:layout_width="180dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/oval"
-                        android:text="Guardar"
-                        android:layout_margin="5dp"
-                        android:textSize="25dp"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorPrimary" />
 
 
             </LinearLayout>
@@ -143,21 +142,23 @@
 
                     <com.android.volley.toolbox.NetworkImageView
                         android:id="@+id/imageView"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="45dp"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="25dp"
                         android:layout_gravity="center" />
 
-                    <TextView
-                        android:id="@+id/txtnombres"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Juan Oseguera"
-                        android:layout_margin="5dp"
+                    <Button
+                        android:id="@+id/pedir"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="20dp"
-                        android:textStyle="normal|bold" />
+                        android:background="@drawable/oval"
+                        android:text="Guardar"
+                        android:textSize="25dp"
+                        android:textAllCaps="false"
+                        android:layout_marginTop="45dp"
+                        android:textColor="@color/colorPrimary" />
+
 
 
 

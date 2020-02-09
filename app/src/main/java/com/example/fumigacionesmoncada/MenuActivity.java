@@ -4,24 +4,22 @@ import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.fumigacionesmoncada.ui.Acerca.AcercaFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -92,6 +90,28 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 }).show();
     }
+
+    public void vision_user(View view){
+        Intent i= new Intent(this, AcercaFragment.class);
+
+        startActivity(i);
+    }
+
+   @Override public boolean onOptionsItemSelected(MenuItem opcion_menu){
+        int id = opcion_menu.getItemId();
+
+        if(id== R.id.vision){
+
+           vision_user(null);
+            return true;
+        }
+
+        if (id== R.id.confi){
+
+            return true;
+        }
+        return  super.onOptionsItemSelected(opcion_menu);
+   }
 
     private void logout() {
         SharedPrefManager.getInstance(MenuActivity.this).clear();

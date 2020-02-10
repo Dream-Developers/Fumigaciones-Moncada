@@ -1,29 +1,20 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Citas_Adapter extends ArrayAdapter<Citas> {
 
@@ -55,7 +46,7 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
         nombre.setText(citas.getNombre());
         direccion.setText(citas.getDireccion());
         precio.setText(citas.getPrecio());
-        fecha.setText(citas.getFecha());
+        fecha.setText(citas.getFechaFumigacion());
         hora.setText(citas.getHora());
 
 

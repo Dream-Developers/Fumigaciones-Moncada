@@ -1,10 +1,14 @@
 package com.example.fumigacionesmoncada;
 
 import android.annotation.TargetApi;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.fumigacionesmoncada.CitasSync.CitasSyncAdapter;
+import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,11 +27,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class NavegacionAdministradorActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    ContentResolver resolver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +63,20 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        resolver=getContentResolver();
 
         CitasSyncAdapter.inicializarSyncAdapter(this);
         CitasSyncAdapter.obtenerCuentaASincronizar(this);
         CitasSyncAdapter.sincronizarAhora(this,false);
 
+        Cursor cursor= obtenerRegistrosFecha();
+        if(cursor.moveToFirst()){
+            Log.i("principal","Si hay registros");
+
+        }else{
+            Log.i("principal","no hay registros");
+            Toast.makeText(this, "No hay", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -82,6 +101,17 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         alertaCerrarSesionAdmin();
     }
 
+    public Cursor obtenerRegistrosFecha(){
+        String fecha_hora = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        Toast.makeText(this, ""+fecha_hora, Toast.LENGTH_SHORT).show();
+        Uri uri = ContractCitas.CONTENT_URI;
+        String selection = ContractCitas.Columnas.FECHA_FUMIGACION+"=?";
+        String[] selectionArgas = new String[]{fecha_hora};
+
+        return resolver.query(uri, null, selection, selectionArgas, null);
+
+    }
 
     public void alertaCerrarSesionAdmin() {
         new AlertDialog.Builder(NavegacionAdministradorActivity.this)

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "218069660386",
-    "firebase_url": "https://chatnuevo-0703.firebaseio.com",
-    "project_id": "chatnuevo-0703",
-    "storage_bucket": "chatnuevo-0703.appspot.com"
+    "project_number": "611997457459",
+    "firebase_url": "https://project-7047723235310926482.firebaseio.com",
+    "project_id": "project-7047723235310926482",
+    "storage_bucket": "project-7047723235310926482.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:218069660386:android:0807f32c05294e5dd864bb",
+        "mobilesdk_app_id": "1:611997457459:android:9c9005ef0b7dc7b7eb9746",
         "android_client_info": {
           "package_name": "com.example.fumigacionesmoncada"
         }
       },
       "oauth_client": [
         {
-          "client_id": "218069660386-o8nvht7bafmc825pjh4oun22vfbhko2c.apps.googleusercontent.com",
+          "client_id": "611997457459-oni27mq5pt2mud369e95sq177rst0n92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.fumigacionesmoncada",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "218069660386-l5l845an1p3855f9d48k2e2ras0c3muq.apps.googleusercontent.com",
+          "client_id": "611997457459-q3f78rnrfokmqcdfhqqjsqq5ive9ro0u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAawagCmUWoaj0MiniYYWOgSNmdgL4ahYE"
+          "current_key": "AIzaSyCiu3uip-nBOvTD9O7sJcMEsQOnHiuWygg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "218069660386-l5l845an1p3855f9d48k2e2ras0c3muq.apps.googleusercontent.com",
+              "client_id": "611997457459-q3f78rnrfokmqcdfhqqjsqq5ive9ro0u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

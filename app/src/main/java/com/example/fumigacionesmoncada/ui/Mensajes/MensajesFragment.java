@@ -3,6 +3,8 @@ package com.example.fumigacionesmoncada.ui.Mensajes;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fumigacionesmoncada.ChatActivity;
 import com.example.fumigacionesmoncada.ChatApplication;
 import com.example.fumigacionesmoncada.ChatsRecent;
+import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
 import com.example.fumigacionesmoncada.ContactsActivity;
 import com.example.fumigacionesmoncada.NavegacionAdministradorActivity;
 import com.example.fumigacionesmoncada.R;
@@ -39,7 +42,10 @@ import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MensajesFragment extends Fragment   implements Application.ActivityLifecycleCallbacks {
 
@@ -98,10 +104,27 @@ public class MensajesFragment extends Fragment   implements Application.Activity
         updateToken();
         searchLastMensaje();
 
+        Cursor cursor= obtenerRegistrosFecha();
+
+        if(cursor!=null&&cursor.moveToNext()){
+            Toast.makeText(getContext(), "Si hay registros de hou", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getContext(), "No hay", Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }
 
+    public Cursor obtenerRegistrosFecha(){
+        String fecha_hora = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        Uri uri = ContractCitas.CONTENT_URI;
+        String selection = ContractCitas.Columnas.FECHA_FUMIGACION+"=?";
+        String[] selectionArgas = new String[]{fecha_hora};
+
+        return getContext().getContentResolver().query(uri, null, selection, selectionArgas, null);
+
+    }
     private void updateToken() {
         String token = FirebaseInstanceId.getInstance().getToken();
         String uid = FirebaseAuth.getInstance().getUid();
@@ -255,7 +278,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                     .document(uid)
                     .update("online", enabled);
         }
-        Toast.makeText(getContext(), "Si da", Toast.LENGTH_LONG).show();
+
     }
 
     public  class ContactoItem extends Item<ViewHolder>{

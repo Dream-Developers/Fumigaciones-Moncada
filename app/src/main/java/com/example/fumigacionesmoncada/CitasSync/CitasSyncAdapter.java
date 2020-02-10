@@ -293,39 +293,42 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
      * @param syncResult Registros de la sincronización
      */
     private void actualizarDatosLocales(JSONObject response, SyncResult syncResult) {
-
-        JSONArray gastos = null;
+        JSONArray citasArray = null;
 
         try {
-            // Obtener array "gastos"
-            gastos = response.getJSONArray("citas");
-        } catch (JSONException e) {
-            e.printStackTrace();
+            citasArray = response.getJSONArray("citas");
+            Log.i(TAG, String.valueOf(citasArray));
+        } catch (Exception exc) {
+            exc.printStackTrace();
         }
-        // Parsear con Gson
-        Citas[] res = gson.fromJson(gastos != null ? gastos.toString() : null, Citas[].class);
-        List<Citas> data = Arrays.asList(res);
+        //parsear con Gson
 
-        // Lista para recolección de operaciones pendientes
+        Citas[] res = gson.fromJson(citasArray != null ? citasArray.toString() : null, Citas[].class);
+        List<Citas> data = Arrays.asList(res);
+        Log.d(TAG, ""+data);
+
+        //Lista para la recoleccion de datos pendientes
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
 
-        // Tabla hash para recibir las entradas entrantes
+        //Tabla hash para recibir las entradas entrantes
         HashMap<Integer, Citas> expenseMap = new HashMap<Integer, Citas>();
         for (Citas e : data) {
-            expenseMap.put(e.getId(), e);
+            expenseMap.put(e.id,e);
         }
+
 
         // Consultar registros remotos actuales
         Uri uri = ContractCitas.CONTENT_URI;
-        String select = ContractCitas.Columnas.ID_REMOTA + " IS NOT NULL";
+        String select = ContractCitas.Columnas.ID_REMOTA;
         Cursor c = resolver.query(uri, PROJECTION, select, null, null);
         assert c != null;
 
         Log.i(TAG, "Se encontraron " + c.getCount() + " registros locales.");
 
         // Encontrar datos obsoletos
-        String id;
+        int id;
         String nombre;
+
         String direccion;
         String precio;
         String fechaFumigacion;
@@ -333,10 +336,11 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
         String hora;
         String id_usuario;
 
+
         while (c.moveToNext()) {
             syncResult.stats.numEntries++;
 
-            id = c.getString(c.getColumnIndex(ContractCitas.Columnas.ID_REMOTA));
+            id = c.getInt(c.getColumnIndex(ContractCitas.Columnas.ID_REMOTA));
             nombre = c.getString(c.getColumnIndex(ContractCitas.Columnas.NOMBRE));
             direccion = c.getString(c.getColumnIndex(ContractCitas.Columnas.DIRECCION));
             precio = c.getString(c.getColumnIndex(ContractCitas.Columnas.PRECIO));
@@ -347,36 +351,32 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
 
             Citas match = expenseMap.get(id);
 
+            //Esta entrada existe
             if (match != null) {
-                // Esta entrada existe, por lo que se remueve del mapeado
                 expenseMap.remove(id);
 
                 Uri existingUri = ContractCitas.CONTENT_URI.buildUpon()
-                        .appendPath(id).build();
+                        .appendPath(String.valueOf(id)).build();
 
                 // Comprobar si el gasto necesita ser actualizado
-
-                boolean b1 = match.nombre != null && !match.nombre.equals(nombre);
-                boolean b2 = match.fecha != null && !match.fecha.equals(fechaFumigacion);
-                boolean b3 = match.precio != null && !match.precio.equals(precio);
-                boolean b4 = match.direccion != null && !match.direccion.equals(direccion);
-                boolean b5 = match.hora != null && !match.hora.equals(hora);
-                boolean b6 = match.fecha_proxima != null && !match.fecha_proxima.equals(fechaProxima);
-
+                boolean b = match.Nombre != null && !match.Nombre.equals(nombre);
+                boolean b2 = match.FechaFumigacion != null && !match.FechaFumigacion.equals(fechaFumigacion);
+                boolean b3 = match.Precio != null && !match.Precio.equals(precio);
+                boolean b4 = match.Direccion != null && !match.Direccion.equals(direccion);
+                boolean b5 = match.Hora != null && !match.Hora.equals(hora);
+                boolean b6 = match.FechaProxima != null && !match.FechaProxima.equals(fechaProxima);
 
 
+                if (b|| b2 || b3||b4||b5||b6) {
 
-                if ( b1 || b2 || b3||b4||b5||b6) {
-
-                    Log.i(TAG, "Programando actualización de: " + existingUri);
-
+                    Log.d(TAG, "Programando Atualizacion de:" + existingUri);
                     ops.add(ContentProviderOperation.newUpdate(existingUri)
-                            .withValue(ContractCitas.Columnas.NOMBRE, match.nombre)
-                            .withValue(ContractCitas.Columnas.DIRECCION, match.direccion)
-                            .withValue(ContractCitas.Columnas.FECHA_FUMIGACION, match.fecha)
-                            .withValue(ContractCitas.Columnas.HORA, match.hora)
-                            .withValue(ContractCitas.Columnas.PRECIO, match.precio)
-                            .withValue(ContractCitas.Columnas.FECHA_PROXIMA, match.fecha_proxima)
+                            .withValue(ContractCitas.Columnas.NOMBRE, match.Nombre)
+                            .withValue(ContractCitas.Columnas.DIRECCION, match.Direccion)
+                            .withValue(ContractCitas.Columnas.FECHA_FUMIGACION, match.FechaFumigacion)
+                            .withValue(ContractCitas.Columnas.HORA, match.Hora)
+                            .withValue(ContractCitas.Columnas.PRECIO, match.Precio)
+                            .withValue(ContractCitas.Columnas.FECHA_PROXIMA, match.FechaProxima)
 
 
                             .build());
@@ -387,7 +387,7 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
             } else {
                 // Debido a que la entrada no existe, es removida de la base de datos
                 Uri deleteUri = ContractCitas.CONTENT_URI.buildUpon()
-                        .appendPath(id).build();
+                        .appendPath(String.valueOf(id)).build();
                 Log.i(TAG, "Programando eliminación de: " + deleteUri);
                 ops.add(ContentProviderOperation.newDelete(deleteUri).build());
                 syncResult.stats.numDeletes++;
@@ -395,22 +395,23 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
         }
         c.close();
 
-        //todo corregir problema de insertar los datos, postdata se llenan nullos
         // Insertar items resultantes
         for (Citas e : expenseMap.values()) {
-            Log.i(TAG, "Programando inserción de: " + e.id);
+            //  image = convertirImgString(e.fotografia);
+
+            Log.i(TAG, "Programando inserción de: " + e.id+e.Nombre);
             ops.add(ContentProviderOperation.newInsert(ContractCitas.CONTENT_URI)
                     .withValue(ContractCitas.Columnas.ID_REMOTA, e.id)
-                    .withValue(ContractCitas.Columnas.NOMBRE, e.nombre)
-                    .withValue(ContractCitas.Columnas.DIRECCION, e.direccion)
-                    .withValue(ContractCitas.Columnas.FECHA_PROXIMA, e.fecha_proxima)
-                    .withValue(ContractCitas.Columnas.FECHA_FUMIGACION, e.fecha)
-                    .withValue(ContractCitas.Columnas.HORA, e.hora)
-                    .withValue(ContractCitas.Columnas.PRECIO, e.precio)
+                    .withValue(ContractCitas.Columnas.NOMBRE, e.Nombre)
+                    .withValue(ContractCitas.Columnas.DIRECCION, e.Direccion)
+                    .withValue(ContractCitas.Columnas.FECHA_PROXIMA, e.FechaProxima)
+                    .withValue(ContractCitas.Columnas.FECHA_FUMIGACION, e.FechaFumigacion)
+                    .withValue(ContractCitas.Columnas.HORA, e.Hora)
+                    .withValue(ContractCitas.Columnas.PRECIO, e.Precio)
+
                     .build());
             syncResult.stats.numInserts++;
         }
-
         if (syncResult.stats.numInserts > 0 ||
                 syncResult.stats.numUpdates > 0 ||
                 syncResult.stats.numDeletes > 0) {
@@ -419,6 +420,7 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
                 resolver.applyBatch(ContractCitas.AUTHORITY, ops);
             } catch (RemoteException | OperationApplicationException e) {
                 e.printStackTrace();
+                Log.d(TAG,"No se inserto");
             }
             resolver.notifyChange(
                     ContractCitas.CONTENT_URI,
@@ -429,7 +431,6 @@ public class CitasSyncAdapter extends AbstractThreadedSyncAdapter {
         } else {
             Log.i(TAG, "No se requiere sincronización");
         }
-
     }
 
     /**

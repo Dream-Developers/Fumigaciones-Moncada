@@ -73,7 +73,7 @@ cargarPreferencias();
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject object = response.getJSONObject("servicio");
-                            titulo.setText(object.getString("nombre"));
+                            titulo.setText(object.getString("Nombre"));
                             descripcion.setText(object.getString("descripcion"));
                             cargarImagen(object.getString("foto"));
 

@@ -150,7 +150,7 @@ public class Principal_Fragment extends Fragment   {
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("nombre"));
+                                servicio.setDescripcion(jsonObject.optString("Nombre"));
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }

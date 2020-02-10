@@ -3,22 +3,23 @@ package com.example.fumigacionesmoncada.ui.citas;
 public class Citas {
     public int id;
     public String idRemta;
-    public String nombre;
-    public String direccion;
-    public String precio;
-    public String fecha;
+    public String Nombre;
+    public String Direccion;
+    public String Precio;
+    public String FechaFumigacion;
 
-    public String getFecha_proxima() {
-        return fecha_proxima;
-    }
-
-    public void setFecha_proxima(String fecha_proxima) {
-        this.fecha_proxima = fecha_proxima;
-    }
-
-    public String fecha_proxima;
-    public String hora;
+    public String FechaProxima;
+    public String Hora;
     public String id_usuario;
+
+    public String getFechaProxima() {
+        return FechaProxima;
+    }
+
+    public void setFechaProxima(String fechaProxima) {
+        this.FechaProxima = fechaProxima;
+    }
+
 
     public String getId_usuario() {
         return id_usuario;
@@ -46,42 +47,42 @@ public class Citas {
 
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.Nombre = nombre;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.Direccion = direccion;
     }
 
     public String getPrecio() {
-        return precio;
+        return Precio;
     }
 
     public void setPrecio(String precio) {
-        this.precio = precio;
+        this.Precio = precio;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getFechaFumigacion() {
+        return FechaFumigacion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaFumigacion(String fechaFumigacion) {
+        this.FechaFumigacion = fechaFumigacion;
     }
 
     public String getHora() {
-        return hora;
+        return Hora;
     }
 
     public void setHora(String hora) {
-        this.hora = hora;
+        this.Hora = hora;
     }
 }

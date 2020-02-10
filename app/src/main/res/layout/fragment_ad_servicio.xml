@@ -147,7 +147,7 @@
                     android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/fecha"
+                    android:id="@+id/fechaFumigacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangulo_blanco"

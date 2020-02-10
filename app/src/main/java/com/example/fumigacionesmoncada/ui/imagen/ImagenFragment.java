@@ -155,8 +155,8 @@ public class ImagenFragment extends Fragment {
 
                 }else {
                     if (campoNombre.getText().toString().length() == 0) {
-                        campoNombre.setError("Ingrese el nombre");
-                        Toast.makeText(getContext(), "Ingrese el nombre", Toast.LENGTH_SHORT).show();
+                        campoNombre.setError("Ingrese el Nombre");
+                        Toast.makeText(getContext(), "Ingrese el Nombre", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -472,7 +472,7 @@ public class ImagenFragment extends Fragment {
                 String imagen = convertirImgString(bitmap);
 
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("nombre", nombre);
+                parametros.put("Nombre", nombre);
                 parametros.put("descripcion", descripcion);
                 parametros.put("foto", imagen);
 

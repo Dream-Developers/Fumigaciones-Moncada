@@ -211,9 +211,9 @@ public class Crear_Citas extends AppCompatActivity {
                 @Override
 
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    //Se validan la fecha actual con la tomada por el usuario para asi
-                    //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
-                    //la hora actual debe ser menor a la hora tomada.
+                    //Se validan la FechaFumigacion actual con la tomada por el usuario para asi
+                    //tomar una validacion distinta, si la FechaFumigacion actual es igual a la que tomo el usuario
+                    //la Hora actual debe ser menor a la Hora tomada.
                     if (fecha_usuarioDate.equals(fecha_actualDate)) {
 
                         if (hour < hourOfDay) {
@@ -233,7 +233,7 @@ public class Crear_Citas extends AppCompatActivity {
                             }
 
                         } else {
-                            Toast.makeText(Crear_Citas.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Citas.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -341,7 +341,7 @@ public class Crear_Citas extends AppCompatActivity {
 
                         finish();
 
-                        Toast.makeText(getApplicationContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Crear_Citas.this, "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
 
 
                     }

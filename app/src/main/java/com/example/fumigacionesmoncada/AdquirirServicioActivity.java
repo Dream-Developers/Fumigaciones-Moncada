@@ -76,7 +76,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         mostrarDireccion = (EditText) findViewById(R.id.direccion);
         mostraraTelefono = (EditText) findViewById(R.id.telefono);
         Hora = (EditText) findViewById(R.id.hora);
-        fecha = (EditText) findViewById(R.id.fecha);
+        fecha = (EditText) findViewById(R.id.fechaFumigacion);
         pedir = findViewById(R.id.pedir);
         mostrarservicion = findViewById(R.id.servicio);
         request = Volley.newRequestQueue(this);
@@ -361,9 +361,9 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                 @Override
 
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    //Se validan la fecha actual con la tomada por el usuario para asi
-                    //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
-                    //la hora actual debe ser menor a la hora tomada.
+                    //Se validan la FechaFumigacion actual con la tomada por el usuario para asi
+                    //tomar una validacion distinta, si la FechaFumigacion actual es igual a la que tomo el usuario
+                    //la Hora actual debe ser menor a la Hora tomada.
                     if(fecha_usuarioDate.equals(fecha_actualDate)){
 
                         if(hour<hourOfDay){
@@ -383,7 +383,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                             }
 
                         }else{
-                            Toast.makeText(AdquirirServicioActivity.this, "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AdquirirServicioActivity.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
                         }
 
 

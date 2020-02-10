@@ -33,10 +33,7 @@ import com.example.fumigacionesmoncada.ClaseVolley;
 
 import com.example.fumigacionesmoncada.R;
 
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
-import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -197,7 +194,7 @@ private FloatingActionButton addcita;
                             citas.setNombre(object.getString("Nombre"));
                             citas.setDireccion(object.getString("Direccion"));
                             citas.setPrecio(object.getString("Precio"));
-                            citas.setFecha(object.getString("FechaFumigacion"));
+                            citas.setFechaFumigacion(object.getString("FechaFumigacion"));
                             citas.setHora(object.getString("Hora"));
                             citas.setId(object.getInt("id"));
 

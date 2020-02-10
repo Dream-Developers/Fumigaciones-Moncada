@@ -82,7 +82,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
         mostrarDireccion = (EditText) view.findViewById(R.id.direccion);
         mostraraTelefono = (EditText) view.findViewById(R.id.telefono);
         Hora = (EditText) view.findViewById(R.id.hora);
-        fecha = (EditText) view.findViewById(R.id.fecha);
+        fecha = (EditText) view.findViewById(R.id.fechaFumigacion);
         pedir = view.findViewById(R.id.pedir);
         request = Volley.newRequestQueue(getActivity());
         Hora.setOnClickListener(new View.OnClickListener() {
@@ -360,9 +360,9 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                 @Override
 
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    //Se validan la fecha actual con la tomada por el usuario para asi
-                    //tomar una validacion distinta, si la fecha actual es igual a la que tomo el usuario
-                    //la hora actual debe ser menor a la hora tomada.
+                    //Se validan la FechaFumigacion actual con la tomada por el usuario para asi
+                    //tomar una validacion distinta, si la FechaFumigacion actual es igual a la que tomo el usuario
+                    //la Hora actual debe ser menor a la Hora tomada.
                     if(fecha_usuarioDate.equals(fecha_actualDate)){
 
                         if(hour<hourOfDay){
@@ -382,7 +382,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                             }
 
                         }else{
-                            Toast.makeText(getContext(), "La hora seleccionada no es correcta, debe ser mayor a la hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
                         }
 
 

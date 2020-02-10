@@ -138,7 +138,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
 
 
                     JSONObject parametros = new JSONObject();
-                    parametros.put("nombre", titulo.getText().toString());
+                    parametros.put("Nombre", titulo.getText().toString());
                     parametros.put("descripcion", descripcion.getText().toString());
                     if (bitmap == null) {
                         parametros.put("foto", null);
@@ -201,7 +201,7 @@ public class DetalleServicioAdministradorActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject object = response.getJSONObject("servicio");
-                            titulo.setText(object.getString("nombre"));
+                            titulo.setText(object.getString("Nombre"));
                             descripcion.setText(object.getString("descripcion"));
                             cargarImagen(object.getString("foto"));
 

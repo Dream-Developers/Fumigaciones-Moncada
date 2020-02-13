@@ -1,24 +1,15 @@
 package com.example.fumigacionesmoncada.ui.solicitarCita;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -27,13 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
-import com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment;
-import com.example.fumigacionesmoncada.ui.citas.Citas;
-import com.example.fumigacionesmoncada.ui.citas.Citas_Adapter;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
-import com.example.fumigacionesmoncada.ui.clientes.Detalle_Cliente;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,6 +71,13 @@ public class SolicitarCitaFragment extends Fragment {
          return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cita= new ArrayList<>();
+        citasAdapter= new CitasAdapter(getContext(), cita);
+        cargarCitas();
+    }
 
     private void cargarCitas() {
 

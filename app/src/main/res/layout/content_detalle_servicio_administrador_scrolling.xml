@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
+    tools:showIn="@layout/activity_detalle_servicio_administrador_scrolling">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+                <EditText
+                    android:id="@+id/tituloImagenDA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:maxLength="500"
+                    android:text="Titulo"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+    </LinearLayout>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/descripcionImagenDA"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Descripcion"
+                            android:textSize="25dp"
+                            android:maxLength="500"
+                            android:textColor="#DD1B1919"
+                            />
+                        <Button
+                            android:id="@+id/guardarcambios"
+                            android:layout_width="140dp"
+                            android:layout_height="35dp"
+                            android:text="Guardar"
+                            android:background="@drawable/oval"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold"
+                            android:layout_marginTop="25dp"
+                            android:textSize="20dp"
+                            android:layout_marginBottom="25dp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

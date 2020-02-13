@@ -74,6 +74,11 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
         Usuario_id = preferences.getString("id", "");
 
     }
+    @Override
+    public void onResume() {
+        cargarCitas();
+        super.onResume();
+    }
     private void cargarCitas() {
         String ip=getString(R.string.ip);
         String url = ip+"/api/recuperar/factura";

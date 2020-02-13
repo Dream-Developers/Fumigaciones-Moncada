@@ -168,9 +168,9 @@ cargarPreferencias();
                     public void onResponse(JSONObject response) {
                         ServiciosVO servicio=null;
 
-                        JSONArray json=response.optJSONArray("servicio");
-
                         try {
+
+                        JSONArray json=response.optJSONArray("servicio");
 
                             for (int i=0;i<json.length();i++){
                                 servicio=new ServiciosVO();
@@ -178,7 +178,8 @@ cargarPreferencias();
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("Nombre"));
+                                servicio.setDescripcion(jsonObject.optString("descripcion"));
+                                servicio.setTitulo(jsonObject.getString("nombre"));
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }
@@ -188,8 +189,6 @@ cargarPreferencias();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
-                                    " "+response, Toast.LENGTH_LONG).show();
                             dialog.hide();
                         }
 
@@ -197,14 +196,16 @@ cargarPreferencias();
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                error.getStackTrace();
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-
-                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                }
+                if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getContext(), "Revise su conexción a internet", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
+                dialog.hide();
             }
 
         }) {

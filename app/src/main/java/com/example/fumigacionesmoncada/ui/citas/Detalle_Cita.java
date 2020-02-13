@@ -24,7 +24,7 @@ import java.util.Map;
 public class Detalle_Cita extends AppCompatActivity {
     private TextView nombre, direccion,precio,fecha,hora;
     private Citas citas;
-    String id;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class Detalle_Cita extends AppCompatActivity {
         fecha = findViewById(R.id.detalle_fecha);
         hora = findViewById(R.id.detalle_hora);
 
-        id = getIntent().getStringExtra("id_citas");
-        cargarCitasWeb(id);
+        id = getIntent().getIntExtra("id_citas",0);
+        cargarCitasWeb(String.valueOf(id));
 
     }
 

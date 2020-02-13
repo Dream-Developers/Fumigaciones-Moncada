@@ -131,7 +131,7 @@ public class SolicitarCitaFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 error.getStackTrace();
-                Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error "+error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

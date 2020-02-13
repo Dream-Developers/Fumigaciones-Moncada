@@ -107,7 +107,7 @@ public class Principal_Fragment extends Fragment   {
             @Override
             public void onClick(View view, int position) {
                 ServiciosVO serviciosVO = listaUsuarios.get(position);
-                Intent intent = new Intent(getContext(),DetalleImagenActivity.class);
+                Intent intent = new Intent(getContext(),DetalleServicioScroll.class);
                 intent.putExtra("id",serviciosVO.getId());
                 startActivity(intent);
             }
@@ -150,7 +150,7 @@ public class Principal_Fragment extends Fragment   {
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("Nombre"));
+                                servicio.setDescripcion(jsonObject.optString("nombre"));
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }
@@ -175,7 +175,7 @@ public class Principal_Fragment extends Fragment   {
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Revise su conexión a internet" + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

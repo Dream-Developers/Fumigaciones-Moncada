@@ -26,12 +26,12 @@
         <item name="android:padding">3dp</item>
     </style>
 
-    <color name="Transparent">#00FFFFFF</color>
-
     <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
 
-        <item name="android:textColor">@color/common_google_signin_btn_text_dark_pressed </item>
-        <item name="android:textSize">25dp </item>
+        <item name="android:textColor">@color/common_google_signin_btn_text_dark_pressed</item>
+        <item name="android:textSize">25dp</item>
     </style>
+
+    <color name="Transparent">#00FFFFFF</color>
 
 </resources>

@@ -1,18 +1,9 @@
 package com.example.fumigacionesmoncada.ui.Principal;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,8 +14,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.fumigacionesmoncada.AdquirirServicioActivity;
 import com.example.fumigacionesmoncada.ClaseVolley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,31 +32,31 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetalleImagenActivity extends AppCompatActivity {
+public class DetalleServicioScroll extends AppCompatActivity {
 
     private TextView titulo, descripcion;
     NetworkImageView imagen;
     String id;
     String tokenUsuario;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_imagen);
-        setTitle("Detalle Servicio");
-         titulo = findViewById(R.id.tituloImagenD);
-         descripcion= findViewById(R.id.descripcionImagenD);
-         imagen= findViewById(R.id.idImagenD);
-         id = getIntent().getStringExtra("id");
+        setContentView(R.layout.activity_detalle_servicio_scroll);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle(null);
+
+        titulo = findViewById(R.id.tituloImagenD);
+        descripcion= findViewById(R.id.descripcionImagenD);
+        imagen= findViewById(R.id.idImagenD);
+        id = getIntent().getStringExtra("id");
         cargarImagenWeb(id);
-
-
-
-cargarPreferencias();
+        cargarPreferencias();
     }
+
     private void cargarPreferencias() {
         SharedPreferences preferences =this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-         tokenUsuario = preferences.getString("token", "");
+        tokenUsuario = preferences.getString("token", "");
 
 
     }
@@ -87,7 +87,7 @@ cargarPreferencias();
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(DetalleImagenActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetalleServicioScroll.this, "Error", Toast.LENGTH_SHORT).show();
             }
 
         }){

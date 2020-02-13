@@ -186,7 +186,7 @@ private FloatingActionButton addcita;
                     cita = new ArrayList<>();
                     Citas citas = null;
                     try {
-                        JSONArray array = response.getJSONArray("citas");
+                        JSONArray array = response.optJSONArray("citas");
                         JSONObject object;
                         for (int i = 0; i < array.length(); i++) {
                             citas = new Citas();

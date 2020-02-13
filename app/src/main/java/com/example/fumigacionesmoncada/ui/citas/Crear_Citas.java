@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.factura.crearFactura;
 import com.example.fumigacionesmoncada.ui.clientes.ClientesAdapter;
 import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
@@ -45,7 +48,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crear_Citas extends AppCompatActivity {
+public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnItemClickListener{
     private String profecha;
     private int dia, mes, anio;
     private EditText fecha;
@@ -67,6 +70,8 @@ public class Crear_Citas extends AppCompatActivity {
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     ClientesAdapter clientesAdapter;
+    private ClientesAdapter adapterClientes;
+    private AlertDialog alertDialogClientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,40 +110,76 @@ public class Crear_Citas extends AppCompatActivity {
         AlertDialog.Builder builde = new AlertDialog.Builder(this);
         View dialogoLayout = getLayoutInflater().inflate(R.layout.lista_clientes_dialog, null);
 
+        View buscadorLayout = getLayoutInflater().inflate(R.layout.buscador_alertdialog, null);
         ListView listaclientesDialogo = (ListView) dialogoLayout.findViewById(R.id.lista_clientes_dialog);
         TextView sinClientes = dialogoLayout.findViewById(R.id.sinclientes);
-        if(clientes.size()>0){
+        EditText buscarET = dialogoLayout.findViewById(R.id.buscar_clientes);
+
+
+        if (clientes.size() > 0) {
             sinClientes.setVisibility(View.GONE);
             builde.setTitle("Seleccione el cliente");
-            ClientesAdapter adaptador_periodos_q = new ClientesAdapter(this, clientes);
-            listaclientesDialogo.setAdapter(adaptador_periodos_q);
-            builde.setAdapter(adaptador_periodos_q, new DialogInterface.OnClickListener() {
+
+            adapterClientes = new ClientesAdapter(this, clientes);
+            listaclientesDialogo.setAdapter(adapterClientes);
+            buscarET.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (!(s == null)) {
+                        ArrayList<ClientesVO> listaClientes = clientes;
+                        try {
+                            listaClientes = filtrarClientes(listaClientes, String.valueOf(s));
+                            adapterClientes.filtrar(listaClientes);
+                            adapterClientes.notifyDataSetChanged();
+
+                        } catch (Exception e) {
+                            Toast.makeText(Crear_Citas.this, "" + listaClientes, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
 
                 }
             });
-            final AlertDialog alertDialog = builde.create();
+            listaclientesDialogo.setOnItemClickListener(this);
+            builde.setView(dialogoLayout);
 
-            listaclientesDialogo = alertDialog.getListView();
-            listaclientesDialogo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    ClientesVO cliente = (ClientesVO) parent.getItemAtPosition(position);
-                    nombre.setText(cliente.getNombre());
-                    direccion.setText(cliente.getApellido());
-                    direccion.setFocusable(false);
-                    id_usuario =cliente.getId();
-                    alertDialog.dismiss();
-                }
-            });
-            alertDialog.show();
-
-        }else {
+            alertDialogClientes = builde.create();
+            alertDialogClientes.show();
+        } else {
             sinClientes.setVisibility(View.VISIBLE);
             Toast.makeText(this, "No hay clientes registrados aun", Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    private ArrayList<ClientesVO> filtrarClientes(ArrayList<ClientesVO> listaTarea, String dato) {
+        ArrayList<ClientesVO> listaFiltradaPermiso = new ArrayList<>();
+        try {
+            dato = dato.toLowerCase();
+            for (ClientesVO permisos : listaTarea) {
+                String nombre = permisos.getNombre().toLowerCase().trim();
+
+
+                if (nombre.toLowerCase().contains(dato)) {
+                    listaFiltradaPermiso.add(permisos);
+                }
+            }
+            adapterClientes.filtrar(listaFiltradaPermiso);
+        } catch (Exception e) {
+            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
+        }
+
+        return listaFiltradaPermiso;
 
     }
 
@@ -389,6 +430,13 @@ public class Crear_Citas extends AppCompatActivity {
 
         }
 
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        ClientesVO cliente = (ClientesVO) parent.getItemAtPosition(position);
+        nombre.setText(cliente.getNombre());
+        alertDialogClientes.dismiss();
     }
 
     public void registrar1(View view) {

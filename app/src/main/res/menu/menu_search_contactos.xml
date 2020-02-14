@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/Cerrar_sesion"
+        android:title="Cerrar Sesión"
+        app:showAsAction="never"/>
+
+
+    <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/baseline_search_black_18dp"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+
+
+</menu>

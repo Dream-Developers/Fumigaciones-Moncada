@@ -32,7 +32,8 @@
         <activity android:name=".AdquirirServicioActivity" />
         <activity
             android:name=".ChatActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".ContactsActivity"/>
         <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" />
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
         <activity android:name=".ui.solicitarCita.Detalle_Cita">

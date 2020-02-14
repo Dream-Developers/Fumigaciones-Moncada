@@ -115,6 +115,11 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
         builder.show();
     }
 
+    @Override
+    public void onResume() {
+        cargarClientes();
+        super.onResume();
+    }
     private void eliminarClienteWebService(String id, final int position) {
         String ip=getString(R.string.ip);
         String url = ip+"/api/registro/"+id+"/delete";

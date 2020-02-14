@@ -23,28 +23,25 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.listadoPeticionesCita.Citas_Peticiones;
-import com.example.fumigacionesmoncada.ui.AdquirirServicio.Aquirir_Servicio_Fragment;
-import com.example.fumigacionesmoncada.ui.citas.Citas;
-import com.example.fumigacionesmoncada.ui.citas.CitasFragment;
 import com.example.fumigacionesmoncada.ui.citas.Crear_Citas;
-//import com.example.fumigacionesmoncada.ui.citas.CitaVO;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.fumigacionesmoncada.listadoPeticionesCita.Citas_Peticiones;
+//import com.example.fumigacionesmoncada.ui.citas.CitaVO;
 
-public class Detalle_Cita  extends Activity {
-    private TextView nombre, direccion,txt_servicio, fecha, hora;
+public class Detalle_Cita extends Activity {
+    private TextView nombre, direccion, txt_servicio, fecha, hora;
     private CitaVO citaVO;
-    private int btnAceptar= 2;
+    private int btnAceptar = 2;
     private int btnRechazar = 4;
     private String id, estado;
     private String Estado;
     private Button btnAceptado;
-    private  Button btnRechazado;
+    private Button btnRechazado;
 
 
     @Override
@@ -73,8 +70,8 @@ public class Detalle_Cita  extends Activity {
                 builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                      Citas_Peticiones citas = null;
-                        int position= 1;
+
+                        agregarCitaWebService(id, which);
                     }
                 });
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -89,18 +86,18 @@ public class Detalle_Cita  extends Activity {
                 }
                 AlertDialog.Builder builder1 = builder.setNegativeButton("No", null);
                 builder1.show();
+
+
             }
 
 
         });
 
 
-
-
         btnRechazado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(Detalle_Cita.this);
                 builder2.setTitle("Confirmacion");
                 builder2.setMessage("Esta seguro que desea Cancelar la Peticion de cita");
                 builder2.setPositiveButton("SI", new DialogInterface.OnClickListener() {
@@ -108,7 +105,7 @@ public class Detalle_Cita  extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         Citas_Peticiones citas = null;
                         int position = 1;
-                        CancelarCitaWebService(citas.getId(),position);
+                        CancelarCitaWebService(id, position);
 
                     }
 
@@ -121,7 +118,6 @@ public class Detalle_Cita  extends Activity {
                         public void onDismiss(DialogInterface dialog) {
                             dialog.dismiss();
 
-
                         }
                     });
                 }
@@ -133,123 +129,119 @@ public class Detalle_Cita  extends Activity {
         });
 
     }
-    private void AgregarCitaWebService(final String id,final int position) {
-        final ProgressDialog progreso = new ProgressDialog(getApplicationContext());
+
+    private void agregarCitaWebService(final String id, final int position) {
+        final ProgressDialog progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando datos...");
         progreso.show();
 
-        if (Estado == "Agregado") {
-            try {
+        try {
 
-                String ip = getString(R.string.ip);
-                String url = ip + "/api/peticionesCitas/" + id + "/update";
+            String ip = getString(R.string.ip);
+            String url = ip + "/api/peticionesCitas/" + id + "/update";
 
-                JSONObject parametros = new JSONObject();
-                parametros.put("Estado_id", btnAceptar);
+            JSONObject parametros = new JSONObject();
+            parametros.put("Estado_id", btnAceptar);
 
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        progreso.dismiss();
-                        try {
-                            Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        cargarCitaWeb(id);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    progreso.dismiss();
+                    try {
+                        Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Detalle_Cita.this, Crear_Citas.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                    cargarCitaWeb(id);
+                }
 
 
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progreso.dismiss();
-                        Toast.makeText(getApplicationContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("volley", "onErrorResponse: " + error.networkResponse);
-                    }
-                }) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progreso.dismiss();
+                    Toast.makeText(getApplicationContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("volley", "onErrorResponse: " + error.networkResponse);
+                }
+            }) {
 
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> parametros = new HashMap<>();
-                        parametros.put("Content-Type", "application/json");
-                        parametros.put("X-Requested-With", "XMLHttpRequest");
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<>();
+                    parametros.put("Content-Type", "application/json");
+                    parametros.put("X-Requested-With", "XMLHttpRequest");
 
-                        return parametros;
-                    }
-                };
-                ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                    return parametros;
+                }
+            };
+            ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
-            } catch (Exception exe) {
-                Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-            progreso.dismiss();
-            Toast.makeText(getApplicationContext(), "Solo Puede Aceptar Las Citas Pendientes", Toast.LENGTH_LONG).show();
-
+        } catch (Exception exe) {
+            Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
+        progreso.dismiss();
+
     }
-
-
 
 
     private void CancelarCitaWebService(final String id, final int position) {
-        final ProgressDialog progreso = new ProgressDialog(getApplicationContext());
+        final ProgressDialog progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando datos...");
         progreso.show();
 
-        if (Estado == "Rechazado") {
-            try {
+        try {
 
-                String ip = getString(R.string.ip);
-                String url = ip + "/api/peticionesCitas/" + id + "/update";
+            String ip = getString(R.string.ip);
+            String url = ip + "/api/peticionesCitas/" + id + "/update";
 
-                JSONObject parametros = new JSONObject();
-                parametros.put("Estado_id", btnRechazar);
+            JSONObject parametros = new JSONObject();
+            parametros.put("Estado_id", btnRechazar);
 
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        progreso.dismiss();
-                        try {
-                            Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        cargarCitaWeb(id);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    progreso.dismiss();
+                    try {
+                        Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                    cargarCitaWeb(id);
+                }
 
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progreso.dismiss();
-                        Toast.makeText(getApplicationContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("volley", "onErrorResponse: " + error.networkResponse);
-                    }
-                }) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progreso.dismiss();
+                    Toast.makeText(getApplicationContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("volley", "onErrorResponse: " + error.networkResponse);
+                }
+            }) {
 
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> parametros = new HashMap<>();
-                        parametros.put("Content-Type", "application/json");
-                        parametros.put("X-Requested-With", "XMLHttpRequest");
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<>();
+                    parametros.put("Content-Type", "application/json");
+                    parametros.put("X-Requested-With", "XMLHttpRequest");
 
-                        return parametros;
-                    }
-                };
-                ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                    return parametros;
+                }
+            };
+            ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
-            } catch (Exception exe) {
-                Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-            progreso.dismiss();
-            Toast.makeText(getApplicationContext(), "Solo Puede cancelar Las citas Pendientes", Toast.LENGTH_LONG).show();
-
+        } catch (Exception exe) {
+            Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
+        progreso.dismiss();
 
     }
-
 
 
     private void cargarCitaWeb(final String id) {
@@ -297,7 +289,6 @@ public class Detalle_Cita  extends Activity {
 
 
     }
-
 
 
 }

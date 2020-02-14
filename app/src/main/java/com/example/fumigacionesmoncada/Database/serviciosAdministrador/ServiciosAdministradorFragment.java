@@ -66,18 +66,18 @@ public class ServiciosAdministradorFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_servicios_administrador, container, false);
+        View view = inflater.inflate(R.layout.fragment_servicios_administrador, container, false);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  view.findViewById(R.id.recycler_servicios);
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
         cargarWebService();
-cargarPreferencias();
+        cargarPreferencias();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 ServiciosVO serviciosVO = listaUsuarios.get(position);
-                Intent intent = new Intent(getContext(), DetalleServicioAdministradorActivity.class);
+                Intent intent = new Intent(getContext(), DetalleServicioAdministradorScrollingActivity.class);
                 intent.putExtra("id",serviciosVO.getId());
                 startActivity(intent);
             }
@@ -116,6 +116,12 @@ cargarPreferencias();
 
     }
 
+
+    @Override
+    public void onResume() {
+        cargarWebService();
+        super.onResume();
+    }
 
     private void eliminarServicioWebService(String id, final int position) {
         String ip=getString(R.string.ip);
@@ -168,9 +174,11 @@ cargarPreferencias();
                     public void onResponse(JSONObject response) {
                         ServiciosVO servicio=null;
 
-                        try {
-
+                        listaUsuarios=new ArrayList<>();
                         JSONArray json=response.optJSONArray("servicio");
+
+                        dialog.cancel();
+                        try {
 
                             for (int i=0;i<json.length();i++){
                                 servicio=new ServiciosVO();
@@ -178,8 +186,7 @@ cargarPreferencias();
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("descripcion"));
-                                servicio.setTitulo(jsonObject.getString("nombre"));
+                                servicio.setDescripcion(jsonObject.optString("nombre"));
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }
@@ -189,23 +196,25 @@ cargarPreferencias();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                                    " "+response, Toast.LENGTH_LONG).show();
+
                             dialog.hide();
                         }
+                        Toast.makeText(getContext(), "Se cargaron los datos correctamente",Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.getStackTrace();
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-                }
-                if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getContext(), "Revise su conexción a internet", Toast.LENGTH_LONG).show();
+
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
-                dialog.hide();
             }
 
         }) {
@@ -220,7 +229,7 @@ cargarPreferencias();
         };
 
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
-
+        dialog.hide();
 
     }
     public void onButtonPressed(Uri uri) {

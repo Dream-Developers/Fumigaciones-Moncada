@@ -13,16 +13,18 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
+            android:label="@string/title_activity_detalle_servicio_administrador_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.Principal.DetalleServicioScroll"
             android:label="@string/title_activity_detalle_servicio_scroll"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity android:name=".AdquirirServicioActivity" />
         <activity
             android:name=".ChatActivity"
@@ -36,7 +38,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ContactsActivity"
             android:configChanges="orientation|screenSize"
@@ -70,7 +71,6 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_registro"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name=".RegistroUsuarioNuevoAdministrador"
             android:label="@string/title_activity_registro"
@@ -80,6 +80,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.clientes.Detalle_Cliente" />
         <activity android:name=".ui.citas.Detalle_Cita" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/iconolm" />
@@ -95,6 +96,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_ringtone"
             android:value="RingtoneManager.TYPE_NOTIFICATION" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.permisosunahtec.android.fileprovider"
@@ -113,7 +115,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         <provider
             android:name=".CitasSync.CitasProvider"
             android:authorities="com.example.fumigacionesmoncada.CitasSync.CitasProvider"
@@ -123,6 +124,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/sync_adapter_citas" />
         </provider>
+
         <receiver
             android:name=".Notificaciones.FirebaseBackgroundService"
             android:exported="true"
@@ -131,6 +133,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".CitasSync.CitasSyncServices"
             android:exported="true">
@@ -142,7 +145,6 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter_citas" />
         </service>
-
         <service android:name=".SyncAdapter.AuthenticationService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -162,14 +164,14 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Autenticación -->
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

@@ -1,158 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/twelve"
-    >
-
-            <LinearLayout
-                android:layout_width="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/cuatro"
+            android:alpha="0.8" />
+        <androidx.appcompat.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rey.material.widget.TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-               >
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_vertical"
-                    app:cardBackgroundColor="#60000000"
-                    card_view:cardPreventCornerOverlap="true"
-                    card_view:cardUseCompatPadding="false">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/txtnombres"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Juan Oseguera"
-                            android:layout_gravity="center"
-                         android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="25dp"
-                            android:textStyle="bold" />
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:scaleType="centerCrop"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre :"
-                    android:layout_marginLeft="15dp"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
-                <EditText
-                    android:id="@+id/nombresP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:inputType="text"
-                    android:maxLength="50"
-                    android:gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:textColor="#ffffff"
-                    android:lines="1"
-                    android:textSize="25dp"
-                    android:textColorHint="#fff" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dirección :"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="25dp"
-                   />
-
-                <EditText
-                    android:id="@+id/direccionP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:lines="1"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:maxLength="250"
-                    android:gravity="center"
-                    android:textColor="#ffffff"
-                    android:inputType="text"
-                    android:textSize="25dp"
-                    android:textColorHint="#ffffff" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Teléfono :"
-                    android:textColor="#fff"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="15dp"/>
-
-                <EditText
-                    android:id="@+id/telefonoP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:maxLength="8"
-                    android:inputType="number"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp"
-                    android:textColorHint="#ffffff" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo :"
-                    android:textColor="#fff"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="15dp"/>
-                <EditText
-                    android:id="@+id/correoP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:maxLength="30"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:textColor="#ffffff"
-                    android:textAlignment="center"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp"
-                    android:focusable="false"/>
+                android:text="Informacion Personal"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="bottom"
+                android:textColor="#fff"/>
+            <com.rey.material.widget.TextView
+                android:id="@+id/pedir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:textSize="15dp"
+                android:background="@drawable/oval"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp" />
+        </androidx.appcompat.widget.Toolbar>
 
 
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/circleview"
+            android:layout_width="177dp"
+            android:layout_height="187dp"
+            style="@style/Material.Widget.ProgressView.Circular"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:view_borderColor="#cccccc"
+            app:view_borderWidth="2dp"
+            app:view_shadowDx="2dp"
+            app:view_shadowDy="0dp"
+            app:view_shadowRadius="2dp" />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.rey.material.widget.TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="0.35"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="14dp"
+            android:layout_marginLeft="@dimen/margenleft"
+            android:padding="20dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            android:id="@+id/nombresP"
+            android:hint="Sam Enric"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:layout_gravity="center"
+            android:background="#00000000"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.rey.material.widget.TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:text="Correo"
+            android:textSize="14dp"
+            android:layout_marginLeft="@dimen/margenleft"
+            android:padding="20dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="0dp"
+            android:id="@+id/correoP"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            android:hint="Sam_enric@Seotoolzz.com"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:layout_gravity="center"
+            android:background="#00000000"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.rey.material.widget.TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Telefono"
+            android:textSize="14dp"
+            android:padding="20dp"
+            android:layout_marginLeft="@dimen/margenleft"
+            android:id="@+id/myTextView" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="0dp"
+            android:id="@+id/telefonoP"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="14dp"
+            android:hint="99999999"
+            android:maxLength="8"
+            android:background="#00000000"
+            android:padding="20dp"/>
 
-                <Button
-                    android:id="@+id/pedir"
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                   android:layout_gravity="center"
-                    android:background="@drawable/oval"
-                    android:text="Guardar"
-                    android:layout_marginTop="10dp"
-                    android:textAllCaps="false"
-                    android:textAlignment="center"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                   />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.rey.material.widget.TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Direccion"
+            android:textSize="14dp"
+            android:padding="20dp"
+            android:layout_marginLeft="@dimen/margenleft"
+            android:id="@+id/direccion" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="0dp"
+            android:id="@+id/direccionP"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:hint="Danli , el Paraiso colonia la Reforma"
+            android:maxLength="8"
+            android:background="#00000000"
+            android:padding="20dp"/>
 
-            </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#ACACAC"/>
 
-   </ScrollView>
+</LinearLayout>

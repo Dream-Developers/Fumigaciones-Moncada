@@ -86,7 +86,7 @@ private FloatingActionButton addcita;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Citas citas = (Citas) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getContext(), Detalle_Cita.class);
+                Intent intent = new Intent(getContext(), DetalleCitaScrollingActivity.class);
                 intent.putExtra("id_citas", citas.getId());
                 startActivity(intent);
             }

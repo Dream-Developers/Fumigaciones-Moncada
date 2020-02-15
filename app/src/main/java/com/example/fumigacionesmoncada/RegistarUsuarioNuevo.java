@@ -430,7 +430,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
             public void onResponse(JSONObject response) {
                 progreso.dismiss();
                 finish();
-                Toast.makeText(RegistarUsuarioNuevo.this, "Se regsiro correctamente ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistarUsuarioNuevo.this, "Se registro correctamente ", Toast.LENGTH_SHORT).show();
         }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

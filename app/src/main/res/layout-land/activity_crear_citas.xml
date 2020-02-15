@@ -14,13 +14,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
         app:cardBackgroundColor="#60000000">
 
 
@@ -34,18 +29,14 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="150dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/logo" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre Cliente"
                     android:textColor="#ffffff"
+                    android:layout_marginTop="50dp"
                     android:textSize="25dp" />
 
 

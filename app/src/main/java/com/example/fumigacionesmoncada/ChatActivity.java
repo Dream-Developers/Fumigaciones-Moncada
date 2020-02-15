@@ -35,7 +35,7 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
-    private User user = new User();
+    private User user; //= new User();
     private EditText editChat;
     private User yo;
 
@@ -161,7 +161,7 @@ public class ChatActivity extends AppCompatActivity {
                                 notification.setFromName(yo.getUsername());
 
                                 FirebaseFirestore.getInstance().collection("/notifications")
-                                        .document(user.getToken())
+                                        .document(FirebaseAuth.getInstance().getUid())
                                         .set(notification);
                             }
 

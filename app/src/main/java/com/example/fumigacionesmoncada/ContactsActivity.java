@@ -6,44 +6,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+import com.xwray.groupie.Group;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
-import java.time.LocalDate;
+
 import java.util.List;
+
+
 
 public class ContactsActivity extends AppCompatActivity {
 
-    private EditText search_field;
-    private ImageButton search_btn;
    
     private GroupAdapter adapter;
 
     private DatabaseReference mUserDatabase;
+    EditText search_users;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +57,33 @@ public class ContactsActivity extends AppCompatActivity {
 
         RecyclerView rv = findViewById(R.id.recycler);
         mUserDatabase = FirebaseDatabase.getInstance().getReference("User");
+       // searchView = findViewById(R.id.searchView);
 
-        search_field =  findViewById(R.id.search_field);
-        search_btn = findViewById(R.id.search_btn);
+        search_users = findViewById(R.id.search_users);
+        search_users.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchContacts(charSequence.toString().toLowerCase());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -77,13 +102,40 @@ public class ContactsActivity extends AppCompatActivity {
         SearchUsers();
 
 
-              search_btn.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+    /**
+     * BUSCADOR DE CONTACTOS
+     * */
+    private void searchContacts(String s) {
+
+        final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference("User")
+                .orderByChild("username")
+                .startAt(s)
+                .endAt(s+"\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                adapter.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
 
-                String searchText = search_field.getText().toString();
+                    assert user != null;
+                    assert fuser != null;
+                    if (!user.getUuid().equals(fuser.getUid())){
+                        adapter.add((Group) user);
+                    }
+                }
 
-                firebaseUserSearch(searchText);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
@@ -121,26 +173,6 @@ public class ContactsActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-    /**
-     * METODO PARA buscar los datos
-     * */
-    private void firebaseUserSearch(String searchText) {
-
-        Toast.makeText(ContactsActivity.this, "Started Search", Toast.LENGTH_LONG).show();
-
-        Query firebaseSearchQuery = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
-
-        //FirebaseRecyclerAdapter<User, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
-
-                //User.class,
-              //  R.layout.activity_contacts,
-              //  UsersViewHolder.class,
-               // firebaseSearchQuery,
-
-        };
-
 
 
 

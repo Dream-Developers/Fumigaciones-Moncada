@@ -34,8 +34,9 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_citas, null, false);
 
         TextView nombre = convertView.findViewById(R.id.nombre_cita);
-        TextView direccion = convertView.findViewById(R.id.direccion_cita);
         TextView precio = convertView.findViewById(R.id.precio_cita);
+
+
         TextView fecha = convertView.findViewById(R.id.fecha_cita);
         TextView hora = convertView.findViewById(R.id.hora_cita);
         ImageView imagen = convertView.findViewById(R.id.icon_citas);
@@ -44,7 +45,7 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
 
 
         nombre.setText(citas.getNombre());
-        direccion.setText(citas.getDireccion());
+
         precio.setText(citas.getPrecio());
         fecha.setText(citas.getFechaFumigacion());
         hora.setText(citas.getHora());

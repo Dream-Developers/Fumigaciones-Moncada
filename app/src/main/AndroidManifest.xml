@@ -13,9 +13,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.citas.DetalleCitaScrollingActivity"
+            android:label="@string/title_activity_detalle_cita_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
             android:label="@string/title_activity_detalle_servicio_administrador_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.Principal.DetalleServicioScroll"
             android:label="@string/title_activity_detalle_servicio_scroll"
@@ -28,7 +32,8 @@
         <activity android:name=".AdquirirServicioActivity" />
         <activity
             android:name=".ChatActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".ContactsActivity"/>
         <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" />
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
         <activity android:name=".ui.solicitarCita.Detalle_Cita">
@@ -164,14 +169,14 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Autenticación -->
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

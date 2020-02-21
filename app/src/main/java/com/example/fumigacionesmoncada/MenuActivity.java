@@ -41,7 +41,8 @@ public class MenuActivity extends AppCompatActivity {
                 R.id.nav_servicio,
                 R.id.nav_acerca,
                 R.id.nav_perfil,
-                R.id.nav_registro_citas)
+                R.id.nav_registro_citas,
+                R.id.nav_contactar)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

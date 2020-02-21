@@ -52,7 +52,7 @@
     <string name="btn_chat">Enviar</string>
     <string name="message">Escribe tu mensaje</string>
     <string name="factura">Factura</string>
-    <string name= "default_notification_channel_id"> fumigaciones </string >
+    <string name="default_notification_channel_id"> fumigaciones </string>
     <string name="mision_y_visi_n">Misión y visión</string>
     <string name="adquirir_servicios">Servicio</string>
     <string name="title_activity_detalle_servicio_administrador_scrolling">

@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_registro__de__citas" />
     <fragment
         android:id="@+id/nav_contactar"
-        android:name="com.example.fumigacionesmoncada.Contactar_Fragment"
+        android:name="com.example.fumigacionesmoncada.ui.contactar.ContactarFragment"
         android:label="@string/contactar"
         tools:layout="@layout/fragment_contactar_" />
 </navigation>

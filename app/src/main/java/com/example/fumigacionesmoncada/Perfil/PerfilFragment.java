@@ -96,7 +96,6 @@ public class PerfilFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-        mostrarnombre1 = view.findViewById(R.id.txtnombres);
         mostrarNombre = view.findViewById(R.id.nombresP);
         mostrarDireccion = view.findViewById(R.id.direccionP);
         mostraraTelefono = view.findViewById(R.id.telefonoP);

@@ -293,8 +293,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         btn_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión, verifique que su " +
-                                "contraseña esté correcta ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión, hubo" +
+                                " un problema con el servidor ", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

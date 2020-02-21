@@ -57,7 +57,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         RecyclerView rv = findViewById(R.id.recycler);
         mUserDatabase = FirebaseDatabase.getInstance().getReference("User");
-       // searchView = findViewById(R.id.searchView);
+       /* searchView = findViewById(R.id.searchView);
 
         search_users = findViewById(R.id.search_users);
         search_users.addTextChangedListener(new TextWatcher() {
@@ -76,7 +76,7 @@ public class ContactsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
 
         adapter = new GroupAdapter();

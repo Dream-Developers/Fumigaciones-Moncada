@@ -35,7 +35,7 @@
     <string name="contactar">Contactar</string>
 
 
-    <string name="ip">http://192.168.137.1</string>
+    <string name="ip">http://192.168.0.104</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -61,6 +61,8 @@
     </string>
 
     <string name="title_activity_detalle_cita_scrolling">DetalleCitaScrollingActivity</string>
+    <string name="menu_contactar">Contactar</string>
+    <string name="titlr_llamar">Llamada Telefónica</string>
 
 
 </resources>

@@ -7,9 +7,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
+import com.xwray.groupie.OnItemLongClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.text.SimpleDateFormat;
@@ -87,6 +91,20 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                 startActivity(intent);
             }
         });
+
+
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(@NonNull Item item, @NonNull View view) {
+                Toast.makeText(getContext(), "Gracias por darle click, ", Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+
+
 
 
 

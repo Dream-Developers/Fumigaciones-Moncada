@@ -57,13 +57,18 @@ public class MenuActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_usuarios, menu);
+
+        try {
+            getMenuInflater().inflate(R.menu.menu_usuarios, menu);
+        }catch (Exception e){
+
+        }
         return true;
     }
-
 
     public void red_user(MenuItem item) {
         alertaCerrarSesionUsuario();

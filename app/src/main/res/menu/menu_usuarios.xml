@@ -12,12 +12,13 @@
         android:id="@+id/vision"
         android:orderInCategory="100"
         android:title="@string/mision_y_visi_n"
-        android:onClick="fragment_acerca"
+        android:onClick="vision_user"
         app:showAsAction="never" />
     <item
         android:id="@+id/confi"
         android:orderInCategory="100"
         android:title="Desarrolladores"
+        android:onClick="confi_user"
         app:showAsAction="never" />
 
 

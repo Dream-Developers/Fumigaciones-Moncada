@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +16,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.fumigacionesmoncada.ui.Acerca.AcercaFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private Object vision_mision;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,27 +91,32 @@ public class MenuActivity extends AppCompatActivity {
                 }).show();
     }
 
-    public void vision_user(View view){
-        Intent i= new Intent(this, AcercaFragment.class);
+    public void vision_user(Class<VisionMision> view){
+        Intent i= new Intent(this, VisionMision.class);
 
         startActivity(i);
     }
 
-   @Override public boolean onOptionsItemSelected(MenuItem opcion_menu){
-        int id = opcion_menu.getItemId();
+    public void confi_user(Class<Desarrolladores> view){
+        Intent intent = new Intent(this, Desarrolladores.class);
 
-        if(id== R.id.vision){
+        startActivity(intent);
+    }
 
-           vision_user(null);
-            return true;
-        }
+   @Override public boolean onOptionsItemSelected(MenuItem opcion_menu) {
+       switch (opcion_menu.getItemId()) {
+           case R.id.confi:
+               return true;
 
-        if (id== R.id.confi){
+           case R.id.mision:
+               return true;
 
-            return true;
-        }
-        return  super.onOptionsItemSelected(opcion_menu);
+           default:
+       }
+       return super.onOptionsItemSelected(opcion_menu);
    }
+
+
 
     private void logout() {
         SharedPrefManager.getInstance(MenuActivity.this).clear();

@@ -32,6 +32,7 @@
     <string name="menu_acercad">Acerca de</string>
     <string name="perfil">Perfil</string>
     <string name="publicidad">Publicidad</string>
+    <string name="contactar">Contactar</string>
 
 
     <string name="ip">http://192.168.137.1</string>
@@ -58,6 +59,7 @@
     <string name="title_activity_detalle_servicio_administrador_scrolling">
         DetalleServicioAdministradorScrollingActivity
     </string>
+
     <string name="title_activity_detalle_cita_scrolling">DetalleCitaScrollingActivity</string>
 
 

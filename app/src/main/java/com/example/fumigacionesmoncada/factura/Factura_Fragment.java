@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTextListener{
+public class Factura_Fragment extends Fragment implements SearchView.OnQueryTextListener {
     private FloatingActionButton addCliente;
     ListView lista_citas;
     facturas_adapter citasAdapter;
@@ -59,7 +59,7 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
         addCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),crearFactura.class);
+                Intent intent = new Intent(getContext(), crearFactura.class);
                 startActivity(intent);
             }
         });
@@ -68,20 +68,17 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
         cargarCitas();
         return view;
     }
+
     private void cargarPreferencias() {
         SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
         Usuario_id = preferences.getString("id", "");
 
     }
-    @Override
-    public void onResume() {
-        cargarCitas();
-        super.onResume();
-    }
+
     private void cargarCitas() {
-        String ip=getString(R.string.ip);
-        String url = ip+"/api/recuperar/factura";
+        String ip = getString(R.string.ip);
+        String url = ip + "/api/recuperar/factura";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -91,7 +88,7 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
                 cita = new ArrayList<>();
                 Facturas citas = null;
                 try {
-                    JSONObject object  = response;
+                    JSONObject object = response;
                     JSONArray array = response.getJSONArray("citas");
                     for (int i = 0; i < array.length(); i++) {
                         citas = new Facturas();
@@ -112,7 +109,6 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
                 }
 
 
-
             }
 
 
@@ -130,9 +126,9 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
                 }
 
                 error.getStackTrace();
-                Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -146,6 +142,7 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
 
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -155,58 +152,56 @@ public class Factura_Fragment extends Fragment  implements SearchView.OnQueryTex
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
     }
-@Override
-public boolean onQueryTextSubmit(String query) {
-        return false;
-        }
 
-@Override
-public boolean onQueryTextChange(String s) {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
         if (!(citasAdapter == null)) {
-        ArrayList<Facturas> listaClientes = null;
-        try {
-        listaClientes = filtrarDatosDeptos(cita, s.trim());
-        citasAdapter.filtrar(listaClientes);
-        citasAdapter.notifyDataSetChanged();
+            ArrayList<Facturas> listaClientes = null;
+            try {
+                listaClientes = filtrarDatosDeptos(cita, s.trim());
+                citasAdapter.filtrar(listaClientes);
+                citasAdapter.notifyDataSetChanged();
 
-        } catch (Exception e) {
-        Toast.makeText(getContext(), "" + listaClientes, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "" + listaClientes, Toast.LENGTH_SHORT).show();
 
-        }
-        return true;
+            }
+            return true;
 
 
         }
         return false;
-        }
-private ArrayList<Facturas> filtrarDatosDeptos(ArrayList<Facturas> listaTarea, String dato) {
+    }
+
+    private ArrayList<Facturas> filtrarDatosDeptos(ArrayList<Facturas> listaTarea, String dato) {
         ArrayList<Facturas> listaFiltradaPermiso = new ArrayList<>();
-        try{
-        dato = dato.toLowerCase();
-        for(Facturas permisos: listaTarea){
-        String nombre = permisos.getNombre().toLowerCase().trim();
-            String detalle = permisos.getDetalle().toLowerCase().trim();
+        try {
+            dato = dato.toLowerCase();
+            for (Facturas permisos : listaTarea) {
+                String nombre = permisos.getNombre().toLowerCase().trim();
+                String detalle = permisos.getDetalle().toLowerCase().trim();
 
 
-
-        if(nombre.toLowerCase().contains(dato)) {
-        listaFiltradaPermiso.add(permisos);
-        }else if(detalle.toLowerCase().contains(dato)){
-                listaFiltradaPermiso.add(permisos);
+                if (nombre.toLowerCase().contains(dato)) {
+                    listaFiltradaPermiso.add(permisos);
+                } else if (detalle.toLowerCase().contains(dato)) {
+                    listaFiltradaPermiso.add(permisos);
+                }
             }
-        }
-        citasAdapter.filtrar(listaFiltradaPermiso);
-        }catch (Exception e){
-        Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
-        e.getStackTrace();
+            citasAdapter.filtrar(listaFiltradaPermiso);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "" + e, Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
         }
 
         return listaFiltradaPermiso;
 
-        }
+    }
 
 
-
-
-
-        }
+}

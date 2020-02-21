@@ -9,12 +9,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +50,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class crearFactura extends AppCompatActivity {
+public class crearFactura extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private String profecha;
     private int dia, mes, anio;
     EditText fecha;
@@ -54,7 +60,7 @@ public class crearFactura extends AppCompatActivity {
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
     EditText etHora;
-    EditText nombre,detalle,total;
+    EditText nombre, detalle, total;
     TextView col;
     Button registrar;
     String tokenUsuario;
@@ -62,8 +68,13 @@ public class crearFactura extends AppCompatActivity {
     private static final int minimo = 07;
     ProgressDialog progreso;
     ArrayList<ClientesVO> clientes;
+    ListView lista_citas;
+    facturas_adapter citasAdapter;
+    ArrayList<Facturas> cita;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
+    private ClientesAdapter adapterClientes;
+    private AlertDialog alertDialogClientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,45 +108,87 @@ public class crearFactura extends AppCompatActivity {
             }
         });
     }
+
     private void cargarPreferencias() {
         SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
 
-    } private void seleccionarCliente(View v) {
+    }
+
+    private void seleccionarCliente(View v) {
         AlertDialog.Builder builde = new AlertDialog.Builder(this);
         View dialogoLayout = getLayoutInflater().inflate(R.layout.lista_clientes_dialog, null);
 
+        View buscadorLayout = getLayoutInflater().inflate(R.layout.buscador_alertdialog, null);
         ListView listaclientesDialogo = (ListView) dialogoLayout.findViewById(R.id.lista_clientes_dialog);
         TextView sinClientes = dialogoLayout.findViewById(R.id.sinclientes);
-        if(clientes.size()>0){
+        EditText buscarET = dialogoLayout.findViewById(R.id.buscar_clientes);
+
+
+        if (clientes.size() > 0) {
             sinClientes.setVisibility(View.GONE);
             builde.setTitle("Seleccione el cliente");
-            ClientesAdapter adaptador_periodos_q = new ClientesAdapter(this, clientes);
-            listaclientesDialogo.setAdapter(adaptador_periodos_q);
-            builde.setAdapter(adaptador_periodos_q, new DialogInterface.OnClickListener() {
+
+            adapterClientes = new ClientesAdapter(this, clientes);
+            listaclientesDialogo.setAdapter(adapterClientes);
+            buscarET.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (!(s == null)) {
+                        ArrayList<ClientesVO> listaClientes = clientes;
+                        try {
+                            listaClientes = filtrarClientes(listaClientes, String.valueOf(s));
+                            adapterClientes.filtrar(listaClientes);
+                            adapterClientes.notifyDataSetChanged();
+
+                        } catch (Exception e) {
+                            Toast.makeText(crearFactura.this, "" + listaClientes, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
 
                 }
             });
-            final AlertDialog alertDialog = builde.create();
+            listaclientesDialogo.setOnItemClickListener(this);
+            builde.setView(dialogoLayout);
 
-            listaclientesDialogo = alertDialog.getListView();
-            listaclientesDialogo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    ClientesVO cliente = (ClientesVO) parent.getItemAtPosition(position);
-                    nombre.setText(cliente.getNombre());
-                    alertDialog.dismiss();
-                }
-            });
-            alertDialog.show();
-
-        }else {
+             alertDialogClientes = builde.create();
+            alertDialogClientes.show();
+        } else {
             sinClientes.setVisibility(View.VISIBLE);
             Toast.makeText(this, "No hay clientes registrados aun", Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    private ArrayList<ClientesVO> filtrarClientes(ArrayList<ClientesVO> listaTarea, String dato) {
+        ArrayList<ClientesVO> listaFiltradaPermiso = new ArrayList<>();
+        try {
+            dato = dato.toLowerCase();
+            for (ClientesVO permisos : listaTarea) {
+                String nombre = permisos.getNombre().toLowerCase().trim();
+
+
+                if (nombre.toLowerCase().contains(dato)) {
+                    listaFiltradaPermiso.add(permisos);
+                }
+            }
+            adapterClientes.filtrar(listaFiltradaPermiso);
+        } catch (Exception e) {
+            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
+        }
+
+        return listaFiltradaPermiso;
 
     }
 
@@ -219,15 +272,16 @@ public class crearFactura extends AppCompatActivity {
         }
 
     }
+
     private void cargarWebService() {
 
-        progreso=new ProgressDialog(this);
+        progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String ip=getString(R.string.ip);
+        String ip = getString(R.string.ip);
 
-        String url=ip+"/api/factura";
+        String url = ip + "/api/factura";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -251,23 +305,24 @@ public class crearFactura extends AppCompatActivity {
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
 
                 }
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
 
-                Map<String,String> parametros=new HashMap<>();
-                parametros.put("Nombre",nombre.getText().toString());
-                parametros.put("Detalle",detalle.getText().toString());
-                parametros.put("Total",total.getText().toString());
-                parametros.put("Fecha",fecha.getText().toString());
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Nombre", nombre.getText().toString());
+                parametros.put("Detalle", detalle.getText().toString());
+                parametros.put("Total", total.getText().toString());
+                parametros.put("Fecha", fecha.getText().toString());
                 return parametros;
 
             }
+
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -281,11 +336,12 @@ public class crearFactura extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
     private void validacion() {
-        if(nombre.getText().toString().equals("")||total.getText().toString().equals("")||detalle.getText().toString().equals("")||fecha.getText().toString().equals("")
-                || fecha.getText().toString().equals("")){
-            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
+        if (nombre.getText().toString().equals("") || total.getText().toString().equals("") || detalle.getText().toString().equals("") || fecha.getText().toString().equals("")
+                || fecha.getText().toString().equals("")) {
+            Toast.makeText(this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+        } else {
 
             cargarWebService();
 
@@ -293,6 +349,13 @@ public class crearFactura extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        ClientesVO cliente = (ClientesVO) parent.getItemAtPosition(position);
+        nombre.setText(cliente.getNombre());
+        alertDialogClientes.dismiss();
+    }
 }
 
 

@@ -42,6 +42,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,10 +70,10 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class PerfilFragment extends Fragment {
     private String tokenUsuario;
-    private EditText mostrarNombre, mostrarDireccion, mostraraTelefono, mostrarCorreo;
+    private TextInputEditText mostrarNombre, mostrarDireccion, mostraraTelefono, mostrarCorreo;
     private TextView mostrarnombre1;
     NetworkImageView imagen;
-    private Button guradarDatos;
+    private TextView guradarDatos;
     ProgressBar pro;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
@@ -99,7 +100,7 @@ public class PerfilFragment extends Fragment {
         mostrarNombre = view.findViewById(R.id.nombresP);
         mostrarDireccion = view.findViewById(R.id.direccionP);
         mostraraTelefono = view.findViewById(R.id.telefonoP);
-        imagen = view.findViewById(R.id.imageView);
+        imagen = view.findViewById(R.id.circleview);
         mostrarCorreo = view.findViewById(R.id.correoP);
         guradarDatos = view.findViewById(R.id.pedir);
         request = Volley.newRequestQueue(getContext());
@@ -239,7 +240,6 @@ public class PerfilFragment extends Fragment {
                             JSONObject object = response;
                             id_usuario = object.getString("id");
 
-                            mostrarnombre1.setText(object.getString("name"));
                             mostrarNombre.setText(object.getString("name"));
                             mostraraTelefono.setText(object.getString("telefono"));
                             mostrarDireccion.setText(object.getString("recidencia"));

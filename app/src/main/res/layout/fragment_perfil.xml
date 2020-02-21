@@ -5,54 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.rey.material.widget.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informacion Personal"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="bottom" />
+        <com.rey.material.widget.TextView
+            android:id="@+id/pedir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:background="@drawable/ic_save_black_24dp"
+            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+            android:textSize="15dp"
+            android:layout_gravity="right"
+           />
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#000000">
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/cuatro"
-            android:alpha="0.8" />
-        <androidx.appcompat.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.rey.material.widget.TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Informacion Personal"
-                android:textSize="20dp"
-                android:layout_gravity="center"
-                android:gravity="bottom"
-                android:textColor="#fff"/>
-            <com.rey.material.widget.TextView
-                android:id="@+id/pedir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Guardar"
-                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                android:textSize="15dp"
-                android:background="@drawable/oval"
-                android:layout_gravity="right"
-                android:layout_marginRight="20dp" />
-        </androidx.appcompat.widget.Toolbar>
-
-
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/circleview"
-            android:layout_width="177dp"
-            android:layout_height="187dp"
-            style="@style/Material.Widget.ProgressView.Circular"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            app:view_borderColor="#cccccc"
-            app:view_borderWidth="2dp"
-            app:view_shadowDx="2dp"
-            app:view_shadowDy="0dp"
-            app:view_shadowRadius="2dp" />
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="center"
+            android:background="#fff"/>
+
+
+
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,8 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Nombre"
             android:textSize="14dp"
-            android:layout_marginLeft="@dimen/margenleft"
-            android:padding="20dp"/>
+            android:padding="15dp"/>
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,8 +90,7 @@
             android:layout_height="wrap_content"
             android:text="Correo"
             android:textSize="14dp"
-            android:layout_marginLeft="@dimen/margenleft"
-            android:padding="20dp"/>
+            android:padding="15dp"/>
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
             android:id="@+id/correoP"
@@ -123,15 +118,14 @@
             android:layout_weight="0.5"
             android:text="Telefono"
             android:textSize="14dp"
-            android:padding="20dp"
-            android:layout_marginLeft="@dimen/margenleft"
+            android:padding="@dimen/margenleft"
             android:id="@+id/myTextView" />
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
             android:id="@+id/telefonoP"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:textSize="14dp"
             android:hint="99999999"
             android:maxLength="8"
@@ -154,8 +148,7 @@
             android:layout_weight="0.5"
             android:text="Direccion"
             android:textSize="14dp"
-            android:padding="20dp"
-            android:layout_marginLeft="@dimen/margenleft"
+            android:padding="@dimen/margenleft"
             android:id="@+id/direccion" />
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
@@ -164,14 +157,18 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:hint="Danli , el Paraiso colonia la Reforma"
-            android:maxLength="8"
             android:background="#00000000"
             android:padding="20dp"/>
 
+
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="#ACACAC"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

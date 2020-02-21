@@ -2,39 +2,30 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="6dp"
     app:cardElevation="4dp"
     android:id="@+id/relativeLayout2"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
-    android:background="@drawable/animalitos">
+    android:background="@drawable/animalitos"
+   >
+
 
     <LinearLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:background="@drawable/fondo_chat3">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/icono"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:src="@drawable/realizado_icon"
-                />
 
-        </LinearLayout>
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="5dp">
+    android:layout_marginLeft="@dimen/margenleft">
     <TextView
         android:id="@+id/direccion"
         android:layout_width="wrap_content"
@@ -83,7 +74,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="5dp">
+        android:layout_marginRight="@dimen/margenleft">
         <TextView
             android:id="@+id/mosstardireccion"
             android:layout_width="wrap_content"
@@ -125,11 +116,18 @@
 
 
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right">
 
-
-
-
-
+        <ImageView
+            android:id="@+id/icono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/realizado_icon" />
+</LinearLayout>
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

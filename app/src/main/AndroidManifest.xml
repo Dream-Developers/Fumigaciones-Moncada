@@ -31,7 +31,6 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" />
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
-        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"/>
         <activity android:name=".ui.solicitarCita.Detalle_Cita">
             <intent-filter>
                 <action android:name=".Detalle_Cita" />

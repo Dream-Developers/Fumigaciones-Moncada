@@ -13,13 +13,11 @@
         android:id="@+id/visionau"
         android:orderInCategory="100"
         android:title="@string/mision_y_visi_n"
-        android:onClick="vision_admin"
         app:showAsAction="never" />
     <item
         android:id="@+id/confinau"
         android:orderInCategory="100"
         android:title="Desarrolladores"
-        android:onClick="confi_admin"
         app:showAsAction="never" />
 
 </menu>

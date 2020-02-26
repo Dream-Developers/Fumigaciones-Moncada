@@ -2,40 +2,37 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="6dp"
     app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="3dp"
-    android:background="@drawable/animalitos">
+
+    >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/icon_citas"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="34dp"
-            android:layout_marginRight="34dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/cliente" />
+
+
 
         <TextView
             android:id="@+id/nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="9dp"
+            android:layout_above="@+id/detalle_txt_servicio"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
             android:text="Nombre:"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -44,119 +41,59 @@
             android:id="@+id/txt_servicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="42dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_above="@+id/fecha_cita"
+            android:layout_marginTop="9dp"
             android:text="Servicio:"
             android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/detalle_txt_servicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="90dp"
+            android:text="Roedores"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/nombre_cita"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/nombre_cita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="10dp"
+            android:text="Eloisa Flores"
+            android:textSize="18sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/fechaFumigacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="55dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/detalle_txt_servicio"
             android:text="Fecha:"
             android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/hora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="95dp"
-            android:layout_marginBottom="59dp"
-            android:text="Hora:"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/direccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="140dp"
-            android:text="Direccion:"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hora_cita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="157dp"
-            android:layout_marginLeft="157dp"
-            android:layout_marginTop="95dp"
-            android:layout_marginBottom="59dp"
-            android:text="10:50"
-            android:textSize="18sp"
-            android:visibility="visible" />
-
-        <TextView
             android:id="@+id/fecha_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="157dp"
-            android:layout_marginLeft="157dp"
-            android:layout_marginBottom="89dp"
-            android:text="10/01/2020"
-            android:textSize="18sp"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/nombre_cita"
-            android:layout_width="176dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="154dp"
-            android:layout_marginLeft="154dp"
+            android:layout_marginLeft="90dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginRight="44dp"
-            android:text="Eloisa Flores"
+            android:layout_below="@+id/detalle_txt_servicio"
+            android:text="1200"
             android:textSize="18sp"
-            android:visibility="visible" />
-
-
-        <TextView
-            android:id="@+id/direccion_cita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="156dp"
-            android:layout_marginLeft="156dp"
-            android:layout_marginTop="140dp"
-            android:text="Danli"
-            android:textSize="18sp"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/txt_servicio_cita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="156dp"
-            android:layout_marginLeft="156dp"
-            android:layout_marginTop="42dp"
-            android:text="Roedores"
-            android:textSize="18sp"
-            android:visibility="visible" />
-
-
+            android:visibility="visible"
+            android:layout_marginBottom="10dp"/>
     </RelativeLayout>
-
-
 
 </androidx.cardview.widget.CardView>

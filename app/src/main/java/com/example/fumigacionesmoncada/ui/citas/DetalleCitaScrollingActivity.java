@@ -35,8 +35,6 @@ public class DetalleCitaScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_cita_scrolling);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         setTitle(null);
         nombre = findViewById(R.id.detalle_nombre);
         direccion = findViewById(R.id.detalle_direccion);

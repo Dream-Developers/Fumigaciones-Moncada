@@ -32,11 +32,9 @@ public class CitasAdapter extends ArrayAdapter<CitaVO> {
 
 
         TextView nombre = convertView.findViewById(R.id.nombre_cita);
-        TextView telefono = convertView.findViewById(R.id.direccion_cita);
         CitaVO citaVO = getItem(position);
 
         nombre.setText(citaVO.getNombre());
-        telefono.setText(citaVO.getDireccion());
 
 
         return  convertView;

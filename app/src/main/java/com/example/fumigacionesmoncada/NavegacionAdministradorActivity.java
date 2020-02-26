@@ -69,14 +69,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         CitasSyncAdapter.obtenerCuentaASincronizar(this);
         CitasSyncAdapter.sincronizarAhora(this,false);
 
-        Cursor cursor= obtenerRegistrosFecha();
-        if(cursor.moveToFirst()){
-            Log.i("principal","Si hay registros");
 
-        }else{
-            Log.i("principal","no hay registros");
-            Toast.makeText(this, "No hay", Toast.LENGTH_LONG).show();
-        }
     }
 
 

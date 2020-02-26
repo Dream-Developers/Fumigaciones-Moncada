@@ -25,9 +25,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -46,7 +49,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Aquirir_Servicio_Fragment extends Fragment  {
+public class Aquirir_Servicio_Fragment extends Fragment {
     private int dia, mes, anio;
     private EditText fecha;
     private static final String CERO = "0";
@@ -102,7 +105,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
 
         String [] opciones = {"Insectos","Roedores"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item,opciones);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item,opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,13 +161,13 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
     private void cargarWebService() {
 
-        progreso=new ProgressDialog(getContext());
+        progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String ip=getString(R.string.ip);
+        String ip = getString(R.string.ip);
 
-        String url=ip+"/api/peticioncita";
+        String url = ip + "/api/peticioncita";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -189,25 +192,27 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
 
                 }
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> parametros=new HashMap<>();
-                parametros.put("Nombre",mostrarNombre.getText().toString());
-                parametros.put("Direccion",mostrarDireccion.getText().toString());
-                parametros.put("Telefono",mostraraTelefono.getText().toString());
-                parametros.put("FechaFumigacion",fecha.getText().toString());
-                parametros.put("Hora",Hora.getText().toString());
-                parametros.put("Servicio",mostrarservicion.getSelectedItem().toString());
-                parametros.put("User_id",Usuario_id);
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Nombre", mostrarNombre.getText().toString());
+                parametros.put("Direccion", mostrarDireccion.getText().toString());
+                parametros.put("Telefono", mostraraTelefono.getText().toString());
+                parametros.put("FechaFumigacion", fecha.getText().toString());
+                parametros.put("Hora", Hora.getText().toString());
+                parametros.put("Servicio", mostrarservicion.getSelectedItem().toString());
+                parametros.put("User_id", Usuario_id);
 
                 return parametros;
-            }@Override
+            }
+
+            @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "Bearer" + " " + tokenUsuario);
@@ -218,26 +223,27 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
         };
         //request.add(stringRequest);
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);}
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
     private void validacion() {
-        if(mostrarNombre.getText().toString().equals("")||mostrarDireccion.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")
-                || fecha.getText().toString().equals("") || Hora.getText().toString().equals("")){
-            Toast.makeText(getContext(),"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
-                if (mostraraTelefono.getText().toString().length() < 8 ) {
-                    Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
-                } else {
+        if (mostrarNombre.getText().toString().equals("") || mostrarDireccion.getText().toString().equals("") || mostraraTelefono.getText().toString().equals("")
+                || fecha.getText().toString().equals("") || Hora.getText().toString().equals("")) {
+            Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+        } else {
+            if (mostraraTelefono.getText().toString().length() < 8) {
+                Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+            } else {
 
 
-                            cargarWebService();
+                cargarWebService();
 
 
-
-                }
             }
         }
-
-
+    }
 
 
     private void cargarPreferencias() {
@@ -297,8 +303,6 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
     }
 
 
-
-
     private void obtenerFecha() {
         Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
@@ -336,6 +340,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
 
     }
+
     private void obtenerHora() {
 
         Calendar c = Calendar.getInstance();
@@ -351,7 +356,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         String fecha_usuario = fecha.getText().toString();
-        String fecha_actual = anio_hoy + "-" + (mes_hoy +1) + "-" + dia_hoy;
+        String fecha_actual = anio_hoy + "-" + (mes_hoy + 1) + "-" + dia_hoy;
         try {
             final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
             final Date fecha_actualDate = formatter.parse(fecha_actual);
@@ -363,10 +368,10 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                     //Se validan la FechaFumigacion actual con la tomada por el usuario para asi
                     //tomar una validacion distinta, si la FechaFumigacion actual es igual a la que tomo el usuario
                     //la Hora actual debe ser menor a la Hora tomada.
-                    if(fecha_usuarioDate.equals(fecha_actualDate)){
+                    if (fecha_usuarioDate.equals(fecha_actualDate)) {
 
-                        if(hour<hourOfDay){
-                            if (hourOfDay<maximo&&hourOfDay>minimo) {
+                        if (hour < hourOfDay) {
+                            if (hourOfDay < maximo && hourOfDay > minimo) {
                                 String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
                                 String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
                                 String AM_PM;
@@ -376,18 +381,18 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
                                     AM_PM = "p.m.";
                                 }
                                 Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
-                            }else {
+                            } else {
                                 Toast.makeText(getContext(), "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
                                 Hora.setText("");
                             }
 
-                        }else{
+                        } else {
                             Toast.makeText(getContext(), "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
                         }
 
 
-                    }else {
-                        if (hourOfDay<maximo&&hourOfDay>minimo) {
+                    } else {
+                        if (hourOfDay < maximo && hourOfDay > minimo) {
                             String horaFormateada = (hourOfDay < 10) ? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
                             String minutoFormateado = (minute < 10) ? String.valueOf(CERO + minute) : String.valueOf(minute);
                             String AM_PM;

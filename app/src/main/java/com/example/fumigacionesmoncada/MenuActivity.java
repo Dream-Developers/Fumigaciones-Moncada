@@ -110,10 +110,16 @@ public class MenuActivity extends AppCompatActivity {
 
    @Override public boolean onOptionsItemSelected(MenuItem opcion_menu) {
        switch (opcion_menu.getItemId()) {
-           case R.id.confi:
+           case R.id.confi_user:
+               Intent myIntent1 = new Intent(this,Desarrolladores.class);
+
+               startActivity(myIntent1);
                return true;
 
-           case R.id.mision:
+           case R.id.vision_user:
+               Intent myIntent2 = new Intent(this,VisionMision.class);
+
+               startActivity(myIntent2);
                return true;
 
            default:

@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,17 +25,8 @@ import com.example.fumigacionesmoncada.CitasSync.CitasSyncAdapter;
 import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class NavegacionAdministradorActivity extends AppCompatActivity {
 
@@ -132,6 +127,37 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 }).show();
+    }
+
+    public void vision_admin(Class<VisionMision> view){
+        Intent i= new Intent(this, VisionMision.class);
+
+        startActivity(i);
+    }
+
+    public void confi_admin(Class<Desarrolladores> view){
+        Intent intent = new Intent(this, Desarrolladores.class);
+
+        startActivity(intent);
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem opcion_menu) {
+        switch (opcion_menu.getItemId()) {
+            case R.id.visionau:
+                Intent myIntent1 = new Intent(this,VisionMision.class);
+
+                startActivity(myIntent1);
+                return true;
+
+            case R.id.confinau:
+                Intent myIntent2 = new Intent(this,Desarrolladores.class);
+
+                startActivity(myIntent2);
+                return true;
+
+            default:
+        }
+        return super.onOptionsItemSelected(opcion_menu);
     }
 
     private void logout() {

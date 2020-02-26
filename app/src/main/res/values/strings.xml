@@ -35,7 +35,7 @@
     <string name="contactar">Contactar</string>
 
 
-    <string name="ip">http://192.168.137.1</string>
+    <string name="ip">http://192.168.2.13</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>

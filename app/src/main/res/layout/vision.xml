@@ -10,14 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
-        android:layout_marginRight="10dp"
-        android:text="                                 VISIÓN                                          Lograr para el año 2021 ser una empresa de servicio de fumigaciónsolida y diseminada en diferentes departamentos de nuestro país, con el objetivo de generar empleos y posicionarnos en la mente de nuestros clientes actuales y futuros. "
+        android:layout_marginRight="20dp"
+        android:textColorHint="#000"
+        android:hint="                                 VISIÓN                                          Lograr para el año 2021 ser una empresa de servicio de fumigaciónsolida y diseminada en diferentes departamentos de nuestro país, con el objetivo de generar empleos y posicionarnos en la mente de nuestros clientes actuales y futuros. "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/control"
         android:layout_width="294dp"
         android:layout_height="152dp"
@@ -31,10 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
-        android:text="                                 MISIÓN                                          Establecer la empresa en los primeros lugares de servicio de fumigación a nivel local, departamental y nacional cumpliendo con las expectativas empresariales y familiares logrando con ello la satisfacción en nuestros clientes. "
+        android:textColorHint="#000"
+        android:hint="                                 MISIÓN                                          Establecer la empresa en los primeros lugares de servicio de fumigación a nivel local, departamental y nacional cumpliendo con las expectativas empresariales y familiares logrando con ello la satisfacción en nuestros clientes. "
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 </LinearLayout>

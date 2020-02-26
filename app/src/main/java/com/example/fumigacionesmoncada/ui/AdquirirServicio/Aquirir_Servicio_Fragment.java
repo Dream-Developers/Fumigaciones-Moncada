@@ -102,7 +102,7 @@ public class Aquirir_Servicio_Fragment extends Fragment  {
 
 
         String [] opciones = {"Insectos","Roedores"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item,opciones);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item,opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -103,8 +104,8 @@ public class Aquirir_Servicio_Fragment extends Fragment {
         cargarClienteWeb();
 
 
-        String[] opciones = {"Insectos", "Roedores"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, opciones);
+        String [] opciones = {"Insectos","Roedores"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item,opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override

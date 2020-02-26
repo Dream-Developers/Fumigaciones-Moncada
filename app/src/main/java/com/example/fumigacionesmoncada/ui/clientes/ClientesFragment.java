@@ -27,10 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.RegistarUsuarioNuevo;
 import com.example.fumigacionesmoncada.RegistroUsuarioNuevoAdministrador;
-import com.example.fumigacionesmoncada.ui.citas.Citas;
-import com.example.fumigacionesmoncada.ui.citas.Citas_Adapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -59,7 +56,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ClientesVO clientesVO = (ClientesVO) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getContext(), Detalle_Cliente.class);
+                Intent intent = new Intent(getContext(), DetalleClienteScrollingActivity.class);
                 intent.putExtra("id_cliente",clientesVO.getId());
                 startActivity(intent);
 

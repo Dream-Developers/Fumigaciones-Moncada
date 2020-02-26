@@ -71,6 +71,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         recyclerUsuarios =  view.findViewById(R.id.recycler_servicios);
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
+
         cargarWebService();
         cargarPreferencias();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
@@ -193,6 +194,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
                             dialog.hide();
                             ClaseAdapterImagen adapter=new ClaseAdapterImagen(listaUsuarios, getContext());
                             recyclerUsuarios.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

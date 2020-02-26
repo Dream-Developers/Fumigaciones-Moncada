@@ -89,7 +89,12 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_servicio_administrador_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        try {
+
+        }catch (Exception e){
+            setSupportActionBar(toolbar);
+        }
+
         setTitle(null);
 
         titulo = findViewById(R.id.tituloImagenDA);

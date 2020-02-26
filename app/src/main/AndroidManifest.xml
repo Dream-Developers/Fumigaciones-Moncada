@@ -12,10 +12,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LlamadaActivity"
-            android:label="@string/titlr_llamar"
-            />
-
+        <activity
+            android:name=".ui.clientes.DetalleClienteScrollingActivity"
+            android:label="@string/title_activity_detalle_cliente_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".LlamadaActivity"
+            android:label="@string/titlr_llamar" />
         <activity
             android:name=".ui.Principal.DetalleServicioScroll"
             android:label="@string/title_activity_detalle_servicio_scroll"
@@ -29,7 +32,7 @@
         <activity
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorActivity" />
+        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity" />
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
         <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"/>
         <activity android:name=".ui.solicitarCita.Detalle_Cita">
@@ -81,6 +84,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.clientes.Detalle_Cliente" />
         <activity android:name=".ui.citas.Detalle_Cita" />
+        <activity android:name=".ui.citas.DetalleCitaScrollingActivity" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -168,10 +172,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Autenticación -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> <!-- Autenticación -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 

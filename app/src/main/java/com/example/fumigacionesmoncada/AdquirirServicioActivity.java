@@ -96,7 +96,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         cargarClienteWeb();
 
         String [] opciones = {"Inceptos","Roedores"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item,opciones);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override

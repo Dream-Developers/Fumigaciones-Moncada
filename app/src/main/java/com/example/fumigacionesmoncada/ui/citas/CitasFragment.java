@@ -55,6 +55,8 @@ private FloatingActionButton addcita;
         View view = inflater.inflate(R.layout.fragment_citas, container, false);
         addcita = view.findViewById(R.id.add_citas);
         lista_citas= view.findViewById(R.id.lista_citas);
+        lista_citas.setDivider(null);
+      lista_citas.setDividerHeight(0);
 
         lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

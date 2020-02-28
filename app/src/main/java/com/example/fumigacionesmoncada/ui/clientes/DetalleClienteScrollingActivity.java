@@ -41,7 +41,7 @@ public class DetalleClienteScrollingActivity extends AppCompatActivity {
     private TextView nombre, residencia, telefono,correo;
     private ClientesVO clientesVO;
     NetworkImageView imagen;
-    FloatingActionButton fab, phone;
+  FloatingActionButton fab, phone;
     String id;
 
     @Override

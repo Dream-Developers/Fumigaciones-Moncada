@@ -4,123 +4,156 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="3dp"
+    android:layout_margin="6dp"
     app:cardElevation="4dp"
-    android:id="@+id/relativeLayout2"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
 
-   >
-
+    >
     <LinearLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/nombreCliente"
+            android:orientation="vertical"
+            android:layout_margin="15dp"
+            android:layout_weight="1">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre:"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
 
-            <TextView
-                android:id="@+id/fechaCliente"
+                    >
+                    <TextView
+                        android:id="@+id/nombreCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre:"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/nombre_cita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Danli"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha:"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
 
-            <TextView
-                android:id="@+id/horaCliente"
+                    >
+                    <TextView
+                        android:id="@+id/fechaCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fecha_cita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10/01/2020"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="26dp"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hora:"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
 
-            <TextView
-                android:id="@+id/servicio"
+                    <TextView
+                        android:id="@+id/horaCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hora:"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/hora_cita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:50"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="37dp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precio:"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/servicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio:"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/precio_cita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="350"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="23dp"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+
+
 
 
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/nombre_cita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Danli"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/fecha_cita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10/01/2020"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/hora_cita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10:50"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/precio_cita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="350"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
-
-            <ImageView
-                android:id="@+id/icon_citas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="10dp"
-                android:src="@drawable/cliente" />
-        </LinearLayout>
-    </LinearLayout>
 
 
 

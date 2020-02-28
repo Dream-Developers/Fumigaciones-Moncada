@@ -39,8 +39,7 @@ public class Citas_Adapter extends ArrayAdapter<Citas> {
 
         TextView fecha = convertView.findViewById(R.id.fecha_cita);
         TextView hora = convertView.findViewById(R.id.hora_cita);
-        ImageView imagen = convertView.findViewById(R.id.icon_citas);
-
+       
         Citas citas = getItem(position);
 
 

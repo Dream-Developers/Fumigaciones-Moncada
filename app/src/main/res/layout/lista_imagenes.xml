@@ -10,8 +10,10 @@ tools:context=".LoginActivity">
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     card_view:cardBackgroundColor="#fffffe91"
+    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="10dp"
     >
     <ImageView
         android:id="@+id/idImagen"
@@ -26,9 +28,8 @@ tools:context=".LoginActivity">
         android:fontFamily="sans-serif"
         android:padding="10dp"
         android:layout_marginTop="162dp"
-        android:textColor="#000"
-        android:background="#fff"
-
+        android:textColor="#fff"
+        android:background="#7C000000"
         />
 </androidx.cardview.widget.CardView>
 

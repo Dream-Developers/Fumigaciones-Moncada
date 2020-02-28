@@ -4,6 +4,7 @@ package com.example.fumigacionesmoncada.Database.serviciosAdministrador;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
     ProgressDialog dialog;
     JsonObjectRequest jsonObjectRequest;
     String tokenUsuario;
-
+    ConstraintLayout linearLayout;
     private OnFragmentInteractionListener mListener;
     ClaseAdapterImagen claseAdapterImagen;
 
@@ -71,6 +72,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         recyclerUsuarios =  view.findViewById(R.id.recycler_servicios);
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
+        linearLayout = view.findViewById(R.id.error);
 
         cargarWebService();
         cargarPreferencias();
@@ -213,8 +215,11 @@ public class ServiciosAdministradorFragment extends Fragment  {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
+                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    Toast.makeText(getContext(), "Revise su conexión a internet" , Toast.LENGTH_SHORT).show();
                     // Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }

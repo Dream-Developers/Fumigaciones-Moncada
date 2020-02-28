@@ -7,5 +7,7 @@
     <ListView
         android:id="@+id/lista_citas_solicitud"
         android:layout_width="match_parent"
+        android:dividerHeight="0dp"
+        android:divider="@null"
         android:layout_height="wrap_content" />
 </RelativeLayout>

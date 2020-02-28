@@ -180,7 +180,7 @@ linearLayout = vista.findViewById(R.id.error);
                 } else {
 
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Revise su conexión a internet" , Toast.LENGTH_SHORT).show();
                 }
 
             }

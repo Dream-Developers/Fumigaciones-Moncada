@@ -61,7 +61,7 @@
             android:name=".ui.citas.Crear_Citas"
             android:configChanges="orientation|screenSize"
             android:label="@string/factura"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
         <activity
             android:name=".NavegacionAdministradorActivity"
             android:theme="@style/AppTheme.NoActionBar" />

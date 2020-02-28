@@ -11,86 +11,131 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.rey.material.widget.TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="25dp"
+                android:padding="15dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC" />
+            <com.rey.material.widget.TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textSize="25sp"
+                android:padding="@dimen/margenleft"
+                android:id="@+id/direccion" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/baseline_phone_in_talk_white_18dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
 
 
-        <TextView
-            android:id="@+id/nombreCliente"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Nombre:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nombre_detalle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_toRightOf="@+id/nombreCliente"
-            android:text="Maria Izamar Molina" />
-
-        <TextView
-            android:id="@+id/residencia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nombreCliente"
-            android:layout_margin="10dp"
-            android:text="Residencia:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/residencia_detalle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nombreCliente"
-            android:layout_margin="15dp"
-            android:layout_toRightOf="@+id/residencia"
-            android:text="Danli" />
-
-        <TextView
-            android:id="@+id/telefonoCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/residencia"
-            android:layout_margin="10dp"
-            android:text="Telefono:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/telefono_detalle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="89765643" />
-        <ImageButton
-            android:id="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end"
-            app:srcCompat="@android:drawable/stat_sys_phone_call" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC" />
 
 
-        <TextView
-            android:id="@+id/CorreoCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Correo:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/correo_detalle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Izamar_molina@yahoo.com" />
+            <com.rey.material.widget.TextView
+                android:id="@+id/nombre_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="#00000000"
+                android:hint="Sam Enric"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margenleft"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ACACAC" />
+
+
+            <com.rey.material.widget.TextView
+                android:id="@+id/residencia_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:hint="Danli , el Paraiso colonia la Reforma"
+                android:padding="@dimen/margenleft"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ACACAC" />
+            <com.rey.material.widget.TextView
+                android:id="@+id/telefono_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:hint="99999999"
+                android:padding="@dimen/margenleft"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ACACAC" />
+            <com.rey.material.widget.TextView
+                android:id="@+id/correo_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="#00000000"
+                android:hint="Sam_enric@Seotoolzz.com"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margenleft"
+                android:textSize="25sp"  />
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

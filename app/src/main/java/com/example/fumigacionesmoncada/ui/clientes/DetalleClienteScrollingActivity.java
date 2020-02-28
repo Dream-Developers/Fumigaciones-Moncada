@@ -41,8 +41,7 @@ public class DetalleClienteScrollingActivity extends AppCompatActivity {
     private TextView nombre, residencia, telefono,correo;
     private ClientesVO clientesVO;
     NetworkImageView imagen;
-    FloatingActionButton fab;
-     ImageButton phone;
+    FloatingActionButton fab, phone;
     String id;
 
     @Override
@@ -57,6 +56,7 @@ public class DetalleClienteScrollingActivity extends AppCompatActivity {
         correo= findViewById(R.id.correo_detalle);
         fab=  findViewById(R.id.correo);
         phone =  findViewById(R.id.phone);
+        setTitle(null);
 
         imagen = findViewById(R.id.imagen_cliente);
         id = getIntent().getStringExtra("id_cliente");

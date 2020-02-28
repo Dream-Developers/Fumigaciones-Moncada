@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="6dp"
     app:cardElevation="4dp"
@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
 
@@ -25,7 +25,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginLeft="@dimen/margenleft">
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="@dimen/margenleft"
+    android:layout_marginBottom="15dp">
     <TextView
         android:id="@+id/direccion"
         android:layout_width="wrap_content"
@@ -74,7 +76,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginRight="@dimen/margenleft">
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
         <TextView
             android:id="@+id/mosstardireccion"
             android:layout_width="wrap_content"
@@ -89,13 +93,15 @@
             android:text="10/01/2020"
             android:textSize="18sp"
             android:visibility="visible" />
-    <TextView
-        android:id="@+id/mostrarcita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10:50"
-        android:textSize="18sp"
-        android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/mostrarcita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:50"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/mosstarservicio"
             android:layout_width="wrap_content"
@@ -119,6 +125,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="15dp"
     android:gravity="right">
 
         <ImageView

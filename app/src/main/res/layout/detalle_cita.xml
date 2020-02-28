@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:layout_width="380dp"
@@ -201,8 +200,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginBottom="140dp"
         android:background="@drawable/oval"
         android:onClick="btnAceptado"
@@ -216,11 +215,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="140dp"
         android:background="@drawable/oval"
-        android:lineSpacingExtra="25dp"
+        android:lineSpacingExtra="25sp"
         android:onClick="btnRechazado"
         android:text="RECHAZAR"
         android:textColor="@android:color/black" />

@@ -3,8 +3,10 @@ package com.example.fumigacionesmoncada.ui.solicitarCita;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +42,8 @@ public class Detalle_Cita extends Activity {
     private int btnRechazar = 4;
     private String id, estado;
     private String Estado;
+    String id_usuario;
+    private String tokenUsuario;
     private Button btnAceptado;
     private Button btnRechazado;
 
@@ -60,6 +64,8 @@ public class Detalle_Cita extends Activity {
         id = getIntent().getStringExtra("id");
 
         cargarCitaWeb(id);
+        cargarPreferencias(id_usuario);
+
 
         btnAceptado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +136,13 @@ public class Detalle_Cita extends Activity {
 
     }
 
+    private void cargarPreferencias(String id) {
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            tokenUsuario = preferences.getString("token", "");
+            id_usuario = preferences.getString("id", "");
+        }
+
+
     private void agregarCitaWebService(final String id, final int position) {
         final ProgressDialog progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando datos...");
@@ -157,6 +170,7 @@ public class Detalle_Cita extends Activity {
                         e.printStackTrace();
                     }
                     cargarCitaWeb(id);
+
                 }
 
 
@@ -173,6 +187,7 @@ public class Detalle_Cita extends Activity {
                     Map<String, String> parametros = new HashMap<>();
                     parametros.put("Content-Type", "application/json");
                     parametros.put("X-Requested-With", "XMLHttpRequest");
+                    parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
 
                     return parametros;
                 }
@@ -229,6 +244,7 @@ public class Detalle_Cita extends Activity {
                     Map<String, String> parametros = new HashMap<>();
                     parametros.put("Content-Type", "application/json");
                     parametros.put("X-Requested-With", "XMLHttpRequest");
+                    parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
 
                     return parametros;
                 }
@@ -242,6 +258,7 @@ public class Detalle_Cita extends Activity {
         progreso.dismiss();
 
     }
+
 
 
     private void cargarCitaWeb(final String id) {
@@ -281,6 +298,7 @@ public class Detalle_Cita extends Activity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("id", id);
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return parametros;
             }
         };

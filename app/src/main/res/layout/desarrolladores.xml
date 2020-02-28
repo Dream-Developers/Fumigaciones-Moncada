@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+
     <TextView
         android:id="@+id/desa"
         android:layout_width="wrap_content"
@@ -11,60 +12,110 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:textStyle="bold"
+        android:textColor="#000"
         android:textSize="25dp"
         android:text="Desarrolladores" />
 
-
-
     <TextView
-            android:id="@+id/desa1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:text="Eloisa Flores"/>
+        android:id="@+id/ini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:text="Esta aplicación fue desarrollada por los alumnos de UNAH TEC DANLI:" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="35dp"
+         />
 
         <TextView
+            android:id="@+id/desa1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="85sp"
+            android:gravity="center"
+            android:layout_marginTop="35dp"
+            android:text="Eloisa Flores"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
             android:id="@+id/desa2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="85sp"
+            android:textSize="25sp"
             android:textStyle="bold"
+            android:textColor="#000"
             android:text="Enrique Alemán"/>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/desa3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="85sp"
+            android:textSize="25sp"
             android:textStyle="bold"
+            android:textColor="#000"
             android:text="Izamar Molina  "/>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/desa4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="85sp"
+            android:textSize="25sp"
             android:textStyle="bold"
+            android:textColor="#000"
             android:text="Jacob Aguilar"/>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/desa5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
-        android:textSize="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="85sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="#000"
         android:text="Jenifer Chavarria" />
-
+    </RelativeLayout>
 
 </LinearLayout>

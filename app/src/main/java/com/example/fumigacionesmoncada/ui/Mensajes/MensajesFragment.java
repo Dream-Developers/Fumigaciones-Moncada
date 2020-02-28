@@ -125,7 +125,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
         Cursor cursor= obtenerRegistrosFecha();
 
         if(cursor!=null&&cursor.moveToNext()){
-            Toast.makeText(getContext(), "Si hay registros de hou", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Si hay registros de hoy", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getContext(), "No hay", Toast.LENGTH_LONG).show();
         }

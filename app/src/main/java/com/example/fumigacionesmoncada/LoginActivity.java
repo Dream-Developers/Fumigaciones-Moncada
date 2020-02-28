@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String STRING_PREFERENCES = "example.preferencias";
     private static final String PREFERENCE_ESTADO_BUTTON = "estado.button";
+    ProgressDialog progressDialog;
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -244,6 +246,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(final String txtCorreo, final String txtContrasena) {
 
+        progressDialog = new ProgressDialog(this);
+        //progressDialog.   setMessage("Iniciando sesión");
+        progressDialog.   show();
+        progressDialog.setContentView(R.layout.custom_progressdialog);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setCancelable(true);
+
         String ip = getString(R.string.ip);
 
         String url = ip + "/api/auth/login";
@@ -252,6 +261,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressDialog. dismiss();
                         guardarEstadoButton();
                         //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
@@ -292,6 +302,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.hide();
                         btn_login.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Error al iniciar sesión, hubo" +
                                 " un problema con el servidor ", Toast.LENGTH_SHORT).show();

@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -93,6 +94,7 @@ public class PerfilFragment extends Fragment {
     private final int MIS_PERMISOS = 100;
     private static final int COD_SELECCIONA = 10;
     String foto;
+    LinearLayout linearLayout;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -108,6 +110,7 @@ public class PerfilFragment extends Fragment {
         mostrarCorreo = view.findViewById(R.id.correoP);
         guradarDatos = view.findViewById(R.id.pedir);
         request = Volley.newRequestQueue(getContext());
+         linearLayout = view.findViewById(R.id.error);
 
         mostrarCorreo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,6 +267,7 @@ public class PerfilFragment extends Fragment {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo más tarde.", Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();

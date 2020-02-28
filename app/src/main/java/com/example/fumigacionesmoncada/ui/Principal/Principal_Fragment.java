@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +50,7 @@ public class Principal_Fragment extends Fragment   {
 
     RecyclerView recyclerUsuarios;
     ArrayList<ServiciosVO> listaUsuarios;
-
+    ConstraintLayout linearLayout;
     ProgressDialog dialog;
     String tokenUsuario;
 
@@ -101,7 +103,7 @@ public class Principal_Fragment extends Fragment   {
         //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
-
+linearLayout = vista.findViewById(R.id.error);
         cargarWebService();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -173,10 +175,14 @@ public class Principal_Fragment extends Fragment   {
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
+
+                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     Toast.makeText(getContext(), "Revise su conexión a internet" + error.toString(), Toast.LENGTH_SHORT).show();
                 }
+
             }
 
         }) {

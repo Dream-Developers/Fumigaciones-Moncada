@@ -5,7 +5,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ten"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -42,9 +41,9 @@
                         android:id="@+id/foto"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        android:src="@drawable/baseline_add_photo_alternate_white_48dp"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/perfil"
                         android:background="@drawable/boton_redondo"
                         />
 

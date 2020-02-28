@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <androidx.core.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         >
 
         <LinearLayout
@@ -26,15 +26,7 @@
             android:textSize="20dp"
             android:layout_gravity="center"
             android:gravity="bottom" />
-        <com.rey.material.widget.TextView
-            android:id="@+id/pedir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:background="@drawable/ic_save_black_24dp"
-            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-            android:textSize="15dp"
-            android:layout_gravity="right"
-           />
+
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -51,124 +43,118 @@
 
 
     </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.rey.material.widget.TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:layout_weight="0.35"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:textSize="14dp"
-            android:padding="15dp"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="14dp"
-            android:id="@+id/nombresP"
-            android:hint="Sam Enric"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:layout_gravity="center"
-            android:background="#00000000"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.rey.material.widget.TextView
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content"
-            android:text="Correo"
-            android:textSize="14dp"
-            android:padding="15dp"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="0dp"
-            android:id="@+id/correoP"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="14dp"
-            android:hint="Sam_enric@Seotoolzz.com"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:layout_gravity="center"
-            android:background="#00000000"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.rey.material.widget.TextView
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Telefono"
-            android:textSize="14dp"
-            android:padding="@dimen/margenleft"
-            android:id="@+id/myTextView" />
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="0dp"
-            android:id="@+id/telefonoP"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="14dp"
-            android:hint="99999999"
-            android:maxLength="8"
-            android:background="#00000000"
-            android:padding="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.rey.material.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"
+                    android:textSize="14dp"
+                    android:padding="15dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.rey.material.widget.TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo"
+                    android:textSize="14dp"
+                    android:padding="15dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.rey.material.widget.TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telefono"
+                    android:textSize="14dp"
+                    android:padding="@dimen/margenleft"
+                    android:id="@+id/myTextView" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.rey.material.widget.TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Direccion"
+                    android:textSize="14dp"
+                    android:padding="@dimen/margenleft"
+                    android:id="@+id/direccion" />
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.rey.material.widget.TextView
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Direccion"
-            android:textSize="14dp"
-            android:padding="@dimen/margenleft"
-            android:id="@+id/direccion" />
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="0dp"
-            android:id="@+id/direccionP"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="Danli , el Paraiso colonia la Reforma"
-            android:background="#00000000"
-            android:padding="20dp"/>
-
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC"/>
-
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:id="@+id/nombresP"
+                    android:hint="Sam Enric"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/margenleft"
+                    android:layout_gravity="left"
+                    android:background="#00000000"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:id="@+id/correoP"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:hint="Sam_enric@Seotoolzz.com"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/margenleft"
+                    android:layout_gravity="left"
+                    android:background="#00000000"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:id="@+id/telefonoP"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:hint="99999999"
+                    android:maxLength="8"
+                    android:background="#00000000"
+                    android:padding="@dimen/margenleft"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="#ACACAC"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:id="@+id/direccionP"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:hint="Danli , el Paraiso colonia la Reforma"
+                    android:background="#00000000"
+                    android:padding="@dimen/margenleft"/>
+            </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
+
+
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

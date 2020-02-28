@@ -2,6 +2,7 @@ package com.example.fumigacionesmoncada.factura;
 
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -46,7 +48,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +68,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
     EditText  EditNombre,EditFecha,EditDetalle,EditTotal;
     String id_usuario;
     AlertDialog alertDialogFactura;
+    private int dia, mes, anio;
 
 
     @Override
@@ -97,6 +104,40 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         });
         return view;
     }
+    private void obtenerFecha() {
+        Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        anio = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext()
+                , new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                EditFecha.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+
+            }
+        }, anio, mes, dia);
+        datePickerDialog.show();
+
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+            Date fechai = dateParser.parse(EditFecha.getText().toString().trim());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechai);
+            c.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 30);
+            Date newDate = c.getTime();
+            String fechaf = dateParser.format(newDate);
+
+            EditFecha.setText(fechaf);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void cargarPreferencias() {
         SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -121,6 +162,14 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         EditDetalle.setText(facturas.getDetalle());
         EditFecha.setText(facturas.getFecha());
         EditTotal.setText(facturas.getTotal());
+
+        EditFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                obtenerFecha();
+            }
+        });
+
         builde.setCancelable(false);
         builde.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {

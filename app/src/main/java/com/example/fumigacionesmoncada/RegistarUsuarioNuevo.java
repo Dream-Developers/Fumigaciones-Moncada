@@ -465,36 +465,60 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     }
 }
     private void validacion() {
-        if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
-                || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
-            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
-            if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
-                Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
-            } else {
-                if (telefono.getText().toString().length() < 8 ) {
-                    Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+        if (bitmap == null) {
+            Toast.makeText(this, "Ingrese la fotografia", Toast.LENGTH_SHORT).show();
+        } else {
+        if(nombre.getText().toString().equals("")){
+            nombre.setError("ingrese el nombre");
+        }else { if (apellidos.getText().toString().equals("")) {
+            apellidos.setError("ingrese Recidencia");
+
+            }else{
+            if (telefono.getText().toString().equals("")) {
+                telefono.setError("ingrese el Telefono");
+
+
+            }else{
+                if (correo.getText().toString().equals("")) {
+                    correo.setError("ingrese el Correo");
+                }else{
+                if  (contraseña.getText().toString().equals("")) {
+                    contraseña.setError("ingrese La Contraseña");
+
+            }else{
+             if (confcontra.getText().toString().equals("")) {
+                        confcontra.setError("ingrese la Confirmacion  De Contraseña");
+            }else{
+
+            if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
+
+                if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
+                    Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
                 } else {
-                    if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
+                    if (telefono.getText().toString().length() < 8) {
+                        telefono.setError("No es un numero Telefonico");
+                        Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                    } else {
+
                         if (!validarEmail(correo.getText().toString())) {
+                            correo.setError("correo no valido");
                             Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
                         } else {
-                            if(bitmap == null ){
-                                Toast.makeText(this, "Ingrese la fotografia", Toast.LENGTH_SHORT).show();
-                            }else{
 
-                            cargarWebService();
+
+                                cargarWebService();
                                 createUser();
-                        }
+                            }
                         }
 
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
                     }
-                }
+                }else {
+                Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
+contraseña.setError("no Coinciden ");
             }
-        }
+            }
+        }}}}}}
 
 
     }

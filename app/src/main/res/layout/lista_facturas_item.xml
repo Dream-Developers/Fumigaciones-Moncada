@@ -2,7 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,15 +12,24 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#C639CF27"
             android:gravity="center"
+            android:background="@drawable/oval"
+            android:layout_marginLeft="@dimen/margenleft"
+            android:layout_marginRight="@dimen/margenleft"
             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Numero De Factura"
+                android:textSize="25dp"
+
+                />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Factura  Numero "
-        android:textAlignment="center"
+        android:text=" N°"
         android:textSize="25dp"
 
         />
@@ -28,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
-                android:textAlignment="center"
+                android:layout_gravity="right"
                 android:textSize="25dp"
                 />
         </LinearLayout>
@@ -36,13 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="  Nombre:  "
                 android:textSize="20dp"
                 android:textStyle="bold"
-                />
+                android:layout_marginLeft="@dimen/margenleft"/>
             <TextView
                 android:id="@+id/mostrarNombre"
                 android:layout_width="match_parent"
@@ -61,6 +72,7 @@
                 android:text="  Fecha:  "
                 android:textSize="20dp"
                 android:textStyle="bold"
+                android:layout_marginLeft="@dimen/margenleft"
 
                 />
             <TextView
@@ -81,6 +93,7 @@
        android:text="  Detalle:  "
        android:textSize="20dp"
        android:textStyle="bold"
+       android:layout_marginLeft="@dimen/margenleft"
 
        />
             <TextView
@@ -90,11 +103,51 @@
                 android:textSize="20dp"
                 />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#B939CF27"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text=" SubTotal:  L"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/mostrarsubtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="00"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text=" Descuento:  L"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/mostrardescuento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="00"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right">
             <TextView

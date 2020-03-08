@@ -440,7 +440,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
                     if (error.toString().equals("com.android.volley.ClientError")) {
                     Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "No se pudo registar ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
 
                 }
             }

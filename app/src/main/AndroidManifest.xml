@@ -65,7 +65,7 @@
         <activity
             android:name=".ui.citas.Crear_Citas"
             android:configChanges="orientation|screenSize"
-            android:label="@string/factura"
+            android:label="@string/detalle_cita"
              />
         <activity
             android:name=".NavegacionAdministradorActivity"

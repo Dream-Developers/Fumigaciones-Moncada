@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -95,6 +96,7 @@ public class PerfilFragment extends Fragment {
     private static final int COD_SELECCIONA = 10;
     String foto;
     LinearLayout linearLayout;
+    ImageView editar;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -111,12 +113,12 @@ public class PerfilFragment extends Fragment {
         guradarDatos = view.findViewById(R.id.pedir);
         request = Volley.newRequestQueue(getContext());
          linearLayout = view.findViewById(R.id.error);
+         editar = view.findViewById(R.id.editar);
 
         mostrarCorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "El Correo no se puede modificar", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getContext(), R.string.validacionCorreo, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -125,7 +127,7 @@ public class PerfilFragment extends Fragment {
 
 
 
-        imagen.setOnClickListener(new View.OnClickListener() {
+        editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarDialogOpciones();
@@ -156,20 +158,20 @@ public class PerfilFragment extends Fragment {
     public void actualizar_datos(final String id) {
 
         try {
-            if (mostrarNombre.getText().toString().trim().equals("")
-                    || mostraraTelefono.getText().toString().trim().equals("") || mostrarDireccion.getText().toString().trim().equals("")) {
-                Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
-            } else {
-            }
-            if ((mostraraTelefono.getText().toString().length() < 8) || (mostraraTelefono.getText().toString().length() > 8)) {
-                Toast.makeText(getContext(), "No es un número teléfonico", Toast.LENGTH_LONG).show();
-
+            if (mostrarNombre.getText().toString().trim().equals("")) {
+                Toast.makeText(getContext(), R.string.campoNombre, Toast.LENGTH_LONG).show();
+            }else if(mostraraTelefono.getText().toString().trim().equals("")){
+                Toast.makeText(getContext(), R.string.campoTelefono, Toast.LENGTH_LONG).show();
+            }else if(mostraraTelefono.getText().toString().trim().length() < 8){
+                Toast.makeText(getContext(), R.string.NumeroInvalido, Toast.LENGTH_LONG).show();
+            }else if( mostrarDireccion.getText().toString().trim().equals("")){
+                Toast.makeText(getContext(), R.string.campoResidencia, Toast.LENGTH_LONG).show();
             } else {
                 {
 
 
                     progreso = new ProgressDialog(getContext());
-                    progreso.setMessage("Cargando datos...");
+                    progreso.setMessage(getString(R.string.cargandoAdquirir));
                     progreso.show();
 
                     if (bitmap == null) {
@@ -264,13 +266,13 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo más tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
 
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),R.string.reviseConexion, Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -25,10 +25,19 @@
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Informacion Personal"
+            android:text="@string/informacion_personal"
             android:textSize="20dp"
             android:layout_gravity="center"
-            android:gravity="bottom" />
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+        <ImageView
+            android:id="@+id/editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -40,8 +49,10 @@
             android:id="@+id/circleview"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:scaleType="center"
-            android:background="#fff"/>
+            android:scaleType="fitCenter"
+            android:background="#fff"
+          />
+
 
 
 
@@ -58,9 +69,10 @@
                     android:layout_width="wrap_content"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
+                    android:text="@string/nombre"
                     android:textSize="14dp"
-                    android:padding="15dp"/>
+                    android:padding="15dp"
+                    android:textColor="#000"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp"
@@ -69,9 +81,10 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Correo"
+                    android:text="@string/correo"
                     android:textSize="14dp"
-                    android:padding="15dp"/>
+                    android:padding="15dp"
+                    android:textColor="#000"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp"
@@ -80,10 +93,11 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telefono"
+                    android:text="@string/telefono"
                     android:textSize="14dp"
                     android:padding="@dimen/margenleft"
-                    android:id="@+id/myTextView" />
+                    android:id="@+id/myTextView"
+                    android:textColor="#000"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp"
@@ -92,10 +106,11 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Direccion"
+                    android:text="@string/direccion"
                     android:textSize="14dp"
                     android:padding="@dimen/margenleft"
-                    android:id="@+id/direccion" />
+                    android:id="@+id/direccion"
+                    android:textColor="#000"/>
 
             </LinearLayout>
             <LinearLayout
@@ -125,7 +140,9 @@
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/margenleft"
                     android:layout_gravity="left"
-                    android:background="#00000000"/>
+                    android:focusable="false"
+                    android:background="#00000000"
+                    />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp"

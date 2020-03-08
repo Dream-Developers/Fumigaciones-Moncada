@@ -60,7 +60,7 @@ public class crearFactura extends AppCompatActivity implements AdapterView.OnIte
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
     EditText etHora;
-    EditText nombre, detalle, total;
+    EditText nombre, detalle, total, descuento;
     TextView col;
     Button registrar;
     String tokenUsuario;
@@ -85,6 +85,7 @@ public class crearFactura extends AppCompatActivity implements AdapterView.OnIte
         nombre = findViewById(R.id.registro_nombres);
         detalle = findViewById(R.id.registrodetalle);
         registrar = findViewById(R.id.registrar12);
+        descuento = findViewById(R.id.registro_descuento);
         cargarClientes();
         nombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,6 +320,7 @@ public class crearFactura extends AppCompatActivity implements AdapterView.OnIte
                 parametros.put("Detalle", detalle.getText().toString());
                 parametros.put("Total", total.getText().toString());
                 parametros.put("Fecha", fecha.getText().toString());
+                parametros.put("Descuento", descuento.getText().toString());
                 return parametros;
 
             }

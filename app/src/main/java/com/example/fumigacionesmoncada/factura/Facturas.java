@@ -15,7 +15,17 @@ public class Facturas {
     private String detalle;
     private String Total;
     private String fecha;
+    private String descuento;
+
     private String numero;
+
+    public String getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(String descuento) {
+        this.descuento = descuento;
+    }
 
     public String getNumero() {
         return numero;

@@ -65,10 +65,11 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
     private String Usuario_id;
     ProgressDialog progreso;
     TextView  Nombre , Detalle ,Fecha,Total ;
-    EditText  EditNombre,EditFecha,EditDetalle,EditTotal;
+    EditText  EditNombre,EditFecha,EditDetalle,EditTotal,EditDescuento;
     String id_usuario;
     AlertDialog alertDialogFactura;
     private int dia, mes, anio;
+    Button editar;
 
 
     @Override
@@ -78,6 +79,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         View view = inflater.inflate(R.layout.fragment_factura, container, false);
         addCliente = view.findViewById(R.id.add_clientes);
         lista_citas = view.findViewById(R.id.lista);
+        editar =view.findViewById(R.id.guar);
         cita = new ArrayList<>();
         lista_citas.setAdapter(new facturas_adapter(getContext(), cita));
         lista_citas.setVisibility(View.VISIBLE);
@@ -102,6 +104,8 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
             }
 
         });
+
+
         return view;
     }
     private void obtenerFecha() {
@@ -157,12 +161,12 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
          EditFecha = dialogoLayout.findViewById(R.id.fecha);
          EditDetalle = dialogoLayout.findViewById(R.id.detalle);
          EditTotal = dialogoLayout.findViewById(R.id.total);
-
+        EditDescuento = dialogoLayout.findViewById(R.id.descuento);
          EditNombre.setText(facturas.getNombre());
         EditDetalle.setText(facturas.getDetalle());
         EditFecha.setText(facturas.getFecha());
         EditTotal.setText(facturas.getTotal());
-
+        EditDescuento.setText(facturas.getDescuento());
         EditFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -226,8 +230,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                     parametros.put("Detalle", EditDetalle.getText().toString());
                     parametros.put("Fecha", EditFecha.getText().toString());
                     parametros.put("Total", EditTotal.getText().toString());
-
-
+                    parametros.put("Descuento", EditDescuento.getText().toString());
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, parametros, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -294,6 +297,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                         citas.setNombre(object.getString("Nombre"));
                         citas.setFecha(object.getString("Fecha"));
                         citas.setDetalle(object.getString("Detalle"));
+                        citas.setDescuento(object.getString("Descuento"));
                         citas.setTotal(object.getString("Total"));
 
                         cita.add(citas);

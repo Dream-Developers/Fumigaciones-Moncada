@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -68,8 +69,9 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
     EditText  EditNombre,EditFecha,EditDetalle,EditTotal,EditDescuento;
     String id_usuario;
     AlertDialog alertDialogFactura;
+    static SwipeRefreshLayout refreshLayout;
     private int dia, mes, anio;
-    Button editar;
+
 
 
     @Override
@@ -77,9 +79,17 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_factura, container, false);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(false);
+                cargarPreferencias();
+                cargarCitas();
+            }
+        });
         addCliente = view.findViewById(R.id.add_clientes);
         lista_citas = view.findViewById(R.id.lista);
-        editar =view.findViewById(R.id.guar);
         cita = new ArrayList<>();
         lista_citas.setAdapter(new facturas_adapter(getContext(), cita));
         lista_citas.setVisibility(View.VISIBLE);
@@ -93,17 +103,6 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         setHasOptionsMenu(true);
         cargarPreferencias();
         cargarCitas();
-
-        lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Facturas facturas = (Facturas) parent.getItemAtPosition(position);
-                seleccionarFactura(facturas,position);
-
-                return true;
-            }
-
-        });
 
 
         return view;

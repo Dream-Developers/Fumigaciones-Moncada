@@ -19,8 +19,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ public class DetalleServicioScroll extends AppCompatActivity {
     NetworkImageView imagen;
     String id;
     String tokenUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +90,18 @@ public class DetalleServicioScroll extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (error.toString().equals("com.android.volley.ServerError")) {
+                    Toast.makeText(DetalleServicioScroll.this, R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetalleServicioScroll.this, R.string.reviseConexion, Toast.LENGTH_LONG).show();
 
-                Toast.makeText(DetalleServicioScroll.this, "Error", Toast.LENGTH_SHORT).show();
+                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+
+                    Toast.makeText(DetalleServicioScroll.this, R.string.reviseConexion, Toast.LENGTH_LONG).show();
+                } else {
+
+                    Toast.makeText(DetalleServicioScroll.this,  R.string.reviseConexion , Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         }){

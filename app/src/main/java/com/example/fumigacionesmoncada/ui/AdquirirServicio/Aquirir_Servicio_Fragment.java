@@ -73,7 +73,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
     private String Usuario_id;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, final Bundle savedInstanceState) {
         servicioViewModel =
                 ViewModelProviders.of(this).get(Aquirir_Servicio_ViewModel.class);
         View view = inflater.inflate(R.layout.fragment_ad_servicio, container, false);
@@ -104,13 +104,13 @@ public class Aquirir_Servicio_Fragment extends Fragment {
         cargarClienteWeb();
 
 
-        String [] opciones = {"Insectos","Roedores"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item,opciones);
+        String[] opciones = {getString(R.string.insectos), getString(R.string.roedores)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "El Nombre no se puede modificar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.nombreNoModificar, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -119,27 +119,35 @@ public class Aquirir_Servicio_Fragment extends Fragment {
         pedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mostrarNombre.getText().toString().equals("") || mostraraTelefono.getText().toString().equals("")
-                        || mostraraTelefono.getText().toString().equals("") || fecha.getText().toString().equals("") ||
-                        Hora.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+                if (mostrarNombre.getText().toString().trim().equals("")) {
+                    Toast.makeText(getContext(), R.string.nombreNoModificar, Toast.LENGTH_LONG).show();
+                } else if (mostrarDireccion.getText().toString().trim().equals("")) {
+                    Toast.makeText(getContext(), R.string.campoResidencia, Toast.LENGTH_LONG).show();
+                } else if (mostraraTelefono.getText().toString().trim().equals("")) {
+                    Toast.makeText(getContext(), R.string.campoTelefono, Toast.LENGTH_LONG).show();
+                } else if (mostraraTelefono.getText().toString().trim().length() < 8) {
+                    Toast.makeText(getContext(), R.string.NumeroInvalido, Toast.LENGTH_LONG).show();
+                } else if (fecha.getText().toString().trim().equals("")) {
+                    Toast.makeText(getContext(), R.string.campoFecha, Toast.LENGTH_LONG).show();
+                } else if (Hora.getText().toString().trim().equals("")) {
+                    Toast.makeText(getContext(), R.string.campoHora, Toast.LENGTH_LONG).show();
                 } else {
 
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
-                    dialogo1.setTitle("Importante");
-                    dialogo1.setMessage("¿ Estos Datos Son los correctos ?" + "\n" +
-                            "Nombre  " + ":  " + mostrarNombre.getText().toString() + "\n" +
-                            "Direccion De Fumigacion " + ":  " + mostrarDireccion.getText().toString() + "\n" +
-                            "Telefono  " + ":  " + mostraraTelefono.getText().toString() + "\n"
+                    dialogo1.setTitle(R.string.importante);
+                    dialogo1.setMessage(R.string.verificacionDeDatos + "\n" +
+                            getString(R.string.nombreAdquirir) + " " + mostrarNombre.getText().toString() + "\n" +
+                            getString(R.string.direccionAdquirir) + " " + mostrarDireccion.getText().toString() + "\n" +
+                            getString(R.string.telefonoAdquirir) + " " + mostraraTelefono.getText().toString() + "\n"
 
                     );
                     dialogo1.setCancelable(false);
-                    dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    dialogo1.setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             aceptar();
                         }
                     });
-                    dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    dialogo1.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             cancelar();
                         }
@@ -177,7 +185,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
                         Hora.setText("");
                         fecha.setText("");
 
-                        Toast.makeText(getContext(), "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.registroAdquirir, Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -187,12 +195,12 @@ public class Aquirir_Servicio_Fragment extends Fragment {
                 progreso.hide();
                 Log.i("errorVolley", String.valueOf(error.getStackTrace()));
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -229,12 +237,18 @@ public class Aquirir_Servicio_Fragment extends Fragment {
     }
 
     private void validacion() {
-        if (mostrarNombre.getText().toString().equals("") || mostrarDireccion.getText().toString().equals("") || mostraraTelefono.getText().toString().equals("")
-                || fecha.getText().toString().equals("") || Hora.getText().toString().equals("")) {
-            Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
-        } else {
-            if (mostraraTelefono.getText().toString().length() < 8) {
-                Toast.makeText(getContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+        if (mostrarNombre.getText().toString().trim().equals("")) {
+            Toast.makeText(getContext(), R.string.nombreNoModificar, Toast.LENGTH_LONG).show();
+        } else if (mostrarDireccion.getText().toString().trim().equals("")) {
+            Toast.makeText(getContext(), R.string.campoResidencia, Toast.LENGTH_LONG).show();
+        } else if (mostraraTelefono.getText().toString().trim().equals("")) {
+            Toast.makeText(getContext(), R.string.campoTelefono, Toast.LENGTH_LONG).show();
+        } else if (mostraraTelefono.getText().toString().trim().length() < 8) {
+            Toast.makeText(getContext(), R.string.NumeroInvalido, Toast.LENGTH_LONG).show();
+        } else if (fecha.getText().toString().trim().equals("")) {
+            Toast.makeText(getContext(), R.string.campoFecha, Toast.LENGTH_LONG).show();
+        } else if (Hora.getText().toString().trim().equals("")) {
+            Toast.makeText(getContext(), R.string.campoHora, Toast.LENGTH_LONG).show();
             } else {
 
 
@@ -243,7 +257,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
 
             }
         }
-    }
+
 
 
     private void cargarPreferencias() {
@@ -277,12 +291,12 @@ public class Aquirir_Servicio_Fragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),R.string.reviseConexion , Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -382,12 +396,12 @@ public class Aquirir_Servicio_Fragment extends Fragment {
                                 }
                                 Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
                             } else {
-                                Toast.makeText(getContext(), "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                                 Hora.setText("");
                             }
 
                         } else {
-                            Toast.makeText(getContext(), "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),R.string.horaAlerta, Toast.LENGTH_LONG).show();
                         }
 
 
@@ -406,7 +420,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
 
                         } else {
                             Hora.setText("");
-                            Toast.makeText(getContext(), "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                         }
                     }
                 }

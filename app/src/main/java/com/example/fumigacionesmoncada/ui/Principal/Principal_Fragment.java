@@ -101,9 +101,9 @@ public class Principal_Fragment extends Fragment   {
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
         //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),3));
         recyclerUsuarios.setHasFixedSize(true);
-linearLayout = vista.findViewById(R.id.error);
+        linearLayout = vista.findViewById(R.id.error);
         cargarWebService();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -131,7 +131,7 @@ linearLayout = vista.findViewById(R.id.error);
 
     private void cargarWebService() {
         dialog=new ProgressDialog(getContext());
-        dialog.setMessage("Consultando Imagenes");
+        dialog.setMessage(getString(R.string.consultandoImagenes));
         dialog.show();
         String ip=getString(R.string.ip);
 
@@ -162,7 +162,7 @@ linearLayout = vista.findViewById(R.id.error);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                            Toast.makeText(getContext(), getString(R.string.conexionServidor) +
                                     " "+response, Toast.LENGTH_LONG).show();
                             dialog.hide();
                         }
@@ -172,15 +172,15 @@ linearLayout = vista.findViewById(R.id.error);
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    linearLayout.setBackgroundResource(R.drawable.alerta);
+                    Toast.makeText(getContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
 
-                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet" , Toast.LENGTH_SHORT).show();
+                    linearLayout.setBackgroundResource(R.drawable.alerta);
+                    Toast.makeText(getContext(),  R.string.reviseConexion , Toast.LENGTH_SHORT).show();
                 }
 
             }

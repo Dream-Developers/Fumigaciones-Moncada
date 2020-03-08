@@ -35,7 +35,7 @@
     <string name="contactar">Contactar</string>
 
 
-    <string name="ip">http://192.168.0.104</string>
+    <string name="ip">http://192.168.137.1</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -154,6 +154,34 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="loading">Iniciando sesión</string>
+    <string name="consultandoImagenes">Consultando Imágenes</string>
+    <string name="conexionServidor">No se ha podido establecer conexión con el servidor</string>
+    <string name="presentamosProblemas">Presentamos problemas intentelo más tarde</string>
+    <string name="reviseConexion">Revise su conexión a internet</string>
+    <string name="error">Error</string>
+    <string name="detalle_servicio">Detalle Servicio</string>
+    <string name="titulo">Titulo</string>
+    <string name="descripcion">Descripción</string>
+    <string name="insectos">Insectos</string>
+    <string name="roedores">Roedores</string>
+    <string name="adquirirServicio">Adquirir servicio</string>
+    <string name="nombreNoModificar">El Nombre no se puede modificar</string>
+    <string name="campoTelefono">El campo del teléfono está vacio</string>
+    <string name="campoResidencia">El campo de la dirección está vacio</string>
+    <string name="campoFecha">El campo de la fecha está vacio</string>
+    <string name="campoHora">El campo de la hora está vacio</string>
+    <string name="importante">Importante</string>
+    <string name="verificacionDeDatos">¿Estos Datos son los correctos?</string>
+    <string name="nombreAdquirir">Nombre:</string>
+    <string name="direccionAdquirir">Dirección De Fumigación:</string>
+    <string name="telefonoAdquirir">Teléfono:</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cargandoAdquirir">Cargando...</string>
+    <string name="registroAdquirir">Se ha registrado con éxito</string>
+    <string name="horarioDeAtencion">El Horario de atención es de 7:00AM a 7:00PM</string>
+    <string name="horaAlerta">La hora seleccionada no es correcta, debe ser mayor a la hora actual</string>
+    <string name="NumeroInvalido">No es un número telefónico</string>
 
 
 </resources>

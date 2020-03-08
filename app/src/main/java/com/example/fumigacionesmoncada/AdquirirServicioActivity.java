@@ -71,7 +71,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         cargarPreferencias();
 
 
-        setTitle("Adquirir servicio");
+        setTitle(R.string.adquirirServicio);
         mostrarNombre = (EditText) findViewById(R.id.nombres);
         mostrarDireccion = (EditText) findViewById(R.id.direccion);
         mostraraTelefono = (EditText) findViewById(R.id.telefono);
@@ -95,20 +95,20 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         });
         cargarClienteWeb();
 
-        String [] opciones = {"Inceptos","Roedores"};
+        String [] opciones = {getString(R.string.insectos),getString(R.string.roedores)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdquirirServicioActivity.this, "El Nombre no se puede modificar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdquirirServicioActivity.this, R.string.nombreNoModificar, Toast.LENGTH_SHORT).show();
 
             }
         });
         mostrarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdquirirServicioActivity.this, "El Nombre no se puede modificar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdquirirServicioActivity.this,  R.string.nombreNoModificar, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -117,27 +117,36 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         pedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mostrarNombre.getText().toString().equals("") || mostraraTelefono.getText().toString().equals("")
-                        || mostraraTelefono.getText().toString().equals("") || fecha.getText().toString().equals("") ||
-                        Hora.getText().toString().equals("")) {
-                    Toast.makeText(AdquirirServicioActivity.this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
-                } else {
+                if (mostrarNombre.getText().toString().trim().equals("")) {
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.nombreNoModificar, Toast.LENGTH_LONG).show();
+                } else if (mostrarDireccion.getText().toString().trim().equals("")) {
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.campoResidencia, Toast.LENGTH_LONG).show();
+                } else if (mostraraTelefono.getText().toString().trim().equals("")){
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.campoTelefono, Toast.LENGTH_LONG).show();
+                } else if (mostraraTelefono.getText().toString().trim().length() < 8) {
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.NumeroInvalido, Toast.LENGTH_LONG).show();
+                } else if(fecha.getText().toString().trim().equals("")){
+                Toast.makeText(AdquirirServicioActivity.this, R.string.campoFecha, Toast.LENGTH_LONG).show();
+                } else if(Hora.getText().toString().trim().equals("")) {
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.campoHora, Toast.LENGTH_LONG).show();
+                }
+                else {
 
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AdquirirServicioActivity.this);
-                    dialogo1.setTitle("Importante");
-                    dialogo1.setMessage("¿ Estos Datos Son los correctos ?" + "\n" +
-                            "Nombre  " + ":  " + mostrarNombre.getText().toString() + "\n" +
-                            "Direccion De Fumigacion " + ":  " + mostrarDireccion.getText().toString() + "\n" +
-                            "Telefono  " + ":  " + mostraraTelefono.getText().toString() + "\n"
+                    dialogo1.setTitle(R.string.importante);
+                    dialogo1.setMessage(getString(R.string.verificacionDeDatos) + "\n" +
+                            getString(R.string.nombreAdquirir) + " " + mostrarNombre.getText().toString() + "\n" +
+                            getString(R.string.direccionAdquirir) + " " +  mostrarDireccion.getText().toString() + "\n" +
+                            getString(R.string.telefonoAdquirir) + " " +  mostraraTelefono.getText().toString() + "\n"
 
                     );
                     dialogo1.setCancelable(false);
-                    dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    dialogo1.setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             aceptar();
                         }
                     });
-                    dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    dialogo1.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             cancelar();
                         }
@@ -160,7 +169,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
     private void cargarWebService() {
 
         progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage(getString(R.string.cargandoAdquirir));
         progreso.show();
 
         String ip=getString(R.string.ip);
@@ -175,7 +184,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                         Hora.setText("");
                         fecha.setText("");
 
-                        Toast.makeText(AdquirirServicioActivity.this, "Se ha registrado con éxito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdquirirServicioActivity.this, R.string.registroAdquirir, Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -184,12 +193,12 @@ public class AdquirirServicioActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progreso.hide();
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(AdquirirServicioActivity.this, "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(AdquirirServicioActivity.this, "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(AdquirirServicioActivity.this, error+"Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.reviseConexion, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -220,12 +229,21 @@ public class AdquirirServicioActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);}
     private void validacion() {
-        if(mostrarNombre.getText().toString().equals("")||mostrarDireccion.getText().toString().equals("")||mostraraTelefono.getText().toString().equals("")
-                || fecha.getText().toString().equals("") || Hora.getText().toString().equals("")){
-            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
-            if (mostraraTelefono.getText().toString().length() < 8 ) {
-                Toast.makeText(this, "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+
+
+        if (mostrarNombre.getText().toString().trim().equals("")) {
+            Toast.makeText(AdquirirServicioActivity.this, R.string.nombreNoModificar, Toast.LENGTH_LONG).show();
+        }else if( mostrarDireccion.getText().toString().trim().equals("")) {
+            Toast.makeText(AdquirirServicioActivity.this, R.string.campoResidencia, Toast.LENGTH_LONG).show();
+        }else if(mostraraTelefono.getText().toString().trim().equals("")){
+            Toast.makeText(AdquirirServicioActivity.this, R.string.campoTelefono, Toast.LENGTH_LONG).show();
+        }else if(mostraraTelefono.getText().toString().trim().length()<8){
+            Toast.makeText(AdquirirServicioActivity.this, R.string.NumeroInvalido, Toast.LENGTH_LONG).show();
+        } else if(fecha.getText().toString().trim().equals("")){
+            Toast.makeText(AdquirirServicioActivity.this, R.string.campoFecha, Toast.LENGTH_LONG).show();
+        } else if(Hora.getText().toString().trim().equals("")) {
+            Toast.makeText(AdquirirServicioActivity.this, R.string.campoHora, Toast.LENGTH_LONG).show();
+
             } else {
 
 
@@ -235,7 +253,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
 
             }
         }
-    }
+
 
 
 
@@ -272,12 +290,12 @@ public class AdquirirServicioActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(AdquirirServicioActivity.this, "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(AdquirirServicioActivity.this, "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdquirirServicioActivity.this, R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(AdquirirServicioActivity.this, " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdquirirServicioActivity.this,R.string.reviseConexion , Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -378,12 +396,12 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                                 }
                                 Hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
                             }else {
-                                Toast.makeText(AdquirirServicioActivity.this, "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AdquirirServicioActivity.this, R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                                 Hora.setText("");
                             }
 
                         }else{
-                            Toast.makeText(AdquirirServicioActivity.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AdquirirServicioActivity.this, R.string.horaAlerta, Toast.LENGTH_LONG).show();
                         }
 
 
@@ -402,7 +420,7 @@ public class AdquirirServicioActivity extends AppCompatActivity {
 
                         } else {
                             Hora.setText("");
-                            Toast.makeText(AdquirirServicioActivity.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AdquirirServicioActivity.this, R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                         }
                     }
                 }

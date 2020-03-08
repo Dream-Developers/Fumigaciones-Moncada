@@ -33,7 +33,11 @@
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".ChatActivity"/>
-        <activity android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity" />
+
+        <activity
+            android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
         <activity android:name=".ui.solicitarCita.Detalle_Cita">
             <intent-filter>
@@ -41,7 +45,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity>c
         <activity
             android:name=".ContactsActivity"
             android:configChanges="orientation|screenSize"

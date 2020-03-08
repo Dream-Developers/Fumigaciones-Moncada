@@ -43,7 +43,7 @@ public class DetalleImagenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_imagen);
-        setTitle("Detalle Servicio");
+        setTitle(R.string.detalle_servicio);
          titulo = findViewById(R.id.tituloImagenD);
          descripcion= findViewById(R.id.descripcionImagenD);
          imagen= findViewById(R.id.idImagenD);
@@ -87,7 +87,7 @@ cargarPreferencias();
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(DetalleImagenActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetalleImagenActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
             }
 
         }){

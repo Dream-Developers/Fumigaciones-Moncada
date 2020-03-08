@@ -45,7 +45,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>c
+        </activity>
         <activity
             android:name=".ContactsActivity"
             android:configChanges="orientation|screenSize"

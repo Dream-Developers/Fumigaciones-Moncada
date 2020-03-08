@@ -47,10 +47,10 @@ public class FirebaseMessagingServices extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        if(remoteMessage.getData().get("body")!=null) {
+        if (remoteMessage.getData().get("body") != null) {
             sendNotification(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"));
-        }else{
-            sendNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
+        } else {
+            sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
         }
         Log.i("data firebase", String.valueOf(remoteMessage.getNotification().getBody()));
     }
@@ -62,64 +62,50 @@ public class FirebaseMessagingServices extends FirebaseMessagingService {
         Intent intent = null;
         String NOTIFICATION_CHANNEL_ID = getString(R.string.default_notification_channel_id);
 
-        try {
-            if (body != null) {
-                JSONObject data = new JSONObject(body);
+        if (body != null) {
+            if (obtener_rol_usuario() == 1) {
+                intent = new Intent(this, NavegacionAdministradorActivity.class);
 
-                if (obtener_rol_usuario() == 1) {
-                    if (data.getString("id_cita") != null) {
-                        intent = new Intent(this, Detalle_Cita.class);
-                        intent.putExtra("id_citas", data.getString("id_cita"));
-
-                    } else {
-                        intent = new Intent(this, NavegacionAdministradorActivity.class);
-
-
-                    }
-                } else {
-
-                    intent = new Intent(this, MenuActivity.class);
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                        PendingIntent.FLAG_ONE_SHOT);
-
-                Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-                NotificationCompat.Builder notificationBuilder =
-                        new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-                notificationBuilder
-                        .setSmallIcon(R.drawable.logo)
-                        .setColor(rgb(255, 160, 0))
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(data.getString("body")))
-                        .setContentText(data.getString("body"))
-                        .setAutoCancel(true)
-                        .setVibrate(new long[]{0, 1000, 500, 1000})
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent)
-                        .setContentInfo("info");
-
-                NotificationManager notificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                // Since android Oreo notification channel is needed.
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                            getString(R.string.app_name),
-                            NotificationManager.IMPORTANCE_DEFAULT);
-
-                    notificationChannel.setDescription("Descripcion");
-                    notificationChannel.enableLights(true);
-                    notificationChannel.setLightColor(Color.BLUE);
-                    notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
-                    notificationChannel.enableLights(true);
-
-                    notificationManager.createNotificationChannel(notificationChannel);
-                }
-                i = (int) (Math.random() * 1000 + 1);
-                notificationManager.notify(i /* ID of notification */, notificationBuilder.build());
+            } else {
+                intent = new Intent(this, MenuActivity.class);
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            NotificationCompat.Builder notificationBuilder =
+                    new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+            notificationBuilder
+                    .setSmallIcon(R.drawable.logo)
+                    .setColor(rgb(255, 160, 0))
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
+                    .setContentText(body)
+                    .setAutoCancel(true)
+                    .setVibrate(new long[]{0, 1000, 500, 1000})
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent)
+                    .setContentInfo("info");
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            // Since android Oreo notification channel is needed.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                        getString(R.string.app_name),
+                        NotificationManager.IMPORTANCE_DEFAULT);
+
+                notificationChannel.setDescription("Descripcion");
+                notificationChannel.enableLights(true);
+                notificationChannel.setLightColor(Color.BLUE);
+                notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                notificationChannel.enableLights(true);
+
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+            i = (int) (Math.random() * 1000 + 1);
+            notificationManager.notify(i /* ID of notification */, notificationBuilder.build());
         }
     }
 

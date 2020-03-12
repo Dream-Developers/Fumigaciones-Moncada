@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -104,6 +106,7 @@ public class Principal_Fragment extends Fragment   {
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
 linearLayout = vista.findViewById(R.id.error);
+        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         cargarWebService();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {

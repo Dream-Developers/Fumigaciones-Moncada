@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,9 +39,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -146,8 +145,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        logeoLaravel();
-                        logeoFirebase();
+                        validaciones();
+
 
                     }
 
@@ -166,16 +165,37 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void logeoLaravel() {
+    public void validaciones() {
+
+        txtCorreo.setError(null);
+        txtContrasena.setError(null);
+
         if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
             if (!isEmailValid(txtCorreo.getText())) {
                 txtCorreo.setError("No es un correo valido");
-            } else {
+            }
+
+            if ((txtContrasena.getText().toString().trim().length() > 0) && (txtCorreo.getText().toString().trim().length() > 0)) {
+                if (!isPasswordValid(txtContrasena.getText())) {
+                    txtContrasena.setError("Al menos 8 caracteres");
+                }
+            }
+
+            // Compruebe que la contraseña sea válida, si el usuario la introdujo.
+            String password = txtContrasena.getText().toString();
+            if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+                txtContrasena.setError("Al menos 8 caracteres");
+            }
+
+            else {
                 String email = txtCorreo.getText().toString().trim();
                 String contraseniaPass = txtContrasena.getText().toString().trim();
-                login(email, contraseniaPass);
+                loginLaravel(email, contraseniaPass);
             }
-        } else {
+        }
+
+
+        else {
             if (txtCorreo.getText().toString().length() == 0 ||
                     txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
                 txtCorreo.setError("Ingresa el correo");
@@ -185,6 +205,7 @@ public class LoginActivity extends AppCompatActivity {
                     txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
                 txtContrasena.setError("Ingresa la contraseña");
             }
+
         }
 
     }
@@ -244,7 +265,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void login(final String txtCorreo, final String txtContrasena) {
+    private void loginLaravel(final String txtCorreo, final String txtContrasena) {
 
         progressDialog = new ProgressDialog(this);
         //progressDialog.   setMessage("Iniciando sesión");
@@ -262,6 +283,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog. dismiss();
+                        logeoFirebase();
                         guardarEstadoButton();
                         //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
                         try {
@@ -303,9 +325,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.hide();
-                        btn_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión, hubo" +
-                                " un problema con el servidor ", Toast.LENGTH_SHORT).show();
+                       // btn_login.setVisibility(View.VISIBLE);
+
+                        if (error instanceof AuthFailureError){
+                            Toast.makeText(getApplicationContext(), "La contraseña es incorrecta",
+                                    Toast.LENGTH_SHORT).show();
+                        }else {
+
+                        }
+
+                       // Toast.makeText(LoginActivity.this, "Error"+error , Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -316,9 +345,20 @@ public class LoginActivity extends AppCompatActivity {
                 parametros.put("password", txtContrasena);
                 return parametros;
             }
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
+            }
+
+
+
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(8000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 
@@ -326,6 +366,13 @@ public class LoginActivity extends AppCompatActivity {
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
+
+    boolean isPasswordValid(CharSequence password) {
+        /**Si la cadena supera los 7 caracteres es una contraseña valida*/
+        return password.length() > 7;
+    }
+
 
     public void intem() {
 

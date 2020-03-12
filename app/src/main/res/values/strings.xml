@@ -36,7 +36,7 @@
     <string name="contactar">Contactar</string>
 
 
-    <string name="ip">http://192.168.137.1</string>
+    <string name="ip">http://192.168.0.105</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -155,6 +155,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="loading">Iniciando sesión</string>
+    <string name="registrando">Registrando tu cuenta</string>
     <string name="consultandoImagenes">Consultando Imágenes</string>
     <string name="conexionServidor">No se ha podido establecer conexión con el servidor</string>
     <string name="presentamosProblemas">Presentamos problemas intentelo más tarde</string>
@@ -191,6 +192,7 @@
     <string name="campoNombre">El campo del nombre está vacio</string>
     <string name="campoCorreo">El campo del correo está vacio</string>
     <string name="validacionCorreo">El correo no se puede modificar</string>
+    <string name="error_invalid_password">Contraseña invalida</string>
 
 
 </resources>

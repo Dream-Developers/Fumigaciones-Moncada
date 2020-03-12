@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -108,6 +110,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         cita = new ArrayList<>();
         lista_citas.setAdapter(new Regstro_peticiones_adapter(getContext(), cita));
         lista_citas.setVisibility(View.VISIBLE);
+        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

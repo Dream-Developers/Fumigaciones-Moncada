@@ -6,14 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +53,9 @@ public class ContactsActivity extends AppCompatActivity {
 
     private DatabaseReference mUserDatabase;
     EditText search_users;
+    private String buscador;
+    private static final String TAG = "ContactsActivity";
+
 
 
     @Override
@@ -209,5 +217,79 @@ public class ContactsActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu_search_contactos, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        SearchManager searchManager = (SearchManager) ContactsActivity.this.getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchContacts(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchContacts(s);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }*/
+
+
+
+
+    // 2. Retrieve your value (which you have done mostly correctly)
+    private void getUserName(String uid) {
+        mUserDatabase.child(String.format("users/%s/name", uid))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // 3. Set the public variable in your class equal to value retrieved
+                        buscador = dataSnapshot.getValue(String.class);
+                        // 4a. EDIT: now that your fetch succeeded, you can trigger whatever else you need to run in your class that uses `buscador`, and you can be sure `buscador` is not null.
+                        sayHiToMe();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+    }
+
+    // (part of step 4a)
+    public void sayHiToMe() {
+        Log.d(TAG, "hi there, " + buscador);
+    }
+
+    // 4b. use the variable in a function triggered by the onClickListener of a button.
+    public void helloButtonWasPressed() {
+        if (buscador != null) {
+            Log.d(TAG, "hi there, " + buscador);
+        }
+    }
+
+
+    private void firebasesearch(String searchText){
+
+        // String quary = new searchText.toLowerCase(quary);
+        //Query firebaseSearchQuery = mUserDatabase.orderByChild("search").startAt(quary).endAt(quary + "uf8ff");
+
+
+    }
+
+
+
+
 
 }

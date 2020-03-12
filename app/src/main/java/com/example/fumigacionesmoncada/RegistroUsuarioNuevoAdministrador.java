@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -37,12 +38,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 import org.json.JSONObject;
@@ -411,8 +423,11 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     private void cargarWebService() {
 
         progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+       // progreso.setMessage("Cargando...");
         progreso.show();
+        progreso.setContentView(R.layout.custom_progressdialog_register);
+        progreso.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progreso.setCancelable(true);
         if (masculino.isChecked()) {
             sexo = "M";
         }
@@ -449,41 +464,58 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    progreso.dismiss();
+                    createUser();
                     finish();
-                    Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se regsiro correctamente ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
+                    progreso.dismiss();
                 }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progreso.hide();
                     if (error.toString().equals("com.android.volley.ServerError")) {
                         Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                        finish();
+
                     } if (error.toString().equals("com.android.volley.TimeoutError")) {
                         Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                     if (error.toString().equals("com.android.volley.ClientError")) {
                         Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "No se pudo registar ", Toast.LENGTH_LONG).show();
+                        finish();
 
                     }
                 }
 
             }){
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                /*public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<>();
                     parametros.put("Content-Type", "application/json");
                     parametros.put("X-Requested-With", "XMLHttpRequest");
 
                     return parametros;
+                }*/
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return super.getHeaders();
                 }
 
             };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(8000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            requestQueue.add(jsonObjectRequest);
+
             ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
             //request.add(stringRequest);
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            //RequestQueue requestQueue = Volley.newRequestQueue(this);
         } catch(Exception exe){
             Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -526,7 +558,85 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     }
 
 
+    /**
+     * Metodos para la authentificacion de firebase
+     *
+     * **/
 
+
+    private void createUser() {
+        String name = nombre.getText().toString();
+        String email = correo.getText().toString();
+        String contra = contraseña.getText().toString();
+
+        if (name == null || name.isEmpty() || email == null || email.isEmpty() || contra == null || contra.isEmpty()) {
+            //  Toast.makeText(this, "Al menos un campo vacio", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, contra)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("Teste", task.getResult().getUser().getUid());
+
+                            saveUserInFirebase();
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("Teste", e.getMessage());
+                    }
+                });
+    }
+
+    private void saveUserInFirebase() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
+        ref.putFile(miPath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.i("Teste", uri.toString());
+
+                        String uid = FirebaseAuth.getInstance().getUid();
+                        String username = nombre.getText().toString();
+                        String profileUrl = uri.toString();
+
+                        User user = new User(uid, username, profileUrl);
+
+                        FirebaseFirestore.getInstance().collection("users")
+                                .document(uid)
+                                .set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.i("Teste", e.getMessage());
+                                    }
+                                });
+                    }
+                });
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Teste", e.getMessage(), e);
+                    }
+                });
+
+    }
 
 
 

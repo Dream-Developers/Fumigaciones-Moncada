@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -37,6 +38,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -398,8 +400,11 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     private void cargarWebService() {
 
         progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+       // progreso.setMessage("Cargando...");
         progreso.show();
+        progreso.setContentView(R.layout.custom_progressdialog_register);
+        progreso.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progreso.setCancelable(true);
         if (masculino.isChecked()) {
             sexo = "M";
         }
@@ -425,41 +430,60 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                progreso.dismiss();
+                createUser();
                 finish();
-                Toast.makeText(RegistarUsuarioNuevo.this, "Se registro correctamente ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistarUsuarioNuevo.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
+                progreso.dismiss();
+
+
         }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progreso.hide();
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    finish();
                 } if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    finish();
                 }
                     if (error.toString().equals("com.android.volley.ClientError")) {
                     Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
+                        finish();
                 } else {
                     Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
+                        finish();
 
                 }
             }
 
         }){
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            /*public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("Content-Type", "application/json");
                 parametros.put("X-Requested-With", "XMLHttpRequest");
 
                 return parametros;
+            }*/
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
             }
 
         };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(8000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            requestQueue.add(jsonObjectRequest);
+
         ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
         //request.add(stringRequest);
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+       // RequestQueue requestQueue = Volley.newRequestQueue(this);
     } catch(Exception exe){
         Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
     }
@@ -507,7 +531,6 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
 
 
                                 cargarWebService();
-                                createUser();
                             }
                         }
 

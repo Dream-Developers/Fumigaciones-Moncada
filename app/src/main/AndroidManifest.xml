@@ -32,7 +32,8 @@
         <activity
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".ChatActivity"/>
+            android:parentActivityName=".ChatActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
 
         <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
@@ -74,7 +75,8 @@
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- SERVICIO DE SINCRONIZACIÓN -->
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateVisible"/> <!-- SERVICIO DE SINCRONIZACIÓN -->
         <activity
             android:name=".RegistarUsuarioNuevo"
             android:configChanges="orientation|screenSize"

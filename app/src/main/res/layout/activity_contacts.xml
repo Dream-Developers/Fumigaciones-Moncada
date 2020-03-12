@@ -19,6 +19,8 @@
         android:layout_marginBottom="5dp"
         android:drawableLeft="@android:drawable/ic_menu_search" /> -->
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="406dp"

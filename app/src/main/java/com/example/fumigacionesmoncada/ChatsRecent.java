@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada;
 
 public class ChatsRecent {
 
+  //  public static ChatsRecent contactos;
     private String uuid;
     private String username;
     private String lastMessage;

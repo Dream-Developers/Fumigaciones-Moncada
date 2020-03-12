@@ -145,7 +145,6 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         telefono.setSingleLine(false);
         telefono.setInputType(InputType.TYPE_CLASS_PHONE | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
 
-        correo.setText("example"+a+"@gmail.com");
         a++;
 
         confcontra.setText("12345678");

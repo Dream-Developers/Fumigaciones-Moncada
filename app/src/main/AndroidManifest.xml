@@ -27,7 +27,7 @@
             android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+           />
         <activity android:name=".AdquirirServicioActivity" />
         <activity
             android:name=".ChatActivity"
@@ -84,8 +84,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".RegistroUsuarioNuevoAdministrador"
-            android:label="@string/title_activity_registro"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/title_activity_registro" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

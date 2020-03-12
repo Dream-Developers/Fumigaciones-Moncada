@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="15dp">
 
 
 
@@ -12,13 +13,16 @@
 
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        app:cardCornerRadius="3dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#60000000">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_marginLeft="10dp">
 
 
             <LinearLayout
@@ -26,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical"
                >
 
@@ -34,8 +39,8 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre Cliente"
                     android:layout_marginTop="50dp"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp" />
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
 
                 <EditText
@@ -43,14 +48,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_supervised_user_circle_white_18dp"
+                    android:drawableLeft="@drawable/cliente_cita"
                     android:inputType="textPersonName"
                     android:lines="1"
                     android:maxLength="50"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp"
+                    android:focusable="false"
+
 
 
                     />
@@ -61,22 +64,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp" />
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:id="@+id/registro_Precio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_attach_money_white_18dp"
-                    android:inputType="number"
+                    android:drawableLeft="@drawable/lempira_icon"
                     android:lines="1"
-                    android:maxLength="30"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp"
 
 
                     />
@@ -84,8 +81,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Descuento"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp" />
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
 
                 <EditText
@@ -93,14 +90,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_supervised_user_circle_white_18dp"
+                    android:drawableLeft="@drawable/lempira_icon"
                     android:inputType="number"
                     android:lines="1"
-                    android:maxLength="50"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp"
+                    android:maxLength="30"
 
 
                     />
@@ -109,41 +102,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp" />
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:id="@+id/reg_Fecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_date_range_white_18dp"
+                    android:drawableLeft="@drawable/fecha_cita"
                     android:focusable="false"
                     android:inputType="date"
-                    android:lines="1"
-                    android:onClick="obtenerfecha"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+                    android:lines="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Detalle"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp" />
+                    android:textColor="#000"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:id="@+id/registrodetalle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_alarm_white_18dp"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+                    android:focusable="false"
+                    android:inputType="time"
+                    android:drawableLeft="@drawable/detalle_factura"
+                    android:lines="1" />
 
 
                 <Button
@@ -162,8 +149,7 @@
                     />
 
             </LinearLayout>
-        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</ScrollView>

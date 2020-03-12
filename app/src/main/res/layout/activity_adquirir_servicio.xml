@@ -1,188 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/twelve"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="30dp">
 
 
     <androidx.cardview.widget.CardView
-
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="40dp"
+        app:cardCornerRadius="3dp"
+        android:layout_marginStart="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="#60000000"
-        card_view:cardPreventCornerOverlap="true"
-        card_view:cardUseCompatPadding="false">
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp">
 
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:allowUndo="true"
+                android:text="Nombre :"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/nombres"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/cliente_cita"
+                android:focusable="false"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:maxLength="50" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="50dp"
-                    android:allowUndo="true"
-                    android:text="Nombre :"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
+            <TextView
+                android:id="@+id/fu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lugar De Fumigacion :"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/nombres"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:lines="1"
-                    android:maxLength="30"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+            <EditText
+                android:id="@+id/direccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/direccion_cita"
+                android:lines="1" />
 
-                <TextView
-                    android:id="@+id/fu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Lugar De Fumigacion :"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefono:"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/direccion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:gravity="center"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789."
+                android:drawableLeft="@drawable/telefono_cliente"
+                android:inputType="phone"
+                android:maxLength="8" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Telefono:"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Que Plaga Desea Fumigar?"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
+            <Spinner
+                android:id="@+id/servicio"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
 
-                <EditText
-                    android:id="@+id/telefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:maxLength="8"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha :"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="¿Que Plaga Desea Fumigar?"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
+            <EditText
+                android:id="@+id/fechaFumigacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/fecha_cita"
+                android:focusable="false"
+                android:inputType="date"
+                android:lines="1" />
 
-                <Spinner
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora :"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-                    android:id="@+id/servicio"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco" />
+            <EditText
+                android:id="@+id/hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Fecha :"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
+                android:drawableLeft="@drawable/hora_cita"
+                android:focusable="false"
+                android:inputType="time"
+                android:lines="1" />
 
-                <EditText
-                    android:id="@+id/fechaFumigacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:inputType="date"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
+            <Button
+                android:id="@+id/pedir"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/oval"
+                android:gravity="center"
+                android:onClick="pedir"
+                android:text="Pedir Cita"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Hora :"
-                    android:textColor="#fff"
-                    android:textSize="25dp" />
 
-                <EditText
-                    android:id="@+id/hora"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    android:textSize="25dp" />
-
-                <Button
-                    android:id="@+id/pedir"
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/oval"
-                    android:gravity="center"
-                    android:onClick="pedir"
-                    android:text="Pedir Cita"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary" />
-            </LinearLayout>
-
-        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
 
-</LinearLayout>
+</ScrollView>

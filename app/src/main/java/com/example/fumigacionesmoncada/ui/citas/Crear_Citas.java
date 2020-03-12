@@ -1,5 +1,6 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -77,6 +79,9 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_citas);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fecha = findViewById(R.id.registro_Fecha);
         etHora = findViewById(R.id.registro_Hora);
         nombre = findViewById(R.id.registro_nombres);
@@ -100,7 +105,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
                 obtenerHora();
             }
         });
-        etHora.setEnabled(false);
+
         cargarPreferencias();
 
 
@@ -226,6 +231,14 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
 
         ClaseVolley.getIntanciaVolley(Crear_Citas.this).addToRequestQueue(jsonObjectRequest);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return true;
     }
 
     private void obtenerHora() {

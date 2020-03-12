@@ -1,6 +1,5 @@
 package com.example.fumigacionesmoncada.ui.solicitarCita;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,7 +35,7 @@ import java.util.Map;
 
 //import com.example.fumigacionesmoncada.ui.citas.CitaVO;
 
-public class Detalle_Cita extends Activity {
+public class Detalle_Cita extends AppCompatActivity {
     private TextView nombre, direccion, txt_servicio, fecha, hora;
     private CitaVO citaVO;
     private int btnAceptar = 2;
@@ -52,6 +52,7 @@ public class Detalle_Cita extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_cita);
+        setTitle("Detalle Cita");
         nombre = findViewById(R.id.detalle_nombre);
         direccion = findViewById(R.id.detalle_direccion);
         hora = findViewById(R.id.detalle_hora);

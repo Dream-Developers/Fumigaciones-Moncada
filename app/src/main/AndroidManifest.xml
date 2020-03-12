@@ -39,7 +39,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity android:name=".ui.Principal.DetalleImagenActivity" />
-        <activity android:name=".ui.solicitarCita.Detalle_Cita">
+        <activity android:name=".ui.solicitarCita.Detalle_Cita"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name=".Detalle_Cita" />
 
@@ -89,7 +90,8 @@
         <activity android:name=".ui.clientes.Detalle_Cliente" />
         <activity android:name=".ui.citas.Detalle_Cita" />
         <activity android:name=".ui.citas.DetalleCitaScrollingActivity" />
-        <activity android:name=".Desarrolladores"/>
+        <activity android:name=".Desarrolladores"
+            android:hardwareAccelerated="true"/>
         <activity android:name=".VisionMision"/>
 
         <meta-data

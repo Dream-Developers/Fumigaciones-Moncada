@@ -56,7 +56,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ClientesVO clientesVO = (ClientesVO) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getContext(), DetalleClienteScrollingActivity.class);
+                Intent intent = new Intent(getContext(), Detalle_Cliente.class);
                 intent.putExtra("id_cliente",clientesVO.getId());
                 startActivity(intent);
 

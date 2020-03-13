@@ -35,8 +35,7 @@
                 android:id="@+id/idImagenDA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                />
+                android:scaleType="centerCrop" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -47,8 +46,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
+        app:layout_anchorGravity="bottom|left"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/guardarcambios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
 
     <include layout="@layout/content_detalle_servicio_administrador_scrolling" />

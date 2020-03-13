@@ -443,38 +443,40 @@ public class PerfilFragment extends Fragment {
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                Uri miPath = data.getData();
-                imagen.setImageURI(miPath);
+                if(data != null) {
+                    Uri miPath = data.getData();
+                    imagen.setImageURI(miPath);
 
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
 
-                    String rutaImagen = getRealPathFromDocumentUri(getContext(), miPath);
-                    ExifInterface exif = new ExifInterface(rutaImagen);
-
-
-                    orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-                    switch (orientation) {
-
-                        case ExifInterface.ORIENTATION_ROTATE_270:
-                            bitmap = rotateImage(getContext(), bitmap, 270);
-                            break;
-
-                        case ExifInterface.ORIENTATION_ROTATE_180:
-                            bitmap = rotateImage(getContext(), bitmap, 180);
-                            break;
-
-                        case ExifInterface.ORIENTATION_ROTATE_90:
-                            bitmap = rotateImage(getContext(), bitmap, 90);
-                            break;
+                        String rutaImagen = getRealPathFromDocumentUri(getContext(), miPath);
+                        ExifInterface exif = new ExifInterface(rutaImagen);
 
 
+                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                        switch (orientation) {
+
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                bitmap = rotateImage(getContext(), bitmap, 270);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                bitmap = rotateImage(getContext(), bitmap, 180);
+                                break;
+
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                bitmap = rotateImage(getContext(), bitmap, 90);
+                                break;
+
+
+                        }
+
+                        imagen.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        Log.i("error", "" + e.getMessage());
                     }
-
-                    imagen.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    Log.i("error", "" + e.getMessage());
                 }
 
                 break;

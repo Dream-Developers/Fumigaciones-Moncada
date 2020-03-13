@@ -66,8 +66,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class DetalleServicioAdministradorScrollingActivity extends AppCompatActivity {
     private EditText titulo, descripcion;
     NetworkImageView imagen;
-    private FloatingActionButton tomarFoto;
-    private Button guardarCambios;
+    private FloatingActionButton tomarFoto,guardarCambios;
     String id;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
@@ -392,37 +391,39 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                Uri miPath = data.getData();
-                imagen.setImageURI(miPath);
+                if(data != null) {
+                    Uri miPath = data.getData();
+                    imagen.setImageURI(miPath);
 
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
-                    String rutaImagen = getRealPathFromDocumentUri(this, miPath);
-                    ExifInterface exif = new ExifInterface(rutaImagen);
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
+                        String rutaImagen = getRealPathFromDocumentUri(this, miPath);
+                        ExifInterface exif = new ExifInterface(rutaImagen);
 
-                    orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-                    switch (orientation) {
+                        switch (orientation) {
 
-                        case ExifInterface.ORIENTATION_ROTATE_270:
-                            bitmap = rotateImage(this, bitmap, 270);
-                            break;
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                bitmap = rotateImage(this, bitmap, 270);
+                                break;
 
-                        case ExifInterface.ORIENTATION_ROTATE_180:
-                            bitmap = rotateImage(this, bitmap, 180);
-                            break;
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                bitmap = rotateImage(this, bitmap, 180);
+                                break;
 
-                        case ExifInterface.ORIENTATION_ROTATE_90:
-                            bitmap = rotateImage(this, bitmap, 90);
-                            break;
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                bitmap = rotateImage(this, bitmap, 90);
+                                break;
+                        }
+
+                        imagen.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        Log.i("error", "" + e.getMessage());
                     }
 
-                    imagen.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    Log.i("error", "" + e.getMessage());
+                    break;
                 }
-
-                break;
             case TOMARFOTO:
                 imgFile = new File(pictureFilePath);
                 if (resultCode == -1) {

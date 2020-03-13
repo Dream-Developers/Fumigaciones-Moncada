@@ -190,10 +190,7 @@ public class ImagenFragment extends Fragment {
                     abrirCamara();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
-                        Intent intent = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        intent.setType("image/");
-                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+                        abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
                     }
@@ -202,7 +199,39 @@ public class ImagenFragment extends Fragment {
         });
         builder.show();
     }
+    private void abrirGaleria() {
+        //Capturar la imagen del empleado desde la camara
 
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    100);
+
+        } else {
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            try {
+
+                //Se crea un achivo de la foto en blanco
+                pictureFile = getPictureFile();
+
+            } catch (Exception e) {
+
+            }
+
+
+            //se agrega la imagen capturada al archivo en blanco
+
+
+        }
+    }
 
     private void abrirCamara() {
         //Capturar la imagen del empleado desde la camara
@@ -261,16 +290,18 @@ public class ImagenFragment extends Fragment {
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                Uri miPath = data.getData();
-                imgFoto.setImageURI(miPath);
 
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
-                    imgFoto.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(data != null) {
+                    Uri miPath = data.getData();
+                    imgFoto.setImageURI(miPath);
+
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
+                        imgFoto.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
                 break;
             case TOMARFOTO:
                 imgFile = new File(pictureFilePath);
@@ -311,6 +342,7 @@ public class ImagenFragment extends Fragment {
                     }
 
 
+
                 } else {
                     //en caso de que no haya foto capturada el archivo en blanco se elimina
                     imgFile.delete();
@@ -319,6 +351,7 @@ public class ImagenFragment extends Fragment {
                 break;
         }
     }
+
 
     public static Bitmap rotateImage(Context context, Bitmap source, float angle) {
         Matrix matrix = new Matrix();

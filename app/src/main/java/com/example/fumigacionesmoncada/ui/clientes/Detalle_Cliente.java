@@ -1,7 +1,13 @@
 package com.example.fumigacionesmoncada.ui.clientes;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +27,17 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class Detalle_Cliente extends AppCompatActivity {
     private TextView nombre, residencia, telefono,correo;
     private ClientesVO clientesVO;
     NetworkImageView imagen;
     String id;
+    TextView fab, phone;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +50,47 @@ public class Detalle_Cliente extends AppCompatActivity {
 
         imagen = findViewById(R.id.imagen_cliente);
         id = getIntent().getStringExtra("id_cliente");
+        fab=  findViewById(R.id.correo);
+        phone =  findViewById(R.id.phone);
 
         cargarClienteWeb(id);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                enviarCorreo("");
+            }
+        });
+
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent llamar = new Intent(Intent.ACTION_CALL);
+                llamar.setData(Uri.parse("tel:"+telefono.getText()));
+                int permisoCheck = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE);
+                if(permisoCheck == PackageManager.PERMISSION_GRANTED){
+
+                    if(llamar.resolveActivity(getPackageManager())!=null){
+                        getApplication().startActivity(llamar);
+
+                    }else{
+                        Toast.makeText(getApplicationContext(),"No hay aplicacion para llamar",Toast.LENGTH_LONG).show();
+                    }
+
+                }else{
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                                102);
+                    }
+                }
+
+            }
+        });
+
 
     }
+
+
 
     private void cargarClienteWeb(final String id) {
         String ip=getString(R.string.ip);
@@ -90,6 +136,14 @@ public class Detalle_Cliente extends AppCompatActivity {
 
 
     }
+    public void enviarCorreo(String mensaje) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Fumigaciones Moncada - Informacion");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{String.valueOf(correo.getText())});
+        startActivity(intent);
+    }
 
     private void cargarImagen(String foto) {
         String ip = getResources().getString(R.string.ip);
@@ -98,5 +152,23 @@ public class Detalle_Cliente extends AppCompatActivity {
 
         imagen.setImageUrl(url,imageLoader);
 
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 102:
+                if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    Intent llamar1 = new Intent(Intent.ACTION_CALL);
+                    llamar1.setData(Uri.parse("tel:"+telefono.getText()));
+                    startActivity(llamar1);
+
+                } else{
+                    Toast.makeText(this, "Es necesario otorgar los permisos", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+        }
     }
 }

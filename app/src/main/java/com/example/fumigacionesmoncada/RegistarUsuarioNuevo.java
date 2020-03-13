@@ -400,11 +400,11 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     private void cargarWebService() {
 
         progreso=new ProgressDialog(this);
-       // progreso.setMessage("Cargando...");
+        progreso.setMessage("Cargando...");
         progreso.show();
-        progreso.setContentView(R.layout.custom_progressdialog_register);
+        /**progreso.setContentView(R.layout.custom_progressdialog_register);
         progreso.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        progreso.setCancelable(true);
+        progreso.setCancelable(true);*/
         if (masculino.isChecked()) {
             sexo = "M";
         }

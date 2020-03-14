@@ -176,10 +176,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                     abrirCamara();
                 } else {
                     if (opciones[i].equals("Elegir de Galeria")) {
-                        Intent intent = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        intent.setType("image/");
-                        startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+                       abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
                     }
@@ -187,6 +184,40 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void abrirGaleria() {
+        //Capturar la imagen del empleado desde la camara
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    100);
+
+        } else {
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            try {
+
+                //Se crea un achivo de la foto en blanco
+                pictureFile = getPictureFile();
+
+            } catch (Exception e) {
+
+            }
+
+
+            //se agrega la imagen capturada al archivo en blanco
+
+
+        }
     }
     private void abrirCamara() {
         //Capturar la imagen desde la camara
@@ -242,16 +273,17 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                miPath = data.getData();
-                imgFoto.setImageURI(miPath);
+                if(data != null) {
+                    miPath = data.getData();
+                    imgFoto.setImageURI(miPath);
 
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
-                    imgFoto.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
+                        imgFoto.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
                 break;
             case TOMARFOTO:
                 imgFile = new File(pictureFilePath);

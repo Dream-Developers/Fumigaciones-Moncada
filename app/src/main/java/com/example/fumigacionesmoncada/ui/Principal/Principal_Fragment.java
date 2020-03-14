@@ -135,7 +135,7 @@ linearLayout = vista.findViewById(R.id.error);
 
     private void cargarWebService() {
         dialog=new ProgressDialog(getContext());
-        dialog.setMessage("Consultando Imagenes");
+        dialog.setMessage(getString(R.string.consultaimage));
         dialog.show();
         String ip=getString(R.string.ip);
 
@@ -166,7 +166,7 @@ linearLayout = vista.findViewById(R.id.error);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                            Toast.makeText(getContext(), getString(R.string.conexionServidor) +
                                     " "+response, Toast.LENGTH_LONG).show();
                             dialog.hide();
                         }
@@ -176,15 +176,15 @@ linearLayout = vista.findViewById(R.id.error);
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamastarde, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.reviseconexion, Toast.LENGTH_LONG).show();
                 } else {
 
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.reviseconexion , Toast.LENGTH_SHORT).show();
                 }
 
             }

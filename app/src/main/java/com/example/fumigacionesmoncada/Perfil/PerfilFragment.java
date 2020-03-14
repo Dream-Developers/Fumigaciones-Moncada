@@ -307,16 +307,16 @@ public class PerfilFragment extends Fragment {
 
 
     private void mostrarDialogOpciones() {
-        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {getString(R.string.tomarFoto), getString(R.string.elegirGaleria), getString(R.string.cancelar)};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Elige una Opción");
+        builder.setTitle(R.string.elegiropcion);
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (opciones[i].equals(getString(R.string.tomarFoto))) {
                     abrirCamara();
                 } else {
-                    if (opciones[i].equals("Elegir de Galeria")) {
+                    if (opciones[i].equals(getString(R.string.elegirGaleria))) {
                        abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
@@ -327,7 +327,6 @@ public class PerfilFragment extends Fragment {
         builder.show();
     }
     private void abrirGaleria() {
-        //Capturar la imagen del empleado desde la camara
 
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -343,7 +342,7 @@ public class PerfilFragment extends Fragment {
 
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
-            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccione)), COD_SELECCIONA);
             try {
 
                 //Se crea un achivo de la foto en blanco
@@ -352,11 +351,6 @@ public class PerfilFragment extends Fragment {
             } catch (Exception e) {
 
             }
-
-
-            //se agrega la imagen capturada al archivo en blanco
-
-
         }
     }
 
@@ -475,7 +469,7 @@ public class PerfilFragment extends Fragment {
 
                         imagen.setImageBitmap(bitmap);
                     } catch (IOException e) {
-                        Log.i("error", "" + e.getMessage());
+                        Log.i(String.valueOf(R.string.error), "" + e.getMessage());
                     }
                 }
 
@@ -515,7 +509,7 @@ public class PerfilFragment extends Fragment {
                         imagen.setImageBitmap(bitmap);
 
                     } catch (Exception e) {
-                        Toast.makeText(getContext(), "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
 
                     }
 
@@ -540,7 +534,7 @@ public class PerfilFragment extends Fragment {
                     matrix, true);
         } catch (Exception e) {
 
-            Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
         }
         return source;
     }
@@ -595,7 +589,7 @@ public class PerfilFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MIS_PERMISOS) {
             if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
-                Toast.makeText(getContext(), "Permisos aceptados", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), R.string.Permisosaceptados, Toast.LENGTH_SHORT);
                 imagen.setEnabled(true);
             }
         } else {
@@ -605,20 +599,20 @@ public class PerfilFragment extends Fragment {
 
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones = {"si", "no"};
+        final CharSequence[] opciones = {getString(R.string.si), getString(R.string.no)};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(getContext());//estamos en fragment
-        alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
+        alertOpciones.setTitle(R.string.permisosManual);
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("si")) {
+                if (opciones[i].equals(getString(R.string.si))) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getContext(), "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.permisosnoaceptados, Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }
@@ -629,10 +623,10 @@ public class PerfilFragment extends Fragment {
 
     private void cargarDialogoRecomendacion() {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
-        dialogo.setTitle("Permisos Desactivados");
-        dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
+        dialogo.setTitle(R.string.PermisosDesactivados);
+        dialogo.setMessage(R.string.aceptarpermisos);
 
-        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, 100);

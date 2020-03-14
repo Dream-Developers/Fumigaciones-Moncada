@@ -42,6 +42,7 @@ public class Detalle_Cliente extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_cliente);
+        setTitle("Perfil");
         getSupportActionBar();
         nombre= findViewById(R.id.nombre_detalle);
         residencia= findViewById(R.id.residencia_detalle);
@@ -66,7 +67,7 @@ public class Detalle_Cliente extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent llamar = new Intent(Intent.ACTION_CALL);
-                llamar.setData(Uri.parse("tel:"+telefono.getText()));
+                llamar.setData(Uri.parse(getString(R.string.tel)+telefono.getText()));
                 int permisoCheck = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE);
                 if(permisoCheck == PackageManager.PERMISSION_GRANTED){
 
@@ -74,7 +75,7 @@ public class Detalle_Cliente extends AppCompatActivity {
                         getApplication().startActivity(llamar);
 
                     }else{
-                        Toast.makeText(getApplicationContext(),"No hay aplicacion para llamar",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.app,Toast.LENGTH_LONG).show();
                     }
 
                 }else{
@@ -120,7 +121,7 @@ public class Detalle_Cliente extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(Detalle_Cliente.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Detalle_Cliente.this, R.string.error, Toast.LENGTH_SHORT).show();
             }
 
         }){
@@ -140,7 +141,7 @@ public class Detalle_Cliente extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Fumigaciones Moncada - Informacion");
+        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.msjCorre);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{String.valueOf(correo.getText())});
         startActivity(intent);
     }
@@ -161,11 +162,11 @@ public class Detalle_Cliente extends AppCompatActivity {
             case 102:
                 if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
                     Intent llamar1 = new Intent(Intent.ACTION_CALL);
-                    llamar1.setData(Uri.parse("tel:"+telefono.getText()));
+                    llamar1.setData(Uri.parse(getString(R.string.tel)+telefono.getText()));
                     startActivity(llamar1);
 
                 } else{
-                    Toast.makeText(this, "Es necesario otorgar los permisos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.permiso, Toast.LENGTH_SHORT).show();
 
                 }
                 break;

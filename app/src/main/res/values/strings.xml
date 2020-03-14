@@ -194,6 +194,26 @@
     <string name="campoCorreo">El campo del correo está vacio</string>
     <string name="validacionCorreo">El correo no se puede modificar</string>
     <string name="error_invalid_password">Contraseña invalida</string>
+    <string name="tel">tel:</string>
+    <string name="app">No hay aplicación para llamar</string>
+    <string name="msjCorre">Fumigaciones Moncada - Información</string>
+    <string name="permiso">Es necesario otorgar los permisos</string>
+    <string name="consultaimage">Consultando imágenes ...</string>
+    <string name="presentamastarde">Presentamos problemas intentelo más tarde</string>
+    <string name="reviseconexion">Revise su conexión a internet</string>
+    <string name="seleccione">Seleccione</string>
+    <string name="tomarFoto">Tomar Foto</string>
+    <string name="elegirGaleria">Elegir de Galeria</string>
+    <string name="elegiropcion">Elige una Opción</string>
+    <string name="IntenteloNuevamente">Intentelo Nuevamente</string>
+    <string name="Permisosaceptados">Permisos aceptados</string>
+    <string name="permisosManual">¿Desea configurar los permisos de forma manual?</string>
+    <string name="permisosnoaceptados">Los permisos no fueron aceptados</string>
+    <string name="PermisosDesactivados">Permisos Desactivados</string>
+    <string name="aceptarpermisos">Debe aceptar los permisos para el correcto funcionamiento de la App</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="si">si</string>
+    <string name="no">no</string>
 
 
 </resources>

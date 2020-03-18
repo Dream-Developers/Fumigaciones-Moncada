@@ -18,7 +18,8 @@
         android:textStyle="bold"
         android:textColor="#000"
         android:textSize="25dp"
-        android:text="Desarrolladores" />
+        android:text="Desarrolladores"
+        />
 
     <TextView
         android:id="@+id/ini"
@@ -40,11 +41,12 @@
 
     <ImageView
         android:id="@+id/img_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="10sp"
         android:foregroundGravity="center"
         android:layout_marginTop="35dp"
+        android:background="@drawable/eloisa"
        />
 
         <TextView
@@ -67,11 +69,12 @@
 
         <ImageView
             android:id="@+id/img_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="35dp"
             android:foregroundGravity="center"
+            android:background="@drawable/enrique1"
 
              />
     <TextView
@@ -93,11 +96,12 @@
 
         <ImageView
             android:id="@+id/img_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="35dp"
             android:foregroundGravity="center"
+            android:background="@drawable/izamar1"
              />
 
         <TextView
@@ -120,11 +124,12 @@
 
         <ImageView
             android:id="@+id/img_4"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="35dp"
             android:foregroundGravity="center"
+            android:background="@drawable/jacob1"
                          />
 
         <TextView
@@ -146,11 +151,13 @@
 
         <ImageView
             android:id="@+id/img_5"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="35dp"
-            android:foregroundGravity="center"/>
+            android:foregroundGravity="center"
+            android:background="@drawable/jennifer1"
+            />
 
     <TextView
         android:id="@+id/desa5"
@@ -161,7 +168,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000"
-        android:text="Jenifer Chavarria                               Cel:9719-2891" />
+        android:text="Jennifer Chavarria                               Cel:9719-2891" />
     </RelativeLayout>
 
     </LinearLayout>

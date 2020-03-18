@@ -72,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:inputType="number"
                     android:drawableLeft="@drawable/lempira_icon"
                     android:lines="1"
 
@@ -127,8 +128,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:focusable="false"
-                    android:inputType="time"
                     android:drawableLeft="@drawable/detalle_factura"
                     android:lines="1" />
 

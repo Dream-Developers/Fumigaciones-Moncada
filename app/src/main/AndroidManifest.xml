@@ -72,12 +72,13 @@
              />
         <activity
             android:name=".NavegacionAdministradorActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan|stateVisible"/> <!-- SERVICIO DE SINCRONIZACIÓN -->
+            android:windowSoftInputMode="adjustPan|stateVisible|stateHidden" /> <!-- SERVICIO DE SINCRONIZACIÓN -->
         <activity
             android:name=".RegistarUsuarioNuevo"
             android:configChanges="orientation|screenSize"

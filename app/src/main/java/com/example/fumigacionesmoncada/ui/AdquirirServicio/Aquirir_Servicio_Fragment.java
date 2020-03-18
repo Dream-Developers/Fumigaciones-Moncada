@@ -135,7 +135,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
 
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
                     dialogo1.setTitle(R.string.importante);
-                    dialogo1.setMessage(R.string.verificacionDeDatos + "\n" +
+                    dialogo1.setMessage(getString(R.string.verificacionDeDatos)+ "\n" +
                             getString(R.string.nombreAdquirir) + " " + mostrarNombre.getText().toString() + "\n" +
                             getString(R.string.direccionAdquirir) + " " + mostrarDireccion.getText().toString() + "\n" +
                             getString(R.string.telefonoAdquirir) + " " + mostraraTelefono.getText().toString() + "\n"

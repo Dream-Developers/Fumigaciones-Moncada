@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
     private User yo;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +61,14 @@ public class ChatActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviarMensaje();
 
+                String msg = editChat.getText().toString();
+                if (!msg.equals("")){
+                    enviarMensaje();
+                } else {
+                    Toast.makeText(ChatActivity.this, "No puedes enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
+                }
+                editChat.setText("");
             }
         });
 

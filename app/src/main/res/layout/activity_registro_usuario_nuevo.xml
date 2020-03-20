@@ -1,169 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
+    android:layout_marginTop="5dp"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#60000000">
+        app:cardCornerRadius="3dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp">
 
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_height="463dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/foto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/boton_redondo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_add_photo_alternate_white_48dp" />
+
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/registro_nombres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical">
+                android:drawableLeft="@drawable/nombre_cliente"
+                android:hint="  Nombre Completo"
+                android:lines="1"
+                android:maxLength="30"
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+
+                />
+
+            <EditText
+                android:id="@+id/registro_apellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/residencia_cliente"
+                android:hint=" Residencia "
+                android:lines="1"
+
+
+                />
+
+            <EditText
+                android:id="@+id/registro_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789."
+                android:drawableLeft="@drawable/telefono_cliente"
+                android:hint="  Telefono"
+                android:inputType="phone"
+                android:maxLength="8" />
+
+
+            <EditText
+                android:id="@+id/registro_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/correo_cliente"
+                android:hint="Correo"
+                android:inputType="textEmailAddress"
+                android:lines="1" />
+
+            <EditText
+                android:id="@+id/registro_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/cotra_cliente"
+                android:focusable="false"
+                android:hint=" Contraseña"
+                android:inputType="textPassword"
+                android:lines="1" />
+
+            <EditText
+                android:id="@+id/comprobacion_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/confi_cliente"
+                android:focusable="false"
+                android:hint=" Confirmar Contraseña"
+                android:inputType="textPassword"
+                android:lines="1" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maculino"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:checked="true"
+                    android:clickable="true"
+                    android:text="Hombre"
 
-                    <ImageButton
-                        android:id="@+id/foto"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/baseline_add_photo_alternate_white_48dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/boton_redondo"
-                        />
+                    android:textSize="18dp" />
 
-                </RelativeLayout>
-
-                <EditText
-                    android:id="@+id/registro_nombres"
-                    android:layout_width="match_parent"
+                <RadioButton
+                    android:id="@+id/femenino"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
-                    android:hint="  Nombre Completo"
-                    android:lines="1"
-                    android:maxLength="30"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
+                    android:text="Mujer"
+                    android:textSize="18dp" />
+            </RadioGroup>
 
 
-                    />
+            <Button
+                android:id="@+id/registrar"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"
+                android:onClick="registrar"
+                android:text="Registrar"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
 
-                <EditText
-                    android:id="@+id/registro_apellidos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_home_white_18dp"
-                    android:hint=" Residencia "
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
+                />
 
-
-                    />
-
-                <EditText
-                    android:digits="0123456789."
-                    android:inputType="phone"
-                    android:id="@+id/registro_telefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_phone_in_talk_white_18dp"
-                    android:hint="  Telefono"
-                    android:maxLength="8"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff"
-                    />
-
-
-                <EditText
-                    android:id="@+id/registro_correo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_email_white_18dp"
-                    android:hint="  Correo"
-                    android:inputType="textEmailAddress"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
-
-                <EditText
-                    android:id="@+id/registro_contraseña"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_vpn_key_white_18dp"
-                    android:hint=" Contraseña"
-                    android:inputType="textPassword"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
-
-                <EditText
-                    android:id="@+id/comprobacion_contraseña"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_check_circle_outline_white_18dp"
-                    android:hint=" Confirmar Contraseña"
-                    android:inputType="textPassword"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textColorHint="#ffffff" />
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <RadioButton
-                        android:id="@+id/maculino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hombre"
-                        android:textColor="#ffffff"
-                        android:clickable="true"
-                        android:textSize="18dp"
-                        android:checked="true"/>
-                    <RadioButton
-                        android:id="@+id/femenino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mujer"
-                        android:textSize="18dp"
-                        android:textColor="#ffffff"/>
-                </RadioGroup>
-
-
-                <Button
-                    android:id="@+id/registrar"
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/oval"
-                    android:onClick="registrar"
-                    android:text="Registrar"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-
-                    />
-
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>
+</ScrollView>
+
+

@@ -125,6 +125,7 @@
                         android:hint="Sam Enric"
                         android:inputType="textEmailAddress"
                         android:padding="@dimen/margenleft"
+                        android:maxLength="100"
                         android:layout_gravity="left"
                         android:background="#00000000"/>
                     <View
@@ -141,6 +142,7 @@
                         android:padding="@dimen/margenleft"
                         android:layout_gravity="left"
                         android:focusable="false"
+                        android:maxLength="150"
                         android:background="#00000000"
                         />
                     <View
@@ -168,6 +170,7 @@
                         android:textSize="14sp"
                         android:hint="Danli , el Paraiso colonia la Reforma"
                         android:background="#00000000"
+                        android:maxLength="250"
                         android:padding="@dimen/margenleft"/>
                 </LinearLayout>
             </LinearLayout>

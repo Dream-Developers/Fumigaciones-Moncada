@@ -126,6 +126,7 @@
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/margenleft"
                     android:layout_gravity="left"
+                    android:maxLength="100"
                     android:background="#00000000"/>
                 <View
                     android:layout_width="match_parent"
@@ -141,6 +142,7 @@
                     android:padding="@dimen/margenleft"
                     android:layout_gravity="left"
                     android:focusable="false"
+                    android:maxLength="100"
                     android:background="#00000000"
                     />
                 <View
@@ -168,6 +170,7 @@
                     android:textSize="14sp"
                     android:hint="Danli , el Paraiso colonia la Reforma"
                     android:background="#00000000"
+                    android:maxLength="250"
                     android:padding="@dimen/margenleft"/>
             </LinearLayout>
             </LinearLayout>

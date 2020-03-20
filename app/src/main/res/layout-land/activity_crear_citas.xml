@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginBottom="15dp">
-
-
-
+    android:orientation="vertical">
+    
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -16,17 +14,16 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:orientation="vertical"
-               >
+                android:orientation="vertical">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre Cliente"
+                    android:text="Seleccione el cliente"
                     android:layout_marginTop="50dp"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
-
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/registro_nombres"
@@ -40,39 +37,32 @@
                     android:focusable="false"
 
 
-
                     />
-
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
+                    android:text="Direccion "
+                    android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/registro_Precio"
+                    android:id="@+id/registro_direccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:inputType="number"
-                    android:drawableLeft="@drawable/lempira_icon"
+                    android:drawableLeft="@drawable/direccion_cita"
                     android:lines="1"
 
-
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descuento"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
-
+                    android:text="Precio"
+                    android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/registro_descuento"
+                    android:id="@+id/registro_Precio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -88,37 +78,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
+                    android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/reg_Fecha"
+                    android:id="@+id/registro_Fecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/fecha_cita"
                     android:focusable="false"
                     android:inputType="date"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:onClick="fechass"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Detalle"
-                    android:textColor="#000"
-                    android:textSize="20dp" />
+                    android:text="Hora"
+                    android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/registrodetalle"
+                    android:id="@+id/registro_Hora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:drawableLeft="@drawable/detalle_factura"
-                    android:lines="1" />
+                    android:focusable="false"
+                    android:inputType="time"
+                    android:drawableLeft="@drawable/hora_cita"
+                    android:lines="1"/>
 
 
                 <Button
-                    android:id="@+id/registrar12"
+                    android:id="@+id/registrar1"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -126,12 +117,14 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/oval"
                     android:onClick="registrar1"
-                    android:text="Agregar Factura"
+                    android:text="Agregar Cita"
                     android:textAllCaps="false"
+                    android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
 
                     />
 
             </LinearLayout>
+    
 
 </ScrollView>

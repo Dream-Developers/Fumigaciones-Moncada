@@ -33,23 +33,41 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/idContraseñaLogin"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ojito"
         android:layout_width="350dp"
         android:layout_height="77dp"
-        android:background="@drawable/bg_txt_password"
-        android:fontFamily="@font/montserrat_semibold"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:paddingLeft="60dp"
-        android:textColor="@color/colorText"
-        android:textSize="30px"
-        android:maxLength="25"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/idCorreoLogin"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
+
+
+        <EditText
+            android:id="@+id/idContraseñaLogin"
+            android:layout_width="350dp"
+            android:layout_height="77dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_txt_password"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            android:paddingLeft="60dp"
+            android:textColor="@color/colorText"
+            android:textSize="30px"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/idCorreoLogin"
+            app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin"
+            tools:ignore="MissingConstraints" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/imageView"
@@ -123,7 +141,7 @@
         android:textColor="@color/colorText"
         android:textSize="28px"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idContraseñaLogin"
+        app:layout_constraintTop_toBottomOf="@+id/ojito"
         tools:ignore="MissingConstraints" />
 
     <TextView

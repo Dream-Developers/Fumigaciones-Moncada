@@ -3,15 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_admin"
         android:onClick="red_admin"
         app:showAsAction="never" />
-
 
     <item
         android:id="@+id/visionau"
@@ -20,15 +17,10 @@
         app:showAsAction="never" />
 
 
-
     <item
         android:id="@+id/confinau"
         android:orderInCategory="100"
         android:title="Desarrolladores"
         app:showAsAction="never" />
-
-
-
-
 
 </menu>

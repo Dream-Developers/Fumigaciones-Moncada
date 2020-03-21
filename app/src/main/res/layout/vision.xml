@@ -30,7 +30,7 @@
     android:layout_gravity="clip_vertical"
         android:elevation="5dp"
         app:cardCornerRadius="3dp"
-        app:cardBackgroundColor="#c5cf5e"
+        app:cardBackgroundColor="@color/colorPrimary"
         android:clickable="true">
 
 
@@ -83,7 +83,7 @@
         android:layout_gravity="clip_vertical"
         android:elevation="5dp"
         app:cardCornerRadius="3dp"
-        app:cardBackgroundColor="#b5cf5e"
+        app:cardBackgroundColor="@color/colorPrimary"
         android:clickable="true"
        >
 
@@ -93,11 +93,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:padding="10dp"
-            android:maxLines="4"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:maxLines="4"
+            android:padding="10dp"
             android:text="Establecer la empresa en los primeros lugares de servicio de fumigación a nivel local, departamental y nacional cumpliendo con las expectativas empresariales y familiares logrando con ello la satisfacción en nuestros clientes. "
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColorHint="#000"
@@ -164,7 +164,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btn_instagram"
-                app:layout_constraintTop_toTopOf="@+id/recycler_contactar"
                 tools:ignore="MissingConstraints" />
 
         </LinearLayout>

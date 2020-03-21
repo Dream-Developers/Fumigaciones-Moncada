@@ -64,7 +64,8 @@
         </activity>
         <activity
             android:name=".PasswordReset"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".LoginActivity"/>
         <activity
             android:name=".ui.citas.Crear_Citas"
             android:configChanges="orientation|screenSize"

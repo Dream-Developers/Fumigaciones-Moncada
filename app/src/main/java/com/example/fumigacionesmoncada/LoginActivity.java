@@ -1,5 +1,6 @@
 package com.example.fumigacionesmoncada;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -7,10 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,8 +60,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText txtCorreo, txtContrasena;
-    private TextView recuperarContra;
-    private Button btn_registro, btn_login;
+    private TextView recuperarContra, registrar;
+    private Button btn_login;
     private RadioButton RBsesion;
     // private static String URL_LOGIN = "http://192.168.0.101/api/auth/login";
     ProgressDialog dialogo_progreso;
@@ -76,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
+    @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +111,25 @@ public class LoginActivity extends AppCompatActivity {
         recuperarContra = findViewById(R.id.recuperarPass);
         RBsesion = findViewById(R.id.noSalir);
         btn_login = findViewById(R.id.idLoginLogin);
-        btn_registro = findViewById(R.id.idRegistroLogin);
-
+        registrar = findViewById(R.id.registarLogin);
         isActivateRadioButton = RBsesion.isChecked();
+
+
+        String text = "¿No tiene una cuenta? Regístrese";
+
+        SpannableString ss = new SpannableString(text);
+
+        StyleSpan boldSpan = new StyleSpan(Typeface.NORMAL);
+        StyleSpan italicSpan = new StyleSpan(Typeface.BOLD);
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
+
+        ss.setSpan(boldSpan, 0, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(italicSpan, 22, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        registrar.setText(ss);
+
 
         RBsesion.setVisibility(View.GONE);
 
@@ -466,14 +490,18 @@ public class LoginActivity extends AppCompatActivity {
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void botonregistrar(View view) {
-        Intent i = new Intent(getApplicationContext(), RegistarUsuarioNuevo.class);
-        startActivity(i);
+    public void crearcuenta(View view) {
+        Intent intent = new Intent(this, RegistarUsuarioNuevo.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
 
     public void resetPassword(View view) {
         Intent intent = new Intent(getApplicationContext(), PasswordReset.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+
 }

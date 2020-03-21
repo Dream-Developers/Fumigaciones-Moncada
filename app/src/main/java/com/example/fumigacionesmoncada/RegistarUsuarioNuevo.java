@@ -457,10 +457,11 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                progreso.dismiss();
                 createUser();
                 finish();
                 Toast.makeText(RegistarUsuarioNuevo.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
-                progreso.dismiss();
+
 
 
         }}, new Response.ErrorListener() {
@@ -683,6 +684,13 @@ contraseña.setError("no Coinciden ");
                         Log.e("Teste", e.getMessage(), e);
                     }
                 });
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
     }
 

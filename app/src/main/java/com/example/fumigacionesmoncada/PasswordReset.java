@@ -1,9 +1,12 @@
 package com.example.fumigacionesmoncada;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +34,8 @@ public class PasswordReset extends AppCompatActivity {
 
     EditText correo;
     Button enviar;
+    FirebaseAuth firebaseAuth;
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,8 @@ public class PasswordReset extends AppCompatActivity {
         setContentView(R.layout.activity_password_reset);
         correo = (EditText) findViewById(R.id.txtCorreResetPass);
         enviar = (Button) findViewById(R.id.btnEnviarCorreo);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +58,18 @@ public class PasswordReset extends AppCompatActivity {
                 if (networkInfo != null && networkInfo.isConnected()) {
                     if (correo.getText().toString().equalsIgnoreCase("")) {
 
+                        if (correo.getText().toString().length() == 0 ||
+                                correo.getText().toString().trim().equalsIgnoreCase("")) {
+                            correo.setError("Ingrese el correo");
+
+                        }
+
                     } else {
-                        enviarCorreo();
+                        if (!isEmailValid(correo.getText())) {
+                            correo.setError("No es un correo válido");
+                        }else {
+                            enviarCorreo();
+                        }
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Sin acceso a internet", Toast.LENGTH_LONG).show();
@@ -62,16 +82,20 @@ public class PasswordReset extends AppCompatActivity {
 
     }
 
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     private void enviarCorreo() {
 
-        final ProgressDialog loading = ProgressDialog.show(
-                this,
-                "Por favor espere...",
-                "Enviando petición...",
-                false,
-                false);
 
-        //String REGISTER_URL = Utils.URL + "api/password/create";
+
+        loading = new ProgressDialog(this);
+        loading.   show();
+        loading.setContentView(R.layout.custom_progressdialog_reset);
+        loading.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        loading.setCancelable(true);
+
 
         String ip = getString(R.string.ip);
         String url = ip + "/api/password/create";
@@ -83,17 +107,18 @@ public class PasswordReset extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         loading.dismiss();
-                        Toast.makeText(getApplicationContext(), "Revisa tu correo electrónico y obten una nueva contraseña", Toast.LENGTH_LONG).show();
+                        reseteoFirebase();
+                        Toast.makeText(PasswordReset.this, "Revisa tu correo electrónico y obten una nueva contraseña", Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                loading.dismiss();
+                loading.hide();
                 if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getApplicationContext(), "Revisa tu conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "correo invalido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Correo no válido", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -111,4 +136,36 @@ public class PasswordReset extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
     }
+
+    private void reseteoFirebase(){
+
+        String email = correo .getText().toString().trim();
+
+        if (email.equals("")){
+            Toast.makeText(PasswordReset.this, "Campo obligatorio", Toast.LENGTH_SHORT).show();
+        } else {
+            firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(PasswordReset.this, "Puedes cambiarla desde tu correo", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PasswordReset.this, LoginActivity.class));
+                        overridePendingTransition(R.anim.botton_in, R.anim.top_out);
+                    } else {
+                        String error = task.getException().getMessage();
+                        Toast.makeText(PasswordReset.this, error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+    }
+
 }

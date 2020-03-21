@@ -1,212 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dos"
     android:alpha="1"
     tools:context=".LoginActivity">
 
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp">
-
-        <androidx.cardview.widget.CardView
-
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            card_view:cardBackgroundColor="#60000000"
-            card_view:cardPreventCornerOverlap="true"
-            card_view:cardUseCompatPadding="false">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="25dp">
+    <Button
+        android:id="@+id/idLoginLogin"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+    <EditText
+        android:id="@+id/idCorreoLogin"
+        android:layout_width="350dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_txt_username"
+        android:fontFamily="@font/montserrat_semibold"
+        android:hint="Correo"
+        android:maxLength="25"
+        android:paddingLeft="60dp"
+        android:textColor="@color/colorText"
+        android:textSize="30px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:elevation="5dp"
-                        android:src="@drawable/logo" />
+    <EditText
+        android:id="@+id/idContraseñaLogin"
+        android:layout_width="350dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_txt_password"
+        android:fontFamily="@font/montserrat_semibold"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingLeft="60dp"
+        android:textColor="@color/colorText"
+        android:textSize="30px"
+        android:maxLength="25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin" />
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MONCADA'S FUMIGACIONES"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="17dp"
-                        android:layout_marginTop="5dp"
-                        android:textStyle="normal|bold"
-                        android:layout_gravity="center"/>
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/idCorreoLogin"
-                    android:layout_width="250dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_person_pin_white_18dp"
-                    android:inputType="textEmailAddress"
-                    android:hint="Correo"
-                    android:maxLength="25"
-                    android:drawablePadding="10dp"
-                    android:textColor="#fff"
-                    android:textColorHint="#fff" />
-
-                <EditText
-                    android:id="@+id/idContraseñaLogin"
-                    android:layout_width="250dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rectangulo_blanco"
-                    android:drawableLeft="@drawable/baseline_key"
-                    android:hint="Contraseña"
-                    android:drawablePadding="10dp"
-                    android:inputType="textPassword"
-                    android:textColor="#FFFF"
-                    android:maxLength="16"
-                    app:passwordToggleEnabled = "true"
-                    app:passwordToggleTint="#FFF"
-                    android:textColorHint="#FFFF" />
-
-                <Button
-                    android:id="@+id/idLoginLogin"
-                    android:layout_width="140dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/oval"
-                    android:text="Ingresar"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18dp"
-                    android:textStyle="normal|bold" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="205dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/fumigacion_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp">
+    <RadioButton
+        android:id="@+id/noSalir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:checked="true"
+        android:text="No cerrar sesión"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints"></RadioButton>
+
+    <TextView
+        android:id="@+id/textVieww"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Moncadas"
+        android:textColor="#197E3a"
+        android:textSize="100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:text="¿Eres nuevo?  "
-                        android:textColor="#ffffff"
-                        android:textSize="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="right"
+        android:text="Fumigaciones"
+        android:textColor="@color/colorText"
+        android:textSize="32px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textVieww" />
 
-                    <Button
-                        android:id="@+id/idRegistroLogin"
-                        android:layout_width="82dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="@drawable/rectangulo_blanco"
-                        android:onClick="botonregistrar"
-                        android:text="Regístrate"
-                        android:textAllCaps="false"
-                        android:textColor="#ffff"
-                        android:textSize="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.504"
-                        app:layout_constraintStart_toEndOf="@+id/textView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/recuperarPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat_light"
+        android:text="¿Olvidó su contraseña?"
+        android:textColor="@color/colorText"
+        android:textSize="28px"
+        android:onClick="resetPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idContraseñaLogin" />
 
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView"
-                        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Ingresar"
+        android:textColor="@color/colorText"
+        android:textSize="44px"
+        app:layout_constraintEnd_toStartOf="@+id/idLoginLogin"
+        app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/noSalir"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:visibility="gone"
-                        android:text="No cerrar sesión"
-                        android:textColor="#ffffff"></RadioButton>
+    <TextView
+        android:id="@+id/registarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/montserrat_light"
+        android:onClick="crearcuenta"
+        android:text="¿No tiene una cuenta? Regístrese"
+        android:textColor="@color/colorText"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-                    <TextView
-                        android:id="@+id/recuperarPass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_weight="3"
-                        android:onClick="resetPassword"
-                        android:text="¿Olvidaste tu contraseña?"
-                        android:textColor="#ffffff"
-                        android:textSize="15dp"
-                        android:textStyle="normal|bold"></TextView>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        </RelativeLayout>
-    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.093" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/recuperarPass"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/common_google_signin_btn_text_light_disabled"

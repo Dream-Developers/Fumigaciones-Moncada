@@ -302,7 +302,14 @@ public class Detalle_Cita extends AppCompatActivity {
                 parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return parametros;
             }
-        };
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> parametros = new HashMap<>();
+        parametros.put("Content-Type", "application/json");
+        parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+        return parametros;
+    }};
 
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
 

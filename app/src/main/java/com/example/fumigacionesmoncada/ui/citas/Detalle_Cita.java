@@ -2,6 +2,8 @@ package com.example.fumigacionesmoncada.ui.citas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ public class Detalle_Cita extends AppCompatActivity {
     private TextView nombre, direccion,precio,fecha,hora;
     private Citas citas;
     int id;
+     String tokenUsuario;
+     String id_usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +41,17 @@ public class Detalle_Cita extends AppCompatActivity {
         fecha = findViewById(R.id.detalle_fecha);
         hora = findViewById(R.id.detalle_hora);
 
+        cargarPreferencias();
         id = getIntent().getIntExtra("id_citas",0);
         cargarCitasWeb(String.valueOf(id));
 
     }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
+    }
     private void cargarCitasWeb(final String id) {
         String ip=getString(R.string.ip);
 
@@ -76,7 +86,16 @@ public class Detalle_Cita extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>parametros = new HashMap<>();
                 parametros.put("id",id);
+
                 return parametros;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+                return  parametros;
             }
         };
 

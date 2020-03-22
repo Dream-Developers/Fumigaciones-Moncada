@@ -218,7 +218,18 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
                 error.getStackTrace();
                 Toast.makeText(Crear_Citas.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders()throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("X-Requested-With", "XMLHttpRequest");
+                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+
+                return params;
+            }
+        };
 
 
         ClaseVolley.getIntanciaVolley(Crear_Citas.this).addToRequestQueue(jsonObjectRequest);

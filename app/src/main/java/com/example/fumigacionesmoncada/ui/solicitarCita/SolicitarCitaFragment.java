@@ -1,6 +1,8 @@
 package com.example.fumigacionesmoncada.ui.solicitarCita;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,11 +27,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SolicitarCitaFragment extends Fragment {
         ListView lista;
     CitasAdapter citasAdapter ;
     ArrayList<CitaVO> cita;
+    String tokenUsuario;
+    String id_usuario;
 
 
 
@@ -61,7 +68,7 @@ public class SolicitarCitaFragment extends Fragment {
 
             }
         });
-
+    cargarPreferencias();
 
         cargarCitas();
         setHasOptionsMenu(true);
@@ -77,6 +84,12 @@ public class SolicitarCitaFragment extends Fragment {
         cita= new ArrayList<>();
         citasAdapter= new CitasAdapter(getContext(), cita);
         cargarCitas();
+    }
+
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
     }
 
     private void cargarCitas() {
@@ -124,7 +137,18 @@ public class SolicitarCitaFragment extends Fragment {
                 error.getStackTrace();
                 Toast.makeText(getContext(), "Error "+error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
+        })
+        {
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Content-Type", "application/json");
+                parametros.put("X-Requested-With", "XMLHttpRequest");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+                return parametros;
+            }
+        };
 
 
         //ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);

@@ -1,7 +1,9 @@
 package com.example.fumigacionesmoncada.ui.clientes;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -40,6 +42,8 @@ import java.util.Map;
 public class DetalleClienteScrollingActivity extends AppCompatActivity {
     private TextView nombre, residencia, telefono,correo;
     private ClientesVO clientesVO;
+    String tokenUsuario;
+    String id_usuario;
     NetworkImageView imagen;
   FloatingActionButton fab, phone;
     String id;
@@ -57,6 +61,7 @@ public class DetalleClienteScrollingActivity extends AppCompatActivity {
         fab=  findViewById(R.id.correo);
         phone =  findViewById(R.id.phone);
         setTitle(null);
+        cargarPreferencias();
 
         imagen = findViewById(R.id.imagen_cliente);
         id = getIntent().getStringExtra("id_cliente");
@@ -133,12 +138,19 @@ public class DetalleClienteScrollingActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>parametros = new HashMap<>();
                 parametros.put("id",id);
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return parametros;
             }
         };
 
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
 
+
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
     }
 

@@ -2,8 +2,10 @@ package com.example.fumigacionesmoncada.ui.citas;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -49,6 +51,9 @@ private FloatingActionButton addcita;
     Citas_Adapter citasAdapter;
     ArrayList<Citas> cita;
 
+    String id_usuario;
+    String tokenUsuario;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -79,7 +84,7 @@ private FloatingActionButton addcita;
             }
         });
 
-
+cargarPreferencias();
 
         cargarCitas();
         setHasOptionsMenu(true);
@@ -123,7 +128,12 @@ private FloatingActionButton addcita;
         builder.setNegativeButton("No", null);
         builder.show();
     }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
+    }
     private void eliminarCitaWebService(String id, final int position) {
         String ip=getString(R.string.ip);
         String url = ip+"/api/citas/"+id+"/borrar";
@@ -153,6 +163,8 @@ private FloatingActionButton addcita;
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> parametros= new HashMap<>();
                 parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+
                 return  parametros;
             }
         };
@@ -221,7 +233,16 @@ private FloatingActionButton addcita;
                 error.getStackTrace();
                 Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+
+                return  parametros;
+            }
+        };
 
 
         //ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);

@@ -1,5 +1,7 @@
 package com.example.fumigacionesmoncada.ui.citas;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +31,8 @@ public class DetalleCitaScrollingActivity extends AppCompatActivity {
     private TextView nombre, direccion,precio,fecha,hora;
     private Citas citas;
     int id;
+    String tokenUsuario;
+    String id_usuario;
 
 
     @Override
@@ -41,9 +45,15 @@ public class DetalleCitaScrollingActivity extends AppCompatActivity {
         precio = findViewById(R.id.detalle_precio);
         fecha = findViewById(R.id.detalle_fecha);
         hora = findViewById(R.id.detalle_hora);
-
+cargarPreferencias();
         id = getIntent().getIntExtra("id_citas",0);
         cargarCitasWeb(String.valueOf(id));
+
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
     }
     private void cargarCitasWeb(final String id) {
@@ -80,6 +90,7 @@ public class DetalleCitaScrollingActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>parametros = new HashMap<>();
                 parametros.put("id",id);
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return parametros;
             }
         };

@@ -2,7 +2,9 @@ package com.example.fumigacionesmoncada.ui.clientes;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -37,6 +39,8 @@ public class Detalle_Cliente extends AppCompatActivity {
     private ClientesVO clientesVO;
     NetworkImageView imagen;
     String id;
+    String tokenUsuario;
+    String id_usuario;
     TextView fab, phone;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class Detalle_Cliente extends AppCompatActivity {
         id = getIntent().getStringExtra("id_cliente");
         fab=  findViewById(R.id.correo);
         phone =  findViewById(R.id.phone);
-
+cargarPreferencias();
         cargarClienteWeb(id);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +94,12 @@ public class Detalle_Cliente extends AppCompatActivity {
 
 
     }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
+    }
 
 
     private void cargarClienteWeb(final String id) {
@@ -129,7 +138,15 @@ public class Detalle_Cliente extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String>parametros = new HashMap<>();
                 parametros.put("id",id);
+
                 return parametros;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+                return  parametros;
             }
         };
 

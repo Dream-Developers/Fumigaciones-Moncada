@@ -231,7 +231,16 @@ public class crearFactura extends AppCompatActivity implements AdapterView.OnIte
                 error.getStackTrace();
                 Toast.makeText(crearFactura.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Content-Type", "application/json");
+                parametros.put("X-Requested-With", "XMLHttpRequest");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+                return parametros;
+            }
+        };
 
 
         ClaseVolley.getIntanciaVolley(crearFactura.this).addToRequestQueue(jsonObjectRequest);

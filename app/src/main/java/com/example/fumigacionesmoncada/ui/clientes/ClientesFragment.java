@@ -1,8 +1,10 @@
 package com.example.fumigacionesmoncada.ui.clientes;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,6 +43,8 @@ import java.util.Map;
 public class ClientesFragment extends Fragment implements SearchView.OnQueryTextListener{
     private FloatingActionButton addCliente;
     ListView lista;
+    String tokenUsuario;
+    String id_usuario;
     ClientesAdapter clientesAdapter ;
     ArrayList<ClientesVO> cliente;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,7 +53,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
         View view = inflater.inflate(R.layout.fragment_clientes, container, false);
         lista = view.findViewById(R.id.lista_clientes);
         addCliente = view.findViewById(R.id.add_clientes);
-
+cargarPreferencias();
         cargarClientes();
         setHasOptionsMenu(true);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,7 +89,12 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
 
         return view;
     }
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
+    }
     private void eliminarClientes(final ClientesVO clientesVO, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirmacion");
@@ -146,6 +155,7 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> parametros= new HashMap<>();
                 parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
                 return  parametros;
             }
         };
@@ -201,7 +211,15 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
                 error.getStackTrace();
                 Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> parametros= new HashMap<>();
+                parametros.put("Content-Type","application/json");
+                parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
+                return  parametros;
+            }
+        };
 
 
         ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);

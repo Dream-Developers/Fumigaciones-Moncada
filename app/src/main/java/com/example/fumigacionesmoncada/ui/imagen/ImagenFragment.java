@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -85,7 +86,8 @@ public class ImagenFragment extends Fragment {
     Button botonSubir;
     ImageView imgFoto;
     ProgressDialog progreso;
-
+String tokenUsuario;
+String id_usuario;
     RelativeLayout layoutSubir;//permisos
     private File imgFile;
     private int orientation;
@@ -144,7 +146,7 @@ public class ImagenFragment extends Fragment {
         // request= Volley.newRequestQueue(getContext());
 
         //Permisos
-
+cargarPreferencias();
 
         botonSubir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -466,7 +468,12 @@ public class ImagenFragment extends Fragment {
     }
 
     ///////////////
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        tokenUsuario = preferences.getString("token", "");
+        id_usuario = preferences.getString("id", "");
 
+    }
 
     private void cargarWebService() {
 
@@ -496,7 +503,7 @@ public class ImagenFragment extends Fragment {
                 error.getStackTrace();
                 progreso.hide();
             }
-        }) {
+        }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 String nombre = campoNombre.getText().toString();
@@ -504,12 +511,16 @@ public class ImagenFragment extends Fragment {
 
                 String imagen = convertirImgString(bitmap);
 
+
+
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("nombre", nombre);
                 parametros.put("descripcion", descripcion);
                 parametros.put("foto", imagen);
 
+
                 return parametros;
+
             }
         };
         //request.add(stringRequest);

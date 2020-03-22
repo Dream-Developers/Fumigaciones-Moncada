@@ -62,8 +62,8 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
     ListView lista_citas;
     facturas_adapter citasAdapter;
     ArrayList<Facturas> cita;
-    private String tokenUsuario;
-    private String Usuario_id;
+     String tokenUsuario;
+     String Usuario_id;
     ProgressDialog progreso;
     TextView  Nombre , Detalle ,Fecha,Total ;
     EditText  EditNombre,EditFecha,EditDetalle,EditTotal,EditDescuento;
@@ -79,6 +79,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_factura, container, false);
+        cargarPreferencias();
         refreshLayout = view.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -245,18 +246,19 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progreso.dismiss();
-                            Toast.makeText(getContext(), "" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(getContext(), "" +tokenUsuario+ error.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("volley", "onErrorResponse: " + error.networkResponse);
                         }
-                    }) {
+                    }){
+                    @Override
+                    public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "Bearer" + " " + tokenUsuario);
 
-                        public Map<String, String> getHeaders() throws AuthFailureError {
-                            Map<String, String> parametros = new HashMap<>();
-                            parametros.put("Content-Type", "application/json");
-                            parametros.put("X-Requested-With", "XMLHttpRequest");
-                            parametros.put("Authorization", "Bearer" + " " + tokenUsuario);
-                            return parametros;
-                        }
+
+                    return params;
+                }
                     };
                     ClaseVolley.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequest);
                 }

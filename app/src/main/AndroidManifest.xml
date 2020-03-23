@@ -37,7 +37,6 @@
 
         <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"></activity>
 
         <activity android:name=".ui.Principal.DetalleImagenActivity" />

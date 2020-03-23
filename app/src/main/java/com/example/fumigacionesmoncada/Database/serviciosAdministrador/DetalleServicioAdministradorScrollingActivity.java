@@ -40,6 +40,8 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +68,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class DetalleServicioAdministradorScrollingActivity extends AppCompatActivity {
     private EditText titulo, descripcion;
     NetworkImageView imagen;
-    private FloatingActionButton tomarFoto,guardarCambios;
+    private FloatingActionButton guardarCambios;
     String id;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
@@ -94,12 +96,11 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
             setSupportActionBar(toolbar);
         }
 
-        setTitle(null);
+        setTitle("Publicidad");
 
         titulo = findViewById(R.id.tituloImagenDA);
         descripcion = findViewById(R.id.descripcionImagenDA);
         imagen = findViewById(R.id.idImagenDA);
-        tomarFoto = findViewById(R.id.fab);
         guardarCambios = findViewById(R.id.guardarcambios);
         id = getIntent().getStringExtra("id");
         cargarPreferencias();
@@ -113,12 +114,33 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
             }
         });
 
-        tomarFoto.setOnClickListener(new View.OnClickListener() {
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mostrarDialogOpciones();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detalle_admin, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int idm = item.getItemId();
+
+        if (idm == R.id.guardarcambios) {
+            mostrarDialogOpciones();
+            return true;
+        }
+
+        if (idm == R.id.fab) {
+            actualizar_datos(id);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void actualizar_datos(final String id) {

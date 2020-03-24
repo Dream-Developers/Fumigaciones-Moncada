@@ -18,6 +18,8 @@
     <string name="crear_factura">Crear Factura</string>
 
 
+
+
     <string name="title_activity_navegacion_admin">Administrador</string>
     <string name="title_activity_navegacion_administrador">NavegacionAdministradorActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -35,6 +37,10 @@
     <string name="perfil">Perfil</string>
     <string name="publicidad">Publicidad</string>
     <string name="contactar">Contactar</string>
+    <string name="crearfactura">Crear Factura</string>
+    <string name="detalleCita">Informacion de la cita</string>
+    <string name="visionMision"> Vision y Mision de la Empresa</string>
+    <string name="desarrolladores">Desarrolladores</string>
 
 
     <string name="ip">http://192.168.137.1</string>

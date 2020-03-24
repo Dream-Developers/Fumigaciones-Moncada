@@ -26,7 +26,7 @@
         <activity
             android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_menu"
+            android:label="@string/crearfactura"
            />
         <activity android:name=".AdquirirServicioActivity" />
         <activity
@@ -91,11 +91,14 @@
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.clientes.Detalle_Cliente" />
-        <activity android:name=".ui.citas.Detalle_Cita" />
+        <activity android:name=".ui.citas.Detalle_Cita"
+            android:label="@string/detalleCita"/>
         <activity android:name=".ui.citas.DetalleCitaScrollingActivity" />
         <activity android:name=".Desarrolladores"
-            android:hardwareAccelerated="true"/>
-        <activity android:name=".VisionMision"/>
+            android:hardwareAccelerated="true"
+            android:label="@string/desarrolladores"/>
+        <activity android:name=".VisionMision"
+            android:label="@string/visionMision"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

@@ -197,6 +197,11 @@ public class LoginActivity extends AppCompatActivity {
         if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
             if (!isEmailValid(txtCorreo.getText())) {
                 txtCorreo.setError("No es un correo valido");
+            }else {
+                    String email = txtCorreo.getText().toString().trim();
+                    String contraseniaPass = txtContrasena.getText().toString().trim();
+                    loginLaravel(email, contraseniaPass);
+                }
             }
 
             if ((txtContrasena.getText().toString().trim().length() > 0) && (txtCorreo.getText().toString().trim().length() > 0)) {
@@ -211,12 +216,8 @@ public class LoginActivity extends AppCompatActivity {
                 txtContrasena.setError("Al menos 8 caracteres");
             }
 
-            else {
-                String email = txtCorreo.getText().toString().trim();
-                String contraseniaPass = txtContrasena.getText().toString().trim();
-                loginLaravel(email, contraseniaPass);
-            }
-        }
+          //Here
+
 
 
         else {
@@ -283,9 +284,6 @@ public class LoginActivity extends AppCompatActivity {
         String contra = preferences.getString("contra", "");
         rol_id = preferences.getString("rol", "");
 
-//        txtCorreo.setText(email);
-        //      txtContrasena.setText(contra);
-
     }
 
 
@@ -336,8 +334,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            Toast.makeText(LoginActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
-                        //
-                        //Bienvenido();
+
                         savePreferences(success, usuario_id);
                         intem();
                         finish();
@@ -349,21 +346,33 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.hide();
-                       // btn_login.setVisibility(View.VISIBLE);
 
-                        if (error instanceof AuthFailureError){
-                            Toast.makeText(getApplicationContext(), "La contraseña es incorrecta",
+
+                        if (error.toString().equals("com.android.volley.ServerError")){
+                            Toast.makeText(getApplicationContext(), "Presentamos problemas intente más tarde",
                                     Toast.LENGTH_SHORT).show();
-                        }else {
-
+                        }
+                        if (error.toString().equals("com.android.volley.TimeoutError")) {
+                            Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                        }
+                        if (error.toString().equals("com.android.volley.AuthFailureError")) {
+                            Toast.makeText(getApplicationContext(), "Este usuario no está registrado", Toast.LENGTH_LONG).show();
                         }
 
-                       // Toast.makeText(LoginActivity.this, "Error"+error , Toast.LENGTH_SHORT).show();
+                        if (error.toString().equals("com.android.volley.ClientError")) {
+                          //  Log.i("Error","No se pudo consultar el registro: "+error.toString());
+                            Toast.makeText(getApplicationContext(), "No se pudo consultar el registro", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
+                        }
+
+
 
                     }
                 }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams(){
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("email", txtCorreo);
                 parametros.put("password", txtContrasena);
@@ -384,6 +393,7 @@ public class LoginActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(8000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
+        ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
 
@@ -410,21 +420,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-    }
-
-    public void Bienvenido() {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customToast = inflater.inflate(R.layout.toas_personalizado, null);
-        TextView txt = (TextView) customToast.findViewById(R.id.txtToast);
-        txt.setText("Bienvenido, Gracias por preferirnos. " +
-                " Sea feliz, que Dios lo bendiga ");
-        Toast toast = new Toast(this);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(customToast);
-        toast.show();
-
-        //Agregar arriba Bienvenido();
     }
 
 

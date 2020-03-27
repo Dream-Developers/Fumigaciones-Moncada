@@ -96,7 +96,7 @@
                         android:text="@string/telefono"
                         android:textSize="14dp"
                         android:padding="@dimen/margenleft"
-                        android:id="@+id/myTextView"
+                        android:id="@+id/fab"
                         android:textColor="#000"/>
                     <View
                         android:layout_width="match_parent"

@@ -51,6 +51,7 @@ public class ClientesAdapter extends ArrayAdapter<ClientesVO> {
 
 
 
+
         return  convertView;
     }
     @Override

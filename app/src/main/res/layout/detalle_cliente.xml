@@ -38,17 +38,14 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#000000">
+                >
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/imagen_cliente"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="fitCenter"
-                    android:background="#fff"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/user_detalle"
                     />
-
-
-
 
             </FrameLayout>
             <LinearLayout

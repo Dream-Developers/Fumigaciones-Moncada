@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -117,11 +118,18 @@ public class PasswordReset extends AppCompatActivity {
                 loading.hide();
                 if (error.toString().equals("com.android.volley.TimeoutError")) {
                     Toast.makeText(getApplicationContext(), "Revisa tu conexión a internet", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Correo no válido", Toast.LENGTH_LONG).show();
+                } if(error.toString().equals("com.android.volley.ServerError")){
+                    Toast.makeText(getApplicationContext(), "Presentamos problemas intente más tarde"+error, Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Error"+error, Toast.LENGTH_SHORT).show();
                 }
             }
         }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
+            }
 
             @Override
             protected Map<String, String> getParams() {

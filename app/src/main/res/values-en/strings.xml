@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FumigacioneSMoncada</string>
+    <string name="IntenteloNuevamente" translatable="false">" Try again"</string>
+    <string name="NumeroInvalido" translatable="false">" it's not a phone number"</string>
+    <string name="PermisosDesactivados" translatable="false">" deactivated permissions"</string>
+    <string name="Permisosaceptados" translatable="false">accepted permissions</string>
+    <string name="aceptar" translatable="false">accept</string>
+    <string name="aceptarpermisos" translatable="false">" You must accept the permissions for the proper functioning of the App"</string>
+    <string name="action_admin" translatable="false">"  Sign Off"</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_usuario" translatable="false">Sing Off</string>
+    <string name="adquirir_servicios" translatable="false">" Service"</string>
+    <string name="app" translatable="false">" No app to call"</string>
+    <string name="btn_chat" translatable="false">Send</string>
+    <string name="adquirirServicio" translatable="false">" Acquire Service"</string>
+    <string name="campoCorreo" translatable="false">" The email field is empty"</string>
+    <string name="campoFecha" translatable="false">" The date field is empty"</string>
+    <string name="campoHora" translatable="false">" The time field is empty"</string>
+    <string name="campoNombre" translatable="false">" The name field is empty"</string>
+    <string name="campoResidencia" translatable="false">" The address field is empty"</string>
+    <string name="campoTelefono" translatable="false">" The phone field is empty"</string>
+    <string name="cancelar" translatable="false">" Cancel"</string>
+    <string name="cargandoAdquirir" translatable="false">" Loading..."</string>
+    <string name="conexionServidor" translatable="false">Could not connect to server</string>
+    <string name="confirmar" translatable="false">" Confirm"</string>
+    <string name="consultaimage" translatable="false">" Consulting images ..."</string>
+    <string name="consultandoImagenes" translatable="false">" Consulting Images"</string>
+    <string name="contactar" translatable="false">" Contact"</string>
+    <string name="correo" translatable="false">Email</string>
+    <string name="crear_factura" translatable="false">" Create Invoice"</string>
+    <string name="default_notification_channel_id" translatable="false">" fumigations"</string>
+    <string name="descripcion" translatable="false">" Description"</string>
+    <string name="detalle_cita" translatable="false">" Add Appointment"</string>
+    <string name="detalle_servicio" translatable="false">" Service Detail"</string>
+    <string name="direccion" translatable="false">" Address"</string>
+    <string name="direccionAdquirir" translatable="false">" Fumigation Direction:"</string>
+    <string name="elegirGaleria" translatable="false">" Choose from Gallery"</string>
+    <string name="elegiropcion" translatable="false">Choose an Option</string>
+    <string name="error" translatable="false">" Error"</string>
+    <string name="error_invalid_password" translatable="false">" Invalid password"</string>
+    <string name="factura" translatable="false">" Invoice"</string>
+    <string name="horaAlerta" translatable="false">" The selected time is not correct, it must be greater than the current time"</string>
+    <string name="horarioDeAtencion" translatable="false">" The hours of operation are from 7:00 AM to 7:00 PM"</string>
+    <string name="importante" translatable="false">" Important"</string>
+    <string name="informacion_personal" translatable="false">" Personal Information"</string>
+    <string name="insectos" translatable="false">" Insects"</string>
+    <string name="loading" translatable="false">" Logging in"</string>
+    <string name="menu_acerca" translatable="false">" About"</string>
+    <string name="menu_acercad" translatable="false">About</string>
+    <string name="menu_chat" translatable="false">Chats</string>
+    <string name="menu_citas" translatable="false">" Appointment"</string>
+    <string name="menu_clientes" translatable="false">" Customer Registration"</string>
+    <string name="menu_contactar" translatable="false">" Contact"</string>
+    <string name="menu_imagen" translatable="false">" Upload image"</string>
+    <string name="menu_principal" translatable="false">Principal</string>
+    <string name="menu_registro_cita" translatable="false">" Appointment record"</string>
+    <string name="menu_servicio" translatable="false">" Acquire Service"</string>
+    <string name="menu_solicitarCita" translatable="false">" Appointment request"</string>
+    <string name="message" translatable="false">" Write your message"</string>
+    <string name="mision_y_visi_n" translatable="false">" Mission and vision"</string>
+    <string name="msjCorre" translatable="false">" Moncada Fumigation - Information"</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="nav_titulo" translatable="false">" Moncada fumigation"</string>
+    <string name="no" translatable="false">" do not"</string>
+    <string name="nombre" translatable="false">" Name"</string>
+    <string name="nombreAdquirir" translatable="false">Name:</string>
+    <string name="nombreNoModificar" translatable="false">" The Name cannot be modified"</string>
+    <string name="perfil" translatable="false">" Profile"</string>
+    <string name="permiso" translatable="false">" Permits need to be granted"</string>
+    <string name="permisosManual" translatable="false">" Do you want to configure permissions manually?"</string>
+    <string name="permisosnoaceptados" translatable="false">" Permits were not accepted"</string>
+    <string name="photo" translatable="false">" Photo"</string>
+    <string name="presentamastarde" translatable="false">" We present problems, please try again later"</string>
+    <string name="presentamosProblemas" translatable="false">" We present problems, please try again later"</string>
+    <string name="publicidad" translatable="false">" Publicity"</string>
+    <string name="registrando" translatable="false">" Registering your account"</string>
+    <string name="registroAdquirir" translatable="false">" You have successfully registered"</string>
+    <string name="reviseConexion" translatable="false">" Check your internet connection"</string>
+    <string name="reviseconexion" translatable="false">" Check your internet connection"</string>
+    <string name="roedores" translatable="false">" Rodents"</string>
+    <string name="seleccione" translatable="false">" Select"</string>
+    <string name="si" translatable="false">Yes</string>
+    <string name="tab_text_1" translatable="false">CHAT</string>
+    <string name="tab_text_2" translatable="false">" REGISTRY"</string>
+    <string name="tab_text_3" translatable="false">CITAS</string>
+    <string name="tab_text_4" translatable="false">" CONTENT"</string>
+    <string name="tel" translatable="false">" tel:"</string>
+    <string name="telefono" translatable="false">Phone</string>
+    <string name="telefonoAdquirir" translatable="false">Phone:</string>
+    <string name="title_activity_contactos" translatable="false">" Contacts"</string>
+    <string name="title_activity_detalle_cita_scrolling" translatable="false">" DetailDateScrollingActivity"</string>
+    <string name="title_activity_detalle_cliente_scrolling" translatable="false">" DetailClientScrollingActivity"</string>
+    <string name="title_activity_detalle_servicio_administrador_scrolling" translatable="false">" DetailServiceAdministratorScrollingActivity"</string>
+    <string name="title_activity_detalle_servicio_scroll" translatable="false">" DetailServiceScroll"</string>
+    <string name="title_activity_menu" translatable="false">" MenuActivity"</string>
+    <string name="title_activity_navegacion_admin" translatable="false">" Administrator"</string>
+    <string name="title_activity_navegacion_administrador" translatable="false">" NavigationAdministradorActivity"</string>
+    <string name="title_activity_registro" translatable="false">" New User Registration"</string>
+    <string name="titlr_llamar" translatable="false">" Phone call"</string>
+    <string name="titulo" translatable="false">" Title"</string>
+    <string name="tomarFoto" translatable="false">" Take photo"</string>
+    <string name="validacionCorreo" translatable="false">" Mail cannot be modified"</string>
+    <string name="verificacionDeDatos" translatable="false">" Is this data correct?"</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="visionMision">" Vision and Mission of the Company"</string>
+    <string name="account_type" translatable="false">com.example.fumigacionesmoncada.account</string>
+    <string name="crearfactura" translatable="false">" Create Invoice"</string>
+    <string name="desarrolladores" translatable="false">" Developers"</string>
+    <string name="detalleCita" translatable="false">" Appointment information"</string>
+    <string name="ip" translatable="false">http://64.225.37.202:8082</string>
+    <string name="large_text" translatable="false">Material is the metaphor.   A material metaphor is the unifying theory of a rationalized space and a system of motion.The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.  Surfaces a</string>
+    <string name="loandingpass" translatable="false">loandingpass</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="provider_citas_authority" translatable="false">com.example.fumigacionesmoncada.CitasSync.CitasProvider</string>
+
+</resources>

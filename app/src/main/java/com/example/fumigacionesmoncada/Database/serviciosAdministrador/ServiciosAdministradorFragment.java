@@ -96,8 +96,8 @@ public class ServiciosAdministradorFragment extends Fragment  {
 
     private void eliminarServicio(final ServiciosVO serviciosVO, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Confirmación");
-        builder.setMessage("¿Está seguro que desea eliminar la imágen?");
+        builder.setTitle(getString(R.string.confirmacion));
+        builder.setMessage(getString(R.string.eliminar_servicio));
         builder.setIcon(R.drawable.logofm);
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override

@@ -97,8 +97,9 @@ cargarPreferencias();
     }
     private void eliminarClientes(final ClientesVO clientesVO, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Confirmacion");
-        builder.setMessage("Esta seguro que desea eliminar de tu lista");
+        builder.setTitle(getString(R.string.confirmacion));
+        builder.setMessage(R.string.eliminar_usuario);
+        builder.setIcon(R.drawable.logofm);
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

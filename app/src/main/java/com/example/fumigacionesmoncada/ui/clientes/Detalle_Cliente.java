@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,6 +96,27 @@ cargarPreferencias();
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detalle_cliente, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int idm = item.getItemId();
+
+        if (idm == R.id.llamar) {
+            hacerllamada();
+            return true;
+        }
+
+        if (idm == R.id.correo) {
+            enviarCorreo("");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void cargarPreferencias() {
         SharedPreferences preferences = this.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         tokenUsuario = preferences.getString("token", "");
@@ -151,6 +174,29 @@ cargarPreferencias();
         };
 
         ClaseVolley.getIntanciaVolley(this).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
+    public void hacerllamada(){
+        Intent llamar = new Intent(Intent.ACTION_CALL);
+        llamar.setData(Uri.parse(getString(R.string.tel)+telefono.getText()));
+        int permisoCheck = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE);
+        if(permisoCheck == PackageManager.PERMISSION_GRANTED){
+
+            if(llamar.resolveActivity(getPackageManager())!=null){
+                getApplication().startActivity(llamar);
+
+            }else{
+                Toast.makeText(getApplicationContext(), R.string.app,Toast.LENGTH_LONG).show();
+            }
+
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                        102);
+            }
+        }
 
 
     }

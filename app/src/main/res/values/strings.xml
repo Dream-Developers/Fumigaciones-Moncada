@@ -221,6 +221,9 @@
     <string name="si">si</string>
     <string name="no">no</string>
     <string name="loandingpass">Enviando correo...</string>
+    <string name="confirmacion">Confirmación</string>
+    <string name="eliminar_servicio">¿Está seguro que desea eliminar el servicio?</string>
+    <string name="eliminar_usuario">¿Está seguro que desea eliminarlo de la lista?</string>
 
 
 </resources>

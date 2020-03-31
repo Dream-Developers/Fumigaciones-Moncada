@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/correo"
+        android:title="correo"
+        android:visible="true"
+        android:icon="@drawable/ic_email_black_24dp"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/llamar"
+        android:title="Llamar"
+        android:visible="true"
+        android:icon="@drawable/ic_phone_in_talk_black_24dp"
+        app:showAsAction="always"/>
+
+
+</menu>

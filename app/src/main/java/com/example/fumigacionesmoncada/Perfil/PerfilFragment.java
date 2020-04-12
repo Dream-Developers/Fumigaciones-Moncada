@@ -95,7 +95,7 @@ public class PerfilFragment extends Fragment {
     private String pictureFilePath;
     private Uri uri;
     private final int MIS_PERMISOS = 100;
-    private static final int COD_SELECCIONA = 10;
+    private static final int COD_SELECCIONA = 300;
     String foto;
     LinearLayout linearLayout;
     ImageView editar;
@@ -128,7 +128,13 @@ public class PerfilFragment extends Fragment {
         cargarPreferencias();
         cargarClienteWeb();
 
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarDialogOpciones();
 
+            }
+        });
 
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -340,7 +346,7 @@ public class PerfilFragment extends Fragment {
 
         } else {
 
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
             startActivityForResult(intent.createChooser(intent, getString(R.string.seleccione)), COD_SELECCIONA);
             try {

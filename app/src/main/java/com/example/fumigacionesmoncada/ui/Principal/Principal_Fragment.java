@@ -12,15 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.fumigacionesmoncada.AdquirirServicioActivity;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RecyclerTouchListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +36,7 @@ import java.util.Map;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Principal_Fragment extends Fragment   {
@@ -52,9 +56,10 @@ public class Principal_Fragment extends Fragment   {
 
     RecyclerView recyclerUsuarios;
     ArrayList<ServiciosVO> listaUsuarios;
-    ConstraintLayout linearLayout;
+   RelativeLayout linearLayout;
     ProgressDialog dialog;
     String tokenUsuario;
+    FloatingActionButton adservicio;
 
     // RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -100,10 +105,11 @@ public class Principal_Fragment extends Fragment   {
 
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         cargarPreferencias();
+        adservicio = vista.findViewById(R.id.ad_servicos);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
-        //recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        //recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setHasFixedSize(true);
 linearLayout = vista.findViewById(R.id.error);
         getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -123,6 +129,16 @@ linearLayout = vista.findViewById(R.id.error);
 
             }
         }));
+
+
+        adservicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AdquirirServicioActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return  vista;
 
 

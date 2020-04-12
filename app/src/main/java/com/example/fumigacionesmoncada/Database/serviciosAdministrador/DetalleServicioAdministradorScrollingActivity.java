@@ -45,6 +45,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.fumigacionesmoncada.R;
@@ -68,7 +69,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class DetalleServicioAdministradorScrollingActivity extends AppCompatActivity {
     private EditText titulo, descripcion;
     NetworkImageView imagen;
-    private FloatingActionButton guardarCambios;
+    private ImageView guardarCambios;
     String id;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;
@@ -311,7 +312,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
         } else {
 
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
             try {

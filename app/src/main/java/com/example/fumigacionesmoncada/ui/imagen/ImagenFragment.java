@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -35,9 +36,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -50,10 +48,14 @@ import com.example.fumigacionesmoncada.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
 public class ImagenFragment extends Fragment {
@@ -86,12 +88,13 @@ public class ImagenFragment extends Fragment {
     Button botonSubir;
     ImageView imgFoto;
     ProgressDialog progreso;
-String tokenUsuario;
-String id_usuario;
+    String tokenUsuario;
+    String id_usuario;
     RelativeLayout layoutSubir;//permisos
     private File imgFile;
     private int orientation;
     private Uri uri;
+
 
     // RequestQueue request;
     //JsonObjectRequest jsonObjectRequest;
@@ -146,7 +149,7 @@ String id_usuario;
         // request= Volley.newRequestQueue(getContext());
 
         //Permisos
-cargarPreferencias();
+        cargarPreferencias();
 
         botonSubir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +190,7 @@ cargarPreferencias();
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 if (opciones[i].equals("Tomar Foto")) {
                     abrirCamara();
                 } else {
@@ -225,6 +228,8 @@ cargarPreferencias();
                 pictureFile = getPictureFile();
 
             } catch (Exception e) {
+
+
 
             }
 
@@ -285,6 +290,21 @@ cargarPreferencias();
         return imagen;
     }
 
+    public static int getOrientation(Context context, Uri photoUri) {
+
+
+        Cursor cursor = context.getContentResolver().query(photoUri, new String[]{
+
+                MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
+
+        try {
+            if (cursor.moveToFirst())
+            { return cursor.getInt(0); }
+            else
+            { return -1; } } finally { cursor.close(); }
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -293,17 +313,44 @@ cargarPreferencias();
         switch (requestCode) {
             case COD_SELECCIONA:
 
-                if(data != null) {
-                    Uri miPath = data.getData();
-                    imgFoto.setImageURI(miPath);
+                Uri path = data.getData();
+                try {
 
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), miPath);
-                        imgFoto.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    InputStream picture = getContext().getContentResolver().openInputStream(path);
+                    bitmap = BitmapFactory.decodeStream(picture);
+                    orientation = getOrientation(getContext(), path);
+
+                    switch (orientation) {
+
+                        case 90:
+                            bitmap = rotateImage(getContext(),bitmap, 90);
+
+                            break;
+
+                        case 180:
+                            bitmap = rotateImage(getContext(),bitmap, 180);
+                            break;
+
+                        case 270:
+                            bitmap = rotateImage(getContext(),bitmap, 270);
+                            break;
+
+                        case ExifInterface.ORIENTATION_NORMAL:
+
+                        default:
+                            break;
                     }
+
+
+
+                    imgFoto.setImageBitmap(bitmap);
+
+
+
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
                 }
+
                 break;
             case TOMARFOTO:
                 imgFile = new File(pictureFilePath);
@@ -579,6 +626,7 @@ cargarPreferencias();
         void onFragmentInteraction(Uri uri);
 
     }
+
 
 
 

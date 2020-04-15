@@ -132,12 +132,10 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                 }
                 else {
 
-                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AdquirirServicioActivity.this);
+                    AlertDialog.Builder dialogo1 =
+                            new AlertDialog.Builder(AdquirirServicioActivity.this);
                     dialogo1.setTitle(R.string.importante);
-                    dialogo1.setMessage(getString(R.string.verificacionDeDatos) + "\n" +
-                            getString(R.string.nombreAdquirir) + " " + mostrarNombre.getText().toString() + "\n" +
-                            getString(R.string.direccionAdquirir) + " " +  mostrarDireccion.getText().toString() + "\n" +
-                            getString(R.string.telefonoAdquirir) + " " +  mostraraTelefono.getText().toString() + "\n"
+                    dialogo1.setMessage("Estas Seguro Que Desea Solicitar Una Cita"
 
                     );
                     dialogo1.setCancelable(false);

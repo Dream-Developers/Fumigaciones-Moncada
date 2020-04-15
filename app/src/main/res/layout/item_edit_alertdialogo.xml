@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="250dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:orientation="vertical">
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,29 +16,10 @@
             android:textSize="14dp"
             android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nombre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:hint="Sam Enric"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            android:textSize="14dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,31 +29,10 @@
 
             android:textSize="14dp"
             android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fecha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:background="#00000000"
-            android:hint="Sam Enric"
-            android:inputType="date"
-            android:padding="16dp"
-            android:textSize="14dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,29 +42,10 @@
 
             android:textSize="14dp"
             android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/detalle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:hint="Sam Enric"
-            android:inputType="text"
-            android:padding="16dp"
-            android:textSize="14dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
 
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
@@ -116,29 +56,10 @@
 
             android:textSize="14dp"
             android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/total"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:hint="Sam Enric"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textSize="14dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#ACACAC" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,25 +69,86 @@
 
             android:textSize="14dp"
             android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descuento"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:hint="Sam Enric"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textSize="14dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        >
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:maxLength="60"
+            android:hint="Sam Enric"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textSize="14dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:background="#00000000"
+            android:hint="Sam Enric"
+            android:inputType="date"
+            android:padding="15dp"
+            android:textSize="14dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="Sam Enric"
+            android:inputType="text"
+            android:maxLength="60"
+            android:padding="15dp"
+            android:textSize="14dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="Sam Enric"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textSize="14dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#ACACAC" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descuento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="Sam Enric"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textSize="14dp" />
 
     </LinearLayout>
+
 </LinearLayout>

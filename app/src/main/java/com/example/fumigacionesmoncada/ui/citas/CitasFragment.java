@@ -80,6 +80,7 @@ private FloatingActionButton addcita;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),Crear_Citas.class);
+
                 startActivity(intent);
             }
         });

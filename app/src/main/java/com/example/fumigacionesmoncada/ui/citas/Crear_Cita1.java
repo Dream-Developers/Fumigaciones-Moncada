@@ -45,7 +45,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnItemClickListener{
+public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnItemClickListener{
     private String profecha;
     private int dia, mes, anio;
     private EditText fecha;
@@ -85,6 +85,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
         registrar = findViewById(R.id.registrar1);
         request = Volley.newRequestQueue(this);
         // llenarSpinner();
+        cargarPreferencias1();
         cargarClientes();
         nombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +138,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
                             adapterClientes.notifyDataSetChanged();
 
                         } catch (Exception e) {
-                            Toast.makeText(Crear_Citas.this, "" + listaClientes, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Crear_Cita1.this, "" + listaClientes, Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -218,7 +219,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
             public void onErrorResponse(VolleyError error) {
 
                 error.getStackTrace();
-                Toast.makeText(Crear_Citas.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Crear_Cita1.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -234,7 +235,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
         };
 
 
-        ClaseVolley.getIntanciaVolley(Crear_Citas.this).addToRequestQueue(jsonObjectRequest);
+        ClaseVolley.getIntanciaVolley(Crear_Cita1.this).addToRequestQueue(jsonObjectRequest);
 
     }
 
@@ -258,7 +259,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
             final Date fecha_usuarioDate = formatter.parse(fecha_usuario);
             final Date fecha_actualDate = formatter.parse(fecha_actual);
 
-            final TimePickerDialog recogerHora = new TimePickerDialog(Crear_Citas.this, new TimePickerDialog.OnTimeSetListener() {
+            final TimePickerDialog recogerHora = new TimePickerDialog(Crear_Cita1.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
 
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -279,12 +280,12 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
                                 }
                                 etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
                             } else {
-                                Toast.makeText(Crear_Citas.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Crear_Cita1.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
                                 etHora.setText("");
                             }
 
                         } else {
-                            Toast.makeText(Crear_Citas.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Cita1.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -303,7 +304,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
 
                         } else {
                             etHora.setText("");
-                            Toast.makeText(Crear_Citas.this, "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Cita1.this, "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -323,6 +324,23 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
         id_usuario = preferences.getString("id", "");
 
     }
+    private void cargarPreferencias1() {
+
+
+
+
+        Bundle bundle = getIntent().getExtras();
+        nombretxt = bundle.getString("nombre");
+        direcciontxt = bundle.getString("direccion");
+        fechatxt = bundle.getString("fecha");
+        horatxt = bundle.getString("hora");
+
+        nombre.setText(nombretxt);
+        fecha.setText(fechatxt);
+        direccion.setText(direcciontxt);
+        etHora.setText(horatxt);
+    }
+
 
 
 
@@ -386,45 +404,45 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
             parametros.put("id_usuario", id_usuario);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url,parametros,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        progreso.hide();
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            progreso.hide();
 
-                        finish();
+                            finish();
 
-                        Toast.makeText(Crear_Citas.this, "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Crear_Cita1.this, "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progreso.hide();
+                    if (error.toString().equals("com.android.volley.ServerError")) {
+                        Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+
+                    } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                        Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
 
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progreso.hide();
-                if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
-
-                } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
-
                 }
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders()throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json");
-                params.put("X-Requested-With", "XMLHttpRequest");
-                params.put("Authorization", "Bearer" + " " + tokenUsuario);
+            }) {
+                @Override
+                public Map<String, String> getHeaders()throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/json");
+                    params.put("X-Requested-With", "XMLHttpRequest");
+                    params.put("Authorization", "Bearer" + " " + tokenUsuario);
 
 
-                return params;
-            }
-        };
-        //request.add(stringRequest);
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+                    return params;
+                }
+            };
+            //request.add(stringRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
         } catch(Exception exe){
             Toast.makeText(getApplicationContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -460,3 +478,4 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
 
 
 }
+

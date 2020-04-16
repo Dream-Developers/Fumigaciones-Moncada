@@ -25,7 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.listadoPeticionesCita.Citas_Peticiones;
-import com.example.fumigacionesmoncada.ui.citas.Crear_Citas;
+import com.example.fumigacionesmoncada.ui.citas.Crear_Cita1;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +46,7 @@ public class Detalle_Cita extends AppCompatActivity {
     private String tokenUsuario;
     private Button btnAceptado;
     private Button btnRechazado;
+    private Object Intent;
 
 
     @Override
@@ -77,7 +78,6 @@ public class Detalle_Cita extends AppCompatActivity {
                 builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         agregarCitaWebService(id, which);
                     }
                 });
@@ -164,12 +164,20 @@ public class Detalle_Cita extends AppCompatActivity {
                     progreso.dismiss();
                     try {
                         Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Detalle_Cita.this, Crear_Citas.class);
+                        Intent intent = new Intent(Detalle_Cita.this, Crear_Cita1.class);
+                        intent.putExtra("nombre", nombre.getText().toString());
+                        intent.putExtra("direccion", direccion.getText().toString());
+                        intent.putExtra("fecha", fecha.getText().toString());
+                        intent.putExtra("hora", hora.getText().toString());
+
                         startActivity(intent);
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
+
                     cargarCitaWeb(id);
 
                 }
@@ -229,6 +237,7 @@ public class Detalle_Cita extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                     cargarCitaWeb(id);
                 }
 
@@ -279,7 +288,7 @@ public class Detalle_Cita extends AppCompatActivity {
                             fecha.setText(object.getString("FechaFumigacion"));
                             hora.setText(object.getString("Hora"));
 
-                            Toast.makeText(getApplicationContext(), "nose", Toast.LENGTH_SHORT).show();
+
 
 
                         } catch (JSONException e) {
@@ -315,6 +324,7 @@ public class Detalle_Cita extends AppCompatActivity {
 
 
     }
+
 
 
 }

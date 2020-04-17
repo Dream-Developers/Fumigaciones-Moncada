@@ -14,7 +14,7 @@ import com.xwray.groupie.GroupAdapter;
 
 public class VisionMision extends AppCompatActivity {
 
-TextView vision,mision;
+TextView mision,descripcionmision, vision,descripcionvision;
     private GroupAdapter adapter;
     private Button face, tel, inst, web;
     private String urlface;
@@ -25,8 +25,10 @@ TextView vision,mision;
    public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
        setContentView(R.layout.vision);
-       CardView cardView = findViewById(R.id.card_vision);
-       CardView cardView1 = findViewById(R.id.card_vision);
+     mision = findViewById(R.id.mision);
+     vision = findViewById(R.id.vision);
+     descripcionmision = findViewById(R.id.descripcionmision);
+     descripcionvision = findViewById(R.id.descripciovision);
 
 
 

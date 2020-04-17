@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/nombre_cliente"
-            android:hint=" Nombre Completo"
+            android:hint="  Nombre Completo"
             android:lines="1"
             android:maxLength="30"
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:digits="0123456789."
             android:drawableLeft="@drawable/telefono_cliente"
-            android:hint=" Telefono"
+            android:hint="  Telefono"
             android:inputType="phone"
             android:maxLength="8"
             />
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/correo_cliente"
-            android:hint=" example0@gmail.com"
+            android:hint="example0@gmail.com"
             android:inputType="textEmailAddress"
             android:lines="1"
             />

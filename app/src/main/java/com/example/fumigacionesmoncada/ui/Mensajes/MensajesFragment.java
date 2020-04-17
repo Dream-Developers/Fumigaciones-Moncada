@@ -166,14 +166,18 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
+                        List<DocumentChange> documentChanges = null;
+                        if (queryDocumentSnapshots != null) {
+                            documentChanges = queryDocumentSnapshots.getDocumentChanges();
 
-                        if (documentChanges != null) {
-                            for (DocumentChange doc: documentChanges) {
-                                if (doc.getType() == DocumentChange.Type.ADDED) {
-                                    ChatsRecent contact = doc.getDocument().toObject(ChatsRecent.class);
 
-                                    adapter.add(new ContactoItem(contact));
+                            if (documentChanges.size() > 0) {
+                                for (DocumentChange doc : documentChanges) {
+                                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        ChatsRecent contact = doc.getDocument().toObject(ChatsRecent.class);
+
+                                        adapter.add(new ContactoItem(contact));
+                                    }
                                 }
                             }
                         }

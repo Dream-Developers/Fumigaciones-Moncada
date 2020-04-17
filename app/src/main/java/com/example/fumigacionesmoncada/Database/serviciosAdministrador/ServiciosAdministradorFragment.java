@@ -42,6 +42,7 @@ import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -70,7 +71,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_servicios_administrador, container, false);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  view.findViewById(R.id.recycler_servicios);
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false));
         recyclerUsuarios.setHasFixedSize(true);
         linearLayout = view.findViewById(R.id.error);
 
@@ -189,7 +190,9 @@ public class ServiciosAdministradorFragment extends Fragment  {
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("nombre"));
+                                servicio.setTitulo(jsonObject.optString("nombre"));
+                                servicio.setDescripcion(jsonObject.optString("descripcion"));
+
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }

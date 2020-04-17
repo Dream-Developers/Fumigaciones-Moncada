@@ -50,8 +50,8 @@ public class ClaseAdapterImagen extends
 
     @Override
     public void onBindViewHolder(UsuariosHolder holder, int position) {
-        holder.txtDocumento.setText( listaUsuarios.get(position).getDescripcion());
-
+        holder.txtDocumento.setText( listaUsuarios.get(position).getTitulo());
+        holder.txtDescripcion.setText(listaUsuarios.get(position).getDescripcion());
         if ( listaUsuarios.get(position).getRutaImagen()!=null){
             cargarImagenWebService( listaUsuarios.get(position).getRutaImagen(),holder);
 
@@ -133,13 +133,14 @@ public class ClaseAdapterImagen extends
 
     public class UsuariosHolder extends RecyclerView.ViewHolder {
 
-        TextView txtDocumento;
+        TextView txtDocumento,txtDescripcion;
         ImageView imagen;
 
         public UsuariosHolder(View itemView) {
             super(itemView);
             txtDocumento =  itemView.findViewById(R.id.idDocumento);
             imagen = itemView.findViewById(R.id.idImagen);
+            txtDescripcion= itemView.findViewById(R.id.descripcionPublicidad);
         }
 
     }

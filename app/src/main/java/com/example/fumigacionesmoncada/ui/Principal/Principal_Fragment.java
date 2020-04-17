@@ -106,14 +106,15 @@ public class Principal_Fragment extends Fragment   {
 
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
         cargarPreferencias();
-        adservicio = vista.findViewById(R.id.ad_servicos);
+        adservicio = vista.findViewById(R.id.ad_servicios);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
-        //recyclerUsuarios.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
+        //recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false));
         recyclerUsuarios.setHasFixedSize(true);
 linearLayout = vista.findViewById(R.id.error);
-        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+       // getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         cargarWebService();
         recyclerUsuarios.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerUsuarios, new RecyclerTouchListener.ClickListener() {
@@ -173,7 +174,8 @@ linearLayout = vista.findViewById(R.id.error);
                                 jsonObject=json.getJSONObject(i);
 
                                 servicio.setId(String.valueOf(jsonObject.getInt("id")));
-                                servicio.setDescripcion(jsonObject.optString("nombre"));
+                                servicio.setTitulo(jsonObject.optString("nombre"));
+                                servicio.setDescripcion(jsonObject.getString("descripcion"));
                                 servicio.setRutaImagen(jsonObject.optString("foto"));
                                 listaUsuarios.add(servicio);
                             }

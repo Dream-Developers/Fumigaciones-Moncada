@@ -108,7 +108,6 @@
         <activity
             android:name=".VisionMision"
             android:label="@string/visionMision" />
-        <activity android:name=".ui.citas.Crear_Cita1" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

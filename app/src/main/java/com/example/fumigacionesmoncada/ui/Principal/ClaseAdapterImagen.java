@@ -51,7 +51,7 @@ public class ClaseAdapterImagen extends
     @Override
     public void onBindViewHolder(UsuariosHolder holder, int position) {
         holder.txtDocumento.setText( listaUsuarios.get(position).getTitulo());
-        holder.txtDescripcion.setText(listaUsuarios.get(position).getDescripcion());
+       // holder.txtDescripcion.setText(listaUsuarios.get(position).getDescripcion());
         if ( listaUsuarios.get(position).getRutaImagen()!=null){
             cargarImagenWebService( listaUsuarios.get(position).getRutaImagen(),holder);
 
@@ -84,9 +84,9 @@ public class ClaseAdapterImagen extends
         if(isRightSide){
             marginL = dpToPx(12);
         }
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) holder.imagen.getLayoutParams();
+        /*FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) holder.imagen.getLayoutParams();
         layoutParams.setMargins(marginL,marginT,marginR,marginB);
-        holder.imagen.setLayoutParams(layoutParams);
+        holder.imagen.setLayoutParams(layoutParams);*/
 
     }
     private int dpToPx(int dp){
@@ -140,7 +140,7 @@ public class ClaseAdapterImagen extends
             super(itemView);
             txtDocumento =  itemView.findViewById(R.id.idDocumento);
             imagen = itemView.findViewById(R.id.idImagen);
-            txtDescripcion= itemView.findViewById(R.id.descripcionPublicidad);
+            //txtDescripcion= itemView.findViewById(R.id.descripcionPublicidad);
         }
 
     }

@@ -111,7 +111,7 @@ public class Principal_Fragment extends Fragment   {
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
 
         //recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),1,LinearLayoutManager.HORIZONTAL,false));
         recyclerUsuarios.setHasFixedSize(true);
 linearLayout = vista.findViewById(R.id.error);
        // getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));

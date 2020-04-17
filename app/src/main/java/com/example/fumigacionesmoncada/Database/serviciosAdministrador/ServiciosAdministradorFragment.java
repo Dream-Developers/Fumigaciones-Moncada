@@ -71,7 +71,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_servicios_administrador, container, false);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  view.findViewById(R.id.recycler_servicios);
-        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),1,LinearLayoutManager.HORIZONTAL,false));
         recyclerUsuarios.setHasFixedSize(true);
         linearLayout = view.findViewById(R.id.error);
 

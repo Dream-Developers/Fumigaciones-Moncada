@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,9 +85,9 @@ public class ClaseAdapterImagen extends
         if(isRightSide){
             marginL = dpToPx(12);
         }
-        /*FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) holder.imagen.getLayoutParams();
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.imagen.getLayoutParams();
         layoutParams.setMargins(marginL,marginT,marginR,marginB);
-        holder.imagen.setLayoutParams(layoutParams);*/
+        holder.imagen.setLayoutParams(layoutParams);
 
     }
     private int dpToPx(int dp){

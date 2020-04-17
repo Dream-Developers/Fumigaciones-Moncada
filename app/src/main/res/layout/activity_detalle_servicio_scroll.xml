@@ -28,12 +28,13 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#000000">
+               >
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/idImagenD"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="300dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:background="#fff"
                     />
 

@@ -38,6 +38,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public class Principal_Fragment extends Fragment   {
 
@@ -108,8 +109,8 @@ public class Principal_Fragment extends Fragment   {
         adservicio = vista.findViewById(R.id.ad_servicos);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
-        recyclerUsuarios.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        //recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        //recyclerUsuarios.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         recyclerUsuarios.setHasFixedSize(true);
 linearLayout = vista.findViewById(R.id.error);
         getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));

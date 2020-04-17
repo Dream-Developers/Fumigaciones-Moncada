@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +59,39 @@ public class ClaseAdapterImagen extends
             holder.imagen.setImageResource(R.drawable.logo);
 
         }
+        int marginL = dpToPx(12);
+        int marginT = dpToPx(12);
+        int marginR = dpToPx(12);
+        int marginB = dpToPx(12);
+        int spanCount = 2;
 
+        boolean isFirst2Items = position < spanCount;
+        boolean isLast2Items = position > getItemCount() - spanCount;
+
+        if(isFirst2Items){
+            marginT = dpToPx(12);
+        }
+        if(isLast2Items){
+            marginB = dpToPx(12);
+        }
+
+        boolean isLeftSide = (position +1)%spanCount != 0;
+        boolean isRightSide = !isLeftSide;
+
+        if(isLeftSide){
+            marginR = dpToPx(12);
+        }
+        if(isRightSide){
+            marginL = dpToPx(12);
+        }
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) holder.imagen.getLayoutParams();
+        layoutParams.setMargins(marginL,marginT,marginR,marginB);
+        holder.imagen.setLayoutParams(layoutParams);
+
+    }
+    private int dpToPx(int dp){
+        float px = dp * context.getResources().getDisplayMetrics().density;
+        return (int) px;
     }
 
     private void cargarImagenWebService(String rutaImagen, final UsuariosHolder holder) {

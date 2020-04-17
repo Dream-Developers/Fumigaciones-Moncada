@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -30,7 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.io.InputStream;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -240,22 +241,62 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
 
         return imagen;
     }
+    public static int getOrientation(Context context, Uri photoUri) {
+
+
+        Cursor cursor = context.getContentResolver().query(photoUri, new String[]{
+
+                MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
+
+        try {
+            if (cursor.moveToFirst())
+            { return cursor.getInt(0); }
+            else
+            { return -1; } } finally { cursor.close(); }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                if(data != null) {
-                    miPath = data.getData();
-                    imgFoto.setImageURI(miPath);
+                Uri path = data.getData();
+                try {
 
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
-                        imgFoto.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    InputStream picture = this.getContentResolver().openInputStream(path);
+                    bitmap = BitmapFactory.decodeStream(picture);
+                    orientation = getOrientation(this, path);
+
+                    switch (orientation) {
+
+                        case 90:
+                            bitmap = rotateImage(this,bitmap, 90);
+
+                            break;
+
+                        case 180:
+                            bitmap = rotateImage(this,bitmap, 180);
+                            break;
+
+                        case 270:
+                            bitmap = rotateImage(this,bitmap, 270);
+                            break;
+
+                        case ExifInterface.ORIENTATION_NORMAL:
+
+                        default:
+                            break;
                     }
+
+
+
+                    imgFoto.setImageBitmap(bitmap);
+
+
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
                 }
                 break;
             case TOMARFOTO:

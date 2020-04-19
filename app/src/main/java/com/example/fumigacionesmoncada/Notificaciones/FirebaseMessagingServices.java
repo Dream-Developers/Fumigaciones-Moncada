@@ -52,7 +52,7 @@ public class FirebaseMessagingServices extends FirebaseMessagingService {
         } else {
             sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
         }
-        Log.i("data firebase", String.valueOf(remoteMessage.getNotification().getBody()));
+        //Log.i("data firebase", String.valueOf(remoteMessage.getNotification().getBody()));
     }
 
 

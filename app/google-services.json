@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "611997457459-lvr6g1p4atn8liedefstku5s7h0r21vf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fumigacionesmoncada",
+            "certificate_hash": "8294dbd5b55ebf6be1511822805ec838fe5a735b"
+          }
+        },
+        {
           "client_id": "611997457459-oni27mq5pt2mud369e95sq177rst0n92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

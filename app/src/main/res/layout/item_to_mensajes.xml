@@ -6,19 +6,19 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_message_user"
+        android:id="@+id/profileIv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/perfil"
+        android:src="@drawable/ic_admin_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txt_msg"
+        android:id="@+id/messageTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -26,10 +26,31 @@
         android:background="@drawable/bg_edittext_rounded_blue"
         android:maxWidth="240dp"
         android:padding="8dp"
-        android:textColor="#fff"
         android:text="Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice. Somos felices, Dios nos bendice. "
-        app:layout_constraintEnd_toStartOf="@+id/img_message_user"
-        app:layout_constraintTop_toTopOf="@+id/img_message_user" />
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/profileIv"
+        app:layout_constraintTop_toTopOf="@+id/profileIv" />
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="02/03/2019 5:00pm"
+        app:layout_constraintEnd_toEndOf="@+id/messageTv"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageTv" />
+
+    <TextView
+        android:id="@+id/isSeentTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Entregado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileIv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

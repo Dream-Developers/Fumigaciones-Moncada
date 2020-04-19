@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imageView;
+    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -18,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         imageView = findViewById(R.id.imgSplash);
+        mediaPlayer = MediaPlayer.create(this, R.raw.maraca);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.animacion);
         imageView.startAnimation(animation);
@@ -28,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
 
             public void run(){
                 try {
-                    sleep(600);
+                    sleep(800);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -41,5 +44,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         timer.start();
+        mediaPlayer.start();
     }
 }

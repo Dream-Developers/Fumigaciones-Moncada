@@ -28,6 +28,8 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Paint;
+import android.util.Patterns;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -46,6 +48,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String STRING_PREFERENCES = "example.preferencias";
     private static final String PREFERENCE_ESTADO_BUTTON = "estado.button";
     ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
 
 
     @SuppressLint("WrongViewCast")
@@ -105,10 +109,12 @@ public class LoginActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(new NotificationChannel(channelId,
                     channelName, NotificationManager.IMPORTANCE_LOW));
         }
+        mAuth = FirebaseAuth.getInstance();
         FirebaseInstanceId.getInstance().getInstanceId();
         txtCorreo = findViewById(R.id.idCorreoLogin);
         txtContrasena = findViewById(R.id.idContraseñaLogin);
         recuperarContra = findViewById(R.id.recuperarPass);
+        recuperarContra.setPaintFlags(recuperarContra.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         RBsesion = findViewById(R.id.noSalir);
         btn_login = findViewById(R.id.idLoginLogin);
         registrar = findViewById(R.id.registarLogin);
@@ -236,7 +242,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void logeoFirebase() {
+    /**private void logeoFirebase() {
         String email = txtCorreo.getText().toString();
         String password = txtContrasena.getText().toString();
 
@@ -261,7 +267,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-    }
+    }*/
 
 
     public void guardarEstadoButton() {
@@ -394,6 +400,46 @@ public class LoginActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
         ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void logeoFirebase() {
+        String email = txtCorreo.getText().toString();
+        String passw = txtContrasena.getText().toString().trim();
+
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            txtCorreo.setError("Email invalidate");
+            txtCorreo.setFocusable(true);
+        }else {
+            loginUser(email, passw);
+        }
+    }
+
+    private void loginUser(String email, String passw) {
+        mAuth.signInWithEmailAndPassword(email, passw)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, ""+e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 

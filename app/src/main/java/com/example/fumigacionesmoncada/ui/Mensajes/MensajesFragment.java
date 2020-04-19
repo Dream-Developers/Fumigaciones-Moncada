@@ -19,20 +19,33 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fumigacionesmoncada.Adapters.AdapterChatlist;
 import com.example.fumigacionesmoncada.ChatActivity;
 import com.example.fumigacionesmoncada.ChatApplication;
 import com.example.fumigacionesmoncada.ChatsRecent;
 import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
 import com.example.fumigacionesmoncada.ContactsActivity;
+import com.example.fumigacionesmoncada.Models.ModelChat;
+import com.example.fumigacionesmoncada.Models.ModelChatlist;
+import com.example.fumigacionesmoncada.Models.ModelUsers;
 import com.example.fumigacionesmoncada.NavegacionAdministradorActivity;
 import com.example.fumigacionesmoncada.R;
+import com.example.fumigacionesmoncada.SplashActivity;
 import com.example.fumigacionesmoncada.User;
+import com.example.fumigacionesmoncada.UsersActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,30 +61,62 @@ import com.xwray.groupie.ViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MensajesFragment extends Fragment   implements Application.ActivityLifecycleCallbacks {
+
+
+public class MensajesFragment extends Fragment  implements Application.ActivityLifecycleCallbacks {
 
     private FloatingActionButton add_chat;
     private GroupAdapter adapter;
+    FirebaseAuth firebaseAuth;
+    RecyclerView recyclerView;
+    List<ModelChatlist> chatlistList;
+    List<ModelUsers> usersList;
+    DatabaseReference reference;
+    FirebaseUser currentUser;
+    AdapterChatlist adapterChatlist;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mensajes, container, false);
-
-        RecyclerView rv = view.findViewById(R.id.recycler_contact);
-        rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
-
-        getActivity().getApplication().registerActivityLifecycleCallbacks(this);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        //RecyclerView rv = view.findViewById(R.id.recycler_contact);
+        //rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
 
-        //<!--android:name=".ChatApplication"-->
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        recyclerView = view.findViewById(R.id.recycler_contact);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        chatlistList = new ArrayList<>();
 
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(currentUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                chatlistList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelChatlist chatlist = ds.getValue(ModelChatlist.class);
+                    chatlistList.add(chatlist);
+                }
+                loadChats();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /**getActivity().getApplication().registerActivityLifecycleCallbacks(this);
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
 
@@ -100,7 +145,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
 
                 return false;
             }
-        });
+        })*/
 
 
 
@@ -113,24 +158,92 @@ public class MensajesFragment extends Fragment   implements Application.Activity
         add_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ContactsActivity.class);
+                Intent intent = new Intent(getActivity(), UsersActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        updateToken();
-        searchLastMensaje();
+        //updateToken();
+        //searchLastMensaje();
 
         Cursor cursor= obtenerRegistrosFecha();
 
         if(cursor!=null&&cursor.moveToNext()){
-            Toast.makeText(getContext(), "Si hay registros de hoy", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getContext(), "Si hay registros de hoy", Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(getContext(), "No hay", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getContext(), "No hay", Toast.LENGTH_LONG).show();
         }
 
         return view;
+    }
+
+    private void loadChats() {
+        usersList = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelUsers users = ds.getValue(ModelUsers.class);
+                    for (ModelChatlist chatlist : chatlistList){
+                        if (users.getUid() != null && users.getUid().equals(chatlist.getId())){
+                            usersList.add(users);
+                            break;
+                        }
+                    }
+                    //adapter
+                    adapterChatlist = new AdapterChatlist(getContext(), usersList);
+                    recyclerView.setAdapter(adapterChatlist);
+                    //set last message
+                    for (int i =0; i<usersList.size(); i++){
+                        lastMessage(usersList.get(i).getUid());
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void lastMessage(final String userId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String theLastMessage = "default";
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelChat chat = ds.getValue(ModelChat.class);
+                    if (chat==null){
+                        continue;
+                    }
+                    String sender = chat.getSender();
+                    String receiver = chat.getReceiver();
+                    if (sender == null || receiver==null){
+                        continue;
+                    }
+                    //pucha mano
+                    if (chat.getReceiver().equals(currentUser.getUid()) && chat.getSender().equals(userId) ||
+                            chat.getReceiver().equals(userId) &&
+                                    chat.getSender().equals(currentUser.getUid())){
+                        theLastMessage = chat.getMessage();
+                    }
+                }
+
+                adapterChatlist.setLastMessageMap(userId, theLastMessage);
+                adapterChatlist.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public Cursor obtenerRegistrosFecha(){
@@ -143,7 +256,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
         return getContext().getContentResolver().query(uri, null, selection, selectionArgas, null);
 
     }
-    private void updateToken() {
+    /**private void updateToken() {
         String token = FirebaseInstanceId.getInstance().getToken();
         String uid = FirebaseAuth.getInstance().getUid();
 
@@ -152,9 +265,9 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                     .document(uid)
                     .update("token", token);
         }
-    }
+    }*/
 
-    private void searchLastMensaje() {
+    /**private void searchLastMensaje() {
 
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid == null) return;
@@ -185,7 +298,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
                 });
 
 
-    }
+    }*/
 
     @Override
     public void onActivityPreCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
@@ -224,7 +337,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
-        setOnline(true);
+       // setOnline(true);
     }
 
     @Override
@@ -239,7 +352,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
-        setOnline(false);
+        //setOnline(false);
     }
 
     @Override
@@ -293,7 +406,7 @@ public class MensajesFragment extends Fragment   implements Application.Activity
     }
 
 
-    private void setOnline(boolean enabled) {
+    /**private void setOnline(boolean enabled) {
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid != null) {
             FirebaseFirestore.getInstance().collection("users")
@@ -329,7 +442,25 @@ public class MensajesFragment extends Fragment   implements Application.Activity
         public int getLayout() {
             return R.layout.item_contactos_mensajes;
         }
+    }*/
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        chechUserUserStatus();
     }
 
+    private void chechUserUserStatus(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+
+            //mUID = user.getUid();
+
+        }else {
+            //startActivity(new Intent(getActivity(), SplashActivity.class));
+            //getActivity().finish();
+        }
+
+    }
 
 }

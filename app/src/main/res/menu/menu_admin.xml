@@ -23,4 +23,12 @@
         android:title="Desarrolladores"
         app:showAsAction="never" />
 
+    <item android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView">
+
+    </item>
+
 </menu>

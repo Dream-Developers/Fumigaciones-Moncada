@@ -54,5 +54,11 @@
         android:label="@string/factura"
         tools:layout="@layout/fragment_factura" />
 
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.fumigacionesmoncada.ui.PerfilAdmin.PerfilAdminFragment"
+        android:label="fragment_perfil_admin"
+        tools:layout="@layout/fragment_perfil_admin" />
+
 
 </navigation>

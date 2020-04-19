@@ -15,6 +15,16 @@
 
     </group>
 
+    <item android:title="Cuenta">
+        <menu>
+            <item
+                android:id="@+id/nav_perfil"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="@string/perfil" />
+        </menu>
+    </item>
+
+
     <item android:title="Públicidad">
 
         <menu>

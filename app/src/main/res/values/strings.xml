@@ -189,10 +189,10 @@
     <string name="horarioDeAtencion">El Horario de atención es de 7:00AM a 7:00PM</string>
     <string name="horaAlerta">La hora seleccionada no es correcta, debe ser mayor a la hora actual</string>
     <string name="NumeroInvalido">No es un número telefónico</string>
-    <string name="nombre">Nombre</string>
-    <string name="correo">Correo</string>
-    <string name="telefono">Teléfono</string>
-    <string name="direccion">Dirección</string>
+    <string name="nombre">Nombre:</string>
+    <string name="correo">Correo:</string>
+    <string name="telefono">Teléfono:</string>
+    <string name="direccion">Dirección:</string>
     <string name="informacion_personal">Información Personal</string>
     <string name="campoNombre">El campo del nombre está vacio</string>
     <string name="campoCorreo">El campo del correo está vacio</string>
@@ -222,6 +222,7 @@
     <string name="confirmacion">Confirmación</string>
     <string name="eliminar_servicio">¿Está seguro que desea eliminar el servicio?</string>
     <string name="eliminar_usuario">¿Está seguro que desea eliminarlo de la lista?</string>
+    <string name="usuarios">Contactos</string>
 
 
 </resources>

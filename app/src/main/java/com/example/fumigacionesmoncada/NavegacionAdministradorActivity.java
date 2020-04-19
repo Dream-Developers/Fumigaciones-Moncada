@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +24,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.fumigacionesmoncada.CitasSync.CitasSyncAdapter;
 import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
+import com.example.fumigacionesmoncada.notifications.Token;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,13 +38,18 @@ import java.util.Date;
 public class NavegacionAdministradorActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    FirebaseAuth firebaseAuth;
     ContentResolver resolver;
+    String mUID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navegacion_administrador);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -64,7 +76,15 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         CitasSyncAdapter.obtenerCuentaASincronizar(this);
         CitasSyncAdapter.sincronizarAhora(this,false);
 
+        checkUserStatus();
+        updateToken(FirebaseInstanceId.getInstance().getToken());
 
+    }
+
+    private void updateToken(String token) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token mToken = new Token(token);
+        ref.child(mUID).setValue(mToken);
     }
 
 
@@ -72,6 +92,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_admin, menu);
+        menu.findItem(R.id.action_search).setVisible(false);
         return true;
     }
 
@@ -85,7 +106,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
 
 
     public void red_admin(MenuItem item) {
-        //logout();
+        logout();
         alertaCerrarSesionAdmin();
     }
 
@@ -110,6 +131,8 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)
                             public void onClick(DialogInterface dialog, int id) {
+                                firebaseAuth.signOut();
+                                checkUserStatus();
                                 logout();
                                 dialog.cancel();
                             }
@@ -159,5 +182,36 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
+    private void checkUserStatus(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            //user is signed
+            mUID = user.getUid();
+
+             SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
+             SharedPreferences.Editor editor = sp.edit();
+             editor.putString("Current_USERID", mUID);
+             editor.apply();
+
+        }else {
+            //user is no signed
+            //startActivity(new Intent(NavegacionAdministradorActivity.this, LoginActivity.class));
+            //finish();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        checkUserStatus();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        checkUserStatus();
+        super.onResume();
+    }
+
 
 }

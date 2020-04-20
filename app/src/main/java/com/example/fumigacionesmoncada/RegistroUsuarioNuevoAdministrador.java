@@ -1,11 +1,5 @@
 package com.example.fumigacionesmoncada;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -13,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -36,6 +31,14 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.io.InputStream;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import android.content.ContentResolver;
+import android.webkit.MimeTypeMap;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -51,11 +54,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-
+import com.google.android.gms.tasks.Continuation;
+import com.google.firebase.storage.StorageTask;
 
 import org.json.JSONObject;
 
@@ -94,11 +104,16 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     private static final int COD_FOTO = 20;
     String sexo;
     //Firebase
-    String imagen;
-    int a = 0;
     private Button mBtnSelectedPhoto;
     private ImageView imgFoto;
     private Uri miPath;
+
+    //here
+    private FirebaseAuth mAuth;
+    DatabaseReference reference;
+    private StorageTask uploadTask;
+    FirebaseUser fuser;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +129,12 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         masculino = findViewById(R.id.maculino);
         femenino = findViewById(R.id.femenino);
         request = Volley.newRequestQueue(this);
+
+        //here
+        mAuth = FirebaseAuth.getInstance();
         imgFoto = findViewById(R.id.foto);
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        // storageReference = FirebaseStorage.getInstance().getReference("Images");
 
         imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,25 +165,6 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         telefono.setSingleLine(false);
         telefono.setInputType(InputType.TYPE_CLASS_PHONE | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
 
-        a++;
-
-        confcontra.setText("12345678");
-        contraseña.setText("12345678");
-        contraseña.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "La contraseña por defecto es del 1 al 8", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        confcontra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "La contraseña por defecto es del 1 al 8", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
     }
     private void mostrarDialogOpciones() {
         final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
@@ -187,7 +188,6 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     }
 
     private void abrirGaleria() {
-        //Capturar la imagen del empleado desde la camara
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -203,7 +203,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
-            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccione)), COD_SELECCIONA);
             try {
 
                 //Se crea un achivo de la foto en blanco
@@ -212,10 +212,6 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             } catch (Exception e) {
 
             }
-
-
-            //se agrega la imagen capturada al archivo en blanco
-
 
         }
     }
@@ -267,22 +263,62 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
         return imagen;
     }
+    public static int getOrientation(Context context, Uri photoUri) {
+
+
+        Cursor cursor = context.getContentResolver().query(photoUri, new String[]{
+
+                MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
+
+        try {
+            if (cursor.moveToFirst())
+            { return cursor.getInt(0); }
+            else
+            { return -1; } } finally { cursor.close(); }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                if(data != null) {
-                    miPath = data.getData();
-                    imgFoto.setImageURI(miPath);
+                Uri path = data.getData();
+                try {
 
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), miPath);
-                        imgFoto.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    InputStream picture = this.getContentResolver().openInputStream(path);
+                    bitmap = BitmapFactory.decodeStream(picture);
+                    orientation = getOrientation(this, path);
+
+                    switch (orientation) {
+
+                        case 90:
+                            bitmap = rotateImage(this,bitmap, 90);
+
+                            break;
+
+                        case 180:
+                            bitmap = rotateImage(this,bitmap, 180);
+                            break;
+
+                        case 270:
+                            bitmap = rotateImage(this,bitmap, 270);
+                            break;
+
+                        case ExifInterface.ORIENTATION_NORMAL:
+
+                        default:
+                            break;
                     }
+
+
+
+                    imgFoto.setImageBitmap(bitmap);
+
+
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
                 }
                 break;
             case TOMARFOTO:
@@ -453,9 +489,9 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     }
     private void cargarWebService() {
 
-        progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
-        progreso.show();
+        //progreso=new ProgressDialog(this);
+        //progreso.setMessage("Cargando...");
+        //progreso.show();
 
         if (masculino.isChecked()) {
             sexo = "M";
@@ -463,21 +499,13 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         if (femenino.isChecked()) {
             sexo = "F";
         }
-
-        if (bitmap == null){
-            imagen = null;
-        }else{
-         imagen = convertirImgString(bitmap);
-        }
-
-
+        String imagen = convertirImgString(bitmap);
         String ip=getString(R.string.ip);
 
-        String url=ip+"/api/auth/signup?";
+        String url=ip+"/api/auth/signup";
         try {
 
             JSONObject parametros = new JSONObject();
-
             parametros.put("name", nombre.getText().toString());
             parametros.put("recidencia", apellidos.getText().toString());
             parametros.put("telefono", telefono.getText().toString());
@@ -485,26 +513,20 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             parametros.put("password", contraseña.getText().toString());
             parametros.put("password_confirmation", confcontra.getText().toString());
             parametros.put("sexo", sexo);
-            if (imagen == null){
-                parametros.put("foto", null);
-            }else{
-            parametros.put("foto", imagen);}
+            parametros.put("foto", imagen);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    createUser();
-                    finish();
+                    //finish();
                     Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
-                    progreso.dismiss();
                 }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    progreso.hide();
+                    //progreso.hide();
                     if (error.toString().equals("com.android.volley.ServerError")) {
                         Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
                         finish();
-
                     } if (error.toString().equals("com.android.volley.TimeoutError")) {
                         Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                         finish();
@@ -513,21 +535,20 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "No se pudo registar ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
                         finish();
 
                     }
                 }
 
             }){
-                /*public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> parametros = new HashMap<>();
-                    parametros.put("Content-Type", "application/json");
-                    parametros.put("X-Requested-With", "XMLHttpRequest");
+            /*public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Content-Type", "application/json");
+                parametros.put("X-Requested-With", "XMLHttpRequest");
 
-                    return parametros;
-                }*/
-
+                return parametros;
+            }*/
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     return super.getHeaders();
@@ -536,7 +557,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             };
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(8000,
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(jsonObjectRequest);
 
@@ -550,40 +571,132 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         }
     }
     private void validacion() {
-        if(nombre.getText().toString().equals("")||correo.getText().toString().equals("")||confcontra.getText().toString().equals("")||contraseña.getText().toString().equals("")
-                || telefono.getText().toString().equals("") || apellidos.getText().toString().equals("")){
-            Toast.makeText(this,"Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo",Toast.LENGTH_LONG).show();
-        }else {
-            if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
-                Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
-            } else {
-                if (telefono.getText().toString().length() < 8 ) {
-                    Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
-                } else {
-                    if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
-                        if (!validarEmail(correo.getText().toString())) {
-                            Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
+        final String email = correo.getText().toString().trim();
+        final String password = contraseña.getText().toString().trim();
+        final String name = nombre.getText().toString().trim();
+        final String phone = telefono.getText().toString().trim();
+
+        if (bitmap == null) {
+            Toast.makeText(this, "Ingrese la fotografia", Toast.LENGTH_SHORT).show();
+        } else {
+            if(nombre.getText().toString().equals("")){
+                nombre.setError("ingrese el nombre");
+            }else { if (apellidos.getText().toString().equals("")) {
+                apellidos.setError("ingrese Recidencia");
+
+            }else{
+                if (telefono.getText().toString().equals("")) {
+                    telefono.setError("ingrese el Telefono");
+
+
+                }else{
+                    if (correo.getText().toString().equals("")) {
+                        correo.setError("ingrese el Correo");
+                    }else{
+                        if  (contraseña.getText().toString().equals("")) {
+                            contraseña.setError("ingrese La Contraseña");
+
+                        }else{
+                            if (confcontra.getText().toString().equals("")) {
+                                confcontra.setError("ingrese la Confirmacion  De Contraseña");
+                            }else{
+                                if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
+
+                                    if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
+                                        Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        if (telefono.getText().toString().length() < 8) {
+                                            telefono.setError("No es un numero Telefonico");
+                                            Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                                        } else {
+
+                                            if (!validarEmail(correo.getText().toString())) {
+                                                correo.setError("correo no valido");
+                                                Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
+                                            } else {
+
+                                                registerUser(name, email, password, phone);
+                                            }
+                                        }
+
+
+                                    }
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
+                                    contraseña.setError("no Coinciden ");
+                                }
+                            }
+                        }}}}}}
+
+
+    }
+    private void registerUser(final String name, String  email, String password, final String phone) {
+        progreso=new ProgressDialog(this);
+        progreso.setMessage("Cargando...");
+        progreso.show();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            cargarWebService();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", name);
+                            hashMap.put("onlineStatus", "online");
+                            hashMap.put("typingTo", "noOne");
+                            hashMap.put("phone", phone); //luego
+                            hashMap.put("image", "");
+
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            //crear path
+                            DatabaseReference reference = database.getReference("Users");
+
+                            reference.child(uid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Intent intent = new Intent(RegistroUsuarioNuevoAdministrador.this, MenuActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+
                         } else {
-
-                                cargarWebService();
-
-
+                            progreso.dismiss();
+                            Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Falló registro en firebase.",
+                                    Toast.LENGTH_SHORT).show();
                         }
 
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
                     }
-                }
-            }
-        }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
+                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, ""+e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
     private boolean validarEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( progreso!=null && progreso.isShowing() ){
+            progreso.cancel();
+        }
     }
 
 
@@ -592,8 +705,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
      *
      * **/
 
-
-    private void createUser() {
+    /**private void createUser() {
         String name = nombre.getText().toString();
         String email = correo.getText().toString();
         String contra = contraseña.getText().toString();
@@ -665,11 +777,21 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                     }
                 });
 
+    }*/
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
-
-
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
 
 
 }

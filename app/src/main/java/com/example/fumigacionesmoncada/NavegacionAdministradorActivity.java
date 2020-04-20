@@ -106,7 +106,6 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
 
 
     public void red_admin(MenuItem item) {
-        logout();
         alertaCerrarSesionAdmin();
     }
 

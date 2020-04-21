@@ -38,6 +38,7 @@ import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.SplashActivity;
 import com.example.fumigacionesmoncada.User;
 import com.example.fumigacionesmoncada.UsersActivity;
+import com.example.fumigacionesmoncada.notifications.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -164,7 +165,7 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
         });
 
 
-        //updateToken();
+        updateToken(FirebaseInstanceId.getInstance().getToken());
         //searchLastMensaje();
 
         Cursor cursor= obtenerRegistrosFecha();
@@ -178,12 +179,20 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
         return view;
     }
 
+    private void updateToken(String token){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(currentUser.getUid()).setValue(token1);
+    }
+
+
     private void loadChats() {
         usersList = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usersList.clear();
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelUsers users = ds.getValue(ModelUsers.class);
                     for (ModelChatlist chatlist : chatlistList){

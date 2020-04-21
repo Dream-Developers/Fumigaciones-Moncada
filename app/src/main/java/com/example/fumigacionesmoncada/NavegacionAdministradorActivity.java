@@ -76,16 +76,16 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         CitasSyncAdapter.obtenerCuentaASincronizar(this);
         CitasSyncAdapter.sincronizarAhora(this,false);
 
-        checkUserStatus();
-        updateToken(FirebaseInstanceId.getInstance().getToken());
+        //checkUserStatus();
+        //updateToken(FirebaseInstanceId.getInstance().getToken());
 
     }
 
-    private void updateToken(String token) {
+    /**private void updateToken(String token) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
         Token mToken = new Token(token);
         ref.child(mUID).setValue(mToken);
-    }
+    }*/
 
 
     @Override
@@ -188,10 +188,10 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
             //user is signed
             mUID = user.getUid();
 
-             SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
-             SharedPreferences.Editor editor = sp.edit();
-             editor.putString("Current_USERID", mUID);
-             editor.apply();
+             //SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
+            // SharedPreferences.Editor editor = sp.edit();
+             //editor.putString("Current_USERID", mUID);
+            // editor.apply();
 
         }else {
             //user is no signed
@@ -200,15 +200,15 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /**@Override
     protected void onStart() {
         checkUserStatus();
         super.onStart();
-    }
+    }*/
 
     @Override
     protected void onResume() {
-        checkUserStatus();
+        //checkUserStatus();
         super.onResume();
     }
 

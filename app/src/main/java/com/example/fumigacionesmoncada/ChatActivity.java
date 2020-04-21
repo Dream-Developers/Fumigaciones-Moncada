@@ -33,6 +33,7 @@ import com.xwray.groupie.ViewHolder;
 
 import java.util.List;*/
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -330,12 +331,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chatList.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds: dataSnapshot.getChildren()) {
                     ModelChat chat = ds.getValue(ModelChat.class);
 
-                    if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid) ||
-                            chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)){
-                        chatList.add(chat);
+                    if (chat != null) {
+                        if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid) ||
+                                chat.getReceiver().equals(hisUid) && chat.getSender().equals(myUid)) {
+                            chatList.add(chat);
+                        }
                     }
                     adapterChat = new AdapterChat(ChatActivity.this, chatList, hisImage);
                     adapterChat.notifyDataSetChanged();
@@ -492,7 +495,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-                //aqui
+
    private void chechUserUserStatus(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null){
@@ -520,6 +523,12 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    private void currentUser(String hisUid){
+        SharedPreferences.Editor editor = getSharedPreferences("SP_USER", MODE_PRIVATE).edit();
+        editor.putString("Current_USERID", hisUid);
+        editor.apply();
+    }
+
 
     @Override
     protected void onStart() {
@@ -535,6 +544,7 @@ public class ChatActivity extends AppCompatActivity {
         String timestamp = String.valueOf(System.currentTimeMillis());
         checkOnlineStatus(timestamp);
         checkTypingStatus("noOne");
+        currentUser("None");
         userRefForSeen.removeEventListener(seenListener);
     }
 
@@ -542,6 +552,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
         checkOnlineStatus("online");
         super.onResume();
+        currentUser(hisUid);
     }
 
     /**private void searchMensajes() {

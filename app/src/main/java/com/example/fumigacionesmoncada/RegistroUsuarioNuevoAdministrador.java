@@ -114,6 +114,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     private StorageTask uploadTask;
     FirebaseUser fuser;
     StorageReference storageReference;
+    String myUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -667,7 +668,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                                     }
                                 }
                             });
-
+                            updateUI(user);
                         } else {
                             progreso.dismiss();
                             Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Falló registro en firebase.",
@@ -685,6 +686,24 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser user) {
+        //hideProgressDialog();
+        if (user != null) {
+            myUid = user.getUid();
+
+        } else {
+
+        }
     }
 
     private boolean validarEmail(String email) {

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -118,6 +119,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         super.onNewToken(s);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //String refreshToken = FirebaseInstanceId.getInstance().getToken();
         if (user != null){
             updateToken(s);
         }

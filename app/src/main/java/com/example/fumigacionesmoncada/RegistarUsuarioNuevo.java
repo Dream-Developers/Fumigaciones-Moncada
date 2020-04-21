@@ -547,19 +547,16 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
             }
 
         }){
-            /*public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("Content-Type", "application/json");
                 parametros.put("X-Requested-With", "XMLHttpRequest");
 
                 return parametros;
-            }*/
-
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return super.getHeaders();
             }
+
+
+
 
         };
 

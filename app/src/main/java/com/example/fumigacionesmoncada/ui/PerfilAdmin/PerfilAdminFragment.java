@@ -373,13 +373,13 @@ public class PerfilAdminFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             pd.dismiss();
-                                            //Toast.makeText(getActivity(), "Imagen actualizada", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getActivity(), "Imagen actualizada", Toast.LENGTH_SHORT).show();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     pd.dismiss();
-                                    //Toast.makeText(getActivity(), "Error al actualizar la foto", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Error al actualizar la foto", Toast.LENGTH_SHORT).show();
 
                                 }
                             });

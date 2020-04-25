@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imageView;
-    MediaPlayer mediaPlayer;
+    //MediaPlayer mediaPlayer;
 
 
     @Override
@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         imageView = findViewById(R.id.imgSplash);
-        mediaPlayer = MediaPlayer.create(this, R.raw.maraca);
+        //mediaPlayer = MediaPlayer.create(this, R.raw.maraca);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.animacion);
         imageView.startAnimation(animation);
@@ -44,6 +44,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         timer.start();
-        mediaPlayer.start();
+        //mediaPlayer.start();
     }
 }

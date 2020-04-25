@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     JsonObjectRequest solicitar_objeto_json;
     String success;
     String rol_id;
+    String firebase;
     String usuario_id;
 
 
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String PREFERENCE_ESTADO_BUTTON = "estado.button";
     ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
+    FirebaseUser user;
 
 
     @SuppressLint("WrongViewCast")
@@ -289,6 +291,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = preferences.getString("email", "");
         String contra = preferences.getString("contra", "");
         rol_id = preferences.getString("rol", "");
+        firebase = preferences.getString("uid", "");
 
     }
 
@@ -310,41 +313,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        logeoFirebase(response);
                         progressDialog. dismiss();
-                        logeoFirebase();
-                        guardarEstadoButton();
-                        //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            success = jsonObject.getString("access_token");
-                            rol_id = jsonObject.getString("rol_id");
-                            usuario_id = jsonObject.getString("id");
-
-                            //Toast.makeText(LoginActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
-
-                            JSONArray jsonArray = jsonObject.getJSONArray("login");
-                            if (success.equals("1")) {
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject object = jsonArray.getJSONObject(i);
-
-                                    String name = object.getString("name").trim();
-                                    String email = object.getString("email").trim();
-                                    Toast.makeText(LoginActivity.this, "Se ha logeado. " +
-                                            " \nTu nombre : " + name + "" +
-                                            "\nTu correo :" + email, Toast.LENGTH_SHORT).show();
-                                    cargando.setVisibility(View.GONE);
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-//                            Toast.makeText(LoginActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-
-
-                        savePreferences(success, usuario_id);
-                        intem();
-                        finish();
-
                     }
 
                 },
@@ -402,7 +372,7 @@ public class LoginActivity extends AppCompatActivity {
         ClaseVolley.getIntanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
-    private void logeoFirebase() {
+    private void logeoFirebase(String response) {
         String email = txtCorreo.getText().toString();
         String passw = txtContrasena.getText().toString().trim();
 
@@ -411,17 +381,51 @@ public class LoginActivity extends AppCompatActivity {
             txtCorreo.setError("Email invalidate");
             txtCorreo.setFocusable(true);
         }else {
-            loginUser(email, passw);
+            loginUser(email, passw, response);
         }
     }
 
-    private void loginUser(String email, String passw) {
+    private void loginUser(String email, String passw, final String response) {
         mAuth.signInWithEmailAndPassword(email, passw)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            user = mAuth.getCurrentUser();
+                            firebase = user.getUid();
+                            System.out.println(user.getUid());
+                            guardarEstadoButton();
+                            //Toast.makeText(LoginActivity.this, "Si responde"+response.toString(), Toast.LENGTH_SHORT).show();
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                success = jsonObject.getString("access_token");
+                                rol_id = jsonObject.getString("rol_id");
+                                usuario_id = jsonObject.getString("id");
+
+                                //Toast.makeText(LoginActivity.this, "Si manda los resultados"+rol_id , Toast.LENGTH_LONG).show();
+
+                                //JSONArray jsonArray = jsonObject.getJSONArray("login");
+                                if (success.equals("1")) {
+                                    /**for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject object = jsonArray.getJSONObject(i);
+
+                                        String name = object.getString("name").trim();
+                                        String email = object.getString("email").trim();
+                                        Toast.makeText(LoginActivity.this, "Se ha logeado. " +
+                                                " \nTu nombre : " + name + "" +
+                                                "\nTu correo :" + email, Toast.LENGTH_SHORT).show();
+
+                                    }*/
+                                    cargando.setVisibility(View.GONE);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+//                            Toast.makeText(LoginActivity.this, "Error al iniciar sesión"+e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            savePreferences(success, usuario_id);
+                            intem();
+                            finish();
 
 
 
@@ -459,6 +463,7 @@ public class LoginActivity extends AppCompatActivity {
         if (rol_id.equals("1")) {
 
             Intent intent = new Intent(getApplicationContext(), NavegacionAdministradorActivity.class);
+            //intent.putExtra("USER", user.getUid());
             startActivity(intent);
         } else {
             Intent i = new Intent(getApplicationContext(), MenuActivity.class);
@@ -481,6 +486,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", contra);
         editor.putString("rol", rol_id);
         editor.putString("id", usuario_id);
+        editor.putString("uid", user.getUid());
 
         String token_firebase = preferences.getString("token_firebase", "");
         guardarTokenFirebaseEnLaravel(usuario_id, token_firebase);

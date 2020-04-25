@@ -68,7 +68,7 @@ import java.util.Locale;
 
 
 
-public class MensajesFragment extends Fragment  implements Application.ActivityLifecycleCallbacks {
+public class MensajesFragment extends Fragment {// implements Application.ActivityLifecycleCallbacks {
 
     private FloatingActionButton add_chat;
     private GroupAdapter adapter;
@@ -79,6 +79,7 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
     DatabaseReference reference;
     FirebaseUser currentUser;
     AdapterChatlist adapterChatlist;
+    String variable;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -89,8 +90,11 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
         //RecyclerView rv = view.findViewById(R.id.recycler_contact);
         //rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
+        variable =  getActivity().getIntent().getStringExtra("USER");
+        System.out.println(variable);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        System.out.println(firebaseAuth.getCurrentUser());
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         recyclerView = view.findViewById(R.id.recycler_contact);
@@ -309,7 +313,7 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
 
     }*/
 
-    @Override
+    /**@Override
     public void onActivityPreCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
 
     }
@@ -412,7 +416,7 @@ public class MensajesFragment extends Fragment  implements Application.ActivityL
     @Override
     public void onActivityPostDestroyed(@NonNull Activity activity) {
 
-    }
+    }*/
 
 
     /**private void setOnline(boolean enabled) {

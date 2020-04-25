@@ -50,6 +50,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        System.out.println(firebaseAuth.getCurrentUser());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

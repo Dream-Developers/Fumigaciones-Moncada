@@ -24,15 +24,13 @@
         app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
 
 
-
     <EditText
         android:id="@+id/idCorreoLogin"
         android:layout_width="355dp"
         android:layout_height="77dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/bg_txt_username"
         android:fontFamily="@font/montserrat_semibold"
         android:hint="Correo"
@@ -41,13 +39,12 @@
         android:paddingLeft="60dp"
         android:textColor="@color/colorText"
         android:textSize="38px"
-        app:layout_constraintHorizontal_bias="0.534"
-        android:layout_marginLeft="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <!--<com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ojitochoco"
         android:layout_width="350dp"
         android:layout_height="85dp"
@@ -59,27 +56,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin"
         app:passwordToggleEnabled="true"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints">-->
 
         <EditText
             android:id="@+id/idContraseñaLogin"
-            android:layout_width="350dp"
+            android:layout_width="355dp"
             android:layout_height="77dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_txt_password1"
+            android:background="@drawable/bg_txt_password"
             android:fontFamily="@font/montserrat_semibold"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:maxLength="25"
-            android:layout_gravity="center_horizontal"
             android:paddingLeft="60dp"
             android:textColor="@color/colorText"
             android:textSize="38px"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--</com.google.android.material.textfield.TextInputLayout>-->
 
     <ImageView
         android:id="@+id/imageView"
@@ -154,7 +151,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ojitochoco" />
+        app:layout_constraintTop_toBottomOf="@+id/idContraseñaLogin" />
 
     <TextView
         android:id="@+id/textView4"

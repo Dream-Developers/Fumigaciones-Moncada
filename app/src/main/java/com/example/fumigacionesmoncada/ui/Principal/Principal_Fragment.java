@@ -23,7 +23,13 @@ import com.example.fumigacionesmoncada.AdquirirServicioActivity;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RecyclerTouchListener;
+import com.example.fumigacionesmoncada.notifications.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +39,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -66,7 +74,9 @@ public class Principal_Fragment extends Fragment   {
     JsonObjectRequest jsonObjectRequest;
 
     private OnFragmentInteractionListener mListener;
-
+    //firebase
+    FirebaseUser currentUser;
+    String variable;
 
     public Principal_Fragment() {
         // Required empty public constructor
@@ -105,10 +115,19 @@ public class Principal_Fragment extends Fragment   {
 
 
         View vista=inflater.inflate(R.layout.fragment_principal,container,false);
+        ActionBar actionBar =  ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        getActivity().getWindow().setBackgroundDrawableResource(R.drawable.gradient_background_app) ;
         cargarPreferencias();
         adservicio = vista.findViewById(R.id.ad_servicios);
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
+
+        //firebase
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        variable =  getActivity().getIntent().getStringExtra("USER");
+        System.out.println(variable);
 
         //recyclerUsuarios.setLayoutManager(new GridLayoutManager(this.getContext(),2));
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),1,LinearLayoutManager.HORIZONTAL,false));
@@ -132,7 +151,7 @@ linearLayout = vista.findViewById(R.id.error);
             }
         }));
 
-
+        updateToken(FirebaseInstanceId.getInstance().getToken());
         adservicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -265,6 +284,12 @@ linearLayout = vista.findViewById(R.id.error);
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void updateToken(String token){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(currentUser.getUid()).setValue(token1);
     }
 
 }

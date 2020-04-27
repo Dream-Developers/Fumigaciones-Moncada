@@ -223,6 +223,7 @@
     <string name="eliminar_servicio">¿Está seguro que desea eliminar el servicio?</string>
     <string name="eliminar_usuario">¿Está seguro que desea eliminarlo de la lista?</string>
     <string name="usuarios">Contactos</string>
+    <string name="perfil_admin">Perfil Administrador</string>
 
 
 </resources>

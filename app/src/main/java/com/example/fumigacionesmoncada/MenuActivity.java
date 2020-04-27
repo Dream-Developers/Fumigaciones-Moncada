@@ -17,12 +17,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Object vision_mision;
+    FirebaseAuth firebaseAuth;
+    String mUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +39,16 @@ public class MenuActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        firebaseAuth = FirebaseAuth.getInstance();
+        System.out.println(firebaseAuth.getCurrentUser());
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_principal,
                 R.id.nav_servicio,
                 R.id.nav_acerca,
                 R.id.nav_perfil,
-                R.id.nav_registro_citas)
-                //R.id.nav_contactar
+                R.id.nav_registro_citas,
+                R.id.nav_contactar)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -84,6 +91,8 @@ public class MenuActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)
                             public void onClick(DialogInterface dialog, int id) {
+                                firebaseAuth.signOut();
+                                checkUserStatus();
                                 logout();
                                 dialog.cancel();
                             }
@@ -134,5 +143,17 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+
+    private void checkUserStatus(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            //user is signed
+            mUID = user.getUid();
+            System.out.println(mUID);
+        }else {
+
+        }
     }
 }

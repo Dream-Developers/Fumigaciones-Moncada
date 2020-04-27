@@ -33,9 +33,9 @@
         android:name="com.example.fumigacionesmoncada.listadoPeticionesCita.Registro_De_Citas"
         android:label="@string/menu_registro_cita"
         tools:layout="@layout/fragment_registro__de__citas" />
-    <!--<fragment
+    <fragment
         android:id="@+id/nav_contactar"
-        android:name="com.example.fumigacionesmoncada.ui.contactar.ContactarFragment"
+        android:name="com.example.fumigacionesmoncada.ui.contactar.ContactarAdminFragment"
         android:label="@string/contactar"
-        tools:layout="@layout/fragment_contactar_" />-->
+        tools:layout="@layout/fragment_contactar_admin" />
 </navigation>

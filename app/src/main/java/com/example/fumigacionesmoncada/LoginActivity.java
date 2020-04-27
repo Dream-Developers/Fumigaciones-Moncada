@@ -314,7 +314,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         logeoFirebase(response);
-                        progressDialog. dismiss();
+                        //progressDialog. dismiss();
                     }
 
                 },
@@ -425,9 +425,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             savePreferences(success, usuario_id);
                             intem();
+                            progressDialog. dismiss();
                             finish();
-
-
 
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",

@@ -120,5 +120,6 @@
     <string name="eliminar_usuario">Are you sure you want to remove it from the list?</string>
     <string name="provider_citas_authority" translatable="false">com.example.fumigacionesmoncada.CitasSync.CitasProvider</string>
     <string name="usuarios">Contacts</string>
+    <string name="perfil_admin">Profile Administrator</string>
 
 </resources>

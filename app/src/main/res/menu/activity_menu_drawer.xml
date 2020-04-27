@@ -28,10 +28,10 @@
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/perfil" />
 
-           <!--<item
+           <item
                android:id="@+id/nav_contactar"
                android:icon="@drawable/ic_perm_phone_msg_black_24dp"
-               android:title="Contactar" />-->
+               android:title="Contactar" />
        </menu>
 
 </item>

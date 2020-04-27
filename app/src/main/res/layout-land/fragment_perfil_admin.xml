@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="15dp"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.PerfilAdmin.PerfilAdminFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center"
+        android:layout_weight="2">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatarIv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:gravity="center"
+        android:paddingRight="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="230dp"
+            android:paddingLeft="30dp"
+            android:gravity="center"
+            android:paddingRight="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.rey.material.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="@string/nombre"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <com.rey.material.widget.TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/correo"
+                android:textSize="14dp"
+                android:padding="15dp"
+                android:textColor="#000"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <com.rey.material.widget.TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/telefono"
+                android:textSize="14dp"
+                android:padding="@dimen/margenleft"
+                android:id="@+id/myTextView"
+                android:textColor="#000"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <com.rey.material.widget.TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:text="@string/direccion"
+                android:textSize="14dp"
+                android:padding="@dimen/margenleft"
+                android:id="@+id/direccion"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:id="@+id/nameTvc"
+                android:hint="Lenin Moncada"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margenleft"
+                android:layout_gravity="left"
+                android:maxLength="100"
+                android:background="#00000000"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:id="@+id/emailTv"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:hint="correo_elec@gmail.com"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margenleft"
+                android:layout_gravity="left"
+                android:focusable="false"
+                android:maxLength="100"
+                android:background="#00000000"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:id="@+id/phoneTv"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="14dp"
+                android:hint="32000000"
+                android:maxLength="8"
+                android:background="#00000000"
+                android:padding="@dimen/margenleft"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#ACACAC"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/direccionP"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:hint="Danli , El Paraiso"
+                android:background="#00000000"
+                android:maxLength="250"
+                android:maxLines="3"
+                android:padding="@dimen/margenleft"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_save_black">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

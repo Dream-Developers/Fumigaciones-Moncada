@@ -3,7 +3,11 @@ package com.example.fumigacionesmoncada;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +24,7 @@ public class AdminPerfilActivity extends AppCompatActivity {
 
     ImageView avatarIv;
     TextView nameTv, emailTv, phoneTv, address;
-
+    String number = "89217523";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +78,24 @@ public class AdminPerfilActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options_chats, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_call:
+                // Do onlick on menu action here
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+                return true;
+        }
+        return false;
     }
 }

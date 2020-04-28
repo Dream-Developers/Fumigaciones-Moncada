@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada.ui.contactar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -88,7 +91,7 @@ public class ContactarAdminFragment extends Fragment {
     String myUid;
     String hisUid;
     String hisImage;
-
+    String number = "89217523";
 
     FirebaseUser fUser;
 
@@ -115,6 +118,10 @@ public class ContactarAdminFragment extends Fragment {
 
         getActivity().getWindow().setBackgroundDrawableResource(R.drawable.fondo_chat2);
         getActivity().getWindow().setBackgroundDrawableResource(R.drawable.fondo_chat3) ;
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.inflateMenu(R.menu.menu_options_chats);
 
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -183,6 +190,22 @@ public class ContactarAdminFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.action_call:
+                        // Do onlick on menu action here
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                        startActivity(intent);
+                        return true;
+                }
+                return false;
             }
         });
 

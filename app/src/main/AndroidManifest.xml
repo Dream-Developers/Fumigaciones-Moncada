@@ -20,13 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdminPerfilActivity"
-            android:parentActivityName=".AdminPerfilActivity"
-            android:label="@string/perfil_admin">
-        </activity>
+        <activity
+            android:name=".ContenedorActivity"
+            android:label="@string/title_activity_contenedor"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AdminPerfilActivity"
+            android:label="@string/perfil_admin"
+            android:parentActivityName=".AdminPerfilActivity" />
         <activity
             android:name=".UsersActivity"
-            android:label="@string/usuarios" />
+            android:label="@string/usuarios"
+            android:parentActivityName=".UsersActivity" />
         <activity android:name=".ui.citas.Crear_Cita1" />
         <activity
             android:name=".ui.clientes.DetalleClienteScrollingActivity"
@@ -39,7 +44,8 @@
             android:theme="@style/AppThemeNo" />
         <activity
             android:name=".ui.Principal.DetalleServicioScroll"
-            android:label="@string/title_activity_detalle_servicio_scroll" />
+            android:label="@string/title_activity_detalle_servicio_scroll"
+            android:parentActivityName=".ui.Principal.DetalleServicioScroll" />
         <activity
             android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
@@ -112,10 +118,12 @@
         <activity
             android:name=".Desarrolladores"
             android:hardwareAccelerated="true"
-            android:label="@string/desarrolladores" />
+            android:label="@string/desarrolladores"
+            android:parentActivityName=".Desarrolladores" />
         <activity
             android:name=".VisionMision"
-            android:label="@string/visionMision" />
+            android:label="@string/visionMision"
+            android:parentActivityName=".VisionMision" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

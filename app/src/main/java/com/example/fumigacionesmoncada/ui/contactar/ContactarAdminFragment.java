@@ -138,7 +138,7 @@ public class ContactarAdminFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         DatabaseReference usersDbRef = FirebaseDatabase.getInstance().getReference();
 
-        Query userQuery = usersDbRef.child("Users").orderByChild("uid").equalTo("GLguSygNzLN0CAp5pTRpDXZRaLm2");
+        Query userQuery = usersDbRef.child("Users").orderByChild("uid").equalTo("rIRg1DDkEIcsqbtY9WMp2cD2Nrq2");
         userQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -299,7 +299,7 @@ public class ContactarAdminFragment extends Fragment {
 
         //fUser = FirebaseAuth.getInstance().getCurrentUser();
         //hisUid = fUser.getUid();
-        hisUid = "GLguSygNzLN0CAp5pTRpDXZRaLm2";
+        hisUid = "rIRg1DDkEIcsqbtY9WMp2cD2Nrq2";
         System.out.println(hisUid);
 
 

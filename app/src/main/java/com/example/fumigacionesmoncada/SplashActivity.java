@@ -3,8 +3,10 @@ package com.example.fumigacionesmoncada;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -36,9 +38,23 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally {
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = preferences.edit();
+                    int splash = Integer.parseInt(preferences.getString("splash", "0"));
 
-                    startActivity(i);
+                    if (splash==1){
+                        Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }else {
+                        editor.putString("splash", "1");
+                        editor.commit();
+
+                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(i);
+
+                        Intent i2 = new Intent(SplashActivity.this, ContenedorActivity.class);
+                        startActivity(i2);
+                    }
                     finish();
                 }
             }

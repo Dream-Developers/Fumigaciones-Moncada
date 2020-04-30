@@ -121,5 +121,12 @@
     <string name="provider_citas_authority" translatable="false">com.example.fumigacionesmoncada.CitasSync.CitasProvider</string>
     <string name="usuarios">Contacts</string>
     <string name="perfil_admin">Profile Administrator</string>
+    <string name="title_activity_contenedor">Content Activity</string>
+    <string name="tv_instruction1">Update your profile: you can choose a photo from the gallery or take it with your mobile camera and edit your personal information. </string>
+    <string name="tv_instruction2">Use messaging to send and receive messages instantly and communicate with the administrator. </string>
+    <string name="tv_instruction3">Acquire our services by sending a reservation request for a certain date. </string>
+    <string name="tv_instruction4">Consult all our fumigation services and request the one you need.</string>
+    <string name="tv_instruction6">We are willing to provide you with telephone communication for the information you need.</string>
+    <string name="tv_instruction5">Receive notifications of messages and in case your reservation has been accepted or denied.</string>
 
 </resources>

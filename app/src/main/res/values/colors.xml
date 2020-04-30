@@ -5,6 +5,23 @@
     <color name="colorAccent">#8BC34A</color>
     <color name="colorText">#504F60</color>
     <color name="color_title">#FFFFFF</color>
+    <color name="colorBlancoTransparente">#cccccc</color>
+    <color name="colorBlanco">#FFFFFF</color>
+    <color name="colorAmarillo">#fecd02</color>
+    <color name="colorCeleste">#05aaf6</color>
+    <color name="colorRojo">#f44337</color>
+    <color name="colorVerde">#29c96b</color>
+    <color name="colorNaranja">#ff9802</color>
+    <color name="colorNa">#fcc22f</color>
+    <color name="colorLila">#cc35cc</color>
+    <color name="colorMarron">#894802</color>
+    <color name="colorLima">#81c10a</color>
+    <color name="colorGranada">#ae0101</color>
+    <color name="colorTurquesa">#41bfbf</color>
+    <color name="colorVinotinto">#89024c</color>
+    <color name="colorFucsia">#ff028d</color>
+    <color name="colorAzulRey">#272e51</color>
+    <color name="colorTeja">#c35c04</color>
 </resources>
 
 

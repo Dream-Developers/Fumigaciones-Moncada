@@ -224,6 +224,13 @@
     <string name="eliminar_usuario">¿Está seguro que desea eliminarlo de la lista?</string>
     <string name="usuarios">Contactos</string>
     <string name="perfil_admin">Perfil Administrador</string>
+    <string name="title_activity_contenedor">ContenedorActivity</string>
+    <string name="tv_instruction1">Actualiza tu perfil: puedes elegir una foto de la galería o tomar con la cámara de tu celular y editar tu información personal. </string>
+    <string name="tv_instruction2">Utiliza la mensajería para enviar y recibir mensajes al instante y poderte comunicar con el administrador. </string>
+    <string name="tv_instruction3">Adquiere nuestros servicios enviando una petición de reservación para una determinada fecha. </string>
+    <string name="tv_instruction4">Consulta todos nuestros servicios de fumigacion y solicita el que necesites. </string>
+    <string name="tv_instruction6">Estamos dispuestos a brindarte comunicación vía telefónica para la información que necesites.</string>
+    <string name="tv_instruction5">Recibe notificaciones de mensajes y en caso de que tu reservación haya sido aceptada o denegada. </string>
 
 
 </resources>

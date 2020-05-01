@@ -284,7 +284,7 @@ public class PerfilAdminFragment extends Fragment {
                         pickFromCamera();
                     }
                     else {
-                        Toast.makeText(getActivity(), "Please enable camera and storage permmision", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.permisoimg), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -299,7 +299,7 @@ public class PerfilAdminFragment extends Fragment {
                         pickFromGallery();
                     }
                     else {
-                        Toast.makeText(getActivity(), "Please enable storage permmision", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.permiso), Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -373,13 +373,13 @@ public class PerfilAdminFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             pd.dismiss();
-                                            Toast.makeText(getActivity(), "Imagen actualizada", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getActivity(), getString(R.string.actualizada), Toast.LENGTH_SHORT).show();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     pd.dismiss();
-                                    Toast.makeText(getActivity(), "Error al actualizar la foto", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
 
                                 }
                             });
@@ -388,7 +388,7 @@ public class PerfilAdminFragment extends Fragment {
                         }else {
                             //error
                             pd.dismiss();
-                            Toast.makeText(getActivity(), "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -521,7 +521,7 @@ public class PerfilAdminFragment extends Fragment {
             });
 
         }else {
-            Toast.makeText(getActivity(), "Please enter ", Toast.LENGTH_SHORT).show();//ojo
+            Toast.makeText(getActivity(), getString(R.string.texto), Toast.LENGTH_SHORT).show();//ojo
         }
     }
 

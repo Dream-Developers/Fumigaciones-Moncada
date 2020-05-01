@@ -165,5 +165,9 @@
     <string name="cerrarsesion">Are you sure you want to sign out?</string>
     <string name="cargando">Loanding…</string>
     <string name="fallofirebase">Failed to register on firebase.</string>
+    <string name="texto">Enter your details to update</string>
+    <string name="errorimagen">Error when updating the photo</string>
+    <string name="actualizada">Updated image</string>
+    <string name="permisoimg">Please enable the camera and the storage permit</string>
 
 </resources>

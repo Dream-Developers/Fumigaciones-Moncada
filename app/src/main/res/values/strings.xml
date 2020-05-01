@@ -268,6 +268,10 @@
     <string name="cerrarsesion">¿Estás seguro que quieres cerrar sesión?</string>
     <string name="cargando">Cargando…</string>
     <string name="fallofirebase">Falló el  registro en firebase.</string>
+    <string name="texto">Ingresa tus datos a actualizar</string>
+    <string name="errorimagen">Error al actualizar la foto</string>
+    <string name="actualizada">Imagen actualizada</string>
+    <string name="permisoimg">Por favor, habilite la cámara y el permiso de almacenamiento</string>
 
 
 </resources>

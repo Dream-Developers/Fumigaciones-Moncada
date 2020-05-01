@@ -153,7 +153,7 @@ public class ContactarAdminFragment extends Fragment {
 
                     //estado de typing
                     if (typingStatus.equals(myUid)){
-                        userStatusTv.setText("Escribiendo...");
+                        userStatusTv.setText(getString(R.string.escribiendo));
                     }
                     else {
 
@@ -164,7 +164,7 @@ public class ContactarAdminFragment extends Fragment {
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             cal.setTimeInMillis(Long.parseLong(onlineStatus));
                             String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
-                            userStatusTv.setText("Ultima vez:"+ dateTime);
+                            userStatusTv.setText(String.format("%s%s", getString(R.string.ultimavez), dateTime));
 
 
                         }
@@ -217,7 +217,7 @@ public class ContactarAdminFragment extends Fragment {
                 String message = messageEt.getText().toString().trim();
 
                 if (TextUtils.isEmpty(message)){
-                    Toast.makeText(getContext(), "No puedes enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.mensajevacio), Toast.LENGTH_SHORT).show();
                 }else {
                     //tex listo
                     sendMessage(message);
@@ -345,7 +345,7 @@ public class ContactarAdminFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     Token token = ds.getValue(Token.class);
-                    Data data = new Data(myUid, name + ": " + message, "Nuevo mensaje", hisUid, R.drawable.logofm);
+                    Data data = new Data(myUid, name + ": " + message, getString(R.string.nuevomsj), hisUid, R.drawable.logofm);
 
                     Sender sender = new Sender(data, token.getToken());
 

@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         isActivateRadioButton = RBsesion.isChecked();
 
 
-        String text = "¿No tiene una cuenta? Regístrese";
+        String text = getString(R.string.cuenta);
 
         SpannableString ss = new SpannableString(text);
 
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if ((txtCorreo.getText().toString().trim().length() > 0) && (txtContrasena.getText().toString().trim().length() > 0)) {
             if (!isEmailValid(txtCorreo.getText())) {
-                txtCorreo.setError("No es un correo valido");
+                txtCorreo.setError(getString(R.string.correovalido));
             }else {
                     String email = txtCorreo.getText().toString().trim();
                     String contraseniaPass = txtContrasena.getText().toString().trim();
@@ -214,14 +214,14 @@ public class LoginActivity extends AppCompatActivity {
 
             if ((txtContrasena.getText().toString().trim().length() > 0) && (txtCorreo.getText().toString().trim().length() > 0)) {
                 if (!isPasswordValid(txtContrasena.getText())) {
-                    txtContrasena.setError("Al menos 8 caracteres");
+                    txtContrasena.setError(getString(R.string.caracteres));
                 }
             }
 
             // Compruebe que la contraseña sea válida, si el usuario la introdujo.
             String password = txtContrasena.getText().toString();
             if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
-                txtContrasena.setError("Al menos 8 caracteres");
+                txtContrasena.setError(getString(R.string.caracteres));
             }
 
           //Here
@@ -231,12 +231,12 @@ public class LoginActivity extends AppCompatActivity {
         else {
             if (txtCorreo.getText().toString().length() == 0 ||
                     txtCorreo.getText().toString().trim().equalsIgnoreCase("")) {
-                txtCorreo.setError("Ingresa el correo");
+                txtCorreo.setError(getString(R.string.ingresarcorreo));
 
             }
             if (txtContrasena.getText().toString().trim().length() == 0 ||
                     txtContrasena.getText().toString().trim().equalsIgnoreCase("")) {
-                txtContrasena.setError("Ingresa la contraseña");
+                txtContrasena.setError(getString(R.string.ingresarcontra));
             }
 
         }
@@ -325,19 +325,19 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         if (error.toString().equals("com.android.volley.ServerError")){
-                            Toast.makeText(getApplicationContext(), "Presentamos problemas intente más tarde",
+                            Toast.makeText(getApplicationContext(), getString(R.string.servererror),
                                     Toast.LENGTH_SHORT).show();
                         }
                         if (error.toString().equals("com.android.volley.TimeoutError")) {
-                            Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.timeerror), Toast.LENGTH_LONG).show();
                         }
                         if (error.toString().equals("com.android.volley.AuthFailureError")) {
-                            Toast.makeText(getApplicationContext(), "Este usuario no está registrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.autherror), Toast.LENGTH_LONG).show();
                         }
 
                         if (error.toString().equals("com.android.volley.ClientError")) {
                           //  Log.i("Error","No se pudo consultar el registro: "+error.toString());
-                            Toast.makeText(getApplicationContext(), "No se pudo consultar el registro", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.clienterror), Toast.LENGTH_LONG).show();
                         }
                         else {
                             Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
@@ -378,7 +378,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            txtCorreo.setError("Email invalidate");
+            txtCorreo.setError(getString(R.string.correovalido));
             txtCorreo.setFocusable(true);
         }else {
             loginUser(email, passw, response);
@@ -429,7 +429,7 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
 
                         } else {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.fallaauth),
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -513,7 +513,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Toast.makeText(LoginActivity.this, "Se actualizo el token firebase", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Se actualizo el token firebase", Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {

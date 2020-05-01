@@ -103,9 +103,11 @@
         <activity
             android:name=".RegistarUsuarioNuevo"
             android:configChanges="orientation|screenSize"
+            android:parentActivityName=".LoginActivity"
             android:label="@string/title_activity_registro" />
         <activity
             android:name=".RegistroUsuarioNuevoAdministrador"
+            android:parentActivityName=".RegistroUsuarioNuevoAdministrador"
             android:label="@string/title_activity_registro" />
         <activity
             android:name=".LoginActivity"

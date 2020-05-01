@@ -243,9 +243,9 @@ public class PerfilAdminFragment extends Fragment {
 
     private void showImagePictureDialog() {
 
-        String options [] = {"Camera", "Gallery"};
+        String options [] = {getString(R.string.tomarFoto), getString(R.string.elegirGaleria)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Pic image from");
+        builder.setTitle(R.string.elegiropcion);
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

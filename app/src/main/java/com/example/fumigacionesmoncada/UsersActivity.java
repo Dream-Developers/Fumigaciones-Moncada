@@ -191,10 +191,10 @@ public class UsersActivity extends AppCompatActivity {
 
     public void alertaCerrarSesionAdmin() {
         new AlertDialog.Builder(UsersActivity.this)
-                .setTitle("Confirmación")
-                .setMessage("¿Estás seguro que quieres cerrar sesión?")
+                .setTitle(getString(R.string.confirmacion))
+                .setMessage(getString(R.string.cerrarsesion))
                 .setIcon(R.drawable.logofm)
-                .setPositiveButton("SI",
+                .setPositiveButton(getString(R.string.si),
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)
                             public void onClick(DialogInterface dialog, int id) {
@@ -204,7 +204,7 @@ public class UsersActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     @TargetApi(11)
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

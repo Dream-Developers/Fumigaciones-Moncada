@@ -640,7 +640,7 @@ contraseña.setError("no Coinciden ");
     }
     private void registerUser(final String name, String  email, String password, final String phone) {
         progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -680,7 +680,7 @@ contraseña.setError("no Coinciden ");
                             updateUI(user);
                         } else {
                             progreso.dismiss();
-                            Toast.makeText(RegistarUsuarioNuevo.this, "Falló registro en firebase.",
+                            Toast.makeText(RegistarUsuarioNuevo.this, getString(R.string.fallofirebase),
                                     Toast.LENGTH_SHORT).show();
                         }
 

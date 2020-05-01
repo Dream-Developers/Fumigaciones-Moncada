@@ -40,7 +40,7 @@ public class AdminPerfilActivity extends AppCompatActivity {
         address = findViewById(R.id.direccionP);
 
         DatabaseReference usersDbRef = FirebaseDatabase.getInstance().getReference();
-        Query query = usersDbRef.child("Users").orderByChild("uid").equalTo("GLguSygNzLN0CAp5pTRpDXZRaLm2");
+        Query query = usersDbRef.child("Users").orderByChild("uid").equalTo("rIRg1DDkEIcsqbtY9WMp2cD2Nrq2");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

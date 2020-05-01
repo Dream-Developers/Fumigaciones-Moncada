@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FumigacioneSMoncada</string>
     <string name="IntenteloNuevamente" translatable="false">" Try again"</string>
     <string name="NumeroInvalido" translatable="false">" it's not a phone number"</string>
@@ -26,7 +26,7 @@
     <string name="confirmar" translatable="false">" Confirm"</string>
     <string name="consultaimage" translatable="false">" Consulting images ..."</string>
     <string name="consultandoImagenes" translatable="false">" Consulting Images"</string>
-    <string name="contactar" translatable="false">" Contact"</string>
+    <string name="contactar">"Contact"</string>
     <string name="correo" translatable="false">Email:</string>
     <string name="crear_factura" translatable="false">" Create Invoice"</string>
     <string name="default_notification_channel_id" translatable="false">" fumigations"</string>
@@ -62,7 +62,7 @@
     <string name="msjCorre" translatable="false">" Moncada Fumigation - Information"</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="nav_titulo" translatable="false">" Moncada fumigation"</string>
-    <string name="no" translatable="false">" do not"</string>
+    <string name="no" translatable="false">"Not"</string>
     <string name="nombre" translatable="false">" Name:"</string>
     <string name="nombreAdquirir" translatable="false">Name:</string>
     <string name="nombreNoModificar" translatable="false">" The Name cannot be modified"</string>
@@ -128,5 +128,42 @@
     <string name="tv_instruction4">Consult all our fumigation services and request the one you need.</string>
     <string name="tv_instruction6">We are willing to provide you with telephone communication for the information you need.</string>
     <string name="tv_instruction5">Receive notifications of messages and in case your reservation has been accepted or denied.</string>
+    <string name="escribiendo">Typing…</string>
+    <string name="ultimavez">Last time: </string>
+    <string name="mensajevacio">You can not send an empty message.</string>
+    <string name="nuevomsj">New message</string>
+    <string name="enviarmsj">Send message</string>
+    <string name="confirmarborrar">Are you sure you want to delete this message?</string>
+    <string name="borrar">Delete</string>
+    <string name="mensajeliminado">⊘ This message has been deleted…</string>
+    <string name="eliminado">Deleted message</string>
+    <string name="mismsj">You can only delete your messages</string>
+    <string name="cuenta">Do you have an account? Register at</string>
+    <string name="correovalido">It not a valid email</string>
+    <string name="caracteres">At least 8 characters</string>
+    <string name="ingresarcorreo">Enter the email</string>
+    <string name="ingresarcontra">Enter the password</string>
+    <string name="servererror">We have problems. Try again later.</string>
+    <string name="timeerror">Check your internet connection</string>
+    <string name="autherror">This user is not registered</string>
+    <string name="clienterror">The record could not be consulted</string>
+    <string name="fallaauth">Your authentication has failed</string>
+    <string name="terminar">finish</string>
+    <string name="correologin">Email</string>
+    <string name="passlogin">Password</string>
+    <string name="moncadas">Moncadas</string>
+    <string name="fumigaciones">Fumigations</string>
+    <string name="olvidopass">Forgot your password?</string>
+    <string name="ingresar">Enter</string>
+    <string name="accesointernet">No internet access</string>
+    <string name="checkemail">Check your email and get a new password</string>
+    <string name="obligatorio">Required field</string>
+    <string name="changepass">You can change it from your mail</string>
+    <string name="reestablecer">Enter your email to reset your password</string>
+    <string name="enviar">Send</string>
+    <string name="emailregister">This email is not registered</string>
+    <string name="cerrarsesion">Are you sure you want to sign out?</string>
+    <string name="cargando">Loanding…</string>
+    <string name="fallofirebase">Failed to register on firebase.</string>
 
 </resources>

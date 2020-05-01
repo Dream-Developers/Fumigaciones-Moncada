@@ -58,7 +58,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="@color/colorBlanco"
             android:background="@android:color/transparent"
-            android:text="Terminar" />
+            android:text="@string/terminar" />
 
 
     </RelativeLayout>

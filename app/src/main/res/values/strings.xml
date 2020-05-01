@@ -37,7 +37,7 @@
     <string name="contactar">Contactar</string>
     <string name="crearfactura">Crear Factura</string>
     <string name="detalleCita">Informacion de la cita</string>
-    <string name="visionMision"> Vision y Mision de la Empresa</string>
+    <string name="visionMision"> Visicon y Mision de la Empresa</string>
     <string name="desarrolladores">Desarrolladores</string>
 
 
@@ -184,7 +184,7 @@
     <string name="telefonoAdquirir">Teléfono:</string>
     <string name="confirmar">Confirmar</string>
     <string name="cancelar">Cancelar</string>
-    <string name="cargandoAdquirir">Cargando...</string>
+    <string name="cargandoAdquirir">Cargando…</string>
     <string name="registroAdquirir">Se ha registrado con éxito</string>
     <string name="horarioDeAtencion">El Horario de atención es de 7:00AM a 7:00PM</string>
     <string name="horaAlerta">La hora seleccionada no es correcta, debe ser mayor a la hora actual</string>
@@ -202,7 +202,7 @@
     <string name="app">No hay aplicación para llamar</string>
     <string name="msjCorre">Fumigaciones Moncada - Información</string>
     <string name="permiso">Es necesario otorgar los permisos</string>
-    <string name="consultaimage">Consultando imágenes ...</string>
+    <string name="consultaimage">Consultando imágenes …</string>
     <string name="presentamastarde">Presentamos problemas intentelo más tarde</string>
     <string name="reviseconexion">Revise su conexión a internet</string>
     <string name="seleccione">Seleccione</string>
@@ -216,9 +216,9 @@
     <string name="PermisosDesactivados">Permisos Desactivados</string>
     <string name="aceptarpermisos">Debe aceptar los permisos para el correcto funcionamiento de la App</string>
     <string name="aceptar">Aceptar</string>
-    <string name="si">si</string>
-    <string name="no">no</string>
-    <string name="loandingpass">Enviando correo...</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="loandingpass">Enviando correo…</string>
     <string name="confirmacion">Confirmación</string>
     <string name="eliminar_servicio">¿Está seguro que desea eliminar el servicio?</string>
     <string name="eliminar_usuario">¿Está seguro que desea eliminarlo de la lista?</string>
@@ -231,6 +231,43 @@
     <string name="tv_instruction4">Consulta todos nuestros servicios de fumigacion y solicita el que necesites. </string>
     <string name="tv_instruction6">Estamos dispuestos a brindarte comunicación vía telefónica para la información que necesites.</string>
     <string name="tv_instruction5">Recibe notificaciones de mensajes y en caso de que tu reservación haya sido aceptada o denegada. </string>
+    <string name="escribiendo">Escribiendo…</string>
+    <string name="ultimavez">Última vez: </string>
+    <string name="mensajevacio">No puedes enviar un mensaje vacío.</string>
+    <string name="nuevomsj">Nuevo mensaje</string>
+    <string name="enviarmsj">Enviar mensaje</string>
+    <string name="confirmarborrar">¿Estás seguro que quieres eliminar este mensaje?</string>
+    <string name="borrar">Borrar</string>
+    <string name="mensajeliminado">⊘ Este mensaje ha sido eliminado…</string>
+    <string name="eliminado">Mensaje eliminado</string>
+    <string name="mismsj">Solo puedes eliminar tus mensajes</string>
+    <string name="cuenta">¿No tiene una cuenta? Regístrese</string>
+    <string name="correovalido">No es un correo valido</string>
+    <string name="caracteres">Al menos 8 caracteres</string>
+    <string name="ingresarcorreo">Ingresa el correo</string>
+    <string name="ingresarcontra">Ingresa la contraseña</string>
+    <string name="servererror">Presentamos problemas intente más tarde</string>
+    <string name="timeerror">Revisa tu conexión a internet</string>
+    <string name="autherror">Este usuario no está registrado</string>
+    <string name="clienterror">No se pudo consultar el registro</string>
+    <string name="fallaauth">La autentificación ha fallado</string>
+    <string name="terminar">terminar</string>
+    <string name="correologin">Correo</string>
+    <string name="passlogin">Contraseña</string>
+    <string name="moncadas">Moncadas</string>
+    <string name="fumigaciones">Fumigaciones</string>
+    <string name="olvidopass">¿Olvidó su contraseña?</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="accesointernet">Sin acceso a internet</string>
+    <string name="checkemail">Revisa tu correo electrónico y obten una nueva contraseña</string>
+    <string name="obligatorio">Campo obligatorio</string>
+    <string name="changepass">Puedes cambiarla desde tu correo</string>
+    <string name="reestablecer">   Ingrese su correo para restablecer la contraseña</string>
+    <string name="enviar">Enviar</string>
+    <string name="emailregister">Este correo no está registrado</string>
+    <string name="cerrarsesion">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="cargando">Cargando…</string>
+    <string name="fallofirebase">Falló el  registro en firebase.</string>
 
 
 </resources>

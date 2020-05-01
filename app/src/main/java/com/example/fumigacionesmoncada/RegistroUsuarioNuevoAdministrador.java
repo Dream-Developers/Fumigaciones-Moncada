@@ -633,7 +633,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
     }
     private void registerUser(final String name, String  email, String password, final String phone) {
         progreso=new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -671,7 +671,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             progreso.dismiss();
-                            Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Falló registro en firebase.",
+                            Toast.makeText(RegistroUsuarioNuevoAdministrador.this, getString(R.string.fallofirebase),
                                     Toast.LENGTH_SHORT).show();
                         }
 

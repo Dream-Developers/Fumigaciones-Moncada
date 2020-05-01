@@ -92,17 +92,17 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Borrar");
-                builder.setMessage("¿Estás seguro que quieres eliminar este mensaje?");
+                builder.setTitle(R.string.borrar);
+                builder.setMessage(R.string.confirmarborrar);
 
-                builder.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.borrar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteMessage(position);
                     }
                 });
 
-                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -116,7 +116,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
 
         if (position == chatList.size() -1){
             if (chatList.get(position).isSeen()){
-                holder.isSeenTv.setText("seen");
+                holder.isSeenTv.setText("✔✔");
             }
             else {
                 holder.isSeenTv.setText("✔✔");
@@ -149,10 +149,10 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
                         hashMap.put("message", "⊘ Este mensaje ha sido eliminado...");
                         ds.getRef().updateChildren(hashMap);
 
-                        Toast.makeText(context, "Mensaje eliminado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.eliminado, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(context, "Solo puedes eliminar tus mensajes", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.mismsj, Toast.LENGTH_SHORT).show();
                     }
 
 

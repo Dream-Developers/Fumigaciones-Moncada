@@ -102,8 +102,8 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         chatlistList = new ArrayList<>();
 
-        reference = FirebaseDatabase.getInstance().getReference("Chatlist");
-              //  .child(currentUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist")
+              .child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -169,7 +169,7 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         });
 
 
-//        updateToken(FirebaseInstanceId.getInstance().getToken());
+        updateToken(FirebaseInstanceId.getInstance().getToken());
         //searchLastMensaje();
 
         Cursor cursor= obtenerRegistrosFecha();
@@ -186,7 +186,7 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
     private void updateToken(String token){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token1 = new Token(token);
-//        reference.child(currentUser.getUid()).setValue(token1);
+        reference.child(currentUser.getUid()).setValue(token1);
     }
 
 

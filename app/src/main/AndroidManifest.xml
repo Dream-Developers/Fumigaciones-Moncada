@@ -21,9 +21,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ContenedorAdmin.ContenedorAdminActivity"
+            android:label="ContenedorAdmin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ContenedorActivity"
             android:label="@string/title_activity_contenedor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdminPerfilActivity"
             android:label="@string/perfil_admin"
@@ -103,12 +107,12 @@
         <activity
             android:name=".RegistarUsuarioNuevo"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".LoginActivity"
-            android:label="@string/title_activity_registro" />
+            android:label="@string/title_activity_registro"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".RegistroUsuarioNuevoAdministrador"
-            android:parentActivityName=".RegistroUsuarioNuevoAdministrador"
-            android:label="@string/title_activity_registro" />
+            android:label="@string/title_activity_registro"
+            android:parentActivityName=".RegistroUsuarioNuevoAdministrador" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

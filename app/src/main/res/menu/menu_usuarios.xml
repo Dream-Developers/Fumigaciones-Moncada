@@ -18,7 +18,7 @@
     <item
         android:id="@+id/confi_user"
         android:orderInCategory="100"
-        android:title="Desarrolladores"
+        android:title="@string/desarrolladores"
         app:showAsAction="never" />
 
 </menu>

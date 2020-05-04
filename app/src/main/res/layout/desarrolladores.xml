@@ -48,7 +48,7 @@
             android:textStyle="bold"
             android:textColor="#000"
             android:textSize="18sp"
-            android:text="Esta aplicacion fue creada por estudiantes del centro UNAH-TEC de la ciudad de Danli, con el fin de ayudar a la poblacion a adquirir los servicios que brinda la empresa Fumigaciones Moncada." />
+            android:text="@string/definicion" />
 
 </androidx.cardview.widget.CardView>
     <TextView
@@ -60,7 +60,7 @@
         android:textStyle="bold"
         android:textColor="#000"
         android:textSize="25dp"
-        android:text="Equipo de Desarrolladores"
+        android:text="@string/equipo"
         android:background="@color/colorPrimary"
         />
 //nuevo

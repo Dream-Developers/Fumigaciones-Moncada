@@ -43,14 +43,14 @@
                         android:id="@+id/nombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre:"
+                        android:text="@string/nombre"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/nombre_cita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Elisa"
+                        android:text="Eloisa"
                         android:textSize="18sp"
                         android:layout_marginLeft="10dp"
                         android:visibility="visible" />
@@ -75,14 +75,14 @@
                         android:id="@+id/txt_servicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Servicio:"
+                        android:text="@string/servicio"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/detalle_txt_servicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Roedores"
+                        android:text="@string/roedores"
                         android:textSize="18sp"
                         android:layout_marginLeft="10dp"
                         android:visibility="visible" />
@@ -108,7 +108,7 @@
                         android:id="@+id/fechaFumigacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fecha:"
+                        android:text="@string/fecha"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView

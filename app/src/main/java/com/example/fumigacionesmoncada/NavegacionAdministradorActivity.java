@@ -24,6 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.fumigacionesmoncada.CitasSync.CitasSyncAdapter;
 import com.example.fumigacionesmoncada.CitasSync.ContractCitas;
+import com.example.fumigacionesmoncada.ContenedorAdmin.ContenedorAdminActivity;
 import com.example.fumigacionesmoncada.notifications.Token;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -169,6 +170,12 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                 Intent myIntent2 = new Intent(this,Desarrolladores.class);
 
                 startActivity(myIntent2);
+                return true;
+
+            case R.id.action_ayuda:
+                Intent myIntent3 = new Intent(this, ContenedorAdminActivity.class);
+
+                startActivity(myIntent3);
                 return true;
 
             default:

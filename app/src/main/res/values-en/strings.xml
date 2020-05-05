@@ -192,5 +192,7 @@
     <string name="añadir">Add Service</string>
     <string name="subir">Upload</string>
     <string name="ayuda">Help</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="direcciongps">Location</string>
 
 </resources>

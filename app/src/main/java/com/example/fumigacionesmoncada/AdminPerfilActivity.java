@@ -82,7 +82,7 @@ public class AdminPerfilActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_options_chats, menu);
+        getMenuInflater().inflate(R.menu.menu_option_perfil, menu);
         return true;
     }
 
@@ -95,6 +95,9 @@ public class AdminPerfilActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
                 startActivity(intent);
                 return true;
+            case R.id.action_map:
+                Intent intent1 = new Intent(AdminPerfilActivity.this, MapsActivity.class);
+                startActivity(intent1);
         }
         return false;
     }

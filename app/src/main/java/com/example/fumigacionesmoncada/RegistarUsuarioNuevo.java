@@ -523,7 +523,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
                 //finish();
                 Toast.makeText(RegistarUsuarioNuevo.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
 
-
+finish();
 
         }}, new Response.ErrorListener() {
             @Override
@@ -642,7 +642,7 @@ contraseña.setError("no Coinciden ");
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            cargarWebService();
+
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             String email = user.getEmail();
@@ -665,9 +665,8 @@ contraseña.setError("no Coinciden ");
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Intent intent = new Intent(RegistarUsuarioNuevo.this, LoginActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
+                                        cargarWebService();
+
                                     }
                                 }
                             });

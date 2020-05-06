@@ -519,7 +519,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parametros, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    //finish();
+                    finish();
                     Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
                 }}, new Response.ErrorListener() {
                 @Override
@@ -636,7 +636,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            cargarWebService();
+
                             FirebaseUser user = mAuth.getCurrentUser();
                             String email = user.getEmail();
                             String uid = user.getUid();
@@ -658,9 +658,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Intent intent = new Intent(RegistroUsuarioNuevoAdministrador.this, MenuActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
+                                        cargarWebService();
                                     }
                                 }
                             });

@@ -277,7 +277,7 @@
     <string name="tv_ayuda3">Puedes crear cuentas para tus clientes y visualizarlas una vez creadas.</string>
     <string name="tv_ayuda4">Crea y actualiza tus servicios de fumigación para que los clientes puedan verlos.</string>
     <string name="tv_ayuda5">Programa y revisa tus fumigaciones pendientes con la información proporcionada por tu cliente.</string>
-    <string name="tv_ayuda6">Acepta o Rechaza solicitudes de Fumigación solicitadas por tus clientes.</string>
+    <string name="tv_ayuda6">Acepta o Rechaza solicitudes de Fumigación generadas por tus clientes.</string>
     <string name="tv_ayuda7">Crea tus facturas y lleva un control de tus servicios cancelados.</string>
     <string name="definicion">Esta aplicacion fue creada por estudiantes del centro UNAH-TEC de la ciudad de Danli, con el fin de ayudar a la poblacion a adquirir los servicios que brinda la empresa Fumigaciones Moncada.</string>
     <string name="equipo">Equipo de Desarrolladores</string>
@@ -297,6 +297,9 @@
     <string name="ayuda">Ayuda</string>
     <string name="title_activity_maps">Mapa</string>
     <string name="direcciongps">Localización</string>
+    <string name="tomarfoto">Tomar Foto</string>
+    <string name="elegirgaleria">Elegir de Galeria</string>
+    <string name="eligeopcion">Elige una Opción</string>
 
 
 </resources>

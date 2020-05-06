@@ -185,16 +185,16 @@ public class ImagenFragment extends Fragment {
     }
 
     private void mostrarDialogOpciones() {
-        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {getString(R.string.tomarfoto), getString(R.string.elegirgaleria), getString(R.string.cancelar)};
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Elige una Opción");
+        builder.setTitle(getString(R.string.eligeopcion));
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (opciones[i].equals(getString(R.string.tomarfoto))) {
                     abrirCamara();
                 } else {
-                    if (opciones[i].equals("Elegir de Galeria")) {
+                    if (opciones[i].equals(getString(R.string.elegirgaleria))) {
                         abrirGaleria();
                     } else {
                         dialogInterface.dismiss();

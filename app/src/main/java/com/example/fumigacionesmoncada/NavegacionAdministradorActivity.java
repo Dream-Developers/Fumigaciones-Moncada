@@ -125,10 +125,10 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
 
     public void alertaCerrarSesionAdmin() {
         new AlertDialog.Builder(NavegacionAdministradorActivity.this)
-                .setTitle("Confirmación")
-                .setMessage("¿Estás seguro que quieres cerrar sesión?")
+                .setTitle(getString(R.string.confirmacion))
+                .setMessage(getString(R.string.confirmacion2))
                 .setIcon(R.drawable.logofm)
-                .setPositiveButton("SI",
+                .setPositiveButton(R.string.si,
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)
                             public void onClick(DialogInterface dialog, int id) {
@@ -138,7 +138,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @TargetApi(11)
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

@@ -262,7 +262,7 @@
     <string name="checkemail">Revisa tu correo electrónico y obten una nueva contraseña</string>
     <string name="obligatorio">Campo obligatorio</string>
     <string name="changepass">Puedes cambiarla desde tu correo</string>
-    <string name="reestablecer">   Ingrese su correo para restablecer la contraseña</string>
+    <string name="reestablecer"> Ingrese su correo para restablecer la contraseña</string>
     <string name="enviar">Enviar</string>
     <string name="emailregister">Este correo no está registrado</string>
     <string name="cerrarsesion">¿Estás seguro que quieres cerrar sesión?</string>
@@ -300,6 +300,33 @@
     <string name="tomarfoto">Tomar Foto</string>
     <string name="elegirgaleria">Elegir de Galeria</string>
     <string name="eligeopcion">Elige una Opción</string>
+    <string name="lugarfumigacion">Lugar de Fumigación :</string>
+    <string name="pedircita">Pedir Cita</string>
+    <string name="seleccioneelcliente">Seleccione el Cliente</string>
+    <string name="precio">Precio</string>
+    <string name="fechas">Fecha</string>
+    <string name="horas">Hora</string>
+    <string name="direccions">Dirección</string>
+    <string name="plaga">Plaga  :</string>
+    <string name="agregarcita">Agregar Cita</string>
+    <string name="nombrecli">Nombre Cliente</string>
+    <string name="totals">Total</string>
+    <string name="descuentos">Descuento</string>
+    <string name="detalle">Detalle</string>
+    <string name="agregarfactura">Agregar Factura</string>
+    <string name="precios">Precio:</string>
+    <string name="guardar">Guardar</string>
+    <string name="actualizarservi">Actualizar Servicios</string>
+    <string name="solicitarservi">Solicitar Servicio</string>
+    <string name="resgistrar">Registrar</string>
+    <string name="mujer">Mujer</string>
+    <string name="hombre">Hombre</string>
+    <string name="nombrecompleto">Nombre Completo</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="confirmarcontra">Confirmar Contraseña</string>
+    <string name="residencias">Residencia</string>
+    <string name="telefonos">Teléfono</string>
+    <string name="pedir_cita">Pedir Cita</string>
 
 
 </resources>

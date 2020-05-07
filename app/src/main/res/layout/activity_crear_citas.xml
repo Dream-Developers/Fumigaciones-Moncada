@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seleccione el cliente"
+                    android:text="@string/seleccioneelcliente"
                     android:layout_marginTop="50dp"
                     android:textSize="25dp" />
 
@@ -43,7 +43,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Direccion "
+                    android:text="@string/direccions"
                     android:textSize="25dp" />
 
                 <EditText
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Precio"
+                    android:text="@string/precio"
                     android:textSize="25dp" />
 
                 <EditText
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha"
+                    android:text="@string/fechas"
                     android:textSize="25dp" />
 
                 <EditText
@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hora"
+                    android:text="@string/horas"
                     android:textSize="25dp" />
 
                 <EditText
@@ -118,7 +118,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/oval"
                     android:onClick="registrar1"
-                    android:text="Agregar Cita"
+                    android:text="@string/agregarcita"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"

@@ -197,5 +197,33 @@
     <string name="tomarfoto">Take photo</string>
     <string name="elegirgaleria">Choose from Gallery</string>
     <string name="eligeopcion">Choose an Option</string>
+    <string name="lugarfumigacion">Fumigation Place :</string>
+    <string name="pedircita">Ask for Appointment</string>
+    <string name="seleccioneelcliente">Select the Client</string>
+    <string name="precio">Price</string>
+    <string name="fechas">Date</string>
+    <string name="horas">Hour</string>
+    <string name="direccions">Address</string>
+    <string name="plaga">Plague :</string>
+    <string name="agregarcita">Add Appointment</string>
+    <string name="nombrecli">Client Name</string>
+    <string name="totals">Total</string>
+    <string name="descuentos">Discount</string>
+    <string name="detalle">Detail</string>
+    <string name="agregarfactura">Add Invoice</string>
+    <string name="precios">Price:</string>
+    <string name="guardar">Save</string>
+    <string name="actualizarservi">Update Services</string>
+    <string name="solicitarservi">Request Service</string>
+    <string name="resgistrar">To Register</string>
+    <string name="mujer">Woman</string>
+    <string name="hombre">Man</string>
+    <string name="nombrecompleto">Full name</string>
+    <string name="contraseña">Password</string>
+    <string name="confirmarcontra">Confirm Password</string>
+    <string name="residencias">Residency</string>
+    <string name="telefonos">Phone</string>
+    <string name="pedir_cita">Ask for Appointment</string>
+
 
 </resources>

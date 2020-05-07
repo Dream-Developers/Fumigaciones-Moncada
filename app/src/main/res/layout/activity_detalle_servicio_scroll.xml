@@ -106,7 +106,7 @@
                     android:background="@drawable/oval"
                     android:gravity="center"
                     android:onClick="adquiiirServicio"
-                    android:text="Solicitar Servicio"
+                    android:text="@string/solicitarservi"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 

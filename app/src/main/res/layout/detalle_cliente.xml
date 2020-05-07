@@ -74,7 +74,7 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Residencia"
+                        android:text="@string/residencia"
                         android:textSize="14dp"
                         android:padding="15dp"
                         android:textColor="#000"/>

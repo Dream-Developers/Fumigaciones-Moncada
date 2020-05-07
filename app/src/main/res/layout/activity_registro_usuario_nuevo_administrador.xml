@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/nombre_cliente"
-                android:hint="Nombre Completo"
+                android:hint="@string/nombrecompleto"
                 android:lines="1"
                 android:maxLength="30"
 
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/residencia_cliente"
-                android:hint="Residencia "
+                android:hint="@string/residencia"
                 android:lines="1"
 
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789."
                 android:drawableLeft="@drawable/telefono_cliente"
-                android:hint="Telefono"
+                android:hint="@string/telefono"
                 android:inputType="phone"
                 android:maxLength="8"
                  />
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/cotra_cliente"
-                android:hint="Contraseña"
+                android:hint="@string/contraseña"
                 android:inputType="textPassword"
                 android:lines="1"
                 />
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/confi_cliente"
-                android:hint="Confirmar Contraseña"
+                android:hint="@string/confirmarcontra"
                 android:inputType="textPassword"
                 android:lines="1"
                  />

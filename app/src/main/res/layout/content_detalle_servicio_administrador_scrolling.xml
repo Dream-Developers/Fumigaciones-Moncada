@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:maxLength="100"
-                    android:text="Titulo"
+                    android:text="@string/titulo"
                     android:textColor="#000"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -43,7 +43,7 @@
                             android:id="@+id/descripcionImagenDA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Descripción"
+                            android:text="@string/descripcion"
                             android:textSize="25dp"
                             android:maxLength="500"
 

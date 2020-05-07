@@ -149,7 +149,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Error al borrar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.error_al_borrar, Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -203,26 +203,26 @@ public class ServiciosAdministradorFragment extends Fragment  {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                            Toast.makeText(getContext(), getString(R.string.conexionServidor) +
                                     " "+response, Toast.LENGTH_LONG).show();
 
                             dialog.hide();
                         }
-                        Toast.makeText(getContext(), "Se cargaron los datos correctamente",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.se_cargaron_correctamente,Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.presentamastarde, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.reviseconexion, Toast.LENGTH_LONG).show();
                 } else {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
-                    Toast.makeText(getContext(), "Revise su conexión a internet" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.reviseconexion , Toast.LENGTH_SHORT).show();
                     // Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             }

@@ -224,6 +224,19 @@
     <string name="residencias">Residency</string>
     <string name="telefonos">Phone</string>
     <string name="pedir_cita">Ask for Appointment</string>
-
+    <string name="jennifer_chavarria">Jennifer Chavarria</string>
+    <string name="correo_elec_gmail_com">email_elec@gmail.com</string>
+    <string name="tel_number">32000000</string>
+    <string name="direccion_ejem">Danlí, El Paraíso, neighborhood El Centro</string>
+    <string name="error_al_borrar">Error while deleting</string>
+    <string name="se_cargaron_correctamente">Data loaded successfully</string>
+    <string name="confirmacion2">Are you sure you want to log out?</string>
+    <string name="detalle_servicio_ti">Service Detail</string>
+    <string name="campos_admon">All fields are mandatory, Please Complete It</string>
+    <string name="cargar">Loading data ...</string>
+    <string name="editar">Edit</string>
+    <string name="guardar_cambios">Save Changes</string>
+    <string name="llamar">To call</string>
+    <string name="buscar">Search</string>
 
 </resources>

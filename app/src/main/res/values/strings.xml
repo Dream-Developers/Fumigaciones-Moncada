@@ -327,6 +327,20 @@
     <string name="residencias">Residencia</string>
     <string name="telefonos">Teléfono</string>
     <string name="pedir_cita">Pedir Cita</string>
+    <string name="jennifer_chavarria">Jennifer Chavarria</string>
+    <string name="correo_elec_gmail_com">correo_elec@gmail.com</string>
+    <string name="tel_number">32000000</string>
+    <string name="direccion_ejem">Danlí , El Paraíso, Barrio El Centro</string>
+    <string name="error_al_borrar">Error al borrar</string>
+    <string name="se_cargaron_correctamente">Se cargarón los datos correctamente</string>
+    <string name="confirmacion2">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="detalle_servicio_ti">Detalle del Servicio</string>
+    <string name="campos_admon">Todos los campos son obligatorio, Por favor Completelo</string>
+    <string name="cargar">Cargando datos...</string>
+    <string name="editar">Editar</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="llamar">Llamar</string>
+    <string name="buscar">buscar</string>
 
 
 </resources>

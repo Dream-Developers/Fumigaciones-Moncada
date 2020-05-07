@@ -5,11 +5,11 @@
     <item
         android:id="@+id/guardarcambios"
         android:orderInCategory="100"
-        android:title="Editar"
+        android:title="@string/editar"
         app:showAsAction="never" />
     <item
         android:id="@+id/fab"
         android:orderInCategory="100"
-        android:title="Guardar Cambios"
+        android:title="@string/guardar_cambios"
         app:showAsAction="never" />
 </menu>

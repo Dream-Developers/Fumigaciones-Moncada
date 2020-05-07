@@ -47,7 +47,7 @@ public class DetalleServicioScroll extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_servicio_scroll);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setTitle("Detalle del Servicio");
+        setTitle(R.string.detalle_servicio_ti);
 
         titulo = findViewById(R.id.tituloImagenD);
         descripcion= findViewById(R.id.descripcionImagenD);

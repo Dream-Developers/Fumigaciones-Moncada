@@ -97,7 +97,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
             setSupportActionBar(toolbar);
         }
 
-        setTitle("Publicidad");
+        setTitle(R.string.publicidad);
 
         titulo = findViewById(R.id.tituloImagenDA);
         descripcion = findViewById(R.id.descripcionImagenDA);
@@ -149,7 +149,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
         try {
             if (titulo.getText().toString().trim().equals("")
                     || descripcion.getText().toString().trim().equals("")) {
-                Toast.makeText(this, "Todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.campos_admon, Toast.LENGTH_LONG).show();
 
 
             } else {
@@ -158,7 +158,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
                 }
                 {
                     progreso = new ProgressDialog(this);
-                    progreso.setMessage("Cargando datos...");
+                    progreso.setMessage(getString(R.string.cargar));
                     progreso.show();
                     if (bitmap == null) {
                         foto = null;
@@ -278,16 +278,16 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
     }
 
     private void mostrarDialogOpciones() {
-        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {getString(R.string.tomarFoto), getString(R.string.elegirGaleria), getString(R.string.cancelar)};
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Elige una Opción");
+        builder.setTitle(R.string.elegiropcion);
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (opciones[i].equals(getString(R.string.tomarFoto))) {
                     abrirCamara();
                 } else {
-                    if (opciones[i].equals("Elegir de Galeria")) {
+                    if (opciones[i].equals(getString(R.string.elegirGaleria))) {
                         abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
@@ -314,7 +314,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
             Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
-            startActivityForResult(intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
+            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccione)), COD_SELECCIONA);
             try {
 
                 //Se crea un achivo de la foto en blanco
@@ -442,7 +442,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
                         imagen.setImageBitmap(bitmap);
                     } catch (IOException e) {
-                        Log.i("error", "" + e.getMessage());
+                        Log.i(String.valueOf(R.string.error), "" + e.getMessage());
                     }
 
                     break;
@@ -480,7 +480,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
                         imagen.setImageBitmap(bitmap);
                     } catch (Exception e) {
-                        Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
 
                     }
 
@@ -515,7 +515,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
                     matrix, true);
         } catch (Exception e) {
 
-            Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
         }
         return source;
     }
@@ -526,7 +526,7 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MIS_PERMISOS) {
             if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
-                Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_SHORT);
+                Toast.makeText(this,  R.string.Permisosaceptados, Toast.LENGTH_SHORT);
                 imagen.setEnabled(true);
             }
         } else {
@@ -581,20 +581,20 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones = {"si", "no"};
+        final CharSequence[] opciones = {getString(R.string.si), getString(R.string.no)};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(this);//estamos en fragment
-        alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
+        alertOpciones.setTitle(R.string.permisosManual);
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("si")) {
+                if (opciones[i].equals(getString(R.string.si))) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),  R.string.permisosnoaceptados, Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }
@@ -605,10 +605,10 @@ public class DetalleServicioAdministradorScrollingActivity extends AppCompatActi
 
     private void cargarDialogoRecomendacion() {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
-        dialogo.setTitle("Permisos Desactivados");
-        dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
+        dialogo.setTitle(R.string.PermisosDesactivados);
+        dialogo.setMessage(R.string.aceptarpermisos);
 
-        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

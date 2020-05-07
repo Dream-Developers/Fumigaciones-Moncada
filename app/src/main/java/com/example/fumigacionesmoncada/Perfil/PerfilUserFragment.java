@@ -150,11 +150,14 @@ public class PerfilUserFragment extends Fragment {
                     String email = ""+ ds.child("email").getValue();
                     String phone = ""+ ds.child("phone").getValue();
                     String image = ""+ ds.child("image").getValue();
+                    String direccion = ""+ ds.child("recidencia").getValue();
+
 
                     //Set data
                     namePu.setText(name);
                     emailPu.setText(email);
                     phonePu.setText(phone);
+                    addrePu.setText(direccion);
 
                     try {
                         Picasso.get().load(image).into(avatarPu);
@@ -514,6 +517,10 @@ try {
                             JSONObject object = response;
                             id_usuario = object.getString("id");
                             addrePu.setText(object.getString("recidencia"));
+                            namePu.setText(object.getString("name"));
+                            phonePu.setText(object.getString("telefono"));
+                            addrePu.setText(object.getString("recidencia"));
+                            emailPu.setText(object.getString("email"));
 
 
                         } catch (JSONException e) {

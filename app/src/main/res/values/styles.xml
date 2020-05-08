@@ -39,10 +39,11 @@
         <item name="android:textColorHint">@color/color_title</item>
     </style>
 
-    <style name="AppThemeNo" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeNo" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">#fff</item>
     </style>
 
 </resources>

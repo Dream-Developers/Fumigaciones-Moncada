@@ -45,8 +45,11 @@
         <activity
             android:name=".UsersActivity"
             android:label="@string/usuarios"
-            android:parentActivityName=".UsersActivity" />
-        <activity android:name=".ui.citas.Crear_Cita1" />
+            android:parentActivityName=".UsersActivity"
+            android:theme="@style/AppThemeNo"/>
+
+        <activity android:name=".ui.citas.Crear_Cita1"
+            android:theme="@style/AppThemeNo"/>
         <activity
             android:name=".ui.clientes.DetalleClienteScrollingActivity"
             android:label="@string/title_activity_detalle_cliente_scrolling"
@@ -63,18 +66,21 @@
         <activity
             android:name=".factura.crearFactura"
             android:configChanges="orientation|screenSize"
-            android:label="@string/crearfactura" />
-        <activity android:name=".AdquirirServicioActivity" />
+            android:label="@string/crearfactura"
+            android:theme="@style/AppThemeNo"/>
+
+        <activity android:name=".AdquirirServicioActivity"
+            android:theme="@style/AppThemeNo"/>
+
         <activity
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".ChatActivity"
-            android:theme="@style/AppThemeNo"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ui.Principal.DetalleImagenActivity" />
+        <activity android:name=".ui.Principal.DetalleImagenActivity"/>
         <activity
             android:name=".ui.solicitarCita.Detalle_Cita"
             android:theme="@style/AppTheme">
@@ -104,7 +110,8 @@
         <activity
             android:name=".ui.citas.Crear_Citas"
             android:configChanges="orientation|screenSize"
-            android:label="@string/detalle_cita" />
+            android:label="@string/detalle_cita"
+            android:theme="@style/AppThemeNo"/>
         <activity
             android:name=".NavegacionAdministradorActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -118,28 +125,35 @@
             android:name=".RegistarUsuarioNuevo"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_registro"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemeNo"/>
         <activity
             android:name=".RegistroUsuarioNuevoAdministrador"
             android:label="@string/title_activity_registro"
-            android:parentActivityName=".RegistroUsuarioNuevoAdministrador" />
+            android:parentActivityName=".RegistroUsuarioNuevoAdministrador"
+            android:theme="@style/AppThemeNo"/>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity android:name=".ui.clientes.Detalle_Cliente" />
+
         <activity
             android:name=".ui.citas.Detalle_Cita"
-            android:label="@string/detalleCita" />
+            android:label="@string/detalleCita"
+            android:theme="@style/AppThemeNo"/>
         <activity android:name=".ui.citas.DetalleCitaScrollingActivity" />
         <activity
             android:name=".Desarrolladores"
             android:hardwareAccelerated="true"
             android:label="@string/desarrolladores"
-            android:parentActivityName=".Desarrolladores" />
+            android:parentActivityName=".Desarrolladores"
+            android:theme="@style/AppThemeNo"/>
         <activity
             android:name=".VisionMision"
             android:label="@string/visionMision"
-            android:parentActivityName=".VisionMision" />
+            android:parentActivityName=".VisionMision"
+            android:theme="@style/AppThemeNo"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

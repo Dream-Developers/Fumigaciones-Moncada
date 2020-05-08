@@ -24,7 +24,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/seleccioneelcliente"
                     android:layout_marginTop="50dp"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/registro_nombres"
@@ -44,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/direccions"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/registro_direccion"
@@ -60,7 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/precio"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/registro_Precio"
@@ -79,7 +82,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fechas"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/registro_Fecha"
@@ -96,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/horas"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:textColor="#000"/>
 
                 <EditText
                     android:id="@+id/registro_Hora"

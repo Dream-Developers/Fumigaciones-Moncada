@@ -32,7 +32,7 @@
                         android:id="@+id/nombreCliente"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre:"
+                        android:text="@string/nombre"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
@@ -64,7 +64,7 @@
                         android:id="@+id/fechaCliente"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fecha:"
+                        android:text="@string/fecha"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -98,7 +98,7 @@
                         android:id="@+id/horaCliente"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hora:"
+                        android:text="@string/hora"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
@@ -130,7 +130,7 @@
                         android:id="@+id/servicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Precio:"
+                        android:text="@string/precio"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 

@@ -10,7 +10,7 @@
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="@string/nombre"
             android:id="@+id/mostarNombre"
             android:padding="15dp"
             android:textSize="14dp"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Fecha"
+            android:text="@string/fecha"
             android:id="@+id/mostarFecha"
 
             android:textSize="14dp"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Detalle"
+            android:text="@string/detalle"
             android:id="@+id/mostarDetalle"
 
             android:textSize="14dp"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Total"
+            android:text="@string/totals"
             android:id="@+id/mostarTotal"
 
             android:textSize="14dp"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Descuento"
+            android:text="@string/descuentos"
             android:id="@+id/mostarDescuneto"
 
             android:textSize="14dp"

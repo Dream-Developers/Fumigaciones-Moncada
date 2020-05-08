@@ -238,5 +238,6 @@
     <string name="guardar_cambios">Save Changes</string>
     <string name="llamar">To call</string>
     <string name="buscar">Search</string>
-
+    <string name="string_estado">string/estado</string>
+    <string name="tituloimagen">Titulo de la imagen</string>
 </resources>

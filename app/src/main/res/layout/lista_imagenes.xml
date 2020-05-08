@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idImagen"
-        android:text="Titulo del prducto"
+        android:text="@string/tituloimagen"
         android:textStyle="bold"
         android:padding="5dp"
         android:textColor="#1D1D1D"

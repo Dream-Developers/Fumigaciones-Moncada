@@ -33,14 +33,14 @@
         android:id="@+id/direccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Direccion:"
+        android:text="@string/direccion"
         android:textSize="18dp"
         android:textStyle="bold" />
         <TextView
             android:id="@+id/fechaCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha:"
+            android:text="@string/fecha"
             android:textSize="18dp"
             android:textStyle="bold" />
 
@@ -48,21 +48,21 @@
             android:id="@+id/horaCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hora:"
+            android:text="@string/hora"
             android:textSize="18dp"
             android:textStyle="bold" />
     <TextView
         android:id="@+id/servicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Servicio:"
+        android:text="@string/servicio"
         android:textSize="18dp"
         android:textStyle="bold" />
     <TextView
         android:id="@+id/estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado:"
+        android:text="@string/string_estado"
         android:textSize="18dp"
         android:textStyle="bold" />
 

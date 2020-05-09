@@ -76,6 +76,7 @@
             android:name=".ChatActivity"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".ChatActivity"
+            android:theme="@style/AppThemeNoo"
             android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity
             android:name=".Database.serviciosAdministrador.DetalleServicioAdministradorScrollingActivity"

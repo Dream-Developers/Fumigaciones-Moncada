@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Factura"
+                android:text="@string/factura"
                 android:textSize="25dp"
 
                 />
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="  Nombre:  "
+                android:text="@string/nombre"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/margenleft"/>
@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  Fecha:  "
+                android:text="@string/fecha"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/margenleft"
@@ -122,7 +122,7 @@
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="  Detalle:  "
+       android:text="@string/detalles"
        android:textSize="20dp"
        android:textStyle="bold"
        android:layout_marginLeft="@dimen/margenleft"
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text=" SubTotal:  L."
+                android:text="@string/subtotal"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text=" Descuento:  L."
+                android:text="@string/descuento"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -190,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Total:  L."
+                android:text="@string/total"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />

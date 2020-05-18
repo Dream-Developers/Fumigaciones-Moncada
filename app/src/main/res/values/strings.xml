@@ -63,14 +63,13 @@
     <string name="mision_y_visi_n">Misión y visión</string>
     <string name="adquirir_servicios">Servicio</string>
     <string name="title_activity_detalle_servicio_administrador_scrolling">
-        DetalleServicioAdministradorScrollingActivity</string>
-
+        DetalleServicioAdministradorScrollingActivity
+    </string>
 
     <string name="title_activity_detalle_cita_scrolling">DetalleCitaScrollingActivity</string>
     <string name="menu_contactar">Contactar</string>
     <string name="titlr_llamar">Llamada Telefónica</string>
     <string name="title_activity_detalle_cliente_scrolling">DetalleClienteScrollingActivity</string>
-
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -342,8 +341,11 @@
     <string name="guardar_cambios">Guardar Cambios</string>
     <string name="llamar">Llamar</string>
     <string name="buscar">buscar</string>
-    <string name="string_estado">Estado</string>
-    <string name="tituloimagen">Titulo de la imagen</string>
+    <string name="tituloimagen">Titulo</string>
+    <string name="detalles">Detalle:</string>
+    <string name="subtotal">Subtotal:         L.</string>
+    <string name="descuento">Descuento:      L.</string>
+    <string name="total">Total:      L.</string>
 
 
 </resources>

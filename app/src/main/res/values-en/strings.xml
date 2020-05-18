@@ -238,6 +238,10 @@
     <string name="guardar_cambios">Save Changes</string>
     <string name="llamar">To call</string>
     <string name="buscar">Search</string>
-    <string name="string_estado">string/estado</string>
-    <string name="tituloimagen">Titulo de la imagen</string>
+    <string name="tituloimagen">Title</string>
+    <string name="detalles">Detail:</string>
+    <string name="subtotal">Subtotal:      L.</string>
+    <string name="descuento">Discount:  L.</string>
+    <string name="total">Total:  L.</string>
+
 </resources>

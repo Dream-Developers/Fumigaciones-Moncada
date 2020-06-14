@@ -127,7 +127,7 @@ public class NavegacionAdministradorActivity extends AppCompatActivity {
         new AlertDialog.Builder(NavegacionAdministradorActivity.this)
                 .setTitle(getString(R.string.confirmacion))
                 .setMessage(getString(R.string.confirmacion2))
-                .setIcon(R.drawable.logofm)
+                .setIcon(R.drawable.fm)
                 .setPositiveButton(R.string.si,
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)

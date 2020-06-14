@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/gradient_background_app"
     android:fitsSystemWindows="true"
     tools:context=".SplashActivity">
 
@@ -23,11 +23,11 @@
 
         <ImageView
             android:id="@+id/imgSplash"
-            android:src="@drawable/splash2"
+            android:src="@drawable/fm"
             android:layout_gravity="center"
-            android:layout_width="260dp"
+            android:layout_width="100dp"
             android:visibility="visible"
-            android:layout_height="250dp"/>
+            android:layout_height="100dp"/>
 
 
 

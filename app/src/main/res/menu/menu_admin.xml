@@ -14,6 +14,7 @@
         android:id="@+id/visionau"
         android:orderInCategory="100"
         android:title="@string/mision_y_visi_n"
+        android:onClick="mision_vision_admin"
         app:showAsAction="never" />
 
 
@@ -21,22 +22,15 @@
         android:id="@+id/confinau"
         android:orderInCategory="100"
         android:title="@string/desarrolladores"
+        android:onClick="desarrolladores_admin"
         app:showAsAction="never" />
-
-    <item android:id="@+id/action_search"
-        android:title="Search"
-        android:icon="@drawable/ic_menu_search"
-        app:showAsAction="always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView">
-
-    </item>
 
 
     <item android:id="@+id/action_ayuda"
         android:orderInCategory="100"
         android:title="@string/ayuda"
         app:showAsAction="never"
-        app:actionViewClass="androidx.appcompat.widget.SearchView">
+        android:onClick="ayuda_admin">
 
     </item>
 

@@ -15,7 +15,7 @@
 
     </group>
 
-    <item android:title="Cuenta">
+    <item android:title="@string/cuenta_nav">
         <menu>
             <item
                 android:id="@+id/nav_perfil"
@@ -25,7 +25,7 @@
     </item>
 
 
-    <item android:title="Públicidad">
+    <item android:title="@string/subir_servicio">
 
         <menu>
         <item
@@ -41,7 +41,7 @@
     </item>
 
 
-    <item android:title="Citas">
+    <item android:title="@string/menu_citas">
         <menu>
 
             <item
@@ -54,7 +54,7 @@
                 android:title="@string/menu_solicitarCita" />
         </menu>
     </item>
-    <item android:title="Comprobante">
+    <item android:title="@string/nav_comprovante">
         <menu>
             <item
                 android:id="@+id/nav_factura"

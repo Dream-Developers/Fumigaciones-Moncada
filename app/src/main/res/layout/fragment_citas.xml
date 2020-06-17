@@ -23,6 +23,8 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="56dp"
+        app:backgroundTint="@color/colorText"
+        app:tint="@color/colorBlanco"
         android:id="@+id/add_citas"
         android:src="@drawable/baseline_check_circle_outline_white_18dp">
 

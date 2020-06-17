@@ -27,6 +27,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        app:backgroundTint="@color/colorText"
+        app:tint="@color/colorBlanco"
         android:layout_marginBottom="56dp"
         android:id="@+id/add_clientes"
         android:src="@drawable/baseline_check_circle_outline_white_18dp">

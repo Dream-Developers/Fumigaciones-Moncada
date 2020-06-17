@@ -348,6 +348,10 @@
     <string name="descuento">Descuento:      L.</string>
     <string name="total">Total:      L.</string>
     <string name="string_estado">Estado:</string>
+    <string name="cuenta_nav">Cuenta</string>
+    <string name="subir_servicio">Subir servicio</string>
+    <string name="nav_comprovante">Comprobante</string>
+
 
 
 </resources>

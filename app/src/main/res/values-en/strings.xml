@@ -245,4 +245,7 @@
     <string name="descuento">Discount:  L.</string>
     <string name="total">Total:  L.</string>
     <string name="string_estado">Status:</string>
+    <string name="cuenta_nav">Account</string>
+    <string name="subir_servicio">Upload service</string>
+    <string name="nav_comprovante">Receipt</string>
 </resources>

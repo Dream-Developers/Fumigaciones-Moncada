@@ -22,7 +22,9 @@
         android:layout_marginBottom="56dp"
         android:id="@+id/ad_servicios"
         android:onClick="adquirServicio"
-        android:src="@drawable/logofm">
+        app:backgroundTint="@color/colorText"
+        app:tint="@color/colorBlanco"
+        android:src="@drawable/ic_servicio">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

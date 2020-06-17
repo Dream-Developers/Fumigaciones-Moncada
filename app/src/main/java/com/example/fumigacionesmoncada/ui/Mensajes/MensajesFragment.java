@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ import com.example.fumigacionesmoncada.SplashActivity;
 import com.example.fumigacionesmoncada.User;
 import com.example.fumigacionesmoncada.UsersActivity;
 import com.example.fumigacionesmoncada.notifications.Token;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -89,7 +92,7 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         //RecyclerView rv = view.findViewById(R.id.recycler_contact);
         //rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
+        setHasOptionsMenu(true);
         variable =  getActivity().getIntent().getStringExtra("USER");
         System.out.println(variable);
 
@@ -180,6 +183,20 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
             //Toast.makeText(getContext(), "No hay", Toast.LENGTH_LONG).show();
         }
 
+
+        final BottomAppBar bottomAppBar = view.findViewById(R.id.bottomAppBar2);
+
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //NavigationDrawerFragment bottomNavFragment = new NavigationDrawerFragment();
+                //bottomNavFragment.show(getSupportFragmentManager(), "TAG");
+                //Intent intent = new Intent(getActivity(), AdministradorActivity.class);
+                //startActivity(intent);
+            }
+
+        });
+
         return view;
     }
 
@@ -269,7 +286,7 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         return getContext().getContentResolver().query(uri, null, selection, selectionArgas, null);
 
     }
-    /**private void updateToken() {
+    /**private void updateToken() {s
         String token = FirebaseInstanceId.getInstance().getToken();
         String uid = FirebaseAuth.getInstance().getUid();
 
@@ -461,6 +478,11 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
     public void onStart() {
         super.onStart();
         chechUserUserStatus();
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
     }
 
     private void chechUserUserStatus(){

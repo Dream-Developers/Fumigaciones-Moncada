@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:background="@color/colorText"
+            android:background="@drawable/gradient_gris"
             android:gravity="bottom"
             android:orientation="vertical"
             android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
-                android:text="@string/nav_titulo"
+                android:text="@string/nav_bienvenida"
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

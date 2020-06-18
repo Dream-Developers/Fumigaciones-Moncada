@@ -351,7 +351,7 @@
     <string name="cuenta_nav">Cuenta</string>
     <string name="subir_servicio">Subir servicio</string>
     <string name="nav_comprovante">Comprobante</string>
-
+    <string name="nav_bienvenida">Bienvenido</string>
 
 
 </resources>

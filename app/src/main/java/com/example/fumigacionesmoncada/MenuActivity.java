@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,14 +23,29 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Object vision_mision;
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
     String mUID;
+    TextView nameTv, emailTv;
+    ImageView avatarIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +56,20 @@ public class MenuActivity extends AppCompatActivity {
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View navHeaderView = navigationView.getHeaderView(0);
+
+        avatarIv =  navHeaderView.findViewById(R.id.imageView_header);
+        nameTv =  navHeaderView.findViewById(R.id.name_header);
+        emailTv =  navHeaderView.findViewById(R.id.email_header);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         firebaseAuth = FirebaseAuth.getInstance();
         System.out.println(firebaseAuth.getCurrentUser());
+        user = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
+        storageReference = FirebaseStorage.getInstance().getReference("Images");
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_principal,
@@ -54,6 +83,37 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    String name = ""+ ds.child("name").getValue();
+                    String email = ""+ ds.child("email").getValue();
+                    String image = ""+ ds.child("image").getValue();
+
+                    //Set data
+                    nameTv.setText(name);
+                    emailTv.setText(email);
+
+
+                    try {
+                        Picasso.get().load(image).into(avatarIv);
+                    }catch (Exception e){
+                        Picasso.get().load(R.drawable.fondo_chat4).into(avatarIv);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -86,7 +146,7 @@ public class MenuActivity extends AppCompatActivity {
         new AlertDialog.Builder(MenuActivity.this)
                 .setTitle("Confirmación")
                 .setMessage("¿Estás seguro que quieres cerrar sesión?")
-                .setIcon(R.drawable.logofm)
+                .setIcon(R.drawable.fm)
                 .setPositiveButton("SI",
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)

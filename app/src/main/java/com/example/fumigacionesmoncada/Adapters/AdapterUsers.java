@@ -60,7 +60,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, ""+userEmail, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, ""+userEmail, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("hisUid", hisIUD);

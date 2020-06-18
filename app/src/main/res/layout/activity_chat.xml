@@ -98,9 +98,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/baseline_white_24dp"
+            android:background="@drawable/boton_redondo"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
+            android:src="@drawable/baseline_send_white_18dp"
             android:textStyle="bold"
             />
 

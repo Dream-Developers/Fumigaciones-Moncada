@@ -3,7 +3,8 @@
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#388E3C</color>
     <color name="colorAccent">#8BC34A</color>
-    <color name="colorText">#504F60</color>
+    <color name="colorgris">#504F60</color>
+    <color name="colorText">#5E5A65</color>
     <color name="color_title">#FFFFFF</color>
     <color name="colorBlancoTransparente">#cccccc</color>
     <color name="colorBlanco">#FFFFFF</color>

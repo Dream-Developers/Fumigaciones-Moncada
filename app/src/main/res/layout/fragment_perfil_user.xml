@@ -194,7 +194,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_save_black"
+        android:src="@drawable/ic_save_black_24dp"
         app:backgroundTint="@color/colorText"
         app:tint="@color/colorBlanco"
         android:layout_alignParentEnd="true">

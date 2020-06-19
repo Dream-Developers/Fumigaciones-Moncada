@@ -1,33 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/error">
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_servicios"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
    />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="56dp"
-        android:id="@+id/ad_servicios"
-        android:onClick="adquirServicio"
-        app:backgroundTint="@color/colorText"
-        app:tint="@color/colorBlanco"
-        android:src="@drawable/ic_servicio">
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
+        >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabOne"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fabThree"
+            android:layout_alignTop="@+id/fabTwo"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="11dp"
+            android:layout_toStartOf="@+id/fabMain"
+            android:src="@drawable/ic_location_on_black_24dp"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:tint="@color/colorBlanco" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="39dp"
+            android:layout_marginBottom="17dp"
+            android:layout_toStartOf="@+id/fabMain"
+            android:src="@drawable/ic_servicio"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"
+            app:tint="@color/colorBlanco" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fabMain"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/ic_phone_in_talk_black_24dp"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:fabSize="mini"
+            app:tint="@color/colorBlanco" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="right"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="13dp"
+            app:backgroundTint="@color/colorText"
+            app:tint="@color/colorBlanco"
+            android:src="@drawable/ic_add_black_24dp"
+            app:fabSize="normal"
+            />
 
 
+    </RelativeLayout>
 
-</RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/error"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/sin_conexion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sin_conexion"
+            android:textColor="@color/colorText"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/error">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

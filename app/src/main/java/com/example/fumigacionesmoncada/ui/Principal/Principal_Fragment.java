@@ -8,11 +8,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fumigacionesmoncada.AdquirirServicioActivity;
 import com.example.fumigacionesmoncada.ClaseVolley;
+import com.example.fumigacionesmoncada.MapsActivity;
 import com.example.fumigacionesmoncada.R;
 import com.example.fumigacionesmoncada.RecyclerTouchListener;
 import com.example.fumigacionesmoncada.notifications.Token;
@@ -48,7 +52,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-public class Principal_Fragment extends Fragment   {
+public class Principal_Fragment extends Fragment  implements View.OnClickListener {
 
 
 
@@ -65,11 +69,15 @@ public class Principal_Fragment extends Fragment   {
 
     RecyclerView recyclerUsuarios;
     ArrayList<ServiciosVO> listaUsuarios;
-   RelativeLayout linearLayout;
+   ConstraintLayout linearLayout;
     ProgressDialog dialog;
     String tokenUsuario;
-    FloatingActionButton adservicio;
-
+    TextView sin_conexion;
+    FloatingActionButton fabMain, fabOne, fabTwo, fabThree;;
+    Float translationY = 100f;
+    Boolean isMenuOpen = false;
+    String number = "89217523";
+    OvershootInterpolator interpolator = new OvershootInterpolator();
     // RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
@@ -120,7 +128,15 @@ public class Principal_Fragment extends Fragment   {
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         getActivity().getWindow().setBackgroundDrawableResource(R.drawable.gradient_background_app) ;
         cargarPreferencias();
-        adservicio = vista.findViewById(R.id.ad_servicios);
+
+        fabMain = vista.findViewById(R.id.fabMain);
+        fabOne = vista.findViewById(R.id.fabOne);
+        fabTwo = vista.findViewById(R.id.fabTwo);
+        fabThree = vista.findViewById(R.id.fabThree);
+        sin_conexion = vista.findViewById(R.id.sin_conexion);
+
+        initFabMenu();
+
         listaUsuarios=new ArrayList<>();
         recyclerUsuarios =  vista.findViewById(R.id.recycler_servicios);
 
@@ -152,13 +168,13 @@ linearLayout = vista.findViewById(R.id.error);
         }));
 
         updateToken(FirebaseInstanceId.getInstance().getToken());
-        adservicio.setOnClickListener(new View.OnClickListener() {
+        /**adservicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AdquirirServicioActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         return  vista;
 
@@ -166,9 +182,68 @@ linearLayout = vista.findViewById(R.id.error);
 
     }
 
+    private void initFabMenu() {
 
 
+        fabOne.setAlpha(0f);
+        fabTwo.setAlpha(0f);
+        fabThree.setAlpha(0f);
 
+        fabOne.setTranslationY(translationY);
+        fabTwo.setTranslationY(translationY);
+        fabThree.setTranslationY(translationY);
+
+        fabMain.setOnClickListener(this);
+        fabOne.setOnClickListener(this);
+        fabTwo.setOnClickListener(this);
+        fabThree.setOnClickListener(this);
+    }
+
+    private void openMenu() {
+        isMenuOpen = !isMenuOpen;
+        fabMain.animate().setInterpolator(interpolator).rotation(45f).setDuration(300).start();
+
+        fabOne.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabTwo.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        fabThree.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+    }
+
+    private void closeMenu() {
+        isMenuOpen = !isMenuOpen;
+        fabMain.animate().setInterpolator(interpolator).rotation(0f).setDuration(300).start();
+
+        fabOne.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabTwo.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        fabThree.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fabMain:
+
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+                break;
+            case R.id.fabOne:
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.fabTwo:
+                // Do onlick on menu action here
+                Intent intent2 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent2);
+                break;
+            case R.id.fabThree:
+                Intent intent3 = new Intent(getActivity(), AdquirirServicioActivity.class);
+                startActivity(intent3);
+                break;
+        }
+    }
 
     private void cargarWebService() {
         dialog=new ProgressDialog(getContext());
@@ -218,10 +293,13 @@ linearLayout = vista.findViewById(R.id.error);
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
+
                     Toast.makeText(getContext(), R.string.reviseconexion, Toast.LENGTH_LONG).show();
                 } else {
 
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), R.string.reviseconexion , Toast.LENGTH_SHORT).show();
                 }
 

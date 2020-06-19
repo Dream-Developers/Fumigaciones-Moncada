@@ -186,8 +186,8 @@
     <string name="contactanos">Contact us</string>
     <string name="residencia">Residency :</string>
     <string name="servicio">Service :</string>
-    <string name="hora">Hour :</string>
-    <string name="fecha">Date :</string>
+    <string name="hora">Hour:</string>
+    <string name="fecha">Date:</string>
     <string name="aceptarcita">TO ACCEPT</string>
     <string name="rechazarcita">REJECT</string>
     <string name="añadir">Add Service</string>
@@ -198,14 +198,14 @@
     <string name="tomarfoto">Take photo</string>
     <string name="elegirgaleria">Choose from Gallery</string>
     <string name="eligeopcion">Choose an Option</string>
-    <string name="lugarfumigacion">Fumigation Place :</string>
+    <string name="lugarfumigacion">Fumigation Place:</string>
     <string name="pedircita">Ask for Appointment</string>
     <string name="seleccioneelcliente">Select the Client</string>
     <string name="precio">Price</string>
     <string name="fechas">Date</string>
     <string name="horas">Hour</string>
     <string name="direccions">Address</string>
-    <string name="plaga">Plague :</string>
+    <string name="plaga">Plague:</string>
     <string name="agregarcita">Add Appointment</string>
     <string name="nombrecli">Client Name</string>
     <string name="totals">Total</string>
@@ -249,4 +249,5 @@
     <string name="subir_servicio">Upload service</string>
     <string name="nav_comprovante">Receipt</string>
     <string name="nav_bienvenida">Welcome</string>
+    <string name="sin_conexion">Connection error </string>
 </resources>

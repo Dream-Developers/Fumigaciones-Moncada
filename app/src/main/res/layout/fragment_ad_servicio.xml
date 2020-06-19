@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="30dp">
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
 
 
     <androidx.cardview.widget.CardView
@@ -17,7 +18,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
         app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="true"
         android:layout_height="wrap_content"
@@ -30,13 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:allowUndo="true"
                 android:text="@string/nombre"
                 android:textColor="#000"
@@ -49,6 +48,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/cliente_cita"
                 android:focusable="false"
+                android:drawablePadding="5dp"
                 android:inputType="textPersonName"
                 android:lines="1"
                 android:maxLength="50" />
@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/direccion_cita"
                 android:lines="1" />
 
@@ -81,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="0123456789."
+                android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/telefono_cliente"
                 android:inputType="phone"
                 android:maxLength="8" />
@@ -113,6 +115,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/fecha_cita"
                 android:focusable="false"
+                android:drawablePadding="5dp"
                 android:inputType="date"
                 android:lines="1" />
 
@@ -130,6 +133,7 @@
 
                 android:drawableLeft="@drawable/hora_cita"
                 android:focusable="false"
+                android:drawablePadding="5dp"
                 android:inputType="time"
                 android:lines="1" />
 
@@ -138,6 +142,7 @@
                 android:layout_width="180dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
                 android:background="@drawable/oval"
                 android:gravity="center"

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,7 +81,7 @@ int resultado;
         TextView subtotal = convertView.findViewById(R.id.mostrarsubtotal);
         TextView descuento = convertView.findViewById(R.id.mostrardescuento);
         TextView detalle = convertView.findViewById(R.id.mosstardetalle);
-        Button guardar = convertView.findViewById(R.id.guar);
+        ImageButton guardar = convertView.findViewById(R.id.guar);
 
 
         final Facturas citas = getItem(position);

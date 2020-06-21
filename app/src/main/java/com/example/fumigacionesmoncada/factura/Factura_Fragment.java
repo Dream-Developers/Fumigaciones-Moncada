@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -60,6 +61,8 @@ import java.util.Map;
 public class Factura_Fragment extends Fragment implements SearchView.OnQueryTextListener {
     private FloatingActionButton addCliente;
     ListView lista_citas;
+    ConstraintLayout constraintLayout;
+    TextView sin_conexion;
     facturas_adapter citasAdapter;
     ArrayList<Facturas> cita;
      String tokenUsuario;
@@ -91,6 +94,8 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         });
         addCliente = view.findViewById(R.id.add_clientes);
         lista_citas = view.findViewById(R.id.lista);
+        constraintLayout = view.findViewById(R.id.error);
+        sin_conexion = view.findViewById(R.id.sin_conexion);
         cita = new ArrayList<>();
         lista_citas.setAdapter(new facturas_adapter(getContext(), cita));
         lista_citas.setVisibility(View.VISIBLE);
@@ -319,11 +324,17 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
             public void onErrorResponse(VolleyError error) {
 
                 if (error.toString().equals("com.android.volley.ServerError")) {
+                    constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
+                    constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
 

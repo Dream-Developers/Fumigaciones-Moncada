@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -36,6 +38,8 @@ public class SolicitarCitaFragment extends Fragment {
     ArrayList<CitaVO> cita;
     String tokenUsuario;
     String id_usuario;
+    ConstraintLayout constraintLayout;
+    TextView sin_conexion;
 
 
 
@@ -44,6 +48,8 @@ public class SolicitarCitaFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_solicitar_cita, container, false);
         lista = view.findViewById(R.id.lista_citas_solicitud);
+        constraintLayout = view.findViewById(R.id.error);
+        sin_conexion = view.findViewById(R.id.sin_conexion);
         cita = new ArrayList<>();
         lista.setAdapter(new CitasAdapter(getContext(),cita));
         lista.setVisibility(View.VISIBLE);
@@ -133,7 +139,8 @@ public class SolicitarCitaFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                sin_conexion.setVisibility(View.VISIBLE);
                 error.getStackTrace();
                 Toast.makeText(getContext(), "Error "+error.toString(), Toast.LENGTH_SHORT).show();
             }

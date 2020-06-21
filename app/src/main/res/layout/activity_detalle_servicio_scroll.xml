@@ -107,7 +107,7 @@
                     android:gravity="center"
                     android:onClick="adquiiirServicio"
                     android:text="@string/solicitarservi"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorBlanco"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -19,10 +19,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -53,6 +55,8 @@ private FloatingActionButton addcita;
 
     String id_usuario;
     String tokenUsuario;
+    ConstraintLayout constraintLayout;
+    TextView sin_conexion;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +66,8 @@ private FloatingActionButton addcita;
         lista_citas= view.findViewById(R.id.lista_citas);
         lista_citas.setDivider(null);
       lista_citas.setDividerHeight(0);
+      constraintLayout = view.findViewById(R.id.error);
+      sin_conexion = view.findViewById(R.id.sin_conexion);
 
         lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -230,9 +236,10 @@ cargarPreferencias();
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                sin_conexion.setVisibility(View.VISIBLE);
                 error.getStackTrace();
-                Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

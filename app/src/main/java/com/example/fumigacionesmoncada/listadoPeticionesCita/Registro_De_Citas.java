@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -52,7 +54,8 @@ import java.util.Map;
  */
 public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTextListener{
 
-
+    ConstraintLayout constraintLayout;
+    TextView sin_conexion;
     ListView lista_citas;
     Regstro_peticiones_adapter citasAdapter;
     ArrayList<Citas_Peticiones> cita;
@@ -110,6 +113,8 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         cita = new ArrayList<>();
         lista_citas.setAdapter(new Regstro_peticiones_adapter(getContext(), cita));
         lista_citas.setVisibility(View.VISIBLE);
+        constraintLayout = view.findViewById(R.id.error);
+        sin_conexion = view.findViewById(R.id.sin_conexion);
         getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -272,9 +277,13 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
             public void onErrorResponse(VolleyError error) {
 
                 if (error.toString().equals("com.android.volley.ServerError")) {
+                    constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
+                    constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();

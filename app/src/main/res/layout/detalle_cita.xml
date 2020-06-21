@@ -213,8 +213,9 @@
                 android:background="@drawable/oval"
                 android:onClick="btnAceptado"
                 android:text="@string/aceptarcita"
+                android:layout_marginEnd="10dp"
                 android:textSize="15dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorBlanco"
                 />
 
 
@@ -227,7 +228,7 @@
                 android:onClick="btnRechazado"
                 android:text="@string/rechazarcita"
                 android:textSize="15dp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorBlanco" />
 </LinearLayout>
 
     </LinearLayout>

@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import android.widget.SearchView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -42,6 +45,8 @@ import java.util.Map;
 
 public class ClientesFragment extends Fragment implements SearchView.OnQueryTextListener{
     private FloatingActionButton addCliente;
+    ConstraintLayout constraintLayout;
+    TextView sin_conexion;
     ListView lista;
     String tokenUsuario;
     String id_usuario;
@@ -53,6 +58,8 @@ public class ClientesFragment extends Fragment implements SearchView.OnQueryText
         View view = inflater.inflate(R.layout.fragment_clientes, container, false);
         lista = view.findViewById(R.id.lista_clientes);
         addCliente = view.findViewById(R.id.add_clientes);
+        constraintLayout = view.findViewById(R.id.error);
+        sin_conexion = view.findViewById(R.id.sin_conexion);
 cargarPreferencias();
         cargarClientes();
         setHasOptionsMenu(true);
@@ -208,7 +215,8 @@ cargarPreferencias();
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                sin_conexion.setVisibility(View.VISIBLE);
                 error.getStackTrace();
                 Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
             }

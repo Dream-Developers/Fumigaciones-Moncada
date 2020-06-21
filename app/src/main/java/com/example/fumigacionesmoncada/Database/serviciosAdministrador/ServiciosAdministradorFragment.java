@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -58,6 +59,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
     ConstraintLayout linearLayout;
     private OnFragmentInteractionListener mListener;
     ClaseAdapterImagen claseAdapterImagen;
+    TextView sin_conexion;
 
     public ServiciosAdministradorFragment() {
         // Required empty public constructor
@@ -74,6 +76,7 @@ public class ServiciosAdministradorFragment extends Fragment  {
         recyclerUsuarios.setLayoutManager(new GridLayoutManager(getContext(),1,LinearLayoutManager.HORIZONTAL,false));
         recyclerUsuarios.setHasFixedSize(true);
         linearLayout = view.findViewById(R.id.error);
+        sin_conexion = view.findViewById(R.id.sin_conexion);
 
         cargarWebService();
         cargarPreferencias();
@@ -215,13 +218,17 @@ public class ServiciosAdministradorFragment extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.toString().equals("com.android.volley.ServerError")) {
+                    linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), R.string.presentamastarde, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), R.string.reviseconexion, Toast.LENGTH_LONG).show();
                 } else {
                     linearLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
+                    sin_conexion.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), R.string.reviseconexion , Toast.LENGTH_SHORT).show();
                     // Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }

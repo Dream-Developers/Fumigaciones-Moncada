@@ -562,7 +562,7 @@ public class ImagenFragment extends Fragment {
 
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("nombre", nombre);
-                parametros.put("descripcion", descripcion);
+                parametros.put("descripción", descripcion);
                 parametros.put("foto", imagen);
 
 

@@ -3,6 +3,7 @@ package com.example.fumigacionesmoncada;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,16 +43,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng danli = new LatLng(14.02028765477462, -86.56811682678376);
-        mMap.addMarker(new MarkerOptions().position(danli).title("Colonia Teodoro Rodas Valle"));
+        mMap.addMarker(new MarkerOptions().position(danli).title(getString(R.string.direccionmap)));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(danli));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(danli, 15));
 
 
         LatLng ubicacion = new LatLng(14.020054475424200, -86.56841302801593);
-        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
-                (R.mipmap.ic_launcher)).anchor(0.0f, 1.0f).position(ubicacion).title("Casa de Lenin Moncada"));
+        try {
+            mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
+                    (R.mipmap.ic_launcher)).anchor(0.0f, 1.0f).position(ubicacion).title(getString(R.string.casalennin)));
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        }catch (Exception ex){
+        }
+
 
     }
 }

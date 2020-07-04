@@ -357,6 +357,8 @@
     <string name="entregado">Entregado</string>
     <string name="slogan">Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice.  Somos felices, Dios nos bendice. Somos felices, Dios nos bendice.</string>
     <string name="sloganadmin">Sean felices, Dios los bendiga.  Sean felices, Dios los bendiga.  Sean felices, Dios los bendiga. Sean felices, Dios los bendiga.</string>
-
+    <string name="aceptarsolicitucita">"¿Está seguro que desea solicitar una cita?"</string>
+    <string name="direccionmap">Colonia Teodoro Rodas Valle</string>
+    <string name="casalennin">Casa de Lenin Moncada</string>
 
 </resources>

@@ -254,4 +254,7 @@
     <string name="entregado">Delivered</string>
     <string name="slogan">We are happy, God bless us. We are happy, God bless us. We are happy, God bless us. We are happy, God bless us.</string>
     <string name="sloganadmin">Be happy, God bless you. Be happy, God bless you. Be happy, God bless you. Be happy, God bless you.</string>
+    <string name="aceptarsolicitucita">"Are you sure you want to request an appointment?"</string>
+    <string name="direccionmap">Neighborhood Teodoro Rodas Valle</string>
+    <string name="casalennin">Lenin Moncada house</string>
 </resources>

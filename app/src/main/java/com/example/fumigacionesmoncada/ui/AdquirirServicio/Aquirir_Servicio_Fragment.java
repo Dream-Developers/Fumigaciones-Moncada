@@ -135,9 +135,8 @@ public class Aquirir_Servicio_Fragment extends Fragment {
 
                     AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
                     dialogo1.setTitle(R.string.importante);
-                    dialogo1.setMessage(
-                            "Estas Seguro Que Desea Solicitar Una Cita"
-
+                    dialogo1.setIcon(R.drawable.fm);
+                    dialogo1.setMessage( R.string.aceptarsolicitucita
 
                     );
                     dialogo1.setCancelable(false);

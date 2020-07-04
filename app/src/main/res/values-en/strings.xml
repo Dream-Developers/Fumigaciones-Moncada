@@ -250,4 +250,8 @@
     <string name="nav_comprovante">Receipt</string>
     <string name="nav_bienvenida">Welcome</string>
     <string name="sin_conexion">Connection error </string>
+    <string name="nohay">No registered customers</string>
+    <string name="entregado">Delivered</string>
+    <string name="slogan">We are happy, God bless us. We are happy, God bless us. We are happy, God bless us. We are happy, God bless us.</string>
+    <string name="sloganadmin">Be happy, God bless you. Be happy, God bless you. Be happy, God bless you. Be happy, God bless you.</string>
 </resources>

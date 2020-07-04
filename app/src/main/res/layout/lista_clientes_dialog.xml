@@ -8,7 +8,7 @@
         android:id="@+id/buscar_clientes"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Buscar" />
+        android:hint="@string/buscar" />
 
     <TextView
         android:id="@+id/sinclientes"
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:text="No hay clientes ingresados"
+        android:text="@string/nohay"
         android:textSize="18sp"
         android:visibility="gone" />
 

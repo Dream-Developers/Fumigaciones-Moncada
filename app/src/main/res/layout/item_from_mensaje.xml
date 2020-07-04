@@ -30,7 +30,7 @@
         android:background="@drawable/bg_edittext_rounded"
         android:maxWidth="240dp"
         android:padding="8dp"
-        android:text="Sean felices, Dios los bendiga.  Sean felices, Dios los bendiga.  Sean felices, Dios los bendiga. Sean felices, Dios los bendiga. "
+        android:text="@string/sloganadmin"
         android:textColor="#000"
         app:layout_constraintStart_toEndOf="@+id/profileIv"
         app:layout_constraintTop_toTopOf="@+id/profileIv" />

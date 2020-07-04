@@ -29,7 +29,7 @@
         android:id="@+id/tituloImagenD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulo"
+        android:text="@string/titulo"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="30sp"
@@ -39,7 +39,7 @@
         android:id="@+id/descripcionImagenD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripcion"
+        android:text="@string/descripcion"
         android:textSize="25dp"
         android:textColor="#DD1B1919"
         />

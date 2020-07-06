@@ -145,8 +145,8 @@
                 android:background="@drawable/oval"
                 android:gravity="center"
                 android:onClick="pedir"
-                android:text="@string/pedircita"
-                android:textColor="@color/colorPrimary"
+                android:text="@string/pedir_cita"
+                android:textColor="@color/colorBlanco"
                 android:textStyle="bold" />
         </LinearLayout>
 

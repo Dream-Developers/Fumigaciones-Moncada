@@ -15,8 +15,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="296dp"
+        android:layout_marginBottom="36dp"
         android:src="@drawable/baseline_check_circle_outline_white_18dp"
         app:backgroundTint="@color/colorText"
         app:layout_constraintBottom_toBottomOf="@+id/refreshLayout"
@@ -65,7 +65,8 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
             android:id="@+id/lista"

@@ -134,7 +134,7 @@
             android:onClick="registrar"
             android:text="Registrar"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#fff"
 
             />
 

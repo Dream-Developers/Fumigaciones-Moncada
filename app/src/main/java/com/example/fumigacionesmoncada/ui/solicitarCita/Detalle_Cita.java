@@ -53,7 +53,7 @@ public class Detalle_Cita extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_cita);
-        setTitle("Detalle Cita");
+        setTitle(R.string.detallecita);
         nombre = findViewById(R.id.detalle_nombre);
         direccion = findViewById(R.id.detalle_direccion);
         hora = findViewById(R.id.detalle_hora);
@@ -73,9 +73,10 @@ public class Detalle_Cita extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Detalle_Cita.this);
-                builder.setTitle("Confirmacion");
-                builder.setMessage("Desea aceptar esta cita");
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.confirmacionCita);
+                builder.setMessage(R.string.aceptacioncita);
+                builder.setIcon(R.drawable.fm);
+                builder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         agregarCitaWebService(id, which);
@@ -91,7 +92,7 @@ public class Detalle_Cita extends AppCompatActivity {
                         }
                     });
                 }
-                AlertDialog.Builder builder1 = builder.setNegativeButton("No", null);
+                AlertDialog.Builder builder1 = builder.setNegativeButton(R.string.no, null);
                 builder1.show();
 
 
@@ -105,9 +106,10 @@ public class Detalle_Cita extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(Detalle_Cita.this);
-                builder2.setTitle("Confirmacion");
-                builder2.setMessage("Esta seguro que desea Cancelar la Peticion de cita");
-                builder2.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder2.setTitle(R.string.confirmacionCita);
+                builder2.setMessage(R.string.rechazarcitas);
+                builder2.setIcon(R.drawable.fm);
+                builder2.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Citas_Peticiones citas = null;
@@ -128,7 +130,7 @@ public class Detalle_Cita extends AppCompatActivity {
                         }
                     });
                 }
-                builder2.setNegativeButton("No", null);
+                builder2.setNegativeButton(R.string.no, null);
                 builder2.show();
             }
 
@@ -146,7 +148,7 @@ public class Detalle_Cita extends AppCompatActivity {
 
     private void agregarCitaWebService(final String id, final int position) {
         final ProgressDialog progreso = new ProgressDialog(this);
-        progreso.setMessage("Cargando datos...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
 
         try {

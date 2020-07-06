@@ -100,7 +100,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
         });
         etHora.setEnabled(false);
         cargarPreferencias();
-
+        setTitle(R.string.formularioCita);
 
 
     }
@@ -368,7 +368,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
     private void cargarWebService() {
 
         progreso = new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
 
         String ip = getString(R.string.ip);
@@ -401,12 +401,12 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
             public void onErrorResponse(VolleyError error) {
                 progreso.hide();
                 if (error.toString().equals("com.android.volley.ServerError")) {
-                    Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.servererror, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                    Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -433,7 +433,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
     private void validacion() {
         if (nombre.getText().toString().equals("") || direccion.getText().toString().equals("") || precio.getText().toString().equals("") || fecha.getText().toString().equals("")
                 || etHora.getText().toString().equals("")) {
-            Toast.makeText(this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.mensajefact, Toast.LENGTH_LONG).show();
         } else {
 
             cargarWebService();

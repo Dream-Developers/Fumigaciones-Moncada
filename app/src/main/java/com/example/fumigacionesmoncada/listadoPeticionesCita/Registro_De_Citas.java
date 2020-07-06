@@ -134,9 +134,9 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
 
     private void CancelarCitas(final Citas_Peticiones cit, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Confirmacion");
-        builder.setMessage("Esta seguro que desea Cancelar la Peticion de cita");
-        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.confirmacionCita);
+        builder.setMessage(R.string.peticioncita);
+        builder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 CancelarCitaWebService(cit.getId(),cit.getEstado(), position);
@@ -155,7 +155,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
                 }
             });
         }
-        builder.setNegativeButton("No", null);
+        builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
 
@@ -170,7 +170,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
     }
     private void CancelarCitaWebService(String id, String Estado, final int position) {
         progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Cargando datos...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
 
         if (Estado.equals("1")){
@@ -220,7 +220,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
         Toast.makeText(getContext(), exe.getMessage(), Toast.LENGTH_SHORT).show();
     }}else {
             progreso.dismiss();
-            Toast.makeText(getContext(), "Solo Puede cancelar Las citas Pendientes", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.cancelarcitap, Toast.LENGTH_LONG).show();
 
         }
 
@@ -279,18 +279,18 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     sin_conexion.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.servererror, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     sin_conexion.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.timeerror, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),  R.string.timeerror, Toast.LENGTH_SHORT).show();
                 }
 
                 error.getStackTrace();
-                Toast.makeText(getContext(), "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

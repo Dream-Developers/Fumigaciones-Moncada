@@ -120,12 +120,12 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/oval"
+                    android:background="@color/colorPrimary"
                     android:onClick="registrar1"
                     android:text="@string/agregarcita"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorBlanco"
 
                     />
 

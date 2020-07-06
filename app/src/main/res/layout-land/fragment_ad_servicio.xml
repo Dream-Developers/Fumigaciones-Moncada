@@ -148,7 +148,7 @@
                 android:background="@drawable/oval"
                 android:gravity="center"
                 android:onClick="pedir"
-                android:text="@string/pedircita"
+                android:text="@string/solicitar_servicio"
                 android:textColor="@color/colorBlanco"
                 android:textStyle="bold" />
         </LinearLayout>

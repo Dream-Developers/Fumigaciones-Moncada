@@ -303,7 +303,7 @@
     <string name="eligeopcion">Elige una Opción</string>
     <string name="lugarfumigacion">Lugar de Fumigación:</string>
     <string name="pedircita">Pedir Cita</string>
-    <string name="seleccioneelcliente">Seleccione el Cliente</string>
+    <string name="seleccioneelcliente">Seleccione el cliente</string>
     <string name="precio">Precio</string>
     <string name="fechas">Fecha</string>
     <string name="horas">Hora</string>
@@ -360,5 +360,22 @@
     <string name="aceptarsolicitucita">"¿Está seguro que desea solicitar una cita?"</string>
     <string name="direccionmap">Colonia Teodoro Rodas Valle</string>
     <string name="casalennin">Casa de Lenin Moncada</string>
+    <string name="solicitar_servicio">solicitar servicio</string>
+    <string name="registrar">Registrar</string>
+    <string name="confirmacionCita">Confirmación</string>
+    <string name="aceptacioncita">¿Desea aceptar está cita?</string>
+    <string name="rechazarcitas">¿Está seguro que desea cancelar la petición de cita?</string>
+    <string name="formularioCita">Formulario de cita</string>
+    <string name="detallecita">Detalle Cita</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="mensajefact">Al menos un campo vacio, todos los campos son obligatorio, por favor completelo</string>
+    <string name="peticioncita">¿Está seguro que desea cancelar la petición de cita?</string>
+    <string name="cancelarcitap">Soló puede cancelar Las citas pendientes</string>
+    <string name="Nohay">No hay clientes registrados</string>
+    <string name="eliminarlista">¿Está seguro que desea eliminarlo de tu lista?</string>
+    <string name="errorborrra">Error al borrar</string>
+    <string name="seleccioneCliente">Seleccione el cliente</string>
+    <string name="regristoexit">Se ha registrado con éxito</string>
+
 
 </resources>

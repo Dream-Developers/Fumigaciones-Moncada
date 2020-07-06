@@ -85,6 +85,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
         registrar = findViewById(R.id.registrar1);
         request = Volley.newRequestQueue(this);
         // llenarSpinner();
+        setTitle(R.string.formularioCita);
         cargarPreferencias1();
         cargarClientes();
         nombre.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
 
         if (clientes.size() > 0) {
             sinClientes.setVisibility(View.GONE);
-            builde.setTitle("Seleccione el cliente");
+            builde.setTitle(R.string.seleccioneCliente);
 
             adapterClientes = new ClientesAdapter(this, clientes);
             listaclientesDialogo.setAdapter(adapterClientes);
@@ -156,7 +157,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
             alertDialogClientes.show();
         } else {
             sinClientes.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "No hay clientes registrados aun", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.Nohay, Toast.LENGTH_LONG).show();
         }
 
     }
@@ -280,12 +281,12 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
                                 }
                                 etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
                             } else {
-                                Toast.makeText(Crear_Cita1.this, "El Horario de atencion es de 7:00AM a 7:00PM ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Crear_Cita1.this, R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                                 etHora.setText("");
                             }
 
                         } else {
-                            Toast.makeText(Crear_Cita1.this, "La Hora seleccionada no es correcta, debe ser mayor a la Hora actual", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Cita1.this, R.string.horaAlerta, Toast.LENGTH_LONG).show();
                         }
 
 
@@ -304,7 +305,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
 
                         } else {
                             etHora.setText("");
-                            Toast.makeText(Crear_Cita1.this, "El Horario de atencion es de 7:00AM a 7:00PM", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Crear_Cita1.this, R.string.horarioDeAtencion, Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -386,7 +387,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
     private void cargarWebService() {
 
         progreso = new ProgressDialog(this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage(getString(R.string.cargando));
         progreso.show();
 
         String ip = getString(R.string.ip);
@@ -411,7 +412,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
 
                             finish();
 
-                            Toast.makeText(Crear_Cita1.this, "Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Crear_Cita1.this, R.string.regristoexit, Toast.LENGTH_SHORT).show();
 
                         }
                     }, new Response.ErrorListener() {
@@ -419,12 +420,12 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
                 public void onErrorResponse(VolleyError error) {
                     progreso.hide();
                     if (error.toString().equals("com.android.volley.ServerError")) {
-                        Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.servererror, Toast.LENGTH_LONG).show();
 
                     } else if (error.toString().equals("com.android.volley.TimeoutError")) {
-                        Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), error + "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.reviseConexion , Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -451,7 +452,7 @@ public class Crear_Cita1 extends AppCompatActivity   implements AdapterView.OnIt
     private void validacion() {
         if (nombre.getText().toString().equals("") || direccion.getText().toString().equals("") || precio.getText().toString().equals("") || fecha.getText().toString().equals("")
                 || etHora.getText().toString().equals("")) {
-            Toast.makeText(this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.mensajefact, Toast.LENGTH_LONG).show();
         } else {
 
             cargarWebService();

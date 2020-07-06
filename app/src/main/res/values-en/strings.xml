@@ -257,4 +257,20 @@
     <string name="aceptarsolicitucita">"Are you sure you want to request an appointment?"</string>
     <string name="direccionmap">Neighborhood Teodoro Rodas Valle</string>
     <string name="casalennin">Lenin Moncada house</string>
+    <string name="solicitar_servicio">request service</string>
+    <string name="registrar">To register</string>
+    <string name="confirmacionCita">Confirmation</string>
+    <string name="aceptacioncita">Do you want to accept this appointment?</string>
+    <string name="rechazarcitas">Are you sure you want to cancel the appointment request?</string>
+    <string name="formularioCita">Appointment form</string>
+    <string name="detallecita">Detalle Cita</string>
+    <string name="actualizar">To update</string>
+    <string name="mensajefact">At least one empty field, all fields are required, please complete it</string>
+    <string name="peticioncita">Are you sure you want to cancel the appointment request?</string>
+    <string name="cancelarcitap">You can only cancel pending appointments</string>
+    <string name="Nohay">No registered customers</string>
+    <string name="eliminarlista">Are you sure you want to remove it from your list?</string>
+    <string name="errorborrra">Error while deleting</string>
+    <string name="seleccioneCliente">Select the client</string>
+    <string name="regristoexit">You have successfully registered</string>
 </resources>

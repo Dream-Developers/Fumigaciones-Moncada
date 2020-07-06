@@ -128,7 +128,7 @@
                     android:onClick="registrar1"
                     android:text="@string/agregarfactura"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorBlanco"
 
                     />
 

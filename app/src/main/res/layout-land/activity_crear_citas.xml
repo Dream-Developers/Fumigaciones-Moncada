@@ -116,10 +116,10 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/oval"
                     android:onClick="registrar1"
-                    android:text="Agregar Cita"
+                    android:text="@string/agregarcita"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorVerde"
 
                     />
 

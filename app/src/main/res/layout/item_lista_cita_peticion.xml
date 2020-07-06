@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:text="Eloisa"
                         android:textSize="18sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="15dp"
                         android:visibility="visible" />
 
 
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:text="2020-02-10"
                         android:textSize="18sp"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginLeft="31dp"
                         android:visibility="visible" />
 
 

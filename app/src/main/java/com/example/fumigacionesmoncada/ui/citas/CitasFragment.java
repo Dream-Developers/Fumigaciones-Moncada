@@ -111,9 +111,10 @@ cargarPreferencias();
 
     private void eliminarCitas(final Citas cit, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Confirmacion");
-        builder.setMessage("Esta seguro que desea eliminar de tu lista");
-        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.confirmacion);
+        builder.setMessage(R.string.eliminarlista);
+       builder.setIcon(R.drawable.fm);
+        builder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 eliminarCitaWebService(String.valueOf(cit.getId()),position);
@@ -132,7 +133,7 @@ cargarPreferencias();
                 }
             });
         }
-        builder.setNegativeButton("No", null);
+        builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
     private void cargarPreferencias() {
@@ -163,7 +164,7 @@ cargarPreferencias();
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Error al borrar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.errorborrra, Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

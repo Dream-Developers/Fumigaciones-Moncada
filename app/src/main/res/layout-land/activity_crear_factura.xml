@@ -125,9 +125,9 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/oval"
                     android:onClick="registrar1"
-                    android:text="Agregar Factura"
+                    android:text="@string/agregarfactura"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorBlanco"
 
                     />
 

@@ -180,12 +180,12 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         });
 
         builde.setCancelable(false);
-        builde.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+        builde.setPositiveButton(R.string.actualizar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 aceptar(facturas.getNumero());
             }
         });
-        builde.setNegativeButton( "Cancelar", new DialogInterface.OnClickListener() {
+        builde.setNegativeButton( R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 cancelar();
             }
@@ -216,7 +216,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         try {
             if (EditNombre.getText().toString().trim().equals("")
                     || EditDetalle.getText().toString().trim().equals("") || EditFecha.getText().toString().trim().equals("") || EditTotal.getText().toString().trim().equals("")) {
-                Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.mensajefact, Toast.LENGTH_LONG).show();
             } else {
             }
 
@@ -224,7 +224,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
 
 
                     progreso = new ProgressDialog(getContext());
-                    progreso.setMessage("Cargando datos...");
+                    progreso.setMessage(getString(R.string.cargar));
                     progreso.show();
 
 
@@ -326,16 +326,16 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
                 if (error.toString().equals("com.android.volley.ServerError")) {
                     constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     sin_conexion.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.servererror, Toast.LENGTH_LONG).show();
 
                 } else if (error.toString().equals("com.android.volley.TimeoutError")) {
                     constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     sin_conexion.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.timeerror, Toast.LENGTH_LONG).show();
                 } else {
                     constraintLayout.setBackgroundResource(R.drawable.ic_cloud_off_black_24dp);
                     sin_conexion.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.timeerror + error.toString(), Toast.LENGTH_SHORT).show();
                 }
 
                 error.getStackTrace();

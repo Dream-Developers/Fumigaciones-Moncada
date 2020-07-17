@@ -376,6 +376,5 @@
     <string name="errorborrra">Error al borrar</string>
     <string name="seleccioneCliente">Seleccione el cliente</string>
     <string name="regristoexit">Se ha registrado con éxito</string>
-
-
+    <string name="no_tiene_una_cuenta_reg_strese">¿No tiene una cuenta? Regístrese</string>
 </resources>

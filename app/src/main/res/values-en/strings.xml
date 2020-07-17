@@ -273,4 +273,5 @@
     <string name="errorborrra">Error while deleting</string>
     <string name="seleccioneCliente">Select the client</string>
     <string name="regristoexit">You have successfully registered</string>
+    <string name="ayudau">Ayuda</string>
 </resources>

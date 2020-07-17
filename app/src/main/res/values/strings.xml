@@ -167,7 +167,7 @@
     <string name="reviseConexion">Revise su conexión a internet</string>
     <string name="error">Error</string>
     <string name="detalle_servicio">Detalle Servicio</string>
-    <string name="titulo">Titulo</string>
+    <string name="titulo">Título</string>
     <string name="descripcion">Descripción</string>
     <string name="insectos">Insectos</string>
     <string name="roedores">Roedores</string>
@@ -280,7 +280,7 @@
     <string name="tv_ayuda6">Acepta o Rechaza solicitudes de Fumigación generadas por tus clientes.</string>
     <string name="tv_ayuda7">Crea tus facturas y lleva un control de tus servicios cancelados.</string>
     <string name="tv_ayuda8">Recibe notificaciones de mensajes y en caso de aceptar o denegar un servicio</string>
-    <string name="definicion">Esta aplicacion fue creada por estudiantes del centro UNAH-TEC de la ciudad de Danli, con el fin de ayudar a la población para adquirir los servicios que brinda la empresa Fumigaciones Moncada.</string>
+    <string name="definicion">Esta aplicación fue creada por estudiantes del centro UNAH-TEC de la ciudad de Danlí, con el fin de ayudar a la población para adquirir los servicios que brinda la empresa Fumigaciones Moncada.</string>
     <string name="equipo">Equipo de Desarrolladores</string>
     <string name="mision">Misión</string>
     <string name="misiondefinicion">Establecer la empresa en los primeros lugares de servicio de fumigación a nivel local, departamental y nacional cumpliendo con las expectativas empresariales y familiares logrando con ello la satisfacción en nuestros clientes.</string>
@@ -299,7 +299,7 @@
     <string name="title_activity_maps">Mapa</string>
     <string name="direcciongps">Localización</string>
     <string name="tomarfoto">Tomar Foto</string>
-    <string name="elegirgaleria">Elegir de Galeria</string>
+    <string name="elegirgaleria">Elegir de Galería</string>
     <string name="eligeopcion">Elige una Opción</string>
     <string name="lugarfumigacion">Lugar de Fumigación:</string>
     <string name="pedircita">Pedir Cita</string>
@@ -376,6 +376,6 @@
     <string name="errorborrra">Error al borrar</string>
     <string name="seleccioneCliente">Seleccione el cliente</string>
     <string name="regristoexit">Se ha registrado con éxito</string>
-
+    <string name="ayudau">Ayuda</string>
 
 </resources>

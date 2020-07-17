@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_parent"
@@ -7,42 +7,238 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_app"
     android:alpha="1"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".LoginActivity">
 
 
-    <Button
-        android:id="@+id/idLoginLogin"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_btn_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textVieww"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/moncadas"
+            android:textColor="#197E3a"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="100px" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/fumigaciones"
+                android:textColor="@color/colorgris"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="100dp"
+                android:textSize="32px"
+                />
+
+        </RelativeLayout>
 
 
-    <EditText
-        android:id="@+id/idCorreoLogin"
-        android:layout_width="355dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_txt_username"
-        android:fontFamily="@font/montserrat_semibold"
-        android:hint="@string/correologin"
-        android:inputType="textEmailAddress"
-        android:maxLength="25"
-        android:paddingLeft="60dp"
-        android:textColor="@color/colorgris"
-        android:textSize="38px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="195dp"
+                android:layout_height="190dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/fumigacion_login" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/idCorreoLogin"
+                android:layout_width="355dp"
+                android:layout_height="77dp"
+                android:layout_marginTop="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_txt_username"
+                android:fontFamily="@font/montserrat_semibold"
+                android:hint="@string/correologin"
+                android:inputType="textEmailAddress"
+                android:maxLength="76"
+                android:paddingLeft="60dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorgris"
+                android:textSize="38px"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/idContraseñaLogin"
+                android:layout_width="355dp"
+                android:layout_height="77dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_txt_password"
+                android:fontFamily="@font/montserrat_semibold"
+                android:hint="@string/passlogin"
+                android:inputType="textPassword"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:maxLength="25"
+                android:paddingLeft="60dp"
+                android:textColor="@color/colorgris"
+                android:textSize="38px"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/recuperarPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/olvidopass"
+                android:textColor="@color/colorgris"
+                android:textSize="32px"
+                android:onClick="resetPassword"
+                 />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/ingresar"
+                android:textColor="@color/colorgris"
+                android:textSize="44px"
+                app:layout_constraintEnd_toStartOf="@+id/idLoginLogin"
+                app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/idLoginLogin"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_btn_login"
+                app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/registarLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat_light"
+                android:onClick="crearcuenta"
+                android:text="@string/no_tiene_una_cuenta_reg_strese"
+                android:textAlignment="center"
+                android:textColor="@color/colorgris"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
 
     <!--<com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ojitochoco"
@@ -58,37 +254,9 @@
         app:passwordToggleEnabled="true"
         tools:ignore="MissingConstraints">-->
 
-        <EditText
-            android:id="@+id/idContraseñaLogin"
-            android:layout_width="355dp"
-            android:layout_height="77dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_txt_password"
-            android:fontFamily="@font/montserrat_semibold"
-            android:hint="@string/passlogin"
-            android:inputType="textPassword"
-            android:maxLength="25"
-            android:paddingLeft="60dp"
-            android:textColor="@color/colorgris"
-            android:textSize="38px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idCorreoLogin" />
+
     <!--</com.google.android.material.textfield.TextInputLayout>-->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="195dp"
-        android:layout_height="190dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/fumigacion_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
 
@@ -103,83 +271,4 @@
         android:textColor="#ffffff"
         android:visibility="gone"
         tools:ignore="MissingConstraints"></RadioButton>
-
-    <TextView
-        android:id="@+id/textVieww"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/moncadas"
-        android:textColor="#197E3a"
-        android:textSize="100px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/montserrat_light"
-        android:gravity="right"
-        android:text="@string/fumigaciones"
-        android:textColor="@color/colorgris"
-        android:textSize="32px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.669"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textVieww" />
-
-    <TextView
-        android:id="@+id/recuperarPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserrat_light"
-        android:text="@string/olvidopass"
-        android:textColor="@color/colorgris"
-        android:textSize="32px"
-        android:onClick="resetPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idContraseñaLogin" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/ingresar"
-        android:textColor="@color/colorgris"
-        android:textSize="44px"
-        app:layout_constraintEnd_toStartOf="@+id/idLoginLogin"
-        app:layout_constraintTop_toBottomOf="@+id/recuperarPass" />
-
-    <TextView
-        android:id="@+id/registarLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/montserrat_light"
-        android:onClick="crearcuenta"
-        android:text="¿No tiene una cuenta? Regístrese"
-        android:textColor="@color/colorgris"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -50,7 +50,22 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.example.fumigacionesmoncada.ClaseVolley;
 import com.example.fumigacionesmoncada.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +82,7 @@ import java.util.regex.Pattern;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -74,6 +90,7 @@ import androidx.fragment.app.Fragment;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
 
 
 public class PerfilFragment extends Fragment {
@@ -99,7 +116,16 @@ public class PerfilFragment extends Fragment {
     String foto;
     LinearLayout linearLayout;
     ImageView editar;
+    String storagePath = "Users_Profile_Cover_Imgs/";
+    String profileOrCoverPhoto;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
+    DatabaseReference dataRefe;
+
+    StorageReference storageReference;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -124,6 +150,19 @@ public class PerfilFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.validacionCorreo, Toast.LENGTH_SHORT).show();
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
+        //  storageReference = getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("Images");
+
+        //int arrays of permitions
+
+
+        dataRefe = FirebaseDatabase.getInstance().getReference().child("Datas");
+
 
         cargarPreferencias();
         cargarClienteWeb();
@@ -140,6 +179,33 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mostrarDialogOpciones();
+
+            }
+        });
+        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    String name = ""+ ds.child("name").getValue();
+                    String email = ""+ ds.child("email").getValue();
+                    String phone = ""+ ds.child("phone").getValue();
+                    String image = ""+ ds.child("image").getValue();
+                    String direccion = ""+ ds.child("recidencia").getValue();
+
+
+                    //Set data
+
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
@@ -453,7 +519,10 @@ public class PerfilFragment extends Fragment {
                         String rutaImagen = getRealPathFromDocumentUri(getContext(), miPath);
                         ExifInterface exif = new ExifInterface(rutaImagen);
 
-
+                        uri = data.getData();
+                        imagen.setImageURI(uri);
+                        foto = "image";
+                        uploadProfileCoverPhoto(uri);
                         orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
                         switch (orientation) {
@@ -489,7 +558,9 @@ public class PerfilFragment extends Fragment {
 
                     try {
 
-
+                        imagen.setImageURI(uri);
+                        foto = "image";
+                        uploadProfileCoverPhoto(uri);
                         ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
 
                         orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -653,4 +724,61 @@ public class PerfilFragment extends Fragment {
              return super.onOptionsItemSelected(item);
     }
 
+    private void uploadProfileCoverPhoto(Uri uri) {
+
+
+        String filePathAndName = storagePath+ ""+ foto +"_"+ user.getUid();
+
+        StorageReference storageReference2 = storageReference.child(filePathAndName);
+        storageReference2.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+
+                        while (!uriTask.isSuccessful());
+                        Uri downloadUri = uriTask.getResult();
+
+
+                        //chequear si ha sido actualizaada o no y el url es recibido
+                        if (uriTask.isSuccessful()){
+                            //image unload
+                            // add update image in users firebase
+                            HashMap<String, Object> results = new HashMap<>();
+
+                            results.put(foto, downloadUri.toString());
+
+                            databaseReference.child(user.getUid()).updateChildren(results)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                            Toast.makeText(getActivity(), getString(R.string.actualizada), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                    Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+
+                        }else {
+                            //error
+
+                            Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getActivity(),  e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

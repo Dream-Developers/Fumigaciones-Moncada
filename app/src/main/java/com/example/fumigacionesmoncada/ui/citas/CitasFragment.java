@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,6 +39,7 @@ import com.example.fumigacionesmoncada.ClaseVolley;
 
 import com.example.fumigacionesmoncada.R;
 
+import com.example.fumigacionesmoncada.factura.Facturas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -56,7 +59,11 @@ private FloatingActionButton addcita;
     String id_usuario;
     String tokenUsuario;
     ConstraintLayout constraintLayout;
-    TextView sin_conexion;
+    TextView sin_conexion; TextView  Nombre , Detalle ,Fecha,Total ;
+    TextView EditNombre,EditFecha, EditDireccion, EditHora, EditPrecio;
+    AlertDialog alertDialogFactura;
+    static SwipeRefreshLayout refreshLayout;
+    private int dia, mes, anio;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,16 +75,16 @@ private FloatingActionButton addcita;
       lista_citas.setDividerHeight(0);
       constraintLayout = view.findViewById(R.id.error);
       sin_conexion = view.findViewById(R.id.sin_conexion);
-
-        lista_citas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Citas citas = (Citas) parent.getItemAtPosition(position);
-                eliminarCitas(citas,position);
-
-                return true;
+            public void onRefresh() {
+                refreshLayout.setRefreshing(false);
+                cargarPreferencias();
+                cargarCitas();
             }
         });
+
 
 
 
@@ -96,7 +103,7 @@ cargarPreferencias();
         cargarCitas();
         setHasOptionsMenu(true);
 
-        lista_citas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*lista_citas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Citas citas = (Citas) parent.getItemAtPosition(position);
@@ -104,6 +111,15 @@ cargarPreferencias();
                 intent.putExtra("id_citas", citas.getId());
                 startActivity(intent);
             }
+        });*/
+        lista_citas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Citas citas = (Citas) parent.getItemAtPosition(position);
+                seleccionarFactura(citas,position);
+
+            }
+
         });
         return view;
 
@@ -141,6 +157,52 @@ cargarPreferencias();
         tokenUsuario = preferences.getString("token", "");
         id_usuario = preferences.getString("id", "");
 
+    }
+    private void seleccionarFactura(final Citas citas, int position) {
+        AlertDialog.Builder builde = new AlertDialog.Builder(getContext());
+        View dialogoLayout = getLayoutInflater().inflate(R.layout.item_cita_alertdialogo, null);
+
+
+        EditNombre = dialogoLayout.findViewById(R.id.detalle_nombre);
+        EditFecha = dialogoLayout.findViewById(R.id.detalle_fecha);
+        EditDireccion = dialogoLayout.findViewById(R.id.detalle_direccion);
+        EditHora = dialogoLayout.findViewById(R.id.detalle_hora);
+        EditPrecio = dialogoLayout.findViewById(R.id.detalle_precio);
+        EditNombre.setText(citas.getNombre());
+        EditDireccion.setText(citas.getDireccion());
+        EditFecha.setText(citas.getFechaFumigacion());
+        EditHora.setText(citas.getHora());
+        EditPrecio.setText(citas.getPrecio());
+
+
+        builde.setCancelable(false);
+
+        builde.setNegativeButton( "Cerrar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelar();
+            }
+        });
+
+
+        builde.setView(dialogoLayout);
+        alertDialogFactura = builde.create();
+        alertDialogFactura.show();
+
+        alertDialogFactura.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                cargarCitas();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        cargarCitas();
+    }
+    public void cancelar() {
     }
     private void eliminarCitaWebService(String id, final int position) {
         String ip=getString(R.string.ip);
@@ -180,11 +242,6 @@ cargarPreferencias();
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        cargarCitas();
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

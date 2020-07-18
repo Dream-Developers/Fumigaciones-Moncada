@@ -23,7 +23,12 @@
         tools:ignore="MissingConstraints">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
     <ListView
         android:id="@+id/lista_citas"
         android:layout_width="match_parent"
@@ -34,6 +39,7 @@
         tools:layout_editor_absoluteY="-29dp">
 
     </ListView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="100dp"

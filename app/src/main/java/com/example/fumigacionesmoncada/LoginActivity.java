@@ -340,7 +340,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), getString(R.string.clienterror), Toast.LENGTH_LONG).show();
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),  R.string.contraincorrecta, Toast.LENGTH_LONG).show();
                         }
 
 

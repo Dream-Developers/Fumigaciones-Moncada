@@ -274,4 +274,19 @@
     <string name="seleccioneCliente">Select the client</string>
     <string name="regristoexit">You have successfully registered</string>
     <string name="no_tiene_una_cuenta_reg_strese">Do not have an account? Sign up</string>
+    <string name="contraincorrecta">Incorrect password</string>
+    <string name="regitro">Registered successfully</string>
+    <string name="correoregistrado">This email has already been registered</string>
+    <string name="ingreseFoto">Enter the photograph</string>
+    <string name="ingresenombre">Enter the name</string>
+    <string name="ingrserecidencia">Enter the residence</string>
+    <string name="ingreseTelefono">Enter the phone</string>
+    <string name="ingrsecorreo">Enter the mail</string>
+    <string name="ingresecontra">Ingrese la contraseña</string>
+    <string name="ingreseconfirmacontra">Enter the password confirmation</string>
+    <string name="ingrecontrano">The password must not be less than eight characters</string>
+    <string name="noestelefono">It is not a phone number</string>
+    <string name="correonovalido">Invalid email</string>
+    <string name="confitrmarcontra">The password does not match the confirmation password</string>
+    <string name="correoyaregistrado">This email is already registered, enter another</string>
 </resources>

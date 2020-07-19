@@ -43,8 +43,7 @@
                     android:id="@+id/imagen_cliente"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/user_detalle"
+                    android:scaleType="center"
                     />
 
             </FrameLayout>

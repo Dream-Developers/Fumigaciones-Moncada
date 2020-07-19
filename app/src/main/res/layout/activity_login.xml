@@ -10,7 +10,10 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".LoginActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,6 +110,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLength="76"
                 android:paddingLeft="60dp"
+                android:paddingRight="15dp"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/colorgris"
                 android:textSize="38px"
@@ -271,4 +275,5 @@
         android:textColor="#ffffff"
         android:visibility="gone"
         tools:ignore="MissingConstraints"></RadioButton>
+</LinearLayout>
 </LinearLayout>

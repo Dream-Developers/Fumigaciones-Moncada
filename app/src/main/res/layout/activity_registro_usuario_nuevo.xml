@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/correo_cliente"
             android:hint="example0@gmail.com"
+            android:maxLength="76"
             android:inputType="textEmailAddress"
             android:lines="1"
             />
@@ -101,7 +102,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <RadioButton
                 android:id="@+id/maculino"
@@ -128,7 +130,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/oval"
+            android:background="@color/colorPrimary"
             android:onClick="registrar"
             android:text="@string/resgistrar"
             android:textAllCaps="false"

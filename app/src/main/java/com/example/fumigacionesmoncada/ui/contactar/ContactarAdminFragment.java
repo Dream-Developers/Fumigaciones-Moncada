@@ -201,7 +201,7 @@ public class ContactarAdminFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.action_call:
                         // Do onlick on menu action here
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(getString(R.string.tel) + number));
                         startActivity(intent);
                         return true;
                 }

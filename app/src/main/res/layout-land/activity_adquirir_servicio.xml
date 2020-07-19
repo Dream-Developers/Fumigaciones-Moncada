@@ -5,21 +5,20 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         app:cardCornerRadius="3dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         app:cardUseCompatPadding="true"
+        android:layout_marginTop="155dp"
         app:cardPreventCornerOverlap="true"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -51,7 +50,6 @@
                 android:focusable="false"
                 android:drawablePadding="5dp"
                 android:inputType="textPersonName"
-                android:lines="1"
                 android:maxLength="50" />
 
             <TextView
@@ -69,7 +67,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/direccion_cita"
-            />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,17 +143,19 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
-                android:background="@drawable/oval"
                 android:gravity="center"
                 android:onClick="pedir"
+                android:background="@color/colorPrimary"
                 android:text="@string/solicitar_servicio"
                 android:textColor="@color/colorBlanco"
                 android:textStyle="bold" />
+
+
         </LinearLayout>
 
 
 
     </androidx.cardview.widget.CardView>
 
-    </ScrollView>
+
 </ScrollView>

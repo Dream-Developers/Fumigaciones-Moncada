@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/nombre_cliente"
-            android:hint="Nombre Completo"
+            android:hint="@string/nombrecompleto"
             android:lines="1"
             android:maxLength="30"
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/residencia_cliente"
-            android:hint="Residencia "
+            android:hint="@string/residencias"
             android:lines="1"
 
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:digits="0123456789."
             android:drawableLeft="@drawable/telefono_cliente"
-            android:hint="Telefono"
+            android:hint="@string/telefonos"
             android:inputType="phone"
             android:maxLength="8"
             />
@@ -74,6 +74,7 @@
             android:drawableLeft="@drawable/correo_cliente"
             android:hint="example0@gmail.com"
             android:inputType="textEmailAddress"
+            android:maxLength="76"
             android:lines="1"
             />
 
@@ -83,7 +84,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/cotra_cliente"
             android:focusable="false"
-            android:hint="Contraseña"
+            android:hint="@string/contraseña"
+            android:maxLength="76"
             android:inputType="textPassword"
             android:lines="1"
             />
@@ -94,7 +96,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/confi_cliente"
             android:focusable="false"
-            android:hint="Confirmar Contraseña"
+            android:hint="@string/confirmarcontra"
             android:inputType="textPassword"
             android:lines="1"
             />
@@ -111,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:clickable="true"
-                android:text="Hombre"
+                android:text="@string/hombre"
 
                 android:textSize="18dp" />
 
@@ -119,7 +121,7 @@
                 android:id="@+id/femenino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mujer"
+                android:text="@string/mujer"
                 android:textSize="18dp" />
         </RadioGroup>
 
@@ -130,12 +132,12 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/oval"
+            android:background="@color/colorPrimary"
             android:onClick="registrar"
-            android:text="Registrar"
+            android:text="@string/registrar"
             android:textAllCaps="false"
             android:textColor="#fff"
-
+            android:layout_marginBottom="20dp"
             />
 
     </LinearLayout>

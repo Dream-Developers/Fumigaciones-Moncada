@@ -267,7 +267,7 @@
     <string name="emailregister">Este correo no está registrado</string>
     <string name="cerrarsesion">¿Estás seguro que quieres cerrar sesión?</string>
     <string name="cargando">Cargando…</string>
-    <string name="fallofirebase">Falló el  registro en firebase.</string>
+    <string name="fallofirebase">Falló el  registro en firebase</string>
     <string name="texto">Ingresa tus datos a actualizar</string>
     <string name="errorimagen">Error al actualizar la foto</string>
     <string name="actualizada">Imagen actualizada</string>
@@ -377,4 +377,19 @@
     <string name="seleccioneCliente">Seleccione el cliente</string>
     <string name="regristoexit">Se ha registrado con éxito</string>
     <string name="no_tiene_una_cuenta_reg_strese">¿No tiene una cuenta? Regístrese</string>
+    <string name="contraincorrecta">Contraseña incorrecta</string>
+    <string name="regitro">Se registró correctamente</string>
+    <string name="correoregistrado">Este correo  ya fue registrado</string>
+    <string name="ingreseFoto">Ingrese la fotografía</string>
+    <string name="ingresenombre">Ingrese el nombre</string>
+    <string name="ingrserecidencia">Ingrese la residencia</string>
+    <string name="ingreseTelefono">Ingrese el teléfono</string>
+    <string name="ingrsecorreo">Ingrese el correo</string>
+    <string name="ingresecontra">Ingrese la contraseña</string>
+    <string name="ingreseconfirmacontra">Ingrese la confirmación  de la contraseña</string>
+    <string name="ingrecontrano">La contraseña no debe ser menor a ocho caracteres</string>
+    <string name="noestelefono">No es un número teléfonico</string>
+    <string name="correonovalido">Correo no valido</string>
+    <string name="confitrmarcontra">La contraseña no coincide con la contraseña de confirmación</string>
+    <string name="correoyaregistrado">Este correo ya esta registrado, ingrese otro</string>
 </resources>

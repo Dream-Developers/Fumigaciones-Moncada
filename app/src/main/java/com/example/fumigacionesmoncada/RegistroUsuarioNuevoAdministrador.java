@@ -168,16 +168,16 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
     }
     private void mostrarDialogOpciones() {
-        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria", "Cancelar"};
+        final CharSequence[] opciones = {getString(R.string.tomarFoto), getString(R.string.elegirGaleria), getString(R.string.cancelar)};
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Elige una Opción");
+        builder.setTitle(R.string.elegiropcion);
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (opciones[i].equals(getString(R.string.tomarFoto))) {
                     abrirCamara();
                 } else {
-                    if (opciones[i].equals("Elegir de Galeria")) {
+                    if (opciones[i].equals(getString(R.string.elegirGaleria))) {
                        abrirGaleria();
                     } else {
                         dialogInterface.dismiss();
@@ -202,7 +202,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
         } else {
 
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             startActivityForResult(intent.createChooser(intent, getString(R.string.seleccione)), COD_SELECCIONA);
             try {
@@ -284,88 +284,91 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
         switch (requestCode) {
             case COD_SELECCIONA:
-                Uri path = data.getData();
-                try {
-
-                    InputStream picture = this.getContentResolver().openInputStream(path);
-                    bitmap = BitmapFactory.decodeStream(picture);
-                    orientation = getOrientation(this, path);
-
-                    switch (orientation) {
-
-                        case 90:
-                            bitmap = rotateImage(this,bitmap, 90);
-
-                            break;
-
-                        case 180:
-                            bitmap = rotateImage(this,bitmap, 180);
-                            break;
-
-                        case 270:
-                            bitmap = rotateImage(this,bitmap, 270);
-                            break;
-
-                        case ExifInterface.ORIENTATION_NORMAL:
-
-                        default:
-                            break;
-                    }
-
-
-
-                    imgFoto.setImageBitmap(bitmap);
-
-
-
-                } catch (Exception e) {
-                    Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case TOMARFOTO:
-                imgFile = new File(pictureFilePath);
-                if (resultCode == -1) {
-
-                    bitmap = BitmapFactory.decodeFile(String.valueOf(imgFile));
-
-
+                if (data != null) {
+                    Uri path = data.getData();
+                    imgFoto.setImageURI(path);
                     try {
 
-
-                        ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
-
-                        orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                        InputStream picture = this.getContentResolver().openInputStream(path);
+                        bitmap = BitmapFactory.decodeStream(picture);
+                        orientation = getOrientation(this, path);
 
                         switch (orientation) {
 
-                            case ExifInterface.ORIENTATION_ROTATE_270:
-                                bitmap = rotateImage(this, bitmap, 270);
+                            case 90:
+                                bitmap = rotateImage(this, bitmap, 90);
+
                                 break;
 
-                            case ExifInterface.ORIENTATION_ROTATE_180:
+                            case 180:
                                 bitmap = rotateImage(this, bitmap, 180);
                                 break;
 
-                            case ExifInterface.ORIENTATION_ROTATE_90:
-                                bitmap = rotateImage(this, bitmap, 90);
+                            case 270:
+                                bitmap = rotateImage(this, bitmap, 270);
                                 break;
 
+                            case ExifInterface.ORIENTATION_NORMAL:
+
+                            default:
+                                break;
                         }
 
 
                         imgFoto.setImageBitmap(bitmap);
+
+
                     } catch (Exception e) {
-                        Toast.makeText(this, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(this, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
                     }
-
-
-                } else {
-                    //en caso de que no haya foto capturada el archivo en blanco se elimina
-                    imgFile.delete();
                 }
+                    break;
+                    case TOMARFOTO:
+                        imgFile = new File(pictureFilePath);
+                        if (resultCode == -1) {
 
-                break;
+                            bitmap = BitmapFactory.decodeFile(String.valueOf(imgFile));
+
+
+                            try {
+
+
+                                ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
+
+                                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                                switch (orientation) {
+
+                                    case ExifInterface.ORIENTATION_ROTATE_270:
+                                        bitmap = rotateImage(this, bitmap, 270);
+                                        break;
+
+                                    case ExifInterface.ORIENTATION_ROTATE_180:
+                                        bitmap = rotateImage(this, bitmap, 180);
+                                        break;
+
+                                    case ExifInterface.ORIENTATION_ROTATE_90:
+                                        bitmap = rotateImage(this, bitmap, 90);
+                                        break;
+
+                                }
+
+
+                                imgFoto.setImageBitmap(bitmap);
+                            } catch (Exception e) {
+                                Toast.makeText(this, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
+
+                            }
+
+
+                        } else {
+                            //en caso de que no haya foto capturada el archivo en blanco se elimina
+                            imgFile.delete();
+                        }
+
+                        break;
+
+
         }
     }
 
@@ -380,7 +383,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                     matrix, true);
         } catch (Exception e) {
 
-            Toast.makeText(context, "Intentelo Nuevamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
         }
         return source;
     } @Override
@@ -388,7 +391,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MIS_PERMISOS) {
             if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {//el dos representa los 2 permisos
-                Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_SHORT);
+                Toast.makeText(this, R.string.Permisosaceptados, Toast.LENGTH_SHORT);
                 imgFoto.setEnabled(true);
             }
         } else {
@@ -443,20 +446,20 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones = {"si", "no"};
+        final CharSequence[] opciones = {getString(R.string.si), getString(R.string.no)};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(this);//estamos en fragment
-        alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
+        alertOpciones.setTitle(R.string.permisosManual);
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("si")) {
+                if (opciones[i].equals(getString(R.string.si))) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package",getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext() , "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext() ,  R.string.permisosnoaceptados, Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }
@@ -467,10 +470,10 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
     private void cargarDialogoRecomendacion() {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
-        dialogo.setTitle("Permisos Desactivados");
-        dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
+        dialogo.setTitle(R.string.PermisosDesactivados);
+        dialogo.setMessage(R.string.aceptarpermisos);
 
-        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -520,23 +523,23 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     finish();
-                    Toast.makeText(RegistroUsuarioNuevoAdministrador.this, "Se registró correctamente ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistroUsuarioNuevoAdministrador.this, R.string.regitro, Toast.LENGTH_SHORT).show();
                 }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //progreso.hide();
                     if (error.toString().equals("com.android.volley.ServerError")) {
-                        Toast.makeText(getApplicationContext(), "Presentamos problemas intentelo mas tarde.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.presentamosProblemas, Toast.LENGTH_LONG).show();
                         finish();
                     } if (error.toString().equals("com.android.volley.TimeoutError")) {
-                        Toast.makeText(getApplicationContext(), "Revise su conexión a internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                         finish();
                     }
                     if (error.toString().equals("com.android.volley.ClientError")) {
-                        Toast.makeText(getApplicationContext(), "Este correo  ya fue registrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.correoregistrado, Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), error+ "", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.reviseConexion, Toast.LENGTH_LONG).show();
                         finish();
 
                     }
@@ -574,42 +577,42 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
         final String phone = telefono.getText().toString().trim();
 
         if (bitmap == null) {
-            Toast.makeText(this, "Ingrese la fotografia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ingreseFoto, Toast.LENGTH_SHORT).show();
         } else {
             if(nombre.getText().toString().equals("")){
-                nombre.setError("ingrese el nombre");
+                nombre.setError(getString(R.string.ingresenombre));
             }else { if (apellidos.getText().toString().equals("")) {
-                apellidos.setError("ingrese Recidencia");
+                apellidos.setError(getString(R.string.ingrserecidencia));
 
             }else{
                 if (telefono.getText().toString().equals("")) {
-                    telefono.setError("ingrese el Telefono");
+                    telefono.setError(getString(R.string.ingreseTelefono));
 
 
                 }else{
                     if (correo.getText().toString().equals("")) {
-                        correo.setError("ingrese el Correo");
+                        correo.setError(getString(R.string.ingrsecorreo));
                     }else{
                         if  (contraseña.getText().toString().equals("")) {
-                            contraseña.setError("ingrese La Contraseña");
+                            contraseña.setError(getString(R.string.ingresecontra));
 
                         }else{
                             if (confcontra.getText().toString().equals("")) {
-                                confcontra.setError("ingrese la Confirmacion  De Contraseña");
+                                confcontra.setError(getString(R.string.ingreseconfirmacontra));
                             }else{
                                 if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
 
                                     if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
-                                        Toast.makeText(getApplicationContext(), "La contraseñia no debe ser menor a ocho caracteres", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), R.string.ingrecontrano, Toast.LENGTH_LONG).show();
                                     } else {
                                         if (telefono.getText().toString().length() < 8) {
-                                            telefono.setError("No es un numero Telefonico");
-                                            Toast.makeText(getApplicationContext(), "No es un numero Telefonico", Toast.LENGTH_LONG).show();
+                                            telefono.setError(getString(R.string.noestelefono));
+                                            Toast.makeText(getApplicationContext(), R.string.noestelefono, Toast.LENGTH_LONG).show();
                                         } else {
 
                                             if (!validarEmail(correo.getText().toString())) {
-                                                correo.setError("correo no valido");
-                                                Toast.makeText(getApplicationContext(), "Correo no valido", Toast.LENGTH_LONG).show();
+                                                correo.setError(getString(R.string.correonovalido));
+                                                Toast.makeText(getApplicationContext(), R.string.correonovalido, Toast.LENGTH_LONG).show();
                                             } else {
 
                                                 registerUser(name, email, password, phone);
@@ -619,8 +622,8 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
 
                                     }
                                 }else {
-                                    Toast.makeText(getApplicationContext(), "nueva password con confirmar password no coinciden", Toast.LENGTH_LONG).show();
-                                    contraseña.setError("no Coinciden ");
+                                    Toast.makeText(getApplicationContext(), R.string.confitrmarcontra, Toast.LENGTH_LONG).show();
+                                    contraseña.setError(getString(R.string.confitrmarcontra));
                                 }
                             }
                         }}}}}}
@@ -674,7 +677,7 @@ public class RegistroUsuarioNuevoAdministrador extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(RegistroUsuarioNuevoAdministrador.this, ""+e.getMessage(),
+                Toast.makeText(RegistroUsuarioNuevoAdministrador.this,  R.string.correoyaregistrado,
                         Toast.LENGTH_SHORT).show();
 
             }

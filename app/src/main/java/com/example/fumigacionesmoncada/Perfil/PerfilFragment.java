@@ -4,6 +4,7 @@ package com.example.fumigacionesmoncada.Perfil;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -449,6 +450,8 @@ public class PerfilFragment extends Fragment {
 
                 //Se crea un achivo de la foto en blanco
                 pictureFile = getPictureFile();
+                ContentValues values = new ContentValues();
+                uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values );
 
             } catch (Exception e) {
 
@@ -558,12 +561,11 @@ public class PerfilFragment extends Fragment {
 
                     try {
 
-                        imagen.setImageURI(uri);
-                        foto = "image";
-                        uploadProfileCoverPhoto(uri);
+
                         ExifInterface exif = new ExifInterface(imgFile.getAbsolutePath());
 
                         orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
 
                         switch (orientation) {
 
@@ -584,6 +586,7 @@ public class PerfilFragment extends Fragment {
 
 
                         imagen.setImageBitmap(bitmap);
+
 
                     } catch (Exception e) {
                         Toast.makeText(getContext(), R.string.IntenteloNuevamente, Toast.LENGTH_LONG).show();
@@ -725,7 +728,9 @@ public class PerfilFragment extends Fragment {
     }
 
     private void uploadProfileCoverPhoto(Uri uri) {
-
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage(getString(R.string.cargandoAdquirir));
+        progreso.show();
 
         String filePathAndName = storagePath+ ""+ foto +"_"+ user.getUid();
 
@@ -753,14 +758,12 @@ public class PerfilFragment extends Fragment {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
-                                            Toast.makeText(getActivity(), getString(R.string.actualizada), Toast.LENGTH_SHORT).show();
+                                            progreso.dismiss();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
 
-                                    Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
 
                                 }
                             });
@@ -768,7 +771,7 @@ public class PerfilFragment extends Fragment {
 
                         }else {
                             //error
-
+                            progreso.dismiss();
                             Toast.makeText(getActivity(), getString(R.string.errorimagen), Toast.LENGTH_SHORT).show();
                         }
 

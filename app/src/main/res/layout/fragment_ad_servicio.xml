@@ -143,7 +143,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
-                android:background="@drawable/oval"
+                android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:onClick="pedir"
                 android:text="@string/solicitar_servicio"

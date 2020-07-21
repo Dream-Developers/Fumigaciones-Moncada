@@ -43,7 +43,7 @@ public class SolicitarCitaFragment extends Fragment {
 
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_solicitar_cita, container, false);

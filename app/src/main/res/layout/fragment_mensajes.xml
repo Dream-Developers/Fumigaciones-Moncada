@@ -23,29 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar2"
-            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_gravity="bottom"
-            app:fabAlignmentMode="end"
-            app:fabCradleMargin="10dp"
-            app:fabCradleRoundedCornerRadius="25dp"
-            app:fabCradleVerticalOffset="10dp"
-            app:hideOnScroll="true"
-            app:menu="@menu/menu_admin" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_email_white_18dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             app:backgroundTint="@color/colorText"
-            app:layout_anchor="@id/bottomAppBar2"
+            android:layout_gravity="bottom|right"
             app:layout_anchorGravity="bottom|right|end"
             app:maxImageSize="30dp"
             app:tint="@color/colorBlanco">
+
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

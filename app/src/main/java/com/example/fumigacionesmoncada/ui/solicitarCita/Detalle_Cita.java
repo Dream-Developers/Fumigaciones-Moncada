@@ -82,6 +82,7 @@ public class Detalle_Cita extends AppCompatActivity {
                         agregarCitaWebService(id, which);
                     }
                 });
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
@@ -93,6 +94,8 @@ public class Detalle_Cita extends AppCompatActivity {
                     });
                 }
                 AlertDialog.Builder builder1 = builder.setNegativeButton(R.string.no, null);
+
+
                 builder1.show();
 
 
@@ -109,7 +112,8 @@ public class Detalle_Cita extends AppCompatActivity {
                 builder2.setTitle(R.string.confirmacionCita);
                 builder2.setMessage(R.string.rechazarcitas);
                 builder2.setIcon(R.drawable.fm);
-                builder2.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                builder2.setPositiveButton(R.string.si, new DialogInterface.OnClickListener()
+                {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Citas_Peticiones citas = null;
@@ -136,6 +140,7 @@ public class Detalle_Cita extends AppCompatActivity {
 
 
         });
+
 
     }
 

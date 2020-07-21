@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -145,11 +146,13 @@ public class AdquirirServicioActivity extends AppCompatActivity {
                             aceptar();
                         }
                     });
+
                     dialogo1.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             cancelar();
                         }
                     });
+
                     dialogo1.show();
                 }
             }

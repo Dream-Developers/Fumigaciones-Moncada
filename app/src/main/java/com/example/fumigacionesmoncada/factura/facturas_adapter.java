@@ -165,7 +165,9 @@ int resultado;
 
         try {
             if (EditNombre.getText().toString().trim().equals("")
-                    || EditDetalle.getText().toString().trim().equals("") || EditFecha.getText().toString().trim().equals("") || EditTotal.getText().toString().trim().equals("")) {
+                    || EditDetalle.getText().toString().trim().equals("")
+                    || EditFecha.getText().toString().trim().equals("")
+                    || EditTotal.getText().toString().trim().equals("")) {
                 Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
             } else {
             }

@@ -92,7 +92,7 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         //RecyclerView rv = view.findViewById(R.id.recycler_contact);
         //rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        setHasOptionsMenu(true);
+
         variable =  getActivity().getIntent().getStringExtra("USER");
         System.out.println(variable);
 
@@ -184,18 +184,6 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
         }
 
 
-        final BottomAppBar bottomAppBar = view.findViewById(R.id.bottomAppBar2);
-
-        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //NavigationDrawerFragment bottomNavFragment = new NavigationDrawerFragment();
-                //bottomNavFragment.show(getSupportFragmentManager(), "TAG");
-                //Intent intent = new Intent(getActivity(), AdministradorActivity.class);
-                //startActivity(intent);
-            }
-
-        });
 
         return view;
     }
@@ -478,11 +466,6 @@ public class MensajesFragment extends Fragment {// implements Application.Activi
     public void onStart() {
         super.onStart();
         chechUserUserStatus();
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
     }
 
     private void chechUserUserStatus(){

@@ -155,6 +155,7 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
 
     }
     private void seleccionarFactura(final Facturas facturas, int position) {
+
         AlertDialog.Builder builde = new AlertDialog.Builder(getContext());
         View dialogoLayout = getLayoutInflater().inflate(R.layout.item_edit_alertdialogo, null);
 
@@ -215,7 +216,9 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
 
         try {
             if (EditNombre.getText().toString().trim().equals("")
-                    || EditDetalle.getText().toString().trim().equals("") || EditFecha.getText().toString().trim().equals("") || EditTotal.getText().toString().trim().equals("")) {
+                    || EditDetalle.getText().toString().trim().equals("") ||
+                    EditFecha.getText().toString().trim().equals("") ||
+                    EditTotal.getText().toString().trim().equals("")) {
                 Toast.makeText(getContext(), R.string.mensajefact, Toast.LENGTH_LONG).show();
             } else {
             }

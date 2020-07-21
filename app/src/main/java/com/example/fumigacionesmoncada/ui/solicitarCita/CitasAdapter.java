@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fumigacionesmoncada.R;
-import com.example.fumigacionesmoncada.ui.clientes.ClientesVO;
 
 import java.util.ArrayList;
 
@@ -24,9 +23,8 @@ public class CitasAdapter extends ArrayAdapter<CitaVO> {
     }
 
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView, ViewGroup parent) {
         if(convertView==null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_cita_peticion,parent,false);
 

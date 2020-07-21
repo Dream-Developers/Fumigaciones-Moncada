@@ -106,7 +106,7 @@ cargarPreferencias();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.confirmacion));
         builder.setMessage(R.string.eliminar_usuario);
-        builder.setIcon(R.drawable.logofm);
+        builder.setIcon(R.drawable.fm);
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

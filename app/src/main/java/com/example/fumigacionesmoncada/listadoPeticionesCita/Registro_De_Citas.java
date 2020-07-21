@@ -135,6 +135,7 @@ public class Registro_De_Citas extends Fragment implements SearchView.OnQueryTex
     private void CancelarCitas(final Citas_Peticiones cit, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.confirmacionCita);
+        builder.setIcon(R.drawable.fm);
         builder.setMessage(R.string.peticioncita);
         builder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
             @Override

@@ -131,7 +131,7 @@
                             android:layout_marginTop="30dp"
                             android:text="kareneloisa_f@yahoo.com"
                             android:textColor="#F6C128"
-                            android:textSize="14sp" />
+                            android:textSize="18sp" />
 
 
                     </LinearLayout>

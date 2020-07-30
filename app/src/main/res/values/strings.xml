@@ -377,7 +377,7 @@
     <string name="seleccioneCliente">Seleccione el cliente</string>
     <string name="regristoexit">Se ha registrado con éxito</string>
     <string name="no_tiene_una_cuenta_reg_strese">¿No tiene una cuenta? Regístrese</string>
-    <string name="contraincorrecta">Contraseña incorrecta</string>
+    <string name="contraincorrecta">Su Correo o Contraseña son incorrectos</string>
     <string name="regitro">Se registró correctamente</string>
     <string name="correoregistrado">Este correo  ya fue registrado</string>
     <string name="ingreseFoto">Ingrese la fotografía</string>

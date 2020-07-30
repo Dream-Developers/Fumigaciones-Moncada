@@ -24,7 +24,7 @@
         android:layout_marginBottom="277dp"
         android:src="@drawable/citas_config" />
 
-    <TextView
+    <me.biubiubiu.justifytext.library.JustifyTextView
         android:layout_width="310dp"
         android:layout_height="169dp"
         android:layout_alignParentStart="true"
@@ -36,11 +36,11 @@
         android:layout_marginLeft="48dp"
         android:layout_marginEnd="26dp"
         android:layout_marginRight="26dp"
-        android:layout_marginBottom="71dp"
+        android:layout_marginBottom="67dp"
         android:text="@string/tv_ayuda5"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

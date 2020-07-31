@@ -170,6 +170,10 @@ int resultado;
                     || EditTotal.getText().toString().trim().equals("")) {
                 Toast.makeText(getContext(), "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
             } else {
+                if (Integer.parseInt(EditTotal.getText().toString()) < Integer.parseInt(EditDescuento.getText().toString())) {
+                    EditDescuento.setError("El descuento no puede ser mayor que el total");
+                } else {
+                }
             }
 
             {

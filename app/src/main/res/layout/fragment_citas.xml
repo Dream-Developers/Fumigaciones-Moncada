@@ -39,6 +39,15 @@
         tools:layout_editor_absoluteY="-29dp">
 
     </ListView>
+        <TextView
+            android:id="@+id/sinclientes1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="@string/nohay"
+            android:textSize="18sp"
+            android:visibility="gone" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

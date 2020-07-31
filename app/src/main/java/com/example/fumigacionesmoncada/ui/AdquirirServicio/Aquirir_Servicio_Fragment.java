@@ -104,7 +104,7 @@ public class Aquirir_Servicio_Fragment extends Fragment {
         cargarClienteWeb();
 
 
-        String[] opciones = {getString(R.string.insectos), getString(R.string.roedores)};
+        String[] opciones = {getString(R.string.insectos), getString(R.string.roedores),"Ambos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, opciones);
         mostrarservicion.setAdapter(adapter);
         mostrarNombre.setOnClickListener(new View.OnClickListener() {

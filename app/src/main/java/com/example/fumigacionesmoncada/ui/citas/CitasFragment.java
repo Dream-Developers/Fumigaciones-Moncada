@@ -62,6 +62,7 @@ private FloatingActionButton addcita;
     TextView sin_conexion; TextView  Nombre , Detalle ,Fecha,Total ;
     TextView EditNombre,EditFecha, EditDireccion, EditHora, EditPrecio;
     AlertDialog alertDialogFactura;
+    TextView sinClientes;
     static SwipeRefreshLayout refreshLayout;
     private int dia, mes, anio;
 
@@ -71,6 +72,7 @@ private FloatingActionButton addcita;
         View view = inflater.inflate(R.layout.fragment_citas, container, false);
         addcita = view.findViewById(R.id.add_citas);
         lista_citas= view.findViewById(R.id.lista_citas);
+         sinClientes = view.findViewById(R.id.sinclientes);
         lista_citas.setDivider(null);
       lista_citas.setDividerHeight(0);
       constraintLayout = view.findViewById(R.id.error);
@@ -101,7 +103,9 @@ private FloatingActionButton addcita;
 cargarPreferencias();
 
         cargarCitas();
+
         setHasOptionsMenu(true);
+
 
         /*lista_citas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -281,12 +285,16 @@ cargarPreferencias();
                             cita.add(citas);
                             citasAdapter = new Citas_Adapter(getContext(), cita);
                             lista_citas.setAdapter(citasAdapter);
+
+
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                if(cita.size() <= 0) {
+                    Toast.makeText(getContext(), "No hay Citas  registradas aun", Toast.LENGTH_LONG).show();
+                }
 
                 }
 

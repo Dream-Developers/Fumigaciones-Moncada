@@ -289,4 +289,5 @@
     <string name="correonovalido">Invalid email</string>
     <string name="confitrmarcontra">The password does not match the confirmation password</string>
     <string name="correoyaregistrado">This email is already registered, enter another</string>
+    <string name="equiponombre">Dream Developers</string>
 </resources>

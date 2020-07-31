@@ -353,11 +353,15 @@ public class crearFactura extends AppCompatActivity implements AdapterView.OnIte
                 || fecha.getText().toString().equals("")) {
             Toast.makeText(this, "Al menos un campo vacio, todos los campos son obligatorio, Por favor Completelo", Toast.LENGTH_LONG).show();
         } else {
+            if (Integer.parseInt(total.getText().toString()) < Integer.parseInt(descuento.getText().toString())) {
+                descuento.setError("El descuento no puede ser mayor que el total");
+            } else {
 
-            cargarWebService();
 
+                cargarWebService();
+
+            }
         }
-
     }
 
     @Override

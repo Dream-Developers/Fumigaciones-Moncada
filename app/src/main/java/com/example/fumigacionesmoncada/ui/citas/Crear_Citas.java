@@ -298,7 +298,7 @@ public class Crear_Citas extends AppCompatActivity   implements AdapterView.OnIt
                             } else {
                                 AM_PM = "p.m.";
                             }
-                            etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + DOS_PUNTOS + "00");
+                            etHora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado );
 
 
                         } else {

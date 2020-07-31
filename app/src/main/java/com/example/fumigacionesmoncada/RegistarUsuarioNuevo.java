@@ -584,7 +584,9 @@ finish();
         final String name = nombre.getText().toString().trim();
         final String phone = telefono.getText().toString().trim();
 
-
+if ((nombre.getText().toString().length() <10 )){
+    nombre.setError("ingrese el nombre Completo");
+}else{
         if(nombre.getText().toString().equals("")){
             nombre.setError(getString(R.string.ingresenombre));
         }else { if (apellidos.getText().toString().equals("")) {
@@ -602,39 +604,39 @@ finish();
                 if  (contraseña.getText().toString().equals("")) {
                     contraseña.setError(getString(R.string.ingresecontra));
 
-            }else{
-             if (confcontra.getText().toString().equals("")) {
+            }else {
+                    if (confcontra.getText().toString().equals("")) {
                         confcontra.setError(getString(R.string.ingreseconfirmacontra));
-            }else{
-
-            if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
-
-                if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
-                    Toast.makeText(getApplicationContext(), R.string.ingrecontrano, Toast.LENGTH_LONG).show();
-                } else {
-                    if (telefono.getText().toString().length() < 8) {
-                        telefono.setError(getString(R.string.noestelefono));
-                        Toast.makeText(getApplicationContext(), getString(R.string.noestelefono), Toast.LENGTH_LONG).show();
                     } else {
 
-                        if (!validarEmail(correo.getText().toString())) {
-                            correo.setError(getString(R.string.correonovalido));
-                            Toast.makeText(getApplicationContext(), getString(R.string.correonovalido), Toast.LENGTH_LONG).show();
-                        } else {
+                        if (contraseña.getText().toString().equals(confcontra.getText().toString())) {
 
-                                registerUser(name, email, password, phone);
-                                //cargarWebService();
+                            if (contraseña.getText().toString().length() < 8 || confcontra.getText().toString().length() < 8) {
+                                Toast.makeText(getApplicationContext(), R.string.ingrecontrano, Toast.LENGTH_LONG).show();
+                            } else {
+                                if (telefono.getText().toString().length() < 8) {
+                                    telefono.setError(getString(R.string.noestelefono));
+                                    Toast.makeText(getApplicationContext(), getString(R.string.noestelefono), Toast.LENGTH_LONG).show();
+                                } else {
+
+                                    if (!validarEmail(correo.getText().toString())) {
+                                        correo.setError(getString(R.string.correonovalido));
+                                        Toast.makeText(getApplicationContext(), getString(R.string.correonovalido), Toast.LENGTH_LONG).show();
+                                    } else {
+
+                                        registerUser(name, email, password, phone);
+                                        //cargarWebService();
+                                    }
+                                }
+
+
                             }
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.confitrmarcontra, Toast.LENGTH_LONG).show();
+                            contraseña.setError(getString(R.string.confitrmarcontra));
                         }
-
-
                     }
-                }else {
-                Toast.makeText(getApplicationContext(), R.string.confitrmarcontra, Toast.LENGTH_LONG).show();
-contraseña.setError(getString(R.string.confitrmarcontra));
-            }
-            }
-        }}}}}
+                }  }}}}}
 
 
     }

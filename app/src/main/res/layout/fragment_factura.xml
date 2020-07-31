@@ -17,7 +17,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="296dp"
         android:layout_marginBottom="36dp"
-        android:src="@drawable/baseline_check_circle_outline_white_18dp"
+        android:src="@drawable/ic_add_black_24dp"
         app:backgroundTint="@color/colorText"
         app:layout_constraintBottom_toBottomOf="@+id/refreshLayout"
         app:layout_constraintEnd_toEndOf="parent"

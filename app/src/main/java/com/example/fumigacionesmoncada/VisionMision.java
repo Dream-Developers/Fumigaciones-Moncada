@@ -22,13 +22,16 @@ TextView mision,descripcionmision, vision,descripcionvision;
     private String urlweb;
     String number = "99480610";
 
+    private int mLineY;
+    private int mViewWidth;
+
    public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
        setContentView(R.layout.vision);
      mision = findViewById(R.id.mision);
      vision = findViewById(R.id.vision);
      descripcionmision = findViewById(R.id.descripcionmision);
-     descripcionvision = findViewById(R.id.descripciovision);
+     descripcionvision = findViewById(R.id.descripcionvision);
 
 
 

@@ -28,7 +28,7 @@
 
     <string name="menu_chat">Chats</string>
     <string name="menu_clientes">Registro de clientes</string>
-    <string name="menu_imagen">Subir imágen</string>
+    <string name="menu_imagen">Añadir Servicio</string>
     <string name="menu_citas">Citas</string>
     <string name="menu_solicitarCita">Solicitud de citas</string>
     <string name="menu_acercad">Acerca de</string>
@@ -273,11 +273,11 @@
     <string name="actualizada">Imagen actualizada</string>
     <string name="permisoimg">Por favor, habilite la cámara y el permiso de almacenamiento</string>
     <string name="title_activity_contenedor_admin">ContenedorAdminActivity</string>
-    <string name="tv_ayuda2">Utiliza la mensajería para enviar y recibir mensajes al instante y poderte comunicarte con él cliente.</string>
+    <string name="tv_ayuda2">Utiliza la mensajería para enviar y recibir mensajes al instante y poderte comunicarte con el cliente.</string>
     <string name="tv_ayuda3">Puedes crear cuentas para tus clientes y visualizarlas una vez creadas.</string>
     <string name="tv_ayuda4">Crea y actualiza tus servicios de fumigación para ser visualizados por los clientes.</string>
-    <string name="tv_ayuda5">Programa y revisa tus fumigaciones pendientes con la información proporcionada por tu cliente.</string>
-    <string name="tv_ayuda6">Acepta o Rechaza solicitudes de Fumigación generadas por tus clientes.</string>
+    <string name="tv_ayuda5">Programa y revisa tus fumigaciones pendientes con la información proporcionada por tus clientes.</string>
+    <string name="tv_ayuda6">Acepta o rechaza solicitudes de fumigación generadas por tus clientes.</string>
     <string name="tv_ayuda7">Crea tus facturas y lleva un control de tus servicios cancelados.</string>
     <string name="tv_ayuda8">Recibe notificaciones de mensajes y en caso de aceptar o denegar un servicio</string>
     <string name="definicion">Esta aplicación fue creada por estudiantes del centro UNAH-TEC de la ciudad de Danlí, con el fin de ayudar a la población para adquirir los servicios que brinda la empresa Fumigaciones Moncada.</string>
@@ -286,7 +286,7 @@
     <string name="misiondefinicion">Establecer la empresa en los primeros lugares de servicio de fumigación a nivel local, departamental y nacional cumpliendo con las expectativas empresariales y familiares logrando con ello la satisfacción en nuestros clientes.</string>
     <string name="vision">Visión</string>
     <string name="visiondefinicion">Lograr para el año 2021 ser una empresa de servicio de fumigación sólida y diseminada en diferentes departamentos de nuestro país, con el objetivo de generar empleos y posicionarnos en la mente de nuestros clientes actuales y futuros.</string>
-    <string name="contactanos">Contactanos</string>
+    <string name="contactanos">Contáctanos</string>
     <string name="residencia">Residencia :</string>
     <string name="servicio">Servicio :</string>
     <string name="hora">Hora:</string>
@@ -377,7 +377,7 @@
     <string name="seleccioneCliente">Seleccione el cliente</string>
     <string name="regristoexit">Se ha registrado con éxito</string>
     <string name="no_tiene_una_cuenta_reg_strese">¿No tiene una cuenta? Regístrese</string>
-    <string name="contraincorrecta">Contraseña incorrecta</string>
+    <string name="contraincorrecta">Su Correo o Contraseña son incorrectos</string>
     <string name="regitro">Se registró correctamente</string>
     <string name="correoregistrado">Este correo  ya fue registrado</string>
     <string name="ingreseFoto">Ingrese la fotografía</string>

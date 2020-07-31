@@ -115,6 +115,7 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
     FirebaseUser fuser;
     StorageReference storageReference;
     String myUid;
+    String imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -502,11 +503,17 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         if (femenino.isChecked()) {
             sexo = "F";
         }
-        String imagen = convertirImgString(bitmap);
+
+
         String ip=getString(R.string.ip);
 
         String url=ip+"/api/auth/signup";
         try {
+            if (bitmap == null){
+                 imagen = null;
+            }else{
+                 imagen = convertirImgString(bitmap);
+            }
 
             JSONObject parametros = new JSONObject();
             parametros.put("name", nombre.getText().toString());
@@ -577,9 +584,7 @@ finish();
         final String name = nombre.getText().toString().trim();
         final String phone = telefono.getText().toString().trim();
 
-        if (bitmap == null) {
-            Toast.makeText(this, R.string.ingreseFoto,Toast.LENGTH_SHORT).show();
-        } else {
+
         if(nombre.getText().toString().equals("")){
             nombre.setError(getString(R.string.ingresenombre));
         }else { if (apellidos.getText().toString().equals("")) {
@@ -629,7 +634,7 @@ finish();
 contraseña.setError(getString(R.string.confitrmarcontra));
             }
             }
-        }}}}}}
+        }}}}}
 
 
     }

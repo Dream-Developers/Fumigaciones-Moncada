@@ -48,7 +48,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/cliente_cita"
                 android:focusable="false"
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:inputType="textPersonName"
                 android:maxLength="50" />
 
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/direccion_cita"
                  />
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="0123456789."
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/telefono_cliente"
                 android:inputType="phone"
                 android:maxLength="8" />
@@ -114,7 +114,7 @@
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/fecha_cita"
                 android:focusable="false"
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:inputType="date"
                 android:lines="1" />
 
@@ -132,7 +132,7 @@
 
                 android:drawableLeft="@drawable/hora_cita"
                 android:focusable="false"
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:inputType="time"
                 android:lines="1" />
 

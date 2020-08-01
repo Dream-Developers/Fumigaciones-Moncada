@@ -37,7 +37,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:focusable="false"
-
+                    android:drawablePadding="10dp"
 
 
                     />
@@ -59,7 +59,7 @@
                     android:inputType="number"
                     android:drawableLeft="@drawable/lempira_icon"
                     android:lines="1"
-
+                    android:drawablePadding="10dp"
 
                     />
                 <TextView
@@ -79,7 +79,7 @@
                     android:inputType="number"
                     android:lines="1"
                     android:maxLength="30"
-
+                    android:drawablePadding="10dp"
 
                     />
 
@@ -98,7 +98,8 @@
                     android:drawableLeft="@drawable/fecha_cita"
                     android:focusable="false"
                     android:inputType="date"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:drawablePadding="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:drawableLeft="@drawable/detalle_factura"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:drawablePadding="10dp"/>
 
 
                 <Button

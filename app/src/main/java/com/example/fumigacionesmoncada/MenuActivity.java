@@ -144,10 +144,10 @@ public class MenuActivity extends AppCompatActivity {
 
     public void alertaCerrarSesionUsuario() {
         new AlertDialog.Builder(MenuActivity.this)
-                .setTitle("Confirmación")
-                .setMessage("¿Estás seguro que quieres cerrar sesión?")
+                .setTitle(getString(R.string.confirmacion))
+                .setMessage(getString(R.string.confirmacion2))
                 .setIcon(R.drawable.fm)
-                .setPositiveButton("SI",
+                .setPositiveButton(R.string.si,
                         new DialogInterface.OnClickListener() {
                             @TargetApi(11)
                             public void onClick(DialogInterface dialog, int id) {
@@ -157,7 +157,7 @@ public class MenuActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @TargetApi(11)
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

@@ -69,7 +69,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class DetalleServicioAdministradorScrollingActivity extends AppCompatActivity {
     private EditText titulo, descripcion;
     NetworkImageView imagen;
-    private ImageView guardarCambios;
+    private Button guardarCambios;
     String id;
     JsonObjectRequest jsonObjectRequest;
     RequestQueue request;

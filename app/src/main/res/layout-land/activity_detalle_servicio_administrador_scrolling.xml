@@ -31,13 +31,6 @@
                     android:gravity="bottom"
                     android:textStyle="bold"
                     android:textColor="#000"/>
-                <ImageView
-                    android:id="@+id/guardarcambios"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_save_black_24dp"
-                    android:layout_gravity="right"
-                    android:layout_margin="10dp"/>
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -60,17 +53,8 @@
                 android:orientation="vertical"
                 android:layout_margin="15dp"
                 android:layout_weight="1">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -83,26 +67,10 @@
                             android:id="@+id/tituloImagenDA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="48dp"
                             android:hint="Fumigaciones Moncada"
                             android:textSize="18sp"
+                            android:maxLength="100"
                           />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -116,9 +84,22 @@
                             android:layout_height="wrap_content"
                             android:hint="Fumigaciones Moncada"
                             android:textSize="18sp"
+                            android:maxLength="250"
                             />
 
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/guardarcambios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_save_black_24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="25dp"
+                        android:text="@string/guardar"
+                        android:layout_margin="10dp"/>
                 </LinearLayout>
 
 

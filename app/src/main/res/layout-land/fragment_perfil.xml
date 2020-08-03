@@ -77,14 +77,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.1dp"
                         android:background="#ACACAC"/>
+
                     <com.rey.material.widget.TextView
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/correo"
-                        android:textSize="14dp"
+                        android:layout_height="35dp"
                         android:padding="15dp"
-                        android:textColor="#000"/>
+                        android:text="@string/correo"
+                        android:textColor="#000"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.1dp"
@@ -157,6 +158,7 @@
                         android:textSize="14dp"
                         android:hint="99999999"
                         android:maxLength="8"
+                        android:digits="0123456789."
                         android:background="#00000000"
                         android:padding="@dimen/margenleft"/>
                     <View

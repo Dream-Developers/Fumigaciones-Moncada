@@ -60,6 +60,7 @@
                     android:inputType="number"
                     android:drawableLeft="@drawable/lempira_icon"
                     android:lines="1"
+                    android:maxLength="9"
                     android:drawablePadding="10dp"
 
                     />
@@ -79,7 +80,7 @@
                     android:drawableLeft="@drawable/lempira_icon"
                     android:inputType="number"
                     android:lines="1"
-                    android:maxLength="30"
+                    android:maxLength="9"
                     android:drawablePadding="10dp"
 
                     />
@@ -126,7 +127,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/oval"
+                    android:background="@color/colorPrimary"
                     android:onClick="registrar1"
                     android:text="@string/agregarfactura"
                     android:textAllCaps="false"

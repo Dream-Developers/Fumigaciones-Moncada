@@ -121,7 +121,7 @@
                     android:textSize="14dp"
                     android:id="@+id/nombresP"
                     android:hint="Sam Enric"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text|textPersonName"
                     android:padding="@dimen/margenleft"
                     android:layout_gravity="left"
                     android:maxLength="100"
@@ -155,6 +155,7 @@
                     android:textSize="14dp"
                     android:hint="99999999"
                     android:maxLength="8"
+                    android:digits="0123456789."
                     android:background="#00000000"
                     android:padding="@dimen/margenleft"/>
                 <View

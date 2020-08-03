@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:drawablePadding="10dp"
+                android:maxLength="250"
                 android:drawableLeft="@drawable/direccion_cita"
                  />
 

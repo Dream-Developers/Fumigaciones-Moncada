@@ -51,8 +51,7 @@
             android:hint="@string/residencias"
             android:lines="1"
             android:drawablePadding="10dp"
-
-
+            android:maxLength="250"
             />
 
         <EditText

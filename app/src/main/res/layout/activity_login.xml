@@ -150,19 +150,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/recuperarPass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="15dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/olvidopass"
-                android:textColor="@color/colorgris"
-                android:textSize="32px"
-                android:onClick="resetPassword"
-                 />
+
 
         </RelativeLayout>
 

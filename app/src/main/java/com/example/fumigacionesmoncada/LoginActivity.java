@@ -115,9 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseInstanceId.getInstance().getInstanceId();
         txtCorreo = findViewById(R.id.idCorreoLogin);
         txtContrasena = findViewById(R.id.idContraseñaLogin);
-        recuperarContra = findViewById(R.id.recuperarPass);
-        recuperarContra.setPaintFlags(recuperarContra.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        RBsesion = findViewById(R.id.noSalir);
+      //  recuperarContra = findViewById(R.id.recuperarPass);
+          RBsesion = findViewById(R.id.noSalir);
         btn_login = findViewById(R.id.idLoginLogin);
         registrar = findViewById(R.id.registarLogin);
         isActivateRadioButton = RBsesion.isChecked();
@@ -543,11 +542,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void resetPassword(View view) {
+   /* public void resetPassword(View view) {
         Intent intent = new Intent(getApplicationContext(), PasswordReset.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
+    }*/
 
 
 }

@@ -191,7 +191,7 @@ int resultado;
                     public void onResponse(JSONObject response) {
 
                         try {
-                            Toast.makeText(getContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Refresque la pantalla deslizando hacia abajo \n" + response.getString("message"), Toast.LENGTH_SHORT).show();
 
                             Factura_Fragment.refreshLayout.setRefreshing(true);
                             Factura_Fragment.refreshLayout.setRefreshing(false);

@@ -186,7 +186,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="cargandoAdquirir">Cargando…</string>
     <string name="registroAdquirir">Se ha registrado con éxito</string>
-    <string name="horarioDeAtencion">El Horario de atención es de 7:00AM a 7:00PM</string>
+    <string name="horarioDeAtencion">El Horario de atención es de 7:00AM a 8:00PM</string>
     <string name="horaAlerta">La hora seleccionada no es correcta, debe ser mayor a la hora actual</string>
     <string name="NumeroInvalido">No es un número telefónico</string>
     <string name="nombre">Nombre:</string>

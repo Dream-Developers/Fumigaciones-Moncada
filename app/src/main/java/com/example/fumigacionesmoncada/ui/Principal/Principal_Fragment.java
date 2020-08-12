@@ -283,6 +283,9 @@ linearLayout = vista.findViewById(R.id.error);
                                     " "+response, Toast.LENGTH_LONG).show();
                             dialog.hide();
                         }
+                        if(listaUsuarios.size() <= 0) {
+                            Toast.makeText(getContext(), "No hay Publicidad  registrada aun", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }, new Response.ErrorListener() {

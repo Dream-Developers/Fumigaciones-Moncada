@@ -158,14 +158,6 @@ public class RegistarUsuarioNuevo extends AppCompatActivity{
         });
 
 
-        nombre.setSingleLine(false);
-        nombre.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
-        correo.setSingleLine(false);
-        correo.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
-        apellidos.setSingleLine(false);
-        apellidos.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
-        telefono.setSingleLine(false);
-        telefono.setInputType(InputType.TYPE_CLASS_PHONE | android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
 
     }
     private void mostrarDialogOpciones() {

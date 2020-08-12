@@ -41,7 +41,7 @@
     <string name="error_invalid_password" >" Invalid password"</string>
     <string name="factura" >" Invoice"</string>
     <string name="horaAlerta">" The selected time is not correct, it must be greater than the current time"</string>
-    <string name="horarioDeAtencion" >" The hours of operation are from 7:00 AM to 7:00 PM"</string>
+    <string name="horarioDeAtencion" >" The hours of operation are from 7:00 AM to 8:00 PM"</string>
     <string name="importante" >" Important"</string>
     <string name="informacion_personal" >" Personal Information"</string>
     <string name="insectos" >" Insects"</string>

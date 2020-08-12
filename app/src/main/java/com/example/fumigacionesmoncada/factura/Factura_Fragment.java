@@ -110,6 +110,8 @@ public class Factura_Fragment extends Fragment implements SearchView.OnQueryText
         cargarPreferencias();
         cargarCitas();
 
+        Factura_Fragment.refreshLayout.setRefreshing(true);
+        Factura_Fragment.refreshLayout.setRefreshing(false);
 
         return view;
     }

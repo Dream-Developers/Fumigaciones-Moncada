@@ -53,30 +53,32 @@
         />
 
 </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/desa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:textSize="25dp"
-        android:text="@string/equipo"
-        android:background="@color/colorPrimary"
-        />
+
+        <TextView
+            android:id="@+id/desa"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/equipo"
+            android:paddingLeft="54dp"
+            android:textColor="#000"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/desanombre"
-            android:layout_width="wrap_content"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:paddingLeft="106dp"
             android:textStyle="bold"
             android:textColor="#000"
             android:textSize="25dp"
             android:text="@string/equiponombre"
-            android:background="@color/colorPrimary"
+            android:drawable="@drawable/oval"
             />
 //nuevo
         <HorizontalScrollView

@@ -114,14 +114,14 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/detalle_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Eloisa Flores "
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Eloisa Flores"
                     android:textSize="14dp"
                     android:padding="15dp"
                     android:textColor="#000"
-                    android:gravity="left"/>
+                    android:gravity="left"
+                    android:maxLines="1"/>
 
                 <View
                     android:layout_width="match_parent"

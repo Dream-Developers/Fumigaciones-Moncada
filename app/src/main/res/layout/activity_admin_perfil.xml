@@ -113,7 +113,7 @@
                             android:textSize="14dp"
                             android:id="@+id/nameTvc"
                             android:hint="Lenin Moncada"
-                            android:inputType="textEmailAddress"
+                            android:inputType="textPersonName"
                             android:padding="@dimen/margenleft"
                             android:layout_gravity="left"
                             android:maxLength="100"

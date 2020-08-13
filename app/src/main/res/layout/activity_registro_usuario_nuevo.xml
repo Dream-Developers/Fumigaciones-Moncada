@@ -37,7 +37,7 @@
             android:drawableLeft="@drawable/nombre_cliente"
             android:hint="@string/nombrecompleto"
             android:lines="1"
-            android:digits="qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM"
+            android:digits="qwertyuiopasdfghjklñ zxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM"
             android:inputType="textPersonName"
             android:maxLength="45"
              android:minEms="10"

@@ -546,7 +546,7 @@ public class ImagenFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "No se ha podido conectar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No se ha registrado, intenta nuevamente", Toast.LENGTH_SHORT).show();
                 error.getStackTrace();
                 progreso.hide();
             }

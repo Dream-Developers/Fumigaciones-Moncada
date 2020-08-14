@@ -90,19 +90,16 @@ public class MenuActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String name = ""+ ds.child("name").getValue();
-                    String email = ""+ ds.child("email").getValue();
-                    String image = ""+ ds.child("image").getValue();
+
 
                     //Set data
-                    nameTv.setText(name);
-                    emailTv.setText(email);
+
 
 
                     try {
-                        Picasso.get().load(image).into(avatarIv);
+                        //Picasso.get().load(image).into(avatarIv);
                     }catch (Exception e){
-                        Picasso.get().load(R.drawable.fondo_chat4).into(avatarIv);
+                        //Picasso.get().load(R.drawable.fondo_chat4).into(avatarIv);
                     }
 
                 }

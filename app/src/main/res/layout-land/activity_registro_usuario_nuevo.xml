@@ -58,7 +58,7 @@
             android:id="@+id/registro_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="0123456789."
+            android:digits="0123456789"
             android:drawableLeft="@drawable/telefono_cliente"
             android:hint="@string/telefonos"
             android:inputType="phone"

@@ -155,7 +155,7 @@
                     android:textSize="14dp"
                     android:hint="99999999"
                     android:maxLength="8"
-                    android:digits="0123456789."
+                    android:digits="0123456789"
                     android:background="#00000000"
                     android:padding="@dimen/margenleft"/>
                 <View

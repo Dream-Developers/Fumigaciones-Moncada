@@ -139,13 +139,13 @@
             <Button
                 android:id="@+id/pedir"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
-                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:onClick="pedir"
-                android:background="@color/colorPrimary"
                 android:text="@string/solicitar_servicio"
                 android:textColor="@color/colorBlanco"
                 android:textStyle="bold" />

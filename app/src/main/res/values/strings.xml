@@ -41,7 +41,7 @@
     <string name="desarrolladores">Desarrolladores</string>
 
 
-    <string name="ip">http://64.225.37.202:8082</string>
+    <string name="ip">http://192.168.137.1</string>
 
 
     <string name="account_type">com.example.fumigacionesmoncada.account</string>
@@ -360,7 +360,7 @@
     <string name="aceptarsolicitucita">"¿Está seguro que desea solicitar una cita?"</string>
     <string name="direccionmap">Colonia Teodoro Rodas Valle</string>
     <string name="casalennin">Casa de Lenin Moncada</string>
-    <string name="solicitar_servicio">solicitar servicio</string>
+    <string name="solicitar_servicio">Solicitar Servicio</string>
     <string name="registrar">Registrar</string>
     <string name="confirmacionCita">Confirmación</string>
     <string name="aceptacioncita">¿Desea aceptar está cita?</string>

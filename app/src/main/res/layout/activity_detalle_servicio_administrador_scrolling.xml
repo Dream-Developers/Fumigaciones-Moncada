@@ -97,10 +97,11 @@
                         android:id="@+id/guardarcambios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_save_black_24dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="25dp"
                         android:text="@string/guardar"
+                        android:textColor="@color/colorBlanco"
+                        android:background="@color/colorPrimary"
                         android:layout_margin="10dp"/>
 
                 </LinearLayout>

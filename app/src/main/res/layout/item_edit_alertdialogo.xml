@@ -81,7 +81,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:maxLength="60"
-            android:hint="Sam Enric"
+            android:hint="Nombre"
             android:inputType="textPersonName"
             android:padding="15dp"
             android:textSize="14dp" />
@@ -98,7 +98,7 @@
             android:layout_weight="1"
             android:focusable="false"
             android:background="#00000000"
-            android:hint="Sam Enric"
+            android:hint="Fecha"
             android:inputType="date"
             android:padding="15dp"
             android:textSize="14dp" />
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            android:hint="Sam Enric"
+            android:hint="Detalle"
             android:inputType="text"
             android:maxLength="60"
             android:padding="15dp"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            android:hint="Sam Enric"
+            android:hint="Total"
             android:inputType="number"
             android:padding="15dp"
             android:textSize="14dp" />
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            android:hint="Sam Enric"
+            android:hint="Descuento"
             android:inputType="number"
             android:padding="15dp"
             android:textSize="14dp" />

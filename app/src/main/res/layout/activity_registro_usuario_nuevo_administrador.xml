@@ -137,7 +137,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimary"
                 android:onClick="registrar"
-                android:text="@string/registrar"
+                android:text="REGISTRAR"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBlanco"
                 />
